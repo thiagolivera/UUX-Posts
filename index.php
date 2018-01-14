@@ -41,8 +41,6 @@
       </ol>
     </section>
 
-    </section>
-      <br><br><Br><br><br><br><Br><br><br><br><Br>
   </div>
 
   <footer class="main-footer">

@@ -98,17 +98,45 @@
             ?>
         
         <li class="header">POSTAGENS</li>
-        <li>
-            <a href="index.php">
-            <i class="fa fa-star"></i> <span>Postagens favoritas</span>
-          </a>
-        </li>
-        
-        <li>
-            <a href="index.php">
-            <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
-          </a>
-        </li>
+        <?php 
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/postagensFavoritas.php") == 0){
+                ?>
+                    <li class="active">
+                        <a href="postagensFavoritas.php">
+                            <i class="fa fa-star"></i> <span>Postagens favoritas</span>
+                        </a>
+                    </li>
+            <?php
+                } else{
+                    ?>
+                    <li>
+                        <a href="postagensFavoritas.php">
+                            <i class="fa fa-star"></i> <span>Postagens favoritas</span>
+                        </a>
+                    </li>
+            <?php
+                }
+            ?>
+                    
+        <?php 
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/postagensComDuvida.php") == 0){
+                ?>
+                    <li class="active">
+                        <a href="postagensComDuvida.php">
+                            <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
+                        </a>
+                    </li>
+            <?php
+                } else{
+                    ?>
+                    <li>
+                        <a href="postagensComDuvida.php">
+                            <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
+                        </a>
+                    </li>
+            <?php
+                }
+            ?>
         
         <li class="header">USUÁRIOS</li>
         <?php 
