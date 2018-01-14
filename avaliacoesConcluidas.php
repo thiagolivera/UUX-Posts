@@ -82,7 +82,7 @@
             </div>
           </div>
       </div>
-        '
+        <a style="color: #ecf0f5">'</a>
     </section>
   </div>
 

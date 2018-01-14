@@ -73,6 +73,18 @@
                     <input type="text" class="form-control" id="profissao" placeholder="Profissão">
                   </div>
                 </div>
+                  
+                <div class="form-group">
+                    <label for="tipoUsuario" class="col-sm-2 control-label">Tipo de usuário</label>
+
+                    <div class="col-sm-10">
+                        <select class="form-control col-sm-10">
+                            <option>Avaliador</option>
+                            <option>Validador</option>
+                            <option>Gerente de Avaliação</option>
+                          </select>
+                    </div>
+                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -82,6 +94,7 @@
             </form>
           </div>
       </div>
+        <a style="color: #ecf0f5">'</a>
     </section>
   </div>
 
