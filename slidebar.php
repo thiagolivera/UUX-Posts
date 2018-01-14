@@ -30,7 +30,26 @@
             <?php
                 }
             ?>
-        
+            
+            <?php 
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/editarPerfil.php") == 0){
+                ?>
+                    <li class="active">
+                        <a href="editarPerfil.php">
+                            <i class="fa fa-edit"></i> <span>Editar perfil</span>
+                        </a>
+                    </li>
+            <?php
+                } else{
+                    ?>
+                    <li>
+                        <a href="editarPerfil.php">
+                            <i class="fa fa-edit"></i> <span>Editar perfil</span>
+                        </a>
+                    </li>
+            <?php
+                }
+            ?>
         <li class="header">AVALIAÇÕES</li>
         <li>
             <a href="index.php">
@@ -111,12 +130,26 @@
             <?php
                 }
             ?>
-        
-        <li>
-            <a href="index.php">
-            <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
-          </a>
-        </li>
+                    
+        <?php 
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/gerenciarUsuarios.php") == 0){
+                ?>
+                    <li class="active">
+                        <a href="gerenciarUsuarios.php">
+                            <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
+                        </a>
+                    </li>
+            <?php
+                } else{
+                    ?>
+                    <li>
+                        <a href="gerenciarUsuarios.php">
+                            <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
+                        </a>
+                    </li>
+            <?php
+                }
+            ?>
       </ul>
     </section>
   </aside>

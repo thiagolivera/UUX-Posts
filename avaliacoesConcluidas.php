@@ -38,7 +38,7 @@
       </h1>
       <ol class="breadcrumb">
           <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Avaliações concluídas</li>
+        <li>Avaliações</li> <li class="active">Avaliações concluídas</li>
       </ol>
     </section>
 
@@ -56,21 +56,14 @@
                   <thead>
                   <tr>
                     <th>Sistema</th>
-                    <th>Progresso</th>
+                    <th>Data de conclusão</th>
                     <th>Ações</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
                     <td>Google Maps</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="
-                                 "aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                100%
-                            </div>
-                        </div>
-                    </td>
+                    <td>31/12/2017</td>
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-edit" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>

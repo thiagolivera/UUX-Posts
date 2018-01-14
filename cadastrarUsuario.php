@@ -38,12 +38,12 @@
       </h1>
       <ol class="breadcrumb">
           <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Cadastrar usuário</li>
+        <li>Usuários</li> <li class="active">Cadastrar usuário</li>
       </ol>
     </section>
 
     <section class="content">
-        <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box box-body">
             <div class="box-header with-border">
               <h3 class="box-title">Cadastrar usuário</h3>
@@ -59,7 +59,7 @@
                 </div>
                   
                 <div class="form-group">
-                  <label for="email" class="col-sm-2 control-label">Email</label>
+                  <label for="email" class="col-sm-2 control-label">E-mail</label>
 
                   <div class="col-sm-10">
                     <input type="email" class="form-control" id="email" placeholder="Email">
@@ -80,7 +80,6 @@
                     <div class="col-sm-10">
                         <select class="form-control col-sm-10">
                             <option>Avaliador</option>
-                            <option>Validador</option>
                             <option>Gerente de Avaliação</option>
                           </select>
                     </div>
@@ -111,5 +110,4 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 </body>
-
 </html>
