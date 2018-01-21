@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>UUX-Posts | Avaliações em andamento</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -19,7 +18,15 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
-
+  
+	<!-- jQuery 3 -->
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- FastClick -->
+	<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../dist/js/adminlte.min.js"></script>
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -27,8 +34,8 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <?php include_once("../cabecalho.php");?>
-  <?php include_once("../slidebar.php");?>
+  <?php include_once("cabecalho.php");?>
+  <?php include_once("slidebar.php");?>
 
   <div class="content-wrapper">
     <section class="content-header">
@@ -100,15 +107,6 @@
   </div>
     <?php include_once("../rodape.php");?>
 </div>
-
-<!-- jQuery 3 -->
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="../bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../dist/js/adminlte.min.js"></script>
 
 </body>
 
