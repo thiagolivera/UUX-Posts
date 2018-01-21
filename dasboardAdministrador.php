@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>UUX-Posts | Dashboard</title>
@@ -43,12 +44,7 @@
 
   </div>
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Versão</b> 2.0.0
-    </div>
-    <strong>UUX-Posts - Uma ferramenta para extração e classificação de PRUs de Sistemas Sociais</strong>
-  </footer>
+  <?php include_once("rodape.php") ?>
 
 </div>
 
