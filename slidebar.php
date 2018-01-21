@@ -1,3 +1,5 @@
+<?php $tipoUsuario = 'administrador';?>
+
 <aside class="main-sidebar">/
     <section class="sidebar">
       <div class="user-panel">
@@ -51,17 +53,23 @@
                 }
             ?>
         <li class="header">AVALIAÇÕES</li>
-        <li>
+        
+        <?php if(strcmp($tipoUsuario,"administrador") == 0){
+            ?>
+            <li>
             <a href="index.php">
             <i class="fa fa-plus"></i> <span>Criar uma nova avaliação</span>
-          </a>
-        </li>
+            </a>
+            </li>
+        <?php 
+        }?>
+        
         
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoesAndamento.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoes/avaliacoesAndamento.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="avaliacoesAndamento.php">
+                        <a href="avaliacoes/avaliacoesAndamento.php">
                             <i class="fa fa-spinner"></i> <span>Avaliações em andamento</span>
                         </a>
                     </li>
@@ -69,7 +77,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="avaliacoesAndamento.php">
+                        <a href="avaliacoes/avaliacoesAndamento.php">
                             <i class="fa fa-spinner"></i> <span>Avaliações em andamento</span>
                         </a>
                     </li>
@@ -78,10 +86,10 @@
             ?>
         
             <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoesConcluidas.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoes/avaliacoesConcluidas.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="avaliacoesConcluidas.php">
+                        <a href="avaliacoes/avaliacoesConcluidas.php">
                             <i class="fa fa-check"></i> <span>Avaliações concluídas</span>
                         </a>
                     </li>
@@ -89,7 +97,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="avaliacoesConcluidas.php">
+                        <a href="avaliacoes/avaliacoesConcluidas.php">
                             <i class="fa fa-check"></i> <span>Avaliações concluídas</span>
                         </a>
                     </li>
@@ -99,10 +107,10 @@
         
         <li class="header">POSTAGENS</li>
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/postagensFavoritas.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoes/postagensFavoritas.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="postagensFavoritas.php">
+                        <a href="avaliacoes/postagensFavoritas.php">
                             <i class="fa fa-star"></i> <span>Postagens favoritas</span>
                         </a>
                     </li>
@@ -110,7 +118,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="postagensFavoritas.php">
+                        <a href="avaliacoes/postagensFavoritas.php">
                             <i class="fa fa-star"></i> <span>Postagens favoritas</span>
                         </a>
                     </li>
@@ -119,10 +127,10 @@
             ?>
                     
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/postagensComDuvida.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoes/postagensComDuvida.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="postagensComDuvida.php">
+                        <a href="avaliacoes/postagensComDuvida.php">
                             <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
                         </a>
                     </li>
@@ -130,7 +138,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="postagensComDuvida.php">
+                        <a href="avaliacoes/postagensComDuvida.php">
                             <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
                         </a>
                     </li>
@@ -140,10 +148,10 @@
         
         <li class="header">USUÁRIOS</li>
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/cadastrarUsuario.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/administracao/cadastrarUsuario.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="cadastrarUsuario.php">
+                        <a href="administracao/cadastrarUsuario.php">
                             <i class="fa fa-user-plus"></i> <span>Cadastrar usuário</span>
                         </a>
                     </li>
@@ -151,7 +159,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="cadastrarUsuario.php">
+                        <a href="administracao/cadastrarUsuario.php">
                             <i class="fa fa-user-plus"></i> <span>Cadastrar usuário</span>
                         </a>
                     </li>
@@ -160,10 +168,10 @@
             ?>
                     
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/gerenciarUsuarios.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/administracao/gerenciarUsuarios.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="gerenciarUsuarios.php">
+                        <a href="administracao/gerenciarUsuarios.php">
                             <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
                         </a>
                     </li>
@@ -171,7 +179,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="gerenciarUsuarios.php">
+                        <a href="administracao/gerenciarUsuarios.php">
                             <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
                         </a>
                     </li>
