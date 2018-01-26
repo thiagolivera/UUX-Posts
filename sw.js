@@ -9,6 +9,7 @@ self.addEventListener('install', function (event) {
 				'cabecalho.php',
 				'slidebar.php',
 				'rodape.php',
+				'dasboardAdministrador.php',
 			]);
 		})
 	)

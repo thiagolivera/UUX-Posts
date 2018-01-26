@@ -40,6 +40,8 @@
       <ol class="breadcrumb">
           <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
       </ol>
+	  
+	  <h1>Olá, bem vindo a UUX-Posts!</h1>
     </section>
 
   </div>

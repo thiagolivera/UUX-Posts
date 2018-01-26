@@ -63,7 +63,7 @@
                   <label for="nome" class="col-sm-2 control-label">Nome</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nome" placeholder="Nome">
+                    <input type="text" class="form-control" id="nome" placeholder="Ex.: Francisco José">
                   </div>
                 </div>
                   
@@ -71,7 +71,7 @@
                   <label for="email" class="col-sm-2 control-label">E-mail</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" placeholder="Ex.: seuemail@email.com">
                   </div>
                 </div>
                   
@@ -79,7 +79,7 @@
                   <label for="profissao" class="col-sm-2 control-label">Profissão</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="profissao" placeholder="Profissão">
+                    <input type="text" class="form-control" id="profissao" placeholder="Ex.: Professor">
                   </div>
                 </div>
                   

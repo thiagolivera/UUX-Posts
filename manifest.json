@@ -1,8 +1,8 @@
 {
   "name": "UUX-Posts",
   "short_name": "UUXPosts",
-  "theme_color": "#2a0044",
-  "background_color": "#2a0044",
+  "theme_color": "#367fa9",
+  "background_color": "#367fa9",
   "display": "standalone",
   "start_url": ".",
   "icons": [

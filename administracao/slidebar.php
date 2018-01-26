@@ -54,15 +54,27 @@
             ?>
         <li class="header">AVALIAÇÕES</li>
         
-        <?php if(strcmp($tipoUsuario,"administrador") == 0){
-            ?>
-            <li>
-            <a href="../index.php">
-            <i class="fa fa-plus"></i> <span>Criar uma nova avaliação</span>
-            </a>
-            </li>
         <?php 
-        }?>
+            if(strcmp($tipoUsuario,"administrador") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoes/novaAvaliacao/criarAvaliacao.php") == 0){
+                ?>
+                    <li class="active">
+                        <a href="../avaliacoes/novaAvaliacao/criarAvaliacao.php">
+                            <i class="fa fa-plus"></i> <span>Criar uma nova avaliação</span>
+                        </a>
+                    </li>
+            <?php
+                } else{
+                    ?>
+                    <li>
+                        <a href="../avaliacoes/novaAvaliacao/criarAvaliacao.php">
+                            <i class="fa fa-plus"></i> <span>Criar uma nova avaliação</span>
+                        </a>
+                    </li>
+            <?php
+                }
+            }
+            ?>
         
         
         <?php 
