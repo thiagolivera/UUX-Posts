@@ -1,3 +1,6 @@
+<link rel="icon" type="imagem/png" href="/images/uux-icon.ico" />
+<link rel = "shortcut icon" type = "imagem/x-icon" href = "/images/uux-icon.ico"/>
+
 <link rel="manifest" href="manifest.json">
 <script> 
 if ('serviceWorker' in navigator) {
@@ -8,7 +11,7 @@ if ('serviceWorker' in navigator) {
 <?php $tipoUsuario = 'administrador';
 
 if(strcmp($tipoUsuario,"administrador") == 0){
-    include_once("dasboardAdministrador.php");
+    include_once("dashboardAdministrador.php");
 }
 
 ?>

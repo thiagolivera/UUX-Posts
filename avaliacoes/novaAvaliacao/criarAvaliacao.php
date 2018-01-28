@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>UUX-Posts | Avaliações em andamento</title>
+  <title>UUX-Posts | Nova avaliação</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -28,7 +28,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
     <script src="dist/bootstrap-tagsinput.min.js"></script>
-    <script src="dist/bootstrap-tagsinput/bootstrap-tagsinput-angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
@@ -98,6 +97,14 @@
                 </div>
                   
                 <div class="form-group">
+                  <label for="nome" class="col-sm-2 control-label">Fonte das postagens <a style="color: #ff0000">*</a></label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nome" placeholder="Ex.: Twitter">
+                  </div>
+                </div>
+                  
+                <div class="form-group">
                     <label for="funcionalidades" class="col-sm-2 control-label">Funcionalidades</label>
 
                     <div class="col-sm-10">
@@ -138,11 +145,11 @@
                         </label>
                         <br>
                         <label style="font-weight: 500;">
-                          <input type="checkbox" class="minimal">
+                            <input type="checkbox" id="criteriosQualidade" onclick="showCriterios()" class="minimal">
                           Classificação por critérios de qualidade de uso
                         </label>
                         <br>
-                        
+                        <div id="criterios" style="display:none;">
                             <label style="font-weight: 300; padding-left:2em;">
                                 <input type="checkbox" class="minimal">
                                 Acessibilidade
@@ -166,6 +173,7 @@
                                 Usabilidade
                             </label>
                             <br>
+                        </div>
 
                         <label style="font-weight: 500;">
                           <input type="checkbox" class="minimal">
@@ -178,7 +186,7 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
+                <button type="submit" class="btn btn-info pull-right">Criar avaliação</button>
               </div>
               <!-- /.box-footer -->
             </form>
@@ -224,6 +232,16 @@
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass   : 'iradio_minimal-blue'
     })
+    </script>
+    
+    <script>
+        function showCriterios() {
+            if (!document.getElementById('criteriosQualidade').checked){
+                document.getElementById('criterios').style.display = 'block';
+            } else {
+                document.getElementById('criterios').style.display = 'none';
+            }
+        }
     </script>
 
 </html>

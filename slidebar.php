@@ -59,7 +59,7 @@
                 if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/avaliacoes/novaAvaliacao/criarAvaliacao.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="avaliacoes/novaAvaliacao/criarAvaliacao.php">
+                        <a href="avaliacoes/novaAvaliacao/criarAvaliacao.php">  
                             <i class="fa fa-plus"></i> <span>Criar uma nova avaliação</span>
                         </a>
                     </li>
