@@ -52,6 +52,12 @@
     </section>
 
     <section class="content">
+        <div class="alert alert-success alert-dismissible" id="alertaSucesso" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Usuário cadastrado com sucesso!</h4>
+            O usuário foi cadastrado com sucesso. Diga-o para entrar com a senha padrão.
+        </div>
+        
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box box-body">
             <div class="box-header with-border">
@@ -106,8 +112,14 @@
     </section>
   </div>
 
-  <?php include("./rodape.php");?>
+  <?php include("../rodape.php");?>
 
 </div>
 </body>
+
+<script>
+     $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
+        $(".alert-dismissible").alert('close');
+    });
+</script>
 </html>

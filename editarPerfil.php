@@ -43,6 +43,12 @@
     </section>
 
     <section class="content">
+        <div class="alert alert-success alert-dismissible" id="alertaSucesso" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Dados alterados com sucesso!</h4>
+            Seus dados foram alterados em nossa base de dados com sucesso.
+        </div>
+        
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box box-body">
             <div class="box-header with-border">
@@ -98,7 +104,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">Alterar senha</h3>
             </div>
-            <form class="form-horizontal">
+              <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="senhaAtual" class="col-sm-2 control-label">Senha atual</label>
@@ -148,5 +154,11 @@
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+
+<script>
+     $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
+        $(".alert-dismissible").alert('close');
+    });
+</script>
 </body>
 </html>
