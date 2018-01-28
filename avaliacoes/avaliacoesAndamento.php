@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </td>
-                    <td><a class="btn btn-sm btn-default"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <td><a class="btn btn-sm btn-default"><i class="fa fa-arrow-right" aria-hidden="true" onclick="abrirAvaliacao()"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
                   </tr>
@@ -124,4 +124,10 @@
     border-top: 1px solid #ddd;
 }
 </style>
+
+<script>
+    function abrirAvaliacao(){
+        window.location.href = "novaAvaliacao/associarAvaliadores.php";
+    }
+</script>
 </html>
