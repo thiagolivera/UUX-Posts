@@ -61,6 +61,7 @@
                   <thead>
                   <tr>
                     <th>Sistema</th>
+                    <th>Seu papel</th>
                     <th>Progresso</th>
                     <th>Ações</th>
                   </tr>
@@ -68,6 +69,7 @@
                   <tbody>
                   <tr>
                     <td>Spotify</td>
+                    <td>Avaliador</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="
@@ -77,12 +79,13 @@
                         </div>
                     </td>
                     <td><a class="btn btn-sm btn-default" onclick="abrirAvaliacao()"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm btn-default disabled"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
                   </tr>
                   
                   <tr>
                     <td>WhatsApp</td>
+                    <td>Gerente de Avaliação</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="

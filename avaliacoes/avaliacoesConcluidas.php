@@ -65,6 +65,7 @@
                   <thead>
                   <tr>
                     <th>Sistema</th>
+                    <th>Sua função</th>
                     <th>Data de conclusão</th>
                     <th>Ações</th>
                   </tr>
@@ -72,6 +73,7 @@
                   <tbody>
                   <tr>
                     <td>Google Maps</td>
+                    <td>Validador</td>
                     <td>31/12/2017</td>
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-edit" aria-hidden="true"></i></a>
