@@ -120,7 +120,7 @@
         <small>Versão 2.0</small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
           <li><a href="../avaliacoesAndamento.php">Avaliações em andamento</a></li><li class="active">Associar avaliadores</li>
       </ol>
     </section>
