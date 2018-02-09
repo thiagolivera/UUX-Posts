@@ -79,8 +79,9 @@
     </section>
 
     <section class="content">
+        <?php include_once("avaliacaoEmAndamento.php");?>
         <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
-          <div class="box box-info">
+          <div class="box box-default">
             <div class="box-header with-border">
               <h3 class="box-title">Informe o contexto de uso do sistema (opcional)</h3>
             </div>
@@ -112,7 +113,7 @@
             </div>
           </div>
             
-            <div class="box box-info">
+            <div class="box box-default">
             <div class="box-header with-border">
               <h3 class="box-title">Informe quem são os usuários do sistema (opcional)</h3>
             </div>

@@ -126,17 +126,7 @@
     </section>
 
     <section class="content">
-        <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Avaliação em andamento</h3>
-            </div>
-              <p style="padding-left: 20px; padding-top: 5px; padding-bottom: 10px;">
-                  <b>Sistema avaliado:</b> Spotify <br>
-                  <b>Plataforma do sistema:</b> Android <br>
-                  <b>Fonte das postagens:</b> Reclame Aqui </p>
-          </div>
-        </div>
+        <?php include_once("avaliacaoEmAndamento.php");?>
         
         <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0; padding-right: 0;">
             <div class="col-md-6 col-sm-12 col-xs-12" style=" padding-left: 0;">
@@ -225,7 +215,7 @@
           </div>
         </div>
         <div style="float: right; padding-bottom: 10px;">
-            <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+            <button type="submit" class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
         </div>
         <a style="color: #ecf0f5">'</a>
     </section>
@@ -331,5 +321,9 @@
           }
         }
     });
+    
+    function proximo(){
+        window.location.href = "contextoAvaliacao.php";
+    }
 </script>
 </html>
