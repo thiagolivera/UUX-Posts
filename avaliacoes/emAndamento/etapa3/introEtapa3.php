@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>UUX-Posts | Nova Avaliação</title>
+  <title>UUX-Posts | Classificação de PRUs</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -46,8 +46,8 @@
         <small>Versão 2.0</small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Avaliações</li><li class="active">Criar uma nova avaliação</li>
+          <li><a href="../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>Avaliações</li><li class="active">Classificaçao de PRUs</li>
       </ol>
     </section>
 
@@ -56,14 +56,14 @@
           <div class="box box-solid">
               <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-black" style="height: 250px;
-                     background: url('../../images/DefinicaoContexto.svg') center center; position: relative">
+                     background: url('../../images/ClassificacaoPrus.svg') center center; position: relative">
                     <div style="width: 100%; left: 0; top: 0; background-color: #3c8dbc;  position: absolute;">
-                        <h3 style="color: white; padding-left: 15px; padding-top: 10px" class="widget-user-username">Etapa 1 - Definição do contexto de avaliação</h3>
+                        <h3 style="color: white; padding-left: 15px; padding-top: 10px" class="widget-user-username">Etapa 3 - Classificação das PRUs</h3>
                         <h5 style="color: white; padding-left: 15px;" class="widget-user-desc">Metodologia MALTU</h5>  
                     </div>
                 </div>
                 <div class="box-footer" style="padding-top: 10px;">
-                    <h4 style="text-align: center">Nessa primeira etapa de avaliação, você deve identificar o sistema avaliado, informar os avaliadores e o contexto de uso do sistema.</h4>
+                    <h4 style="text-align: center">Nessa etapa as postagens são classificadas e validadas pelos avaliadores, nas categorias de classificação indicadas na Etapa 1 dessa avaliação.</h4>
                 </div>
                   <!-- /.row -->
                 </div>
@@ -81,21 +81,21 @@
                         <li>
                           <i class="fa fa-eercast bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header"><strong>ETAPA 1 - Definição do contexto de avaliação</strong></h3>
+                              <h3 class="timeline-header">ETAPA 1 - Definição do contexto de avaliação</h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-cloud-download bg-yellow"></i>
                           <div class="timeline-item">
-                            <h3 class="timeline-header">ETAPA 2 - Extração das PRUs</h3>
+                              <h3 class="timeline-header">ETAPA 2 - Extração das PRUs</h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-check-circle-o bg-yellow"></i>
                           <div class="timeline-item">
-                            <h3 class="timeline-header">ETAPA 3 - Classificação das PRUs</h3>
+                            <h3 class="timeline-header"><strong>ETAPA 3 - Classificação das PRUs</strong></h3>
                           </div>
                         </li>
                         

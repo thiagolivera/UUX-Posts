@@ -6,50 +6,50 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+  <link rel="stylesheet" href="../../../plugins/iCheck/all.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="../../bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="../../../bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
   
-    <link rel="stylesheet" href="dist/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="../../../dist/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="../../../assets/app.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-    <script src="dist/bootstrap-tagsinput.min.js"></script>
+    <script src="../../../dist/bootstrap-tagsinput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
   
 	<!-- jQuery 3 -->
-	<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- iCheck 1.0.1 -->
-        <script src="../../plugins/iCheck/icheck.min.js"></script>
+        <script src="../../../plugins/iCheck/icheck.min.js"></script>
 	<!-- FastClick -->
-	<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+	<script src="../../../bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
-	<script src="../../dist/js/adminlte.min.js"></script>
+	<script src="../../../dist/js/adminlte.min.js"></script>
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   
   <!-- Select 2 -->
-    <link rel="stylesheet" href="../../dist/css/select2.css"/>
-    <script src="../../dist/js/select2.js"></script>
-    <script src="../../dist/js/translation.js"></script>
+    <link rel="stylesheet" href="../../../dist/css/select2.css"/>
+    <script src="../../../dist/js/select2.js"></script>
+    <script src="../../../dist/js/translation.js"></script>
     
     <script>
         $(document).ready(function() {
@@ -73,13 +73,13 @@
         <small>Versão 2.0</small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="../avaliacoesAndamento.php">Avaliações em andamento</a></li><li class="active">Contexto de avaliação</li>
+          <li><a href="../../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="../../avaliacoesAndamento.php">Avaliações em andamento</a></li><li class="active">Contexto de avaliação</li>
       </ol>
     </section>
 
     <section class="content">
-        <?php include_once("avaliacaoEmAndamento.php");?>
+        <?php include_once("../avaliacaoEmAndamento.php");?>
         <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
           <div class="box box-default">
             <div class="box-header with-border">
@@ -193,13 +193,13 @@
           </div>
         
             <div style="float: right; padding-bottom: 10px;">
-                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
             </div>
       </div>
         <a style="color: #ecf0f5">'</a>
     </section>
   </div>
-    <?php include_once("../../rodape.php");?>
+    <?php include_once("../../../rodape.php");?>
 </div>
 
 </body>
@@ -229,12 +229,16 @@
     $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
       checkboxClass: 'icheckbox_flat-blue',
       radioClass   : 'iradio_flat-blue'
-    })
+    });
     
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass   : 'iradio_minimal-blue'
-    })
+    });
+    
+    function proximo(){
+        window.location.href = "../etapa2/introEtapa2.php";
+    }
     </script>
 
 </html>
