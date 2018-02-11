@@ -98,7 +98,6 @@
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Informe o site para extração das postagens</label>
                                   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex.: twitter.com">
-                                  <button style="margin-top: 5px">Extrair</button>
                                   <small id="emailHelp" class="form-text text-muted">Essa funcionalidade pode apresentar problemas ao tentar extrair de outros sites além do Twitter.</small>
                                 </div>
                             </form>

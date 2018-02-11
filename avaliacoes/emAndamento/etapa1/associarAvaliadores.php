@@ -135,7 +135,7 @@
                         <h3 class="box-title">Informe os avaliadores <small>min 02, max 10</small></h3>
                     </div>
 
-                    <div class="box-body">
+                    <div class="box-body" style="padding-left: 15px; padding-right: 15px">
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="nameAvaliador" class="col-sm-2 control-label">Nome</label>
@@ -177,7 +177,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Informe os validadores <small>min 01, max 03</small></h3>
                 </div>
-                  <div class="box-body">
+                  <div class="box-body" style="padding-left: 15px; padding-right: 15px">
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="nome" class="col-sm-2 control-label">Nome</label>

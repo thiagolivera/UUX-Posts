@@ -7,27 +7,27 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="../../bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="../../../bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
   
     <!-- jQuery 3 -->
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="../../../bower_components/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="../../../dist/js/adminlte.min.js"></script>
     
   <!-- Google Font -->
   <link rel="stylesheet"
@@ -46,7 +46,7 @@
         <small>Versão 2.0</small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="../../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Avaliações</li><li class="active">Interpretação dos Resultados</li>
       </ol>
     </section>
@@ -56,7 +56,7 @@
           <div class="box box-solid">
               <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-black" style="height: 250px;
-                     background: url('../../images/InterpretacaoResultados.svg') center center; position: relative">
+                     background: url('../../../images/InterpretacaoResultados.svg') center center; position: relative">
                     <div style="width: 100%; left: 0; top: 0; background-color: #3c8dbc;  position: absolute;">
                         <h3 style="color: white; padding-left: 15px; padding-top: 10px" class="widget-user-username">Etapa 4 - Interpretação dos Resultados</h3>
                         <h5 style="color: white; padding-left: 15px;" class="widget-user-desc">Metodologia MALTU</h5>  
@@ -124,7 +124,7 @@
     </section>
   </div>
 
-  <?php include("../../rodape.php");?>
+  <?php include("../../../rodape.php");?>
 
 </div>
 </body>

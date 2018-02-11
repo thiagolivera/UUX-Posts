@@ -68,7 +68,7 @@
                         </div>
                         
                         <br><label style="color: #ff0000; padding-left: 20px;">* Campos obrigatórios</label>
-                        <div class="box-body">
+                        <div class="box-body" style="padding-left: 25px; padding-right: 35px">
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label for="nome" class="col-sm-2 control-label">Sistema avaliado <a style="color: #ff0000">*</a></label>

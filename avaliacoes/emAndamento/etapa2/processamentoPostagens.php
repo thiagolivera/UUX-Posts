@@ -104,7 +104,7 @@
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Informe os demilitadores que deseja utilizar</label>
                                   <div class="col-sm-10">
-                                        <input type="text" placeholder="Ex.: Cálculo de rotas" data-role="tagsinput" />
+                                        <input type="text" placeholder="Ex.: ponto final" data-role="tagsinput" />
                                     </div>
                                 </div>
                             </form>
