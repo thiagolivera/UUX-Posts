@@ -541,11 +541,11 @@
         </table>
     </div>
     <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassUX()" style="margin-right: 10px;">Voltar</button>
+        <button class="btn btn-info" onclick="abrirClassUX()">Voltar</button>
     </div>
 
     <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
+        <button class="btn btn-info" onclick="proximo()">Salvar e próximo</button>
     </div>
 </div>
 
@@ -618,10 +618,6 @@
         document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
         document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
         document.getElementById('classificacaoPorArtefato').style.display = 'block';
-    }
-    
-    function proximo(){
-        window.location.href = "../etapa4/introEtapa4.php";
     }
 </script>
 

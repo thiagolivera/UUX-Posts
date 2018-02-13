@@ -1,6 +1,3 @@
-<link rel="icon" type="imagem/png" href="/images/uux-icon.ico" />
-<link rel = "shortcut icon" type = "imagem/x-icon" href = "/images/uux-icon.ico"/>
-
 <link rel="manifest" href="manifest.json">
 <script> 
 if ('serviceWorker' in navigator) {

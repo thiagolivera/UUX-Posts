@@ -173,5 +173,5 @@
 </div>
 
 <div style="float: right; padding-bottom: 10px;">
-    <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
+    <button class="btn btn-info" onclick="proximo()">Salvar e próximo</button>
 </div>

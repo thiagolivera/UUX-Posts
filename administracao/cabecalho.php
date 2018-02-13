@@ -1,10 +1,10 @@
 <header class="main-header">
     
-    <link rel="icon" type="imagem/png" href="/images/uux-icon.ico" />
-    <link rel = "shortcut icon" type = "imagem/x-icon" href = "/images/uux-icon.ico"/>
+    <link rel="icon" type="imagem/png" href="../images/uux-icon.ico" />
+    <link rel = "shortcut icon" type = "imagem/x-icon" href = "../images/uux-icon.ico"/>
 
     <!-- Logo -->
-    <a href="index.php" class="logo">
+    <a href="../index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>UUX</b><br>-Posts</span>
       <!-- logo for regular state and mobile devices -->
@@ -22,7 +22,7 @@
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="editarPerfil.php" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="../editarPerfil.php" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="../dist/img/avatar5.png" class="user-image" alt="Imagem do usuário">
               <span class="hidden-xs">Thiago Silva</span>
             </a>

@@ -134,22 +134,12 @@
                                         <br>
                                         
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Acessibilidade)
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Comunicabilidade)
+                                            <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
                                         </label>
                                         <br>
                                         
                                         <label style="font-weight: 500;">
                                             <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Experiência do Usuário)
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
                                         </label>
                                         <br>
 
@@ -160,7 +150,7 @@
                                     </div>
                                 </div>
                                 <div style="float: right; padding-bottom: 10px;">
-                                    <button type="button" class="btn btn-info" onclick="proximaPagina()" style="margin-right: 10px;">Salvar e próximo</button>
+                                    <button class="btn btn-info" onclick="proximaPagina()" type="button">Salvar e próximo</button>
                                 </div>
                             </form>
                         </div>

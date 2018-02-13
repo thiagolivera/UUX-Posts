@@ -135,7 +135,7 @@
     });
     
     function proximo(){
-        window.location.href = "criarAvaliacao.php";
+        window.location.href = "escolhaDadosResultados.php";
     }
 </script>
 

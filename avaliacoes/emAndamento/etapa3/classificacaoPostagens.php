@@ -133,6 +133,10 @@
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass   : 'iradio_minimal-blue'
     });
+    
+    function proximo(){
+        window.location.href = "../etapa4/introEtapa4.php";
+    }
     </script>
 
 </html>
