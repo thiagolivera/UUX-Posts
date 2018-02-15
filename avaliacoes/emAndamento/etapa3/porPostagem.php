@@ -172,6 +172,17 @@
     </div>
 </div>
 
-<div style="float: right; padding-bottom: 10px;">
-    <button class="btn btn-info" onclick="proximo()">Salvar e próximo</button>
+
+<div class="row" style="padding-top: 20px">
+    <div class="col-sm-4" style="padding-bottom: 10px;">
+        <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+    </div>
+    
+    <div class="col-sm-4" style="padding-bottom: 10px;">
+        <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+    </div>
+
+    <div class="col-sm-4" style="padding-bottom: 10px;">
+        <button class="btn btn-info center-block" onclick="proximo()">Salvar e próximo</button>
+    </div>
 </div>

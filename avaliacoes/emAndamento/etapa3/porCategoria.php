@@ -51,8 +51,19 @@
             </tbody>
         </table>
     </div>
-    <div id="btnClassFuncionalidade" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassTipo()" style="margin-right: 10px;">Salvar e próximo</button>
+    
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-4" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
+
+        <div class="col-sm-4" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-4" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="abrirClassTipo()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
@@ -140,12 +151,22 @@
         </table>
     </div>
     
-    <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassFunc()" style="margin-right: 10px;">Voltar</button>
-    </div>
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="abrirClassFunc()" style="margin-right: 10px;">Voltar</button>
+        </div>
+        
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
 
-    <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassIntencao()" style="margin-right: 10px;">Salvar e próximo</button>
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="abrirClassIntencao()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
@@ -214,12 +235,23 @@
             </tbody>
         </table>
     </div>
-    <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassTipo()" style="margin-right: 10px;">Voltar</button>
-    </div>
+    
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="abrirClassTipo()" style="margin-right: 10px;">Voltar</button>
+        </div>
+        
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
 
-    <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassAnaliseSentimentos()" style="margin-right: 10px;">Salvar e próximo</button>
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="abrirClassAnaliseSentimentos()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
@@ -288,12 +320,23 @@
             </tbody>
         </table>
     </div>
-    <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassIntencao()" style="margin-right: 10px;">Voltar</button>
-    </div>
 
-    <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassUsabilidade()" style="margin-right: 10px;">Salvar e próximo</button>
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="abrirClassIntencao()" style="margin-right: 10px;">Voltar</button>
+        </div>
+        
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="abrirClassUsabilidade()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
@@ -386,12 +429,23 @@
             </tbody>
         </table>
     </div>
-    <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassAnaliseSentimentos()" style="margin-right: 10px;">Voltar</button>
-    </div>
 
-    <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassUX()" style="margin-right: 10px;">Salvar e próximo</button>
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="abrirClassAnaliseSentimentos()" style="margin-right: 10px;">Voltar</button>
+        </div>
+        
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="abrirClassUX()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
@@ -478,12 +532,23 @@
             </tbody>
         </table>
     </div>
-    <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassUsabilidade()" style="margin-right: 10px;">Voltar</button>
-    </div>
 
-    <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassArtefato()" style="margin-right: 10px;">Salvar e próximo</button>
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="abrirClassUsabilidade()" style="margin-right: 10px;">Voltar</button>
+        </div>
+        
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="abrirClassArtefato()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
@@ -540,12 +605,23 @@
             </tbody>
         </table>
     </div>
-    <div id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="abrirClassUX()">Voltar</button>
-    </div>
+    
+    <div class="row" style="padding-top: 20px">
+        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="abrirClassUX()" style="margin-right: 10px;">Voltar</button>
+        </div>
+        
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
+        </div>
 
-    <div id="btnClassTipo" style="float: right; padding-bottom: 10px;">
-        <button class="btn btn-info" onclick="proximo()">Salvar e próximo</button>
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
+        </div>
+
+        <div class="col-sm-3" style="padding-bottom: 10px;">
+            <button class="btn btn-info center-block" onclick="proximo()">Salvar e próximo</button>
+        </div>
     </div>
 </div>
 
