@@ -125,7 +125,7 @@
     });
     
     function proximo(){
-        window.location.href = "../etapa2/introEtapa2.php";
+        window.location.href = "../relatorioAvaliacao/relatorioAvaliacao.php";
     }
     </script>
     
