@@ -62,9 +62,9 @@
 
                 <section class="content">
                     <h2 style="text-align: center">Relatório de Avaliação</h2>
-                    <?php include_once("./infoAvaliacao.php");?>
-                    <?php include_once("./avaliadores.php");?>
-                    <?php include_once("./contextoAvaliacao.php");?>
+                    <?php include_once("./infoAvaliacao.php");
+                          include_once("./avaliadores.php");
+                          include_once("./contextoAvaliacao.php");?>
                     <div class="box box-default">
                         <div class="box-header with-border">
                             <h3 class="box-title">Resultados de Classificação</h3>
@@ -78,8 +78,9 @@
                     include("../etapa4/resultadosUsabilidade.php");
                     include("../etapa4/resultadosUX.php");
                     include("../etapa4/resultadosArtefato.php");
+                    include("./percepcoesAvaliacao.php");
                     ?>
-
+                <a href="invoice-print.html" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
                 </section>
             </div>
             <?php include_once("../../../rodape.php");?>
