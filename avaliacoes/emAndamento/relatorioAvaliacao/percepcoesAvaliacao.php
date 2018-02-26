@@ -29,16 +29,7 @@
                 universidade (postagens extraídas de um fórum), as
                 postagens do tipo “Dúvida” e “Ajuda” eram as mais
                 frequentes, o que reforça o caráter colaborativo deste tipo de
-
-                sistema. No caso de PRUs do tipo “Ajuda”, são PRUs em
-                que os usuários respondem dúvidas de outros usuários,
-                ajudando-os a utilizarem o sistema [17, 20]. A classificação
-                por Tipo visa complementar o entendimento de comentários
-                neutros. Eles podem ser dúvidas, sugestões ou mesmo
-                comparações com outros sistemas. Algumas investigações
-                [16, 17] vêm sendo feitas no sentido de investigar como a
-                polaridade neutra pode ser relevante para avaliação textual
-                de sistemas.
+                sistema. 
             </p>
         </div>
     </div>

@@ -80,7 +80,7 @@
                     include("../etapa4/resultadosArtefato.php");
                     include("./percepcoesAvaliacao.php");
                     ?>
-                <a href="invoice-print.html" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
+                    <a target="_blank" onclick="window.print();" class="btn btn-primary no-print"><i class="fa fa-print"></i> Imprimir</a>
                 </section>
             </div>
             <?php include_once("../../../rodape.php");?>

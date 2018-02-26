@@ -57,9 +57,9 @@
             {
                 data: [30, 30, 40],
                 backgroundColor: [
-                    "#B2B0A1",
-                    "#7CF8FF",
-                    "#FFE963"
+                    "#1e90ff",
+                    "#ffa502",
+                    "#a4b0be"
                 ]
             }]
     };

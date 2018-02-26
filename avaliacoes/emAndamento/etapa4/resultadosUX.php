@@ -74,20 +74,33 @@
         ],
         datasets: [
             {
-                data: [, 1.06, 31.01, 2.67, 0, 18.71],
+                data: [50, 50, 50, 50, 50, 50],
                 backgroundColor: [
-                    "#7BF947",
-                    "#FBFF7F",
-                    "#CC4B47",
-                    "#7BF947",
-                    "#FBFF7F",
-                    "#CC4B47"
+                    "#A3CB38",
+                    "#1289A7",
+                    "#EE5A24",
+                    "#5f27cd",
+                    "#12CBC4",
+                    "#9980FA"
                 ]
             }]
     };
 
     var uxChart = new Chart(uxCanvas, {
       type: 'horizontalBar',
-      data: uxData
+      data: uxData,
+      options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
     });
 </script>

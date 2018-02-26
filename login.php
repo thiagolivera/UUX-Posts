@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>UUX-Posts | Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -34,42 +34,42 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: #3c8dbc">
 <div class="login">
            <div class="container">
-               <div class="col-lg-6 col-lg-offset-3">
+               <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
                         <form role="form">
                             <div class="row">
                                 <div class="icon text-center col-md-12">
-                                    <img id="logo" src="images/uux-posts.svg" style="width: 100%">
+                                    <img id="logo" src="images/uux-posts.svg" style="width: 80%;">
                                 </div>
 
                                 <br> <br> 
 
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <label>E-mail</label>
                                     <div class="form-group">
                                         <input type="email" name="email" id="email" class="form-control" placeholder="">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <label>Senha</label>
                                     <div class="form-group">
                                         <input type="password" name="password" id="password" class="form-control" placeholder="">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <button type="submit" class="btn btn-default">
                                         <span>ENTRAR</span>
                                     </button>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="forgot">
-                                        <p>Esqueceu e-mail ou senha?</p>
+                                        <p>Esqueceu sua senha?</p>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
         box-shadow: none;
         color: #565656;
         font-size:16px;
-        padding:30px 10px;
+        padding:20px 10px;
         margin-bottom:30px;
         border: 1px solid #f1f1f1;
     }

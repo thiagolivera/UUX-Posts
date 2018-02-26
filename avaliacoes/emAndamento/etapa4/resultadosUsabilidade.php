@@ -80,21 +80,34 @@
         ],
         datasets: [
             {
-                data: [62.76, 3.72, 2.65, 1.06, 21.80, 0.53, 2.65],
+                data: [100, 50, 50, 50, 50, 50, 50],
                 backgroundColor: [
-                    "#7BF947",
-                    "#FBFF7F",
-                    "#CC4B47",
-                    "#7BF947",
-                    "#FBFF7F",
-                    "#CC4B47",
-                    "#CC4B47"
+                    "#00d2d3",
+                    "#54a0ff",
+                    "#5f27cd",
+                    "#c8d6e5",
+                    "#576574",
+                    "#f368e0",
+                    "#ff9f43"
                 ]
             }]
     };
 
     var usabilidadeChart = new Chart(usabilidadeCanvas, {
-      type: 'horizontalBar',
-      data: usabilidadeData,
+        type: 'horizontalBar',
+        data: usabilidadeData,
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
     });
 </script>
