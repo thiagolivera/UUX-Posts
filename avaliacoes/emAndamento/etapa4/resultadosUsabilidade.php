@@ -11,7 +11,7 @@
                         <thead>
                             <tr>
                               <th>Faceta de Usabilidade</th>
-                              <th>Número de Citações</th>
+                              <th>Frequência</th>
                               <th>Porcentagem (%)</th>
                             </tr>
                         </thead>

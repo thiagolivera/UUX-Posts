@@ -76,7 +76,30 @@
                         </div>
                         <div class="box-body pad">
                             <form>
-                                  <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
+                                  <div class="form-group">
+                                    <label for="comment">Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
+                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="comment">Teve alguma postagem que lhe chamou atenção? Por quê?</label>
+                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="comment">O que você percebeu durante esta análise?</label>
+                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="comment">Qual o sentimento você percebeu com maior frequência nas postagens?</label>
+                                    <textarea class="form-control" rows="2" id="comment"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="comment">Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
+                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="comment">Relate quaisquer outras observações percebidas:</label>
+                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                  </div>
                             </form>
                         </div>
                     </div>

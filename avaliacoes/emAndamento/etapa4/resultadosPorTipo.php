@@ -11,7 +11,7 @@
                         <thead>
                             <tr>
                               <th>Tipo de PRU</th>
-                              <th>Número de Citações</th>
+                              <th>Frequência</th>
                               <th>Porcentagem (%)</th>
                             </tr>
                         </thead>

@@ -62,7 +62,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-default">
+                                    <button type="button" onclick="entrar()" class="btn btn-default">
                                         <span>ENTRAR</span>
                                     </button>
                                 </div>
@@ -159,5 +159,11 @@
         margin-top:-4px;
     }
 </style>
+
+<script>
+    function entrar(){
+        window.location.href = "index.php";
+    }
+    </script>
 </body>
 </html>

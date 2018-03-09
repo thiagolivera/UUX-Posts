@@ -149,6 +149,9 @@
                                         <br>
                                     </div>
                                 </div>
+                                <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
+                                    <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
+                                </div>
                                 <div style="float: right; padding-bottom: 10px;">
                                     <button class="btn btn-info" onclick="proximaPagina()" type="button">Salvar e próximo</button>
                                 </div>
@@ -156,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <a style="color: #ecf0f5">'</a>
+                <a style="color: #ecf0f5;">'</a>
             </section>
         </div>
         <?php include_once("../../rodape.php");?>
@@ -179,6 +182,10 @@
 <script type="text/javascript">
     function proximaPagina(){
         window.location.href = "../emAndamento/etapa1/associarAvaliadores.php";
+    }
+    
+    function voltar(){
+        window.location.href = "introEtapa1.php";
     }
     
     //Flat red color scheme for iCheck

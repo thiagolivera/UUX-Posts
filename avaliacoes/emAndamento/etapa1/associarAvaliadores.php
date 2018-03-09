@@ -48,7 +48,6 @@
     <!-- Select 2 -->
     <link rel="stylesheet" href="../../../dist/css/select2.css"/>
     <script src="../../../dist/js/select2.js"></script>
-    <script src="../../../dist/js/translation.js"></script>
     
     <script>
         $(document).ready(function() {
@@ -161,6 +160,18 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                  <td>Jeferson Juliani</td>
+                                  <td id="email">jeferson.engsoftware@gmail.com</td>
+                                  <td>Estudante</td>
+                                  <td><a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                </tr>
+                                <tr>
+                                  <td>Lavínia Matoso</td>
+                                  <td id="email">laviniamatosof@hotmail.com</td>
+                                  <td>Estudante</td>
+                                  <td><a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                </tr>
+                                <tr>
                                   <td>Thiago Silva</td>
                                   <td id="email">thiago.engsoftware@gmail.com</td>
                                   <td>Estudante</td>
@@ -203,9 +214,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <td>Thiago Silva</td>
-                                  <td id="email">thiago.engsoftware@gmail.com</td>
-                                  <td>Estudante</td>
+                                  <td>Marília Mendes</td>
+                                  <td id="email">mariliamendes@ufc.br</td>
+                                  <td>Professora</td>
                                   <td><a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                 </tr>
                             </tbody>
@@ -213,6 +224,9 @@
                     </div>
               </div>
           </div>
+        </div>
+        <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
         </div>
         <div style="float: right; padding-bottom: 10px;">
             <button type="submit" class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
@@ -324,6 +338,9 @@
     
     function proximo(){
         window.location.href = "contextoAvaliacao.php";
+    }
+    function voltar(){
+        window.location.href = "../../novaAvaliacao/criarAvaliacao.php";
     }
 </script>
 </html>

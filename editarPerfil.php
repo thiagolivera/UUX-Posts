@@ -49,7 +49,7 @@
             Seus dados foram alterados em nossa base de dados com sucesso.
         </div>
         
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6">
           <div class="box box-body">
             <div class="box-header with-border">
               <h3 class="box-title">Editar perfil</h3>
@@ -99,7 +99,7 @@
             </form>
           </div>
       </div>
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-6">
           <div class="box box-body">
             <div class="box-header with-border">
               <h3 class="box-title">Alterar senha</h3>

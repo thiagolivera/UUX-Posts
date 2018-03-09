@@ -68,15 +68,6 @@
                   <!-- /.row -->
                 </div>
             </div>
-            
-            <div class="col-sm-12" style="float: left; padding-left: 0px; padding-bottom: 10px;">
-                <form action="classificacaoPostagens.php" method="post">
-                    Selecione um modo de classificação: <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a>
-                    <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
-                            <option>Por postagem</option>
-                            <option>Por categoria</option>
-                    </select>
-            </div>
         </div>
         
         <div class="col-md-6" id="etapas">
@@ -127,15 +118,39 @@
         </div>
         
         <div style="padding-bottom: 10px;">
-            <button type="submit" class="btn btn-info" style="width: 100%; margin-right: 10px;">Próximo</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="width: 100%; margin-right: 10px;">Próximo</button>
         </div>
-        </form>
+                <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Escolha a forma de visualização da classificação <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></h4>
+              </div>
+              <div class="modal-body">
+                  <form action="classificacaoPostagens.php" method="post">
+                          <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
+                              <option>Por postagem</option>
+                              <option>Por categoria</option>
+                          </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Continuar</button>
+              </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <a style="color: #ecf0f5">'</a>
     </section>
   </div>
 
   <?php include("../../../rodape.php");?>
-
 </div>
 </body>
 

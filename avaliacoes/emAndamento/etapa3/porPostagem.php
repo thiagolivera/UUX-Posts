@@ -174,15 +174,25 @@
 
 
 <div class="row" style="padding-top: 20px">
-    <div class="col-sm-4" style="padding-bottom: 10px;">
+    <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+            <button class="btn btn-info" onclick="voltar()" style="margin-right: 10px;">Voltar</button>
+    </div>
+    
+    <div class="col-sm-3" style="padding-bottom: 10px;">
         <button class="btn btn-primary center-block"><i class="fa fa-star"></i> Marcar como favorita</button>
     </div>
     
-    <div class="col-sm-4" style="padding-bottom: 10px;">
+    <div class="col-sm-3" style="padding-bottom: 10px;">
         <button class="btn btn-warning center-block"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
     </div>
 
-    <div class="col-sm-4" style="padding-bottom: 10px;">
+    <div class="col-sm-3" style="padding-bottom: 10px; float: right;">
         <button class="btn btn-info center-block" onclick="proximo()">Salvar e próximo</button>
     </div>
 </div>
+
+<script>
+    function voltar(){
+        window.location.href = "introEtapa3.php";
+    }
+</script>

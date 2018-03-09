@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="box-footer" style="padding-top: 10px;">
-                    <h4 style="text-align: center">Nessa etapa as postagens são classificadas e validadas pelos avaliadores, nas categorias de classificação indicadas na Etapa 1 dessa avaliação.</h4>
+                    <h4 style="text-align: center">Nessa etapa cada avaliador deve relatar sobre sua experiência durante a avaliação do sitema, fornecendo análises e percepções importantes a partir dos resultados obtidos.</h4>
                 </div>
                   <!-- /.row -->
                 </div>

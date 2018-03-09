@@ -25,7 +25,7 @@
     <script src="../../../dist/bootstrap-tagsinput.min.js"></script>
   
     <link rel="stylesheet" href="../../../dist/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="../../../assets/app.css">
+    <link rel="stylesheet" href="../../novaAvaliacao/assets/app.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
@@ -91,19 +91,20 @@
                         
                         <div class="box-body" id="escolhaForma">
                             <div class="list-group">
-                                <button type="button" onclick="abrirEscolhaSite()" class="list-group-item">Transformar postagens em sentenças (você deve escolher os delimitadores)</button>
+                                <button type="button" onclick="abrirEscolhaProcessamento()" class="list-group-item">Transformar postagens em sentenças (você deve escolher os delimitadores)</button>
                                 <button type="button" class="list-group-item disabled">Limpeza do texto (evolução futura)</button>
                                 <button type="button" class="list-group-item disabled">Eliminação de Stopwords (evolução futura)</button>
                                 <button type="button" class="list-group-item disabled">Steaming (evolução futura)</button>
                                 <button type="button" class="list-group-item disabled">Lematizador (evolução futura)</button>
+                                <button type="button" onclick="pular()" class="list-group-item">Não quero realizar processamento de postagens</button>
                             </div>
                         </div>
                         
                         <div class="box-body" id="escolhaSite" style="display: none">
                             <form> 
                                 <div class="form-group">
-                                  <label for="exampleInputEmail1">Informe os demilitadores que deseja utilizar</label>
-                                  <div class="col-sm-10">
+                                  <label>Informe os demilitadores que deseja utilizar</label>
+                                  <div class="col-sm-12">
                                         <input type="text" placeholder="Ex.: ponto final" data-role="tagsinput" />
                                     </div>
                                 </div>
@@ -161,7 +162,11 @@
         window.location.href = "../etapa3/introEtapa3.php";
     }
     
-    function abrirEscolhaSite(){
+    function pular(){
+        window.location.href = "../etapa3/introEtapa3.php";
+    }
+    
+    function abrirEscolhaProcessamento(){
         document.getElementById('escolhaSite').style.display = 'block';
         document.getElementById('btnVoltar').style.display = 'block';
         document.getElementById('btnSalvar').style.display = 'block';
@@ -169,19 +174,12 @@
         document.getElementById('envioPlanilha').style.display = 'none';
     }
     
-    function abrirEnvioPlanilha(){
-        document.getElementById('envioPlanilha').style.display = 'block';
-        document.getElementById('btnVoltar').style.display = 'block';
-        document.getElementById('btnSalvar').style.display = 'block';
-        document.getElementById('escolhaForma').style.display = 'none';
-    }
-    
     function voltar(){
         document.getElementById('escolhaSite').style.display = 'none';
-        document.getElementById('envioPlanilha').style.display = 'none';
         document.getElementById('btnVoltar').style.display = 'none';
         document.getElementById('btnSalvar').style.display = 'none';
         document.getElementById('escolhaForma').style.display = 'block';
+        document.getElementById('envioPlanilha').style.display = 'block';
     }
     </script>
 

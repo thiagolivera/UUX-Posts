@@ -2,16 +2,6 @@
 
 <aside class="main-sidebar">/
     <section class="sidebar">
-      <div class="user-panel">
-        <div class="pull-left image">
-            <img src="dist/img/avatar5.png" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Thiago Silva</p>
-          <p>Gerente de avaliação</p><br>
-        </div>
-      </div>
-      
       <ul class="sidebar-menu" data-widget="tree">
             <?php 
                 if(strcmp($_SERVER['PHP_SELF'], "/UUX-Posts/index.php") == 0){

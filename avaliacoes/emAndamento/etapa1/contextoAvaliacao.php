@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
   
     <link rel="stylesheet" href="../../../dist/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="../../../assets/app.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
@@ -49,7 +48,6 @@
   <!-- Select 2 -->
     <link rel="stylesheet" href="../../../dist/css/select2.css"/>
     <script src="../../../dist/js/select2.js"></script>
-    <script src="../../../dist/js/translation.js"></script>
     
     <script>
         $(document).ready(function() {
@@ -191,7 +189,10 @@
             </form>
             </div>
           </div>
-        
+            <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
+                <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
+            </div>
+            
             <div style="float: right; padding-bottom: 10px;">
                 <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
             </div>
@@ -238,6 +239,9 @@
     
     function proximo(){
         window.location.href = "../etapa2/introEtapa2.php";
+    }
+    function voltar(){
+        window.location.href = "associarAvaliadores.php";
     }
     </script>
 
