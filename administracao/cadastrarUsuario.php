@@ -95,7 +95,7 @@
                     <div class="col-sm-10">
                         <select class="form-control col-sm-10">
                             <option>Avaliador</option>
-                            <option>Gerente de Avaliação</option>
+                            <option>Administrador</option>
                           </select>
                     </div>
                 </div>
