@@ -70,7 +70,7 @@
                   <tr>
                     <td>Jeferson Juliani</td>
                     <td id="email">jeferson.engsoftware@gmail.com</td>
-                    <td>Gerente de avaliação</td>
+                    <td>Avaliador</td>
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
@@ -78,7 +78,7 @@
                   <tr>
                     <td>Lavínia Matoso</td>
                     <td id="email">laviniamatosof@hotmail.com</td>
-                    <td>Gerente de avaliação</td>
+                    <td>Avaliador</td>
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
@@ -87,7 +87,7 @@
                   <tr>
                     <td>Marília Mendes</td>
                     <td id="email">mariliamendes@ufc.br</td>
-                    <td>Gerente de avaliação</td>
+                    <td>Administrador</td>
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
@@ -96,7 +96,7 @@
                   <tr>
                     <td>Thiago Silva</td>
                     <td id="email">thiago.engsoftware@gmail.com</td>
-                    <td>Gerente de avaliação</td>
+                    <td>Administrador</td>
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
