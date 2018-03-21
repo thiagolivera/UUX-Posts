@@ -3,6 +3,10 @@ session_start();
 if(isset($_SESSION["login"])){
     header("location:index.php");
 }
+include './autenticacao.php';
+if (isset($_POST['email']) && isset($_POST['password'])) {
+   $pessoa = new Autenticacao($_POST['email'],$_POST['password']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +49,7 @@ if(isset($_SESSION["login"])){
            <div class="container">
                <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
-                        <form role="form">
+                        <form role="form" action="login.php" method="post">
                             <div class="row">
                                 <div class="icon text-center col-md-12">
                                     <img id="logo" src="images/uux-posts.svg" style="width: 80%;">
@@ -68,7 +72,7 @@ if(isset($_SESSION["login"])){
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="button" onclick="entrar()" class="btn btn-default">
+                                    <button type="submit" class="btn btn-default">
                                         <span>ENTRAR</span>
                                     </button>
                                 </div>

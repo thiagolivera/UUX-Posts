@@ -1,6 +1,5 @@
 <?php
 class Banco {
-
     private $cnn, $qry, $sql, $db;
     private $host = "localhost";
     private $user = "postgres";
@@ -25,7 +24,6 @@ class Banco {
     }
 
     private function Conectar(){
-
         $DADOS = (object) array(
                             "host" => $this->host,
 			    "port" => $this->porta,
@@ -56,4 +54,3 @@ class Banco {
         return pg_close($this->cnn);
     }
 }
-?>

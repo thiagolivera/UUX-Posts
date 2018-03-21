@@ -1,6 +1,3 @@
-<?php
-include './verificarSessao.php';
-?>
 <header class="main-header">
     <link rel="icon" type="imagem/png" href="/images/uux-icon.ico" />
     <link rel = "shortcut icon" type = "imagem/x-icon" href = "/images/uux-icon.ico"/>
@@ -29,7 +26,7 @@ include './verificarSessao.php';
               <span class="hidden-xs">Thiago Silva</span>
             </a>
           </li>
-          <li><a href="#" class="btn btn-md">Sair</a></li>
+          <li><a href="logout.php" class="btn btn-md">Sair</a></li>
         </ul>
       </div>
 
