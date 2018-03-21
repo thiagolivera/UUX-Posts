@@ -1,3 +1,6 @@
+<?php
+include './verificarSessao.php';
+?>
 <header class="main-header">
     <link rel="icon" type="imagem/png" href="/images/uux-icon.ico" />
     <link rel = "shortcut icon" type = "imagem/x-icon" href = "/images/uux-icon.ico"/>

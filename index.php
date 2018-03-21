@@ -1,3 +1,6 @@
+<?php
+include './verificarSessao.php';
+?>
 <link rel="manifest" href="manifest.json">
 <script> 
 if ('serviceWorker' in navigator) {
