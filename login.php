@@ -3,6 +3,7 @@ session_start();
 if(isset($_SESSION["login"])){
     header("location:index.php");
 }
+
 include './autenticacao.php';
 if (isset($_POST['email']) && isset($_POST['password'])) {
    $pessoa = new Autenticacao($_POST['email'],$_POST['password']);
@@ -22,8 +23,16 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
   
@@ -44,8 +53,13 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page" style="background: #3c8dbc">
-<div class="login">
+    <body class="hold-transition login-page" style="background: #3c8dbc">
+        <div class="login">
+            <div class="alert alert-error alert-dismissible" id="alertaLogin" style="display: none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>Oops... Login inválido!</h4>
+                Humm... Parece que você informou um login ou senha inválidos, tente novamente.
+            </div>
            <div class="container">
                <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
@@ -174,6 +188,19 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     function entrar(){
         window.location.href = "index.php";
     }
+</script>
+
+<?php
+if(isset($_GET['erroLogin'])){
+    ?> 
+    <script>
+        document.getElementById('alertaLogin').style.display = 'block';
+        $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
+            $(".alert-dismissible").alert('close');
+        });
     </script>
+    <?php
+}
+?>
 </body>
 </html>
