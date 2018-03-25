@@ -100,6 +100,22 @@ include 'verificarSessao.class';
                     <td><a class="btn btn-sm btn-default"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                         <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>Waze</td>
+                    <td>Avaliador</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="
+                                 "aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:10%">
+                                10%
+                            </div>
+                        </div>
+                    </td>
+                    <td><a class="btn btn-sm btn-default" href="emAndamento/etapa2/processamentoPostagens.php"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm btn-default disabled"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
                   </tr> 
                   
                   </tbody>

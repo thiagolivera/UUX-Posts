@@ -21,10 +21,9 @@
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="editarPerfil.php" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="dist/img/avatar5.png" class="user-image" alt="Imagem do usuário">
-              <span class="hidden-xs">Thiago Silva</span>
-            </a>
+                <a href="editarPerfil.php">
+                    <img src="dist/img/avatar5.png" class="user-image" alt="Imagem do usuário">
+                    <span class=""><?php echo $_SESSION['loginNome']; ?></span></a>
           </li>
           <li><a href="logout.php" class="btn btn-md">Sair</a></li>
         </ul>

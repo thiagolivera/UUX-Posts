@@ -24,6 +24,8 @@ class Autenticacao extends Banco{
             $usuario = mysqli_fetch_row($rtn);
             if($usuario[5] == 0){
                 $_SESSION['login'] = $usuario[0];
+                $_SESSION['loginNome'] = $usuario[1];
+                $_SESSION['isAdmin'] = $usuario[6];
                 header("location:index.php");
             }
         }
