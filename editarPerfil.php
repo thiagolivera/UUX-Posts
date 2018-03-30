@@ -82,17 +82,6 @@ include './verificarSessao.php';
                       <input type="text" class="form-control" id="profissao" placeholder="Profissão" value="Estudante">
                   </div>
                 </div>
-                  
-                <div class="form-group">
-                    <label for="foto" class="col-sm-2 control-label">Escolher nova foto de perfil</label>
-                    <div class="col-sm-10">
-                        <div class="btn btn-default btn-file">
-                            <i class="fa fa-paperclip"></i> Escolher foto
-                            <input type="file" name="attachment">
-                        </div>
-                        <p class="help-block">Max. 2MB</p>
-                    </div>
-                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
