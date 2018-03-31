@@ -49,7 +49,7 @@ include './verificarSessao.php';
         <div class="alert alert-success alert-dismissible" id="alertaSucesso" style="display: none">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h4><i class="icon fa fa-check"></i> Dados alterados com sucesso!</h4>
-            Seus dados foram alterados em nossa base de dados com sucesso.
+            As alterações foram salvas em nossa base de dados com sucesso.
         </div>
         
         <div class="col-md-6">

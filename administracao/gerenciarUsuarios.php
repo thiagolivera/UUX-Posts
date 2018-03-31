@@ -1,5 +1,6 @@
 <?php
 include './verificarSessao.class';
+if($_SESSION['isAdmin'] == 1){
 ?>
 <!DOCTYPE html>
 <html>
@@ -140,3 +141,5 @@ include './verificarSessao.class';
 </style>
 
 </html>
+<?php 
+} ?>

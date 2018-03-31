@@ -149,12 +149,15 @@
                 }
             ?>
         
+        <?php
+        if($_SESSION['isAdmin'] == 1){
+        ?>
         <li class="header">USUÁRIOS</li>
         <?php 
                 if(strcmp($_SERVER['PHP_SELF'], "/administracao/cadastrarUsuario.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="../administracao/cadastrarUsuario.php">
+                        <a href="administracao/cadastrarUsuario.php">
                             <i class="fa fa-user-plus"></i> <span>Cadastrar usuário</span>
                         </a>
                     </li>
@@ -162,7 +165,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="../administracao/cadastrarUsuario.php">
+                        <a href="administracao/cadastrarUsuario.php">
                             <i class="fa fa-user-plus"></i> <span>Cadastrar usuário</span>
                         </a>
                     </li>
@@ -174,7 +177,7 @@
                 if(strcmp($_SERVER['PHP_SELF'], "/administracao/gerenciarUsuarios.php") == 0){
                 ?>
                     <li class="active">
-                        <a href="../administracao/gerenciarUsuarios.php">
+                        <a href="administracao/gerenciarUsuarios.php">
                             <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
                         </a>
                     </li>
@@ -182,12 +185,13 @@
                 } else{
                     ?>
                     <li>
-                        <a href="../administracao/gerenciarUsuarios.php">
+                        <a href="administracao/gerenciarUsuarios.php">
                             <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
                         </a>
                     </li>
             <?php
                 }
+        }
             ?>
       </ul>
     </section>

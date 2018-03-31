@@ -149,7 +149,9 @@
             <?php
                 }
             ?>
-        
+        <?php
+        if($_SESSION['isAdmin'] == 1){
+        ?>
         <li class="header">USUÁRIOS</li>
         <?php 
                 if(strcmp($_SERVER['PHP_SELF'], "/administracao/cadastrarUsuario.php") == 0){
@@ -189,6 +191,7 @@
                     </li>
             <?php
                 }
+        }
             ?>
       </ul>
     </section>
