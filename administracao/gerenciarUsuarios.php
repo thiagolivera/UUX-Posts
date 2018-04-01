@@ -8,6 +8,14 @@ if($_SESSION['isAdmin'] == 1){
     if(isset($_GET['dstv'])){
         $controle->desativarUsuario($_GET['dstv']);
     }
+    
+    if(isset($_GET['atv'])){
+        $controle->ativarUsuario($_GET['atv']);
+    }
+    
+    if(isset($_GET['rst'])){
+        $controle->resetarSenha($_GET['rst']);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,6 +71,7 @@ if($_SESSION['isAdmin'] == 1){
                   <thead>
                   <tr>
                     <th>Nome</th>
+                    <th></th>
                     <th id="email">E-mail</th>
                     <th id="profissao">Profissão</th>
                     <th>Tipo de Acesso</th>
@@ -75,6 +84,13 @@ if($_SESSION['isAdmin'] == 1){
                         ?>
                         <tr>
                             <td><?php echo $usuarios[$i]["nome"]; ?></td>
+                            <?php
+                            if($usuarios[$i]["bloqueado"] == 0){
+                                ?><td><i class="fa fa-circle" title="Bloqueado" aria-hidden="true" style="color:#2383e8"></i></td><?php
+                            } else{
+                                ?><td><i class="fa fa-circle" title="Desbloqueado" aria-hidden="true" style="color:#e8233d"></i></td><?php  
+                            }
+                            ?>
                             <td id="email"><?php echo $usuarios[$i]["login"]; ?></td>
                             <td id="profissao"><?php echo $usuarios[$i]["profissao"]; ?></td>
                             <?php
@@ -83,10 +99,20 @@ if($_SESSION['isAdmin'] == 1){
                             } else{
                                 ?> <td>Administrador</td> <?php
                             }
+                            if($usuarios[$i]["bloqueado"] == 0){
+                                ?>
+                                <td><a class="btn btn-sm btn-default" title="Resetar senha" href="gerenciarUsuarios.php?rst=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                                    <a class="btn btn-sm btn-default" title="Bloquear usuário" href="gerenciarUsuarios.php?dstv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                                </td>
+                                <?php
+                            } else{
+                                ?>
+                                <td><a class="btn btn-sm btn-default" title="Resetar senha" href="gerenciarUsuarios.php?rst=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                                    <a class="btn btn-sm btn-default" title="Desbloquear usuário" href="gerenciarUsuarios.php?atv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-unlock" aria-hidden="true"></i></a>
+                                </td>
+                                <?php
+                            }
                             ?>
-                            <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
-                                <a class="btn btn-sm btn-default" href="gerenciarUsuarios.php?dstv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                            </td>
                         </tr>
                         <?php
                         }

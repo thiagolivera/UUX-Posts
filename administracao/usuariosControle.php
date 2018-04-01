@@ -45,4 +45,26 @@ class Usuarios extends Banco{
             </script>
         <?php
     }
+    
+    public function ativarUsuario($id){
+        $sql = "UPDATE login SET bloqueado = false WHERE login.codlogin = " . $id . ";";
+        parent::Executar($sql);
+        ?> 
+            <script>
+                alert("Usuário ativado com sucesso");
+                window.location.href = "gerenciarUsuarios.php";
+            </script>
+        <?php
+    }
+    
+    public function resetarSenha($id){
+        $sql = "UPDATE login SET senha = MD5('uuxposts') WHERE login.codlogin = " . $id . ";";
+        parent::Executar($sql);
+        ?> 
+            <script>
+                alert("Senha resetada com sucesso");
+                window.location.href = "gerenciarUsuarios.php";
+            </script>
+        <?php
+    }
 }
