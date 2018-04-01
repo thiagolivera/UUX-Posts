@@ -1,6 +1,13 @@
 <?php
 include './verificarSessao.class';
 if($_SESSION['isAdmin'] == 1){
+    include './usuariosControle.php';
+    $controle = new Usuarios();
+    $usuarios = $controle->obterListaUsuarios();
+    
+    if(isset($_GET['dstv'])){
+        $controle->desativarUsuario($_GET['dstv']);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,22 +23,13 @@ if($_SESSION['isAdmin'] == 1){
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="../bower_components/jvectormap/jquery-jvectormap.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
-  
-	<!-- jQuery 3 -->
-	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap 3.3.7 -->
-	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- FastClick -->
-	<script src="../bower_components/fastclick/lib/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../dist/js/adminlte.min.js"></script>
+  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -60,51 +58,39 @@ if($_SESSION['isAdmin'] == 1){
             <div class="box-header with-border">
               <h3 class="box-title">Gerenciar usuários</h3>
             </div>
-            <div class="table">
-                <table class="table table-hover no-margin text-center">
+              <div class="table" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                <table id="example1" class="table table-hover no-margin text-center table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Nome</th>
                     <th id="email">E-mail</th>
+                    <th id="profissao">Profissão</th>
                     <th>Tipo de Acesso</th>
                     <th>Ações</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Jeferson Juliani</td>
-                    <td id="email">jeferson.engsoftware@gmail.com</td>
-                    <td>Avaliador</td>
-                    <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lavínia Matoso</td>
-                    <td id="email">laviniamatosof@hotmail.com</td>
-                    <td>Avaliador</td>
-                    <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>Marília Mendes</td>
-                    <td id="email">mariliamendes@ufc.br</td>
-                    <td>Administrador</td>
-                    <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>Thiago Silva</td>
-                    <td id="email">thiago.engsoftware@gmail.com</td>
-                    <td>Administrador</td>
-                    <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr>
+                      <?php
+                        for($i = 0; $i < count($usuarios); $i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $usuarios[$i]["nome"]; ?></td>
+                            <td id="email"><?php echo $usuarios[$i]["login"]; ?></td>
+                            <td id="profissao"><?php echo $usuarios[$i]["profissao"]; ?></td>
+                            <?php
+                            if($usuarios[$i]["admin"] == 0){
+                                ?> <td>Avaliador</td> <?php
+                            } else{
+                                ?> <td>Administrador</td> <?php
+                            }
+                            ?>
+                            <td><a class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                <a class="btn btn-sm btn-default" href="gerenciarUsuarios.php?dstv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                        <?php
+                        }
+                      ?>
                   </tbody>
                 </table>
               </div>
@@ -135,10 +121,59 @@ if($_SESSION['isAdmin'] == 1){
 @media(max-width: 768px){
     #email {
         display: none;  
-      }
+    }
+    
+    #profissao {
+        display: none;
+    }
 }
 
 </style>
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<script>
+  $(function () {
+    $('#example1').DataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Exibindo até _MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    })
+  })
+</script>
 
 </html>
 <?php 

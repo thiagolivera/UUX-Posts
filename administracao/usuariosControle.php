@@ -3,6 +3,7 @@
 include '../Banco.php';
 
 class Usuarios extends Banco{
+    
     public function __construct() {
         
     }
@@ -22,29 +23,26 @@ class Usuarios extends Banco{
         <?php
     }
     
-    public function obterPerfil($id){
-        $sql = "SELECT * FROM login WHERE login.codlogin = " . $id . ";";
+    public function obterListaUsuarios(){
+        $sql = "SELECT * FROM login;";
         $rtn = parent::Executar($sql);
-        return mysqli_fetch_row($rtn);
+        
+        $array = array();
+        
+        while($row = mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
     }
     
-    public function alterarSenha($senhaAntiga, $novaSenha, $id){
-        $sql = "SELECT senha FROM login WHERE login.codlogin = " . $id . " and login.senha = MD5('" . $senhaAntiga . "');";
-        $rtn = parent::Executar($sql);
-        if($rtn == '0'){
-            ?> 
+    public function desativarUsuario($id){
+        $sql = "UPDATE login SET bloqueado = true WHERE login.codlogin = " . $id . ";";
+        parent::Executar($sql);
+        ?> 
             <script>
-                window.location.href = "editarPerfil.php?erro";
+                alert("Usuário desativado com sucesso");
+                window.location.href = "gerenciarUsuarios.php";
             </script>
-                <?php
-        } else{
-            $sql = "UPDATE login SET senha = MD5('" . $novaSenha . "') WHERE login.codlogin = " . $id . ";";
-            parent::Executar($sql);
-            ?> 
-                <script>
-                    window.location.href = "editarPerfil.php?sucesso";
-                </script>
-            <?php
-        }
+        <?php
     }
 }
