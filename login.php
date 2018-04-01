@@ -60,6 +60,12 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                 <h4>Oops... Login inválido!</h4>
                 Humm... Parece que você informou um login ou senha inválidos, tente novamente.
             </div>
+            
+            <div class="alert alert-error alert-dismissible" id="bloqueado" style="display: none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>Oops... Login bloqueado!</h4>
+                Desculpas, mas o seu login encontra-se bloqueado. Verifique com o administrador do sistema e tente novamente.
+            </div>
            <div class="container">
                <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
@@ -195,8 +201,19 @@ if(isset($_GET['erroLogin'])){
     ?> 
     <script>
         document.getElementById('alertaLogin').style.display = 'block';
-        $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
-            $(".alert-dismissible").alert('close');
+        $("#alertaLogin").fadeTo(7000, 500).slideUp(500, function(){
+            $("#alertaLogin").alert('close');
+        });
+    </script>
+    <?php
+}
+
+if(isset($_GET['bloqueado'])){
+    ?> 
+    <script>
+        document.getElementById('bloqueado').style.display = 'block';
+        $("#bloqueado").fadeTo(7000, 500).slideUp(500, function(){
+            $("#bloqueado").alert('close');
         });
     </script>
     <?php

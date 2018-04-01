@@ -27,6 +27,12 @@ class Autenticacao extends Banco{
                 $_SESSION['loginNome'] = $usuario[1];
                 $_SESSION['isAdmin'] = $usuario[6];
                 header("location:index.php");
+            }else{
+                ?> 
+                    <script>
+                        window.location.href = "login.php?bloqueado";
+                    </script>
+                <?php
             }
         }
         return true;
