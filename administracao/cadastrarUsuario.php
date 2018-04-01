@@ -1,6 +1,11 @@
 <?php
 include './verificarSessao.class';
 if($_SESSION['isAdmin'] == 1){
+    include './usuariosControle.php';
+    $controle = new Usuarios();
+    if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']) && isset($_POST['tipoUsuario'])) {
+        $controle->cadastrarUsuario($_POST['nome'], $_POST['email'], $_POST['profissao'], $_POST['tipoUsuario']);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,13 +72,13 @@ if($_SESSION['isAdmin'] == 1){
             <div class="box-header with-border">
               <h3 class="box-title">Cadastrar usuário</h3>
             </div>
-            <form class="form-horizontal">
+              <form class="form-horizontal" method="post" action="cadastrarUsuario.php">
               <div class="box-body">
                 <div class="form-group">
                   <label for="nome" class="col-sm-2 control-label">Nome</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nome" placeholder="Ex.: Francisco José">
+                      <input type="text" class="form-control" name="nome" id="nome" placeholder="Ex.: Francisco José">
                   </div>
                 </div>
                   
@@ -81,7 +86,7 @@ if($_SESSION['isAdmin'] == 1){
                   <label for="email" class="col-sm-2 control-label">E-mail</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" placeholder="Ex.: seuemail@email.com">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Ex.: seuemail@email.com">
                   </div>
                 </div>
                   
@@ -89,7 +94,7 @@ if($_SESSION['isAdmin'] == 1){
                   <label for="profissao" class="col-sm-2 control-label">Profissão</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="profissao" placeholder="Ex.: Professor">
+                    <input type="text" class="form-control" name="profissao" id="profissao" placeholder="Ex.: Professor">
                   </div>
                 </div>
                   
@@ -97,7 +102,7 @@ if($_SESSION['isAdmin'] == 1){
                     <label for="tipoUsuario" class="col-sm-2 control-label">Tipo de usuário</label>
 
                     <div class="col-sm-10">
-                        <select class="form-control col-sm-10">
+                        <select class="form-control col-sm-10" name="tipoUsuario">
                             <option>Avaliador</option>
                             <option>Administrador</option>
                           </select>
@@ -121,11 +126,18 @@ if($_SESSION['isAdmin'] == 1){
 </div>
 </body>
 
-<script>
-     $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
-        $(".alert-dismissible").alert('close');
-    });
-</script>
+<?php
+if(isset($_GET['sucesso'])){
+    ?> 
+    <script>
+        document.getElementById('alertaSucesso').style.display = 'block';
+        $("#alertaSucesso").fadeTo(7000, 500).slideUp(500, function(){
+            $("#alertaSucesso").alert('close');
+        });
+    </script>
+    <?php
+}
+?>
 </html>
 
 <?php 

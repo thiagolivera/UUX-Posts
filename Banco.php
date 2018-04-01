@@ -28,7 +28,7 @@ class Banco{
         $this->sql = (string) $sql;
         
         self::Conectar();
-        $this->qry = mysqli_query($this->con, $this->sql) or die ("Erro ao executar query na base de dados: " . mysqli_error());
+        $this->qry = mysqli_query($this->con, $this->sql) or die ("Erro ao executar query na base de dados: " . mysqli_error($this->con));
         
         if(mysqli_affected_rows($this->con) > 0){
             return $this->qry;

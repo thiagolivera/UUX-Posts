@@ -1,5 +1,32 @@
 <?php
 include './verificarSessao.php';
+include './perfilControle.php';
+$perfil = new Perfil();
+$perfilAtual = $perfil->obterPerfil($_SESSION['login']);
+
+if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao'])) {
+   $perfil->alterarPerfil($_POST['nome'], $_POST['email'], $_POST['profissao'], $_SESSION['login']);
+}
+
+if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['novaSenha2'])) {
+    if((strlen($_POST['senhaAtual']) >= 8) && (strlen($_POST['novaSenha']) >= 8) && (strlen($_POST['novaSenha2']) >= 8)){
+        if(strcmp($_POST['novaSenha'], $_POST['novaSenha2']) == 0){
+            $perfil->alterarSenha($_POST['senhaAtual'], $_POST['novaSenha'], $_SESSION['login']);
+        } else{
+            ?>
+            <script type='text/javascript'>
+                alert('Ops, as senhas não conferem. Verifique e tente novamente');
+            </script>
+            <?php
+        }
+    } else{
+        ?>
+        <script type='text/javascript'>
+            alert('Você deve digitar uma senha com 8 ou mais caracteres. Tente novamente.');
+        </script>
+        <?php
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,18 +79,24 @@ include './verificarSessao.php';
             As alterações foram salvas em nossa base de dados com sucesso.
         </div>
         
+        <div class="alert alert-error alert-dismissible" id="alertaErro" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Houve um problema ao salvar os dados!</h4>
+            Verificamos em nosso sistema e a senha atual digitada não confere. Verifique e tente novamente.
+        </div>
+        
         <div class="col-md-6">
           <div class="box box-body">
             <div class="box-header with-border">
               <h3 class="box-title">Editar perfil</h3>
             </div>
-            <form class="form-horizontal">
+              <form class="form-horizontal" action="editarPerfil.php" method="post">
               <div class="box-body">
                 <div class="form-group">
                   <label for="nome" class="col-sm-2 control-label">Nome</label>
 
                   <div class="col-sm-10">
-                      <input type="text" class="form-control" id="nome" placeholder="Nome" value="Thiago Silva">
+                      <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?php echo $perfilAtual[1];?>">
                   </div>
                 </div>
                   
@@ -71,7 +104,7 @@ include './verificarSessao.php';
                   <label for="email" class="col-sm-2 control-label">E-mail</label>
 
                   <div class="col-sm-10">
-                      <input type="email" class="form-control" id="email" placeholder="Email" value="thiago.engsoftware@gmail.com">
+                      <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $perfilAtual[3];?>">
                   </div>
                 </div>
                   
@@ -79,7 +112,7 @@ include './verificarSessao.php';
                   <label for="profissao" class="col-sm-2 control-label">Profissão</label>
 
                   <div class="col-sm-10">
-                      <input type="text" class="form-control" id="profissao" placeholder="Profissão" value="Estudante">
+                      <input type="text" class="form-control" name="profissao" id="profissao" placeholder="Profissão" value="<?php echo $perfilAtual[2];?>">
                   </div>
                 </div>
               </div>
@@ -96,13 +129,13 @@ include './verificarSessao.php';
             <div class="box-header with-border">
               <h3 class="box-title">Alterar senha</h3>
             </div>
-              <form class="form-horizontal">
+              <form class="form-horizontal" method="post" action="editarPerfil.php">
               <div class="box-body">
                 <div class="form-group">
                   <label for="senhaAtual" class="col-sm-2 control-label">Senha atual</label>
 
                   <div class="col-sm-10">
-                      <input type="password" class="form-control" id="senhaAtual" placeholder="Senha atual">
+                      <input type="password" class="form-control" name="senhaAtual" id="senhaAtual" placeholder="Senha atual">
                   </div>
                 </div>
                   
@@ -110,7 +143,7 @@ include './verificarSessao.php';
                   <label for="novaSenha" class="col-sm-2 control-label">Nova senha</label>
 
                   <div class="col-sm-10">
-                      <input type="password" class="form-control" id="novaSenha" placeholder="Nova senha">
+                      <input type="password" class="form-control" name="novaSenha" id="novaSenha" placeholder="Nova senha">
                   </div>
                 </div>
                   
@@ -118,7 +151,7 @@ include './verificarSessao.php';
                   <label for="confirmaSenha" class="col-sm-2 control-label">Confirme a nova senha</label>
 
                   <div class="col-sm-10">
-                      <input type="password" class="form-control" id="confirmaSenha" placeholder="Confirme a nova senha">
+                      <input type="password" class="form-control" name="novaSenha2" id="confirmaSenha" placeholder="Confirme a nova senha">
                   </div>
                 </div>
               </div>
@@ -147,10 +180,28 @@ include './verificarSessao.php';
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 
-<script>
-     $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
-        $(".alert-dismissible").alert('close');
-    });
-</script>
+<?php
+if(isset($_GET['sucesso'])){
+    ?> 
+    <script>
+        document.getElementById('alertaSucesso').style.display = 'block';
+        $("#alertaSucesso").fadeTo(7000, 500).slideUp(500, function(){
+            $("#alertaSucesso").alert('close');
+        });
+    </script>
+    <?php
+}
+
+if(isset($_GET['erro'])){
+    ?> 
+    <script>
+        document.getElementById('alertaErro').style.display = 'block';
+        $("#alertaErro").fadeTo(7000, 500).slideUp(500, function(){
+            $("#alertaErro").alert('close');
+        });
+    </script>
+    <?php
+}
+?>
 </body>
 </html>
