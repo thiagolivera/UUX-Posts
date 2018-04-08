@@ -14,7 +14,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>UUX-Posts | Login</title>
+  <title>UUX-Posts | Registro</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -55,53 +55,37 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 </head>
     <body class="hold-transition login">
         <div class="login">
-            <div class="alert alert-error alert-dismissible" id="alertaLogin" style="display: none">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>Oops... Login inválido!</h4>
-                Humm... Parece que você informou um login ou senha inválidos, tente novamente.
-            </div>
-            
-            <div class="alert alert-error alert-dismissible" id="bloqueado" style="display: none">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>Oops... Login bloqueado!</h4>
-                Desculpas, mas o seu login encontra-se bloqueado. Verifique com o administrador do sistema e tente novamente.
-            </div>
            <div class="container">
                <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
-                        <form role="form" action="login.php" method="post">
+                        <form role="form" action="esqueceuSenha.php" method="post">
                             <div class="row">
-                                <div class="icon text-center col-md-12">
+                                <div class="icon text-center col-md-12" style="padding-bottom: 20px">
                                     <a href="../index.html"><img id="logo" src="images/uux-posts.svg" style="width: 100%;"></a>
                                 </div>
+                                <h3 class="text-center">Recupere sua senha</h3>
+                                
                                 <div class="col-md-12">
                                     <br>
                                     <label>E-mail</label>
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label>Senha (min. 8 caracteres)</label>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="">
+                                        <input type="email" name="email" id="email" class="form-control" placeholder="Ex.: seuemail@uxabilidade.com">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-default">
-                                        <span>ENTRAR</span>
+                                        <span>RECUPERAR SENHA</span>
                                     </button>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="forgot">
-                                        <a href="registro.php"><p>Não possui cadastro? Cadastre-se</p></a>
+                                        <a href="login.php"><p>Já possui cadastro? Entre</p></a>
                                     </div>
                                     
                                     <div class="forgot">
-                                        <a href="esqueceuSenha.php"><p>Esqueceu sua senha?</p></a>
+                                        <a href="registro.php"><p>Não possui cadastro? Cadastre-se</p></a>
                                     </div>
                                 </div>
                             </div>
