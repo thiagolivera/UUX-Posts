@@ -1,6 +1,3 @@
-<?php
-include '../verificarSessao.class';
-?>
 <div id="classificacaoPorFuncionalidade">
     <div class="table">
         <table class="table table-hover no-margin text-center">

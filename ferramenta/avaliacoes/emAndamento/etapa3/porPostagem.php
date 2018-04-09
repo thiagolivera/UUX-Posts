@@ -1,6 +1,3 @@
-<?php
-include '../verificarSessao.class';
-?>
 <div id="classificacaoPorPostagem">
     <div class="box box-body center-block" style="width: 95%; font-size: 16px">
         <div style="float: left;">

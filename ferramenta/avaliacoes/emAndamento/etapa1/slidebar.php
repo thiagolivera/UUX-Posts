@@ -186,7 +186,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="../../../administracao/gerenciarUsuarios.ph">
+                        <a href="../../../administracao/gerenciarUsuarios.php">
                             <i class="fa fa-users"></i> <span>Gerenciar usuários</span>
                         </a>
                     </li>

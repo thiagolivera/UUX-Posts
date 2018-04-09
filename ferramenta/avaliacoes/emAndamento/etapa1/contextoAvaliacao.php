@@ -90,23 +90,23 @@ include '../verificarSessao.class';
                 <form class="form-horizontal" id="contextoUso">
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Ambiente físico</label>
+                        <label for="fisico" class="col-sm-2 control-label">Ambiente físico</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="nome" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
+                            <textarea class="form-control" id="fisico" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
                         </div>
                     </div>
                   
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Ambiente social</label>
+                        <label for="social" class="col-sm-2 control-label">Ambiente social</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="nome" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
+                            <textarea class="form-control" id="social" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
                         </div>
                     </div>
                   
                     <div class="form-group">
-                      <label for="nome" class="col-sm-2 control-label">Ambiente cultural</label>
+                      <label for="cultural" class="col-sm-2 control-label">Ambiente cultural</label>
                       <div class="col-sm-10">
-                          <textarea class="form-control" id="nome" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
+                          <textarea class="form-control" id="cultural" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
                       </div>
                     </div>
                 </div>
@@ -122,9 +122,9 @@ include '../verificarSessao.class';
                 <form class="form-horizontal" id="usuariosSistema">
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Faixa etária</label>
+                        <label for="faixaEtaria" class="col-sm-2 control-label">Faixa etária</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="nameAvaliador" name="state" style="width: 100%">
+                            <select class="js-example-basic-single" id="faixaEtaria" name="state" style="width: 100%">
                                 <option></option>
                                 <option>0 - 10 anos</option>
                                 <option>11 - 20 anos</option>
@@ -138,9 +138,9 @@ include '../verificarSessao.class';
                     </div>
                   
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Sexo</label>
+                        <label for="sexo" class="col-sm-2 control-label">Sexo</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="nameAvaliador" name="state" style="width: 100%">
+                            <select class="js-example-basic-single" id="sexo" name="state" style="width: 100%">
                                 <option></option>
                                 <option>Feminino</option>
                                 <option>Masculino</option>
@@ -149,9 +149,9 @@ include '../verificarSessao.class';
                     </div>
                     
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Formação acadêmica</label>
+                        <label for="formacao" class="col-sm-2 control-label">Formação acadêmica</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="nameAvaliador" name="state" style="width: 100%">
+                            <select class="js-example-basic-single" id="formacao" name="state" style="width: 100%">
                                 <option></option>
                                 <option>Analfabeto</option>
                                 <option>Ensino Fundamental Incompleto</option>
@@ -166,26 +166,16 @@ include '../verificarSessao.class';
                     </div>
                     
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Tempo de uso do sistema</label>
+                        <label for="tempoUso" class="col-sm-2 control-label">Tempo de uso do sistema</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="nameAvaliador" name="state" style="width: 100%">
-                                <option></option>
-                                <option>Pouco tempo de uso</option>
-                                <option>Moderado tempo de uso</option>
-                                <option>Muito tempo de uso</option>
-                            </select>
+                            <input type="text" class="form-control" id="tempoUso" placeholder="Ex.: 2 anos">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Experiência tecnológica</label>
+                        <label for="experiencia" class="col-sm-2 control-label">Experiência tecnológica</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="nameAvaliador" name="state" style="width: 100%">
-                                <option></option>
-                                <option>Pouca experiência</option>
-                                <option>Moderada experiência</option>
-                                <option>Muita experiência</option>
-                            </select>
+                            <input type="text" class="form-control" id="experiencia" placeholder="Ex.: Usa com frequência">
                         </div>
                     </div>
                 </div>

@@ -80,27 +80,27 @@ include '../verificarSessao.class';
                         <div class="box-body pad">
                             <form>
                                   <div class="form-group">
-                                    <label for="comment">Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
+                                    <label for="comment">1) Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
                                     <textarea class="form-control" rows="3" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
-                                    <label for="comment">Teve alguma postagem que lhe chamou atenção? Por quê?</label>
+                                    <label for="comment">2) Teve alguma postagem que lhe chamou atenção? Por quê?</label>
                                     <textarea class="form-control" rows="3" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
-                                    <label for="comment">O que você percebeu durante esta análise?</label>
+                                    <label for="comment">3) O que você percebeu durante esta análise?</label>
                                     <textarea class="form-control" rows="3" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
-                                    <label for="comment">Qual o sentimento você percebeu com maior frequência nas postagens?</label>
+                                    <label for="comment">4) Qual o sentimento você percebeu com maior frequência nas postagens?</label>
                                     <textarea class="form-control" rows="2" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
-                                    <label for="comment">Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
+                                    <label for="comment">5) Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
                                     <textarea class="form-control" rows="3" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
-                                    <label for="comment">Relate quaisquer outras observações percebidas:</label>
+                                    <label for="comment">6) Relate quaisquer outras observações percebidas:</label>
                                     <textarea class="form-control" rows="3" id="comment"></textarea>
                                   </div>
                             </form>
