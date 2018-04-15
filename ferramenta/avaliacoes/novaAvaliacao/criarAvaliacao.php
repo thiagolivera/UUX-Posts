@@ -1,5 +1,65 @@
 <?php
 include './verificarSessao.class';
+include './novaAvaliacaoControle.php';
+
+if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["fonte"])
+        && isset($_POST["objetivos"]) && (isset($_POST["funcionalidade"]) || isset($_POST["tipo"]) || isset($_POST["intencao"])
+        || isset($_POST["analiseSentimentos"]) || isset($_POST["usabilidade"]) || isset($_POST["ux"]) || isset($_POST["artefato"]))){
+    
+    $avaliacao = new Avaliacao();
+    $avaliacao->sistema = $_POST["sistema"];
+    $avaliacao->plataforma = $_POST["plataforma"];
+    $avaliacao->fonte = $_POST["fonte"];
+    $avaliacao->objetivos = $_POST["objetivos"];
+    
+    if(isset($_POST["funcionalidades"])){
+        $avaliacao->funcionalidades = $_POST["funcionalidades"];
+    }
+    
+    if(isset($_POST["funcionalidade"])){
+        $avaliacao->funcionalidade = true;
+    } else{
+        $avaliacao->funcionalidade = 0;
+    }
+    
+    if(isset($_POST["tipo"])){
+        $avaliacao->tipo = true;
+    } else{
+        $avaliacao->tipo = 0;
+    }
+    
+    if(isset($_POST["intencao"])){
+        $avaliacao->intencao = true;
+    } else{
+        $avaliacao->intencao = 0;
+    }
+    
+    if(isset($_POST["analiseSentimentos"])){
+        $avaliacao->sentimentos = true;
+    } else{
+        $avaliacao->sentimentos = 0;
+    }
+    
+    if(isset($_POST["usabilidade"])){
+        $avaliacao->usabilidade = true;
+    } else{
+        $avaliacao->usabilidade = 0;
+    }
+    
+    if(isset($_POST["ux"])){
+        $avaliacao->ux = true;
+    } else{
+        $avaliacao->ux = 0;
+    }
+    
+    if(isset($_POST["artefato"])){
+        $avaliacao->artefato = true;
+    } else{
+        $avaliacao->artefato = 0;
+    }
+    $controleAvaliacao = new AvaliacaoControle();
+    $controleAvaliacao->criarAvaliacao($avaliacao, $_SESSION["login"]);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,8 +118,8 @@ include './verificarSessao.class';
             <section class="content-header">
                 <h1>UUX-Posts <small>Versão 2.0</small></h1>
                 <ol class="breadcrumb">
-                    <li><a href="../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li>Avaliações</li><li class="active">Criar uma nova avaliação</li>
+                    <li><a href="../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Criar uma nova avaliação</li>
                 </ol>
             </section>
 
@@ -72,82 +132,77 @@ include './verificarSessao.class';
                         
                         <br><label style="color: #ff0000; padding-left: 20px;">* Campos obrigatórios</label>
                         <div class="box-body" style="padding-left: 25px; padding-right: 35px">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" method="POST" action="criarAvaliacao.php">
                                 <div class="form-group">
-                                    <label for="nome" class="col-sm-2 control-label">Sistema avaliado <a style="color: #ff0000">*</a></label>
+                                    <label for="sistema" class="col-sm-2 control-label">Sistema avaliado <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="nome" placeholder="Ex.: Google Maps">
+                                        <input maxlength="50" name="sistema" type="text" class="form-control" id="sistema" placeholder="Ex.: Google Maps">
                                     </div>
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label for="plataforma" class="col-sm-2 control-label">Plataforma do sistema <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <select class="form-control col-sm-10">
-                                            <option>Android</option>
-                                            <option>iOS</option>
-                                            <option>Web</option>
-                                            <option>Windows</option>
-                                        </select>
+                                        <input maxlength="45" name="plataforma" type="text" class="form-control" id="plataforma" placeholder="Ex.: Android">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nome" class="col-sm-2 control-label">Fonte das postagens <a style="color: #ff0000">*</a></label>
+                                    <label for="fonte" class="col-sm-2 control-label">Fonte das postagens <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="nome" placeholder="Ex.: Twitter">
+                                        <input maxlength="45" name="fonte" type="text" class="form-control" id="fonte" placeholder="Ex.: Play Store">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="funcionalidades" class="col-sm-2 control-label">Funcionalidades</label>
                                     <div class="col-sm-10">
-                                        <input type="text" placeholder="Ex.: Cálculo de rotas" data-role="tagsinput" />
+                                        <input type="text" name="funcionalidades" placeholder="Separe-as por vírgula" data-role="tagsinput" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tipoUsuario" class="col-sm-2 control-label">Objetivos de avaliação <a style="color: #ff0000">*</a></label>
+                                    <label for="objetivos" class="col-sm-2 control-label">Objetivos de avaliação <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <textarea type="text" class="form-control" id="nome" placeholder="Ex.: Identificar problemas na interação e na interface"></textarea>
+                                        <textarea maxlength="800" type="text" class="form-control" name="objetivos" id="objetivos" placeholder="Ex.: Identificar problemas na interação e na interface"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tipoUsuario" class="col-sm-2 control-label">Categorias de classificação<a style="color: #ff0000">*</a></label>
+                                    <label class="col-sm-2 control-label">Categorias de classificação <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" class="minimal"> Classificação por funcionalidade
+                                            <input type="checkbox" name="funcionalidade" class="minimal"> Classificação por funcionalidade
                                         </label>
                                         <br>
                                         
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" class="minimal"> Classificação por tipo
+                                            <input type="checkbox" name="tipo" class="minimal"> Classificação por tipo
                                         </label>
                                         <br>
                                         
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" class="minimal"> Classificação por intenção
+                                            <input type="checkbox" name="intencao" class="minimal"> Classificação por intenção
                                         </label>
                                         <br>
                                         
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" class="minimal"> Classificação por análise de sentimentos
+                                            <input type="checkbox" name="analiseSentimentos" class="minimal"> Classificação por análise de sentimentos
                                         </label>
                                         <br>
                                         
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
+                                            <input type="checkbox" name="usabilidade" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
                                         </label>
                                         <br>
                                         
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Experiência do Usuário)
+                                            <input type="checkbox" name="ux" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Experiência do Usuário)
                                         </label>
                                         <br>
 
                                         <label style="font-weight: 500;">
-                                            <input type="checkbox" class="minimal"> Classificação por artefato
+                                            <input type="checkbox" name="artefato" class="minimal"> Classificação por artefato
                                         </label>
                                         <br>
                                     </div>
@@ -156,7 +211,7 @@ include './verificarSessao.class';
                                     <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
                                 </div>
                                 <div style="float: right; padding-bottom: 10px;">
-                                    <button class="btn btn-info" onclick="proximaPagina()" type="button">Salvar e próximo</button>
+                                    <button class="btn btn-info" type="submit">Criar avaliação</button>
                                 </div>
                             </form>
                         </div>
@@ -182,11 +237,7 @@ include './verificarSessao.class';
 }
 </style>
 
-<script type="text/javascript">
-    function proximaPagina(){
-        window.location.href = "../emAndamento/etapa1/associarAvaliadores.php";
-    }
-    
+<script type="text/javascript">    
     function voltar(){
         window.location.href = "introEtapa1.php";
     }

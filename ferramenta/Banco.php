@@ -7,23 +7,24 @@ class Banco{
     private $password = 'QOyPVo5YCWrE';
     private $database = 'u884100256_uux';
     
-    public function setHost($ip){
-        $this->host = $ip;
+    public function getHost(){
+        return $this->host;
     }
-    public function setUser($usr){
-        $this->user = $usr;
+    public function getUser(){
+        return $this->user;
     }
-    public function setPass($pwd){
-        $this->password = $pwd;
+    public function getPass(){
+        return $this->password;
     }
-    public function setBanco($db){
-        $this->database = $db;
+    public function getBanco(){
+        return $this->database;
     }
 
     private function Conectar(){
         $this->con = mysqli_connect($this->host, $this->user, $this->password, $this->database) or die ("Erro ao conectar." . mysqli_error());
     }
 
+    //para operações simples
     public function Executar($sql){
         $this->sql = (string) $sql;
         
@@ -37,6 +38,27 @@ class Banco{
         }
         
         self::Desconectar();
+    }
+    
+    //Para operações complexas, ou seja, que precisam de vários SQLs para salvar os dados
+    public function ExecutarSqls($sqls){        
+        $conexao = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+        mysqli_autocommit($conexao, FALSE);
+        $erro = 0;
+        
+        for($i = 0; $i < count($sqls); $i++){
+            if (!mysqli_query($conexao, $sqls[$i])){
+                $erro++;
+            }
+        }
+        
+        if ($erro == 0){
+            mysqli_commit($conexao);
+        } else {
+            mysqli_rollback($conexao);   
+        }
+        
+        mysqli_close($conexao);
     }
     
     private function Desconectar(){

@@ -50,7 +50,7 @@ include './verificarSessao.class';
       </h1>
       <ol class="breadcrumb">
           <li><a href="../../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Avaliações</li><li class="active">Criar uma nova avaliação</li>
+        <li class="active">Criar uma nova avaliação</li>
       </ol>
     </section>
 
