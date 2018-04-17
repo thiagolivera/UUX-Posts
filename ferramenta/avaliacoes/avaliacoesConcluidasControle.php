@@ -1,13 +1,13 @@
 <?php
 include '../Banco.php';
 
-class AvaliacoesAndamentoControle extends Banco{
+class AvaliacoesConcluidasControle extends Banco{
     public function __construct() {
 
     }
 
     public function obterAvaliacoesUsuario($idPessoa){
-        $sql = "SELECT avaliacaoPapeis.idAvaliacao, avaliacaoInfo.nomeSistema, avaliacaoPapeis.papel, avaliacao.status from avaliacaoInfo, avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." and status != 'Concluída';";
+        $sql = "SELECT avaliacaoPapeis.idAvaliacao, avaliacaoInfo.nomeSistema, avaliacaoPapeis.papel, avaliacao.dataTermino from avaliacaoInfo, avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." and status = 'Concluída';";
         $rtn = parent::Executar($sql);
         
         $array = array();
@@ -19,7 +19,7 @@ class AvaliacoesAndamentoControle extends Banco{
     }
 }
 
-class AvaliacaoAndamento {
+class AvaliacaoConcluida {
     var $sistema;
     var $seuPapel;
     var $status;

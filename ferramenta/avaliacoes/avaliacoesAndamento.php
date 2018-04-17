@@ -73,8 +73,8 @@ $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SES
                             <td><?php echo $avaliacoesAndamento[$i]["nomeSistema"]; ?></td>
                             <td><?php echo $avaliacoesAndamento[$i]["papel"]; ?></td>
                             <td><?php echo $avaliacoesAndamento[$i]["status"]; ?></td>
-                            <td><a class="btn btn-sm btn-default" title="Resetar senha" href="gerenciarUsuarios.php?rst=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-undo" aria-hidden="true"></i></a>
-                                <a class="btn btn-sm btn-default" title="Bloquear usuário" href="gerenciarUsuarios.php?dstv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                            <td>
+                                <a class="btn btn-sm btn-default" title="Continuar avaliacao" href="controleAvaliacoes.php?continuar=1&idAvaliacao=<?php echo $avaliacoesAndamento[$i]["idAvaliacao"]; ?>&status=<?php echo $avaliacoesAndamento[$i]["status"]; ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a> 
                             </td>
                         </tr>
                         <?php

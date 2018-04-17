@@ -61,14 +61,13 @@ class AvaliacaoControle extends Banco{
         //Verifica se houve erro para cancelar a transação
         if ($erro == 0){
             mysqli_commit($conexao);
+            $_SESSION['idAvaliacaoCriada'] = $idAvaliacao;
+            header("location:../emAndamento/etapa1/contextoAvaliacao.php");
+            mysqli_close($conexao);
         } else {
-            mysqli_rollback($conexao);   
+            mysqli_rollback($conexao);
+            mysqli_close($conexao);
         }
-        
-        mysqli_close($conexao);
-        
-        $_SESSION['idAvaliacaoCriada'] = $idAvaliacao;
-        header("location:../emAndamento/etapa1/contextoAvaliacao.php");
     }
 }
 
