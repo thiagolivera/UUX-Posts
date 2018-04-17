@@ -9,7 +9,7 @@ class ContextoAvaliacaoControle extends Banco{
     public function obterContexto($idAvaliacao){
         $sql = "SELECT * FROM avaliacaoContexto WHERE idAvaliacao = " . $idAvaliacao . ";";
         $rtn = self::Executar($sql);
-        return mysqli_fetch_row($rtn);
+        return @mysqli_fetch_row($rtn);
     }
 
     public function definirContexto(ContextoAvaliacao $contexto, $idAvaliacao){
@@ -59,7 +59,7 @@ class ContextoAvaliacaoControle extends Banco{
     }
     
     public function isGerente($idAvaliacao, $idPessoa){
-        $sql = "SELECT * FROM avaliacao WHERE idavaliacao = '" . $idAvaliacao . "' and idGerente = '" . $idPessoa . "';";
+        $sql = "SELECT papel FROM avaliacaoPapeis WHERE idavaliacao = '" . $idAvaliacao . "' and idPessoa = '" . $idPessoa . "' and papel = 'Gerente';";
         $rtn = parent::Executar($sql);
         if($rtn == '0'){
             return false;

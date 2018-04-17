@@ -1,9 +1,14 @@
 <?php
-include 'verificarSessao.class';
+include './verificarSessao.class';
+include './avaliacoesAndamentoControle.php';
+$controleAvaliacaoAndamento = new AvaliacoesAndamentoControle();
+$avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SESSION['login']);
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>UUX-Posts | Avaliações em andamento</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -14,22 +19,13 @@ include 'verificarSessao.class';
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="../bower_components/jvectormap/jquery-jvectormap.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
-  
-	<!-- jQuery 3 -->
-	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap 3.3.7 -->
-	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- FastClick -->
-	<script src="../bower_components/fastclick/lib/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../dist/js/adminlte.min.js"></script>
+  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -37,8 +33,8 @@ include 'verificarSessao.class';
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <?php include_once("cabecalho.php");?>
-  <?php include_once("slidebar.php");?>
+  <?php include("./cabecalho.php");?>
+  <?php include("./slidebar.php");?>
 
   <div class="content-wrapper">
     <section class="content-header">
@@ -48,94 +44,60 @@ include 'verificarSessao.class';
       </h1>
       <ol class="breadcrumb">
           <li><a href="../index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Avaliações</li><li class="active">Avaliações em andamento</li>
+          <li class="active">Avaliações em andamento</li>
       </ol>
     </section>
 
     <section class="content">
-        <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
-          <div class="box box-warning">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="box box-body">
             <div class="box-header with-border">
               <h3 class="box-title">Avaliações em andamento</h3>
             </div>
-              <div class="box-body">
-              <div class="table">
-                <table class="table table-hover no-margin text-center">
-                  <thead>
-                  <tr>
-                    <th>Sistema</th>
-                    <th>Seu papel</th>
-                    <th>Progresso</th>
-                    <th>Ações</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Spotify</td>
-                    <td>Avaliador</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="
-                                 "aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                                40%
-                            </div>
-                        </div>
-                    </td>
-                    <td><a class="btn btn-sm btn-default" onclick="abrirAvaliacao()"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default disabled"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>WhatsApp</td>
-                    <td>Gerente de Avaliação</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="
-                                 "aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:92%">
-                                92%
-                            </div>
-                        </div>
-                    </td>
-                    <td><a class="btn btn-sm btn-default"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>Waze</td>
-                    <td>Avaliador</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info active" role="progressbar" accesskey="
-                                 "aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:10%">
-                                10%
-                            </div>
-                        </div>
-                    </td>
-                    <td><a class="btn btn-sm btn-default" href="emAndamento/etapa2/processamentoPostagens.php"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                        <a class="btn btn-sm btn-default disabled"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    </td>
-                  </tr> 
-                  
+              <div class="table" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                <table id="example1" class="table table-hover no-margin text-center table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Sistema</th>
+                        <th>Seu papel</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <?php
+                        for($i = 0; $i < count($avaliacoesAndamento); $i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $avaliacoesAndamento[$i]["nomeSistema"]; ?></td>
+                            <td><?php echo $avaliacoesAndamento[$i]["papel"]; ?></td>
+                            <td><?php echo $avaliacoesAndamento[$i]["status"]; ?></td>
+                            <td><a class="btn btn-sm btn-default" title="Resetar senha" href="gerenciarUsuarios.php?rst=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                                <a class="btn btn-sm btn-default" title="Bloquear usuário" href="gerenciarUsuarios.php?dstv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                        <?php
+                        }
+                      ?>
                   </tbody>
                 </table>
               </div>
-            </div>
           </div>
       </div>
         <a style="color: #ecf0f5">'</a>
     </section>
   </div>
-    <?php include_once("../rodape.php");?>
-</div>
 
-</body>
+  <?php include("../rodape.php");?>
+
+</div>
 
 <style>
     .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
     position: relative;
     min-height: 1px;
+    padding-left: 0px;
     padding-right: 0px;
 }
 
@@ -147,9 +109,49 @@ include 'verificarSessao.class';
 }
 </style>
 
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
 <script>
-    function abrirAvaliacao(){
-        window.location.href = "emAndamento/associarAvaliadores.php";
-    }
+  $(function () {
+    $('#example1').DataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Exibindo até _MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar: ",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    })
+  })
 </script>
+
 </html>

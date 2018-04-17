@@ -185,7 +185,7 @@ if($_SESSION['isAdmin'] == 1){
             "sLoadingRecords": "Carregando...",
             "sProcessing": "Processando...",
             "sZeroRecords": "Nenhum registro encontrado",
-            "sSearch": "Pesquisar",
+            "sSearch": "Pesquisar: ",
             "oPaginate": {
                 "sNext": "Próximo",
                 "sPrevious": "Anterior",

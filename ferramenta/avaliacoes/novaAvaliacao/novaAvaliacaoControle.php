@@ -15,7 +15,7 @@ class AvaliacaoControle extends Banco{
         $erro = 0;
         
         //1) cria um id para a avaliação
-        $sql = "INSERT INTO `avaliacao`(`idavaliacao`, `idGerente`, `dataCriacao`, `status`)"
+        $sql = "INSERT INTO `avaliacao`(`idavaliacao`, `idPessoaCriou`, `dataCriacao`, `status`)"
                 . " VALUES (DEFAULT,". $gerente .",DATE('". $date ."'),'Etapa 1 - Contexto de avaliação')";
         if (!mysqli_query($conexao, $sql)){
             $erro++; //se der erro incrementa no contador para cancelar a transação
@@ -23,10 +23,16 @@ class AvaliacaoControle extends Banco{
         
         
         //2) obtem o id da avaliação criada
-        $sql = "SELECT idavaliacao FROM avaliacao where idGerente = ". $gerente ." ORDER BY idavaliacao DESC LIMIT 1;";
+        $sql = "SELECT idavaliacao FROM avaliacao where idPessoaCriou = ". $gerente ." ORDER BY idavaliacao DESC LIMIT 1;";
         $result = mysqli_query($conexao, $sql);
         $idAvaliacao = mysqli_fetch_array($result)[0];
         
+        //3) associa o gerente à avaliacao
+        $sql = "INSERT INTO `avaliacaoPapeis`(`idAvaliacao`, `idPessoa`, `papel`) VALUES "
+                . "(". $idAvaliacao .",". $gerente .",'Gerente');";
+        if (!mysqli_query($conexao, $sql)){
+            $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
         
         //3) cadastrar informações da avaliação
         $sql = "INSERT INTO `avaliacaoInfo`(`idAvaliacao`, `nomeSistema`, `plataforma`, `fontePostagens`, `objetivos`) VALUES "
