@@ -136,21 +136,21 @@ if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["font
                                 <div class="form-group">
                                     <label for="sistema" class="col-sm-2 control-label">Sistema avaliado <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="50" name="sistema" type="text" class="form-control" id="sistema" placeholder="Ex.: Google Maps">
+                                        <input maxlength="50" required="required" name="sistema" type="text" class="form-control" id="sistema" placeholder="Ex.: Google Maps">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="plataforma" class="col-sm-2 control-label">Plataforma do sistema <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="45" name="plataforma" type="text" class="form-control" id="plataforma" placeholder="Ex.: Android">
+                                        <input maxlength="45" required="required" name="plataforma" type="text" class="form-control" id="plataforma" placeholder="Ex.: Android">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fonte" class="col-sm-2 control-label">Fonte das postagens <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="45" name="fonte" type="text" class="form-control" id="fonte" placeholder="Ex.: Play Store">
+                                        <input maxlength="45" required="required" name="fonte" type="text" class="form-control" id="fonte" placeholder="Ex.: Play Store">
                                     </div>
                                 </div>
 
@@ -164,7 +164,7 @@ if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["font
                                 <div class="form-group">
                                     <label for="objetivos" class="col-sm-2 control-label">Objetivos de avaliação <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <textarea maxlength="800" type="text" class="form-control" name="objetivos" id="objetivos" placeholder="Ex.: Identificar problemas na interação e na interface"></textarea>
+                                        <textarea maxlength="800" required="required" type="text" class="form-control" name="objetivos" id="objetivos" placeholder="Ex.: Identificar problemas na interação e na interface"></textarea>
                                     </div>
                                 </div>
 
@@ -258,7 +258,7 @@ if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["font
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-42755476-1', 'bootstrap-tagsinput.github.io');
-    ga('send', 'pageview'); 
+    ga('send', 'pageview');
 </script>
 
 </html>

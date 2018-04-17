@@ -16,7 +16,7 @@ class AvaliacaoControle extends Banco{
         
         //1) cria um id para a avaliação
         $sql = "INSERT INTO `avaliacao`(`idavaliacao`, `idGerente`, `dataCriacao`, `status`)"
-                . " VALUES (DEFAULT,". $gerente .",DATE('". $date ."'),'Em andamento')";
+                . " VALUES (DEFAULT,". $gerente .",DATE('". $date ."'),'Etapa 1 - Contexto de avaliação')";
         if (!mysqli_query($conexao, $sql)){
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
@@ -61,12 +61,8 @@ class AvaliacaoControle extends Banco{
         
         mysqli_close($conexao);
         
+        $_SESSION['idAvaliacaoCriada'] = $idAvaliacao;
         header("location:../emAndamento/etapa1/contextoAvaliacao.php");
-    }
-
-
-    public function definirAvaliacao($idUsuario, $plataforma, $fonte, $funcionalidades, $objetivos, $categorias){
-        
     }
 }
 

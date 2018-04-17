@@ -1,5 +1,48 @@
 <?php
-include '../verificarSessao.class';
+    include_once '../verificarSessao.class';
+    include_once './contextoAvaliacaoControle.php';
+
+    $idAvalicao = $_SESSION['idAvaliacaoCriada'];
+    unset( $_SESSION['idAvaliacao'] );
+    $controleContextoAvaliacao = new ContextoAvaliacaoControle();
+    
+    if(!$controleContextoAvaliacao->isGerente($idAvalicao, $_SESSION['login'])){
+        header("location:erro.php");
+    }
+    
+    $avaliacaoAtual = $controleContextoAvaliacao->obterAvaliacao($idAvalicao);
+    $contextoAtual = $controleContextoAvaliacao->obterContexto($idAvalicao);
+
+    if(isset($_POST["ambFisico"]) || isset($_POST["ambSocial"]) || isset($_POST["ambCultural"]) || isset($_POST["faixaEtaria"])
+            || isset($_POST["sexo"]) || isset($_POST["formacao"]) || isset($_POST["tempoUso"]) || isset($_POST["experiencia"])){
+        $contextoAvaliacao = new ContextoAvaliacao();
+        if(isset($_POST["ambFisico"])){
+            $contextoAvaliacao->ambFisico = $_POST["ambFisico"];
+        }
+        if(isset($_POST["ambSocial"])){
+            $contextoAvaliacao->ambSocial = $_POST["ambSocial"];
+        }
+        if(isset($_POST["ambCultural"])){
+            $contextoAvaliacao->ambCultural = $_POST["ambCultural"];
+        }
+        if(isset($_POST["faixaEtaria"])){
+            $contextoAvaliacao->faixaEtaria = $_POST["faixaEtaria"];
+        }
+        if(isset($_POST["sexo"])){
+            $contextoAvaliacao->sexo = $_POST["sexo"];
+        }
+        if(isset($_POST["formacao"])){
+            $contextoAvaliacao->formacao = $_POST["formacao"];
+        }
+        if(isset($_POST["tempoUso"])){
+            $contextoAvaliacao->tempoUso = $_POST["tempoUso"];
+        }
+        if(isset($_POST["experiencia"])){
+            $contextoAvaliacao->experiencia = $_POST["experiencia"];
+        }
+
+        $controleContextoAvaliacao->definirContexto($contextoAvaliacao, $idAvalicao);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,112 +125,170 @@ include '../verificarSessao.class';
     <section class="content">
         <?php include_once("../avaliacaoEmAndamento.php");?>
         <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Informe o contexto de uso do sistema (opcional)</h3>
-            </div>
-            <div class="box-body">
-                <form class="form-horizontal" id="contextoUso">
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="fisico" class="col-sm-2 control-label">Ambiente físico</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="fisico" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
-                        </div>
-                    </div>
-                  
-                    <div class="form-group">
-                        <label for="social" class="col-sm-2 control-label">Ambiente social</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="social" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
-                        </div>
-                    </div>
-                  
-                    <div class="form-group">
-                      <label for="cultural" class="col-sm-2 control-label">Ambiente cultural</label>
-                      <div class="col-sm-10">
-                          <textarea class="form-control" id="cultural" placeholder="Ex.: Os usuários usam o aplicativo em casa"></textarea>
-                      </div>
-                    </div>
-                </div>
-                </form>
-            </div>
-          </div>
-            
             <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Informe quem são os usuários do sistema (opcional)</h3>
-            </div>
-            <div class="box-body">
-                <form class="form-horizontal" id="usuariosSistema">
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="faixaEtaria" class="col-sm-2 control-label">Faixa etária</label>
-                        <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="faixaEtaria" name="state" style="width: 100%">
-                                <option></option>
-                                <option>0 - 10 anos</option>
-                                <option>11 - 20 anos</option>
-                                <option>21 - 30 anos</option>
-                                <option>31 - 40 anos</option>
-                                <option>41 - 50 anos</option>
-                                <option>51 - 60 anos</option>
-                                <option>Acima de 60 anos</option>
-                            </select>
-                        </div>
-                    </div>
-                  
-                    <div class="form-group">
-                        <label for="sexo" class="col-sm-2 control-label">Sexo</label>
-                        <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="sexo" name="state" style="width: 100%">
-                                <option></option>
-                                <option>Feminino</option>
-                                <option>Masculino</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="formacao" class="col-sm-2 control-label">Formação acadêmica</label>
-                        <div class="col-sm-10">
-                            <select class="js-example-basic-single" id="formacao" name="state" style="width: 100%">
-                                <option></option>
-                                <option>Analfabeto</option>
-                                <option>Ensino Fundamental Incompleto</option>
-                                <option>Ensino Fundamental Completo</option>
-                                <option>Ensino Médio Incompleto</option>
-                                <option>Ensino Médio Completo</option>
-                                <option>Ensino Superior Incompleto</option>
-                                <option>Ensino Superior Completo</option>
-                                <option>Pós-graduação</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tempoUso" class="col-sm-2 control-label">Tempo de uso do sistema</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="tempoUso" placeholder="Ex.: 2 anos">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="experiencia" class="col-sm-2 control-label">Experiência tecnológica</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="experiencia" placeholder="Ex.: Usa com frequência">
-                        </div>
-                    </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informe o contexto da avaliação (opcional)</h3>
                 </div>
-            </form>
-            </div>
-          </div>
-            <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
-                <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
-            </div>
-            
-            <div style="float: right; padding-bottom: 10px;">
-                <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
+
+                <div class="box-body">
+                    <form class="form-horizontal" id="contextoUso" method="POST" action="contextoAvaliacao.php" style="padding-right: 10px; padding-left: 10px">
+                        <div class="form-group">
+                            <label for="fisico" class="col-sm-2 control-label">Ambiente físico</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="ambFisico" id="fisico" placeholder="Ex.: Os usuários usam o aplicativo em casa"><?php echo $contextoAtual[1]; ?></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="social" class="col-sm-2 control-label">Ambiente social</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="ambSocial" id="social" placeholder="Ex.: Os usuários usam o aplicativo em casa"><?php echo $contextoAtual[2]; ?></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="cultural" class="col-sm-2 control-label">Ambiente cultural</label>
+                          <div class="col-sm-10">
+                              <textarea class="form-control" name="ambCultural" id="cultural" placeholder="Ex.: Os usuários usam o aplicativo em casa"><?php echo $contextoAtual[3]; ?></textarea>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="faixaEtaria" class="col-sm-2 control-label">Faixa etária</label>
+                            <div class="col-sm-10">
+                                <select class="js-example-basic-single" id="faixaEtaria" name="faixaEtaria" style="width: 100%">
+                                    <option></option>
+                                    <?php if(strcmp($contextoAtual[4], '0 - 10 anos') == 0){
+                                        ?> <option selected="true">0 - 10 anos</option> <?php
+                                    } else{
+                                        ?> <option>0 - 10 anos</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[4], '11 - 20 anos') == 0){
+                                        ?> <option selected="true">11 - 20 anos</option> <?php
+                                    } else{
+                                        ?> <option>11 - 20 anos</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[4], '21 - 30 anos') == 0){
+                                        ?> <option selected="true">21 - 30 anos</option> <?php
+                                    } else{
+                                        ?> <option>21 - 30 anos</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[4], '31 - 40 anos') == 0){
+                                        ?> <option selected="true">31 - 40 anos</option> <?php
+                                    } else{
+                                        ?> <option>31 - 40 anos</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[4], '41 - 50 anos') == 0){
+                                        ?> <option selected="true">41 - 50 anos</option> <?php
+                                    } else{
+                                        ?> <option>41 - 50 anos</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[4], '51 - 60 anos') == 0){
+                                        ?> <option selected="true">51 - 60 anos</option> <?php
+                                    } else{
+                                        ?> <option>51 - 60 anos</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[4], 'Acima de 60 anos') == 0){
+                                        ?> <option selected="true">Acima de 60 anos</option> <?php
+                                    } else{
+                                        ?> <option>Acima de 60 anos</option> <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sexo" class="col-sm-2 control-label">Sexo</label>
+                            <div class="col-sm-10">
+                                <select class="js-example-basic-single" id="sexo" name="sexo" style="width: 100%">
+                                    <option></option>
+                                    <?php if(strcmp($contextoAtual[5], 'Feminino') == 0){
+                                        ?> <option selected="true">Feminino</option> <?php
+                                    } else{
+                                        ?> <option>Feminino</option> <?php
+                                    } ?>
+                                        <?php if(strcmp($contextoAtual[5], 'Masculino') == 0){
+                                        ?> <option selected="true">Masculino</option> <?php
+                                    } else{
+                                        ?> <option>Masculino</option> <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formacao" class="col-sm-2 control-label">Formação acadêmica</label>
+                            <div class="col-sm-10">
+                                <select class="js-example-basic-single" id="formacao" name="formacao" style="width: 100%">
+                                    <option></option>
+                                    <?php if(strcmp($contextoAtual[6], 'Analfabeto') == 0){
+                                        ?> <option selected="true">Analfabeto</option> <?php
+                                    } else{
+                                        ?> <option>Analfabeto</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Ensino Fundamental Incompleto') == 0){
+                                        ?> <option selected="true">Ensino Fundamental Incompleto</option> <?php
+                                    } else{
+                                        ?> <option>Ensino Fundamental Incompleto</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Ensino Fundamental Completo') == 0){
+                                        ?> <option selected="true">Ensino Fundamental Completo</option> <?php
+                                    } else{
+                                        ?> <option>Ensino Fundamental Completo</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Ensino Médio Incompleto') == 0){
+                                        ?> <option selected="true">Ensino Médio Incompleto</option> <?php
+                                    } else{
+                                        ?> <option>Ensino Médio Incompleto</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Ensino Médio Completo') == 0){
+                                        ?> <option selected="true">Ensino Médio Completo</option> <?php
+                                    } else{
+                                        ?> <option>Ensino Médio Completo</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Ensino Superior Incompleto') == 0){
+                                        ?> <option selected="true">Ensino Superior Incompleto</option> <?php
+                                    } else{
+                                        ?> <option>Ensino Superior Incompleto</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Ensino Superior Completo') == 0){
+                                        ?> <option selected="true">Ensino Superior Completo</option> <?php
+                                    } else{
+                                        ?> <option>Ensino Superior Completo</option> <?php
+                                    } ?>
+                                    <?php if(strcmp($contextoAtual[6], 'Pós-graduação') == 0){
+                                        ?> <option selected="true">Pós-graduação</option> <?php
+                                    } else{
+                                        ?> <option>Pós-graduação</option> <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tempoUso" class="col-sm-2 control-label">Tempo de uso do sistema</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="tempoUso" id="tempoUso" value="<?php echo $contextoAtual[7]; ?>" placeholder="Ex.: 2 anos">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experiencia" class="col-sm-2 control-label">Experiência tecnológica</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="experiencia" id="experiencia" value="<?php echo $contextoAtual[8]; ?>" placeholder="Ex.: Usa com frequência">
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px; padding-top: 20px">
+                            <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
+                        </div>
+
+                        <div style="float: right; padding-bottom: 10px; padding-top: 20px">
+                            <button class="btn btn-info" type="submit" style="margin-right: 10px;">Salvar e próximo</button>
+                        </div>
+                    </form>
+                </div>
             </div>
       </div>
         <a style="color: #ecf0f5">'</a>
