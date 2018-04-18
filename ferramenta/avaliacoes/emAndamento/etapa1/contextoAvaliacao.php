@@ -3,7 +3,6 @@
     include_once './contextoAvaliacaoControle.php';
 
     $idAvalicao = $_SESSION['idAvaliacaoCriada'];
-    unset( $_SESSION['idAvaliacao'] );
     $controleContextoAvaliacao = new ContextoAvaliacaoControle();
     
     if(!$controleContextoAvaliacao->isGerente($idAvalicao, $_SESSION['login'])){

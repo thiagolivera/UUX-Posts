@@ -24,6 +24,12 @@ class ContextoAvaliacaoControle extends Banco{
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
         
+        //1) muda status da avaliação no dados no banco
+        $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 2 - Extração de PRUS' WHERE `idavaliacao` = ".$idAvaliacao.";";
+        if (!mysqli_query($conexao, $sql)){
+            $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
+        
         //Verifica se houve erro para cancelar a transação
         if ($erro == 0){
             mysqli_commit($conexao);

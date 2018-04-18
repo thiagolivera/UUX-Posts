@@ -1,5 +1,11 @@
 <?php
 include '../verificarSessao.class';
+include './extracaoControle.php';
+
+$idAvalicao = $_SESSION['idAvaliacaoCriada'];
+unset( $_SESSION['idAvaliacao'] );
+$extracaoControle = new ExtracaoControle();
+$avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
 ?>
 <!DOCTYPE html>
 <html>
