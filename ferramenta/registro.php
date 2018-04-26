@@ -6,11 +6,18 @@ if(isset($_SESSION["login"])){
 include './loginControle.php';
 $controle = new Usuarios();
 
+$nome = '';
+$profissao = '';
+$email = '';
+
 if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']) && isset($_POST['senha']) && isset($_POST['password'])){
     if((strlen($_POST['senha']) >= 8) && (strlen($_POST['password']) >= 8)){
         if(strcmp($_POST['senha'], $_POST['password']) == 0){
             $controle->registrarUsuario($_POST['nome'], $_POST['email'], $_POST['profissao'], $_POST['senha']);
         } else{
+            $nome = $_POST['nome'];
+            $profissao = $_POST['profissao'];
+            $email = $_POST['email'];
             ?>
             <script type='text/javascript'>
                 alert('Ops, as senhas não conferem. Verifique e tente novamente');
@@ -86,40 +93,40 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
                                     <br>
                                     <label>Nome</label>
                                     <div class="form-group">
-                                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Ex.: Fulano da Silva">
+                                        <input type="text" maxlength="120" required="required" value="<?php echo $nome; ?>" name="nome" id="nome" class="form-control" placeholder="Ex.: Fulano da Silva">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-12">
                                     <label>Profissão</label>
                                     <div class="form-group">
-                                        <input type="text" name="profissao" id="profissao" class="form-control" placeholder="Ex.: Estudante">
+                                        <input type="text" maxlength="120" required="required" value="<?php echo $profissao; ?>" name="profissao" id="profissao" class="form-control" placeholder="Ex.: Estudante">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-12">
                                     <label>E-mail</label>
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Ex.: seuemail@uxabilidade.com">
+                                        <input type="email" maxlength="120" required="required" value="<?php echo $email; ?>" name="email" id="email" class="form-control" placeholder="Ex.: seuemail@uxabilidade.com">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label>Senha</label>
                                     <div class="form-group">
-                                        <input type="password" name="senha" id="password" class="form-control" placeholder="Mínimo 8 caracteres">
+                                        <input type="password" minlength="8" required="required" name="senha" id="senha" class="form-control" placeholder="Mínimo 8 caracteres">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-12">
                                     <label>Confirme a senha</label>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="Mínimo 8 caracteres">
+                                        <input type="password" minlength="8" required="required" name="password" id="password" class="form-control" placeholder="Mínimo 8 caracteres">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-default">
+                                    <button type="submit" class="btn btn-default" onclick="return validarSenha()">
                                         <span>CADASTRAR</span>
                                     </button>
                                 </div>
@@ -230,5 +237,18 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
         }
     }
 </style>
+
+<script>
+    function validarSenha(){
+        senha = document.getElementsByName('senha').value;
+        senha2 = document.getElementsByName('password').value;
+
+        if(senha!== senha2) {
+             senha2.setCustomValidity("Senhas diferentes!");
+            return false; 
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
