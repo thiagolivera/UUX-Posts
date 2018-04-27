@@ -1,8 +1,9 @@
 <?php
     include_once '../verificarSessao.class';
     include_once './contextoAvaliacaoControle.php';
-
-    $idAvalicao = $_SESSION['idAvaliacaoCriada'];
+    
+    $idAvalicao = $_SESSION['idAvaliacao'];
+    
     $controleContextoAvaliacao = new ContextoAvaliacaoControle();
     
     if(!$controleContextoAvaliacao->isGerente($idAvalicao, $_SESSION['login'])){

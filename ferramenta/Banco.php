@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 class Banco{
     private $con, $qry, $sql, $db;

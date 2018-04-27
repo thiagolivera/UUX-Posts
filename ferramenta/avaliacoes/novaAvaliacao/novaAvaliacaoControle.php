@@ -35,8 +35,8 @@ class AvaliacaoControle extends Banco{
         }
         
         //3) cadastrar informações da avaliação
-        $sql = "INSERT INTO `avaliacaoInfo`(`idAvaliacao`, `nomeSistema`, `plataforma`, `fontePostagens`, `objetivos`) VALUES "
-                . "(". $idAvaliacao .",'". $avaliacao->sistema ."','". $avaliacao->plataforma ."','". $avaliacao->fonte ."','". $avaliacao->objetivos ."');";
+        $sql = "INSERT INTO `avaliacaoInfo`(`idAvaliacao`, `nomeAvaliacao`, `nomeSistema`, `plataforma`, `fontePostagens`, `objetivos`) VALUES "
+                . "(". $idAvaliacao .",'".$avaliacao->nome."','". $avaliacao->sistema ."','". $avaliacao->plataforma ."','". $avaliacao->fonte ."','". $avaliacao->objetivos ."');";
         if (!mysqli_query($conexao, $sql)){
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
@@ -51,17 +51,10 @@ class AvaliacaoControle extends Banco{
             }
         }
         
-        //5) cadastrar categorias de classificação informadas        
-        $sql = "INSERT INTO `avaliacaoCategorias`(`idavaliacao`, `funcionalidade`, `tipo`, `intencao`, `analiseSentimentos`, `usabilidade`, `ux`, `artefato`) VALUES"
-                . " (". $idAvaliacao .",".$avaliacao->funcionalidade.",".$avaliacao->tipo.",".$avaliacao->intencao.",".$avaliacao->sentimentos.",".$avaliacao->usabilidade.",".$avaliacao->ux.",".$avaliacao->artefato.");";
-        if (!mysqli_query($conexao, $sql)){
-            $erro++; //se der erro incrementa no contador para cancelar a transação
-        }
-        
         //Verifica se houve erro para cancelar a transação
         if ($erro == 0){
             mysqli_commit($conexao);
-            $_SESSION['idAvaliacaoCriada'] = $idAvaliacao;
+            $_SESSION['idAvaliacao'] = $idAvaliacao;
             header("location:../emAndamento/etapa1/contextoAvaliacao.php");
             mysqli_close($conexao);
         } else {
@@ -72,18 +65,12 @@ class AvaliacaoControle extends Banco{
 }
 
 class Avaliacao {
+    var $nome;
     var $sistema;
     var $plataforma;
     var $fonte;
     var $funcionalidades;
     var $objetivos;
-    var $funcionalidade;
-    var $tipo;
-    var $intencao;
-    var $sentimentos;
-    var $usabilidade;
-    var $ux;
-    var $artefato;
     
     public function __construct() {
         

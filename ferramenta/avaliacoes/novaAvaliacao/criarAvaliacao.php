@@ -2,11 +2,10 @@
 include './verificarSessao.class';
 include './novaAvaliacaoControle.php';
 
-if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["fonte"])
-        && isset($_POST["objetivos"]) && (isset($_POST["funcionalidade"]) || isset($_POST["tipo"]) || isset($_POST["intencao"])
-        || isset($_POST["analiseSentimentos"]) || isset($_POST["usabilidade"]) || isset($_POST["ux"]) || isset($_POST["artefato"]))){
+if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["fonte"]) && isset($_POST["objetivos"])){
     
     $avaliacao = new Avaliacao();
+    $avaliacao->nome = $_POST["nome"];
     $avaliacao->sistema = $_POST["sistema"];
     $avaliacao->plataforma = $_POST["plataforma"];
     $avaliacao->fonte = $_POST["fonte"];
@@ -16,47 +15,6 @@ if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["font
         $avaliacao->funcionalidades = $_POST["funcionalidades"];
     }
     
-    if(isset($_POST["funcionalidade"])){
-        $avaliacao->funcionalidade = true;
-    } else{
-        $avaliacao->funcionalidade = 0;
-    }
-    
-    if(isset($_POST["tipo"])){
-        $avaliacao->tipo = true;
-    } else{
-        $avaliacao->tipo = 0;
-    }
-    
-    if(isset($_POST["intencao"])){
-        $avaliacao->intencao = true;
-    } else{
-        $avaliacao->intencao = 0;
-    }
-    
-    if(isset($_POST["analiseSentimentos"])){
-        $avaliacao->sentimentos = true;
-    } else{
-        $avaliacao->sentimentos = 0;
-    }
-    
-    if(isset($_POST["usabilidade"])){
-        $avaliacao->usabilidade = true;
-    } else{
-        $avaliacao->usabilidade = 0;
-    }
-    
-    if(isset($_POST["ux"])){
-        $avaliacao->ux = true;
-    } else{
-        $avaliacao->ux = 0;
-    }
-    
-    if(isset($_POST["artefato"])){
-        $avaliacao->artefato = true;
-    } else{
-        $avaliacao->artefato = 0;
-    }
     $controleAvaliacao = new AvaliacaoControle();
     $controleAvaliacao->criarAvaliacao($avaliacao, $_SESSION["login"]);
 }
@@ -134,6 +92,13 @@ if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["font
                         <div class="box-body" style="padding-left: 25px; padding-right: 35px">
                             <form class="form-horizontal" method="POST" action="criarAvaliacao.php">
                                 <div class="form-group">
+                                    <label for="nome" class="col-sm-2 control-label">Nome da avaliação:<a style="color: #ff0000">*</a></label>
+                                    <div class="col-sm-10">
+                                        <input maxlength="120" required="required" name="nome" type="text" class="form-control" id="nome" placeholder="Ex.: Avaliação para artigo do HCI">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
                                     <label for="sistema" class="col-sm-2 control-label">Sistema avaliado <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
                                         <input maxlength="50" required="required" name="sistema" type="text" class="form-control" id="sistema" placeholder="Ex.: Google Maps">
@@ -168,45 +133,6 @@ if(isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["font
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Categorias de classificação <a style="color: #ff0000">*</a></label>
-                                    <div class="col-sm-10">
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="funcionalidade" class="minimal"> Classificação por funcionalidade
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="tipo" class="minimal"> Classificação por tipo
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="intencao" class="minimal"> Classificação por intenção
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="analiseSentimentos" class="minimal"> Classificação por análise de sentimentos
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="usabilidade" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
-                                        </label>
-                                        <br>
-                                        
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="ux" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Experiência do Usuário)
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="artefato" class="minimal"> Classificação por artefato
-                                        </label>
-                                        <br>
-                                    </div>
-                                </div>
                                 <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
                                     <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
                                 </div>
