@@ -2,8 +2,7 @@
 include '../verificarSessao.class';
 include './extracaoControle.php';
 
-$idAvalicao = $_SESSION['idAvaliacaoCriada'];
-unset( $_SESSION['idAvaliacao'] );
+$idAvalicao = $_SESSION['idAvaliacao'];
 $extracaoControle = new ExtracaoControle();
 $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
 ?>
@@ -102,6 +101,10 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
                             </div>
                         </div>
                         
+                        <div id="btnVoltarExt" style="float: left; padding-bottom: 10px; padding-top: 10px">
+                            <button class="btn btn-info" onclick="voltarExt()" style="margin-left: 10px;">Voltar</button>
+                        </div>
+                        
                         <div class="box-body" id="escolhaSite" style="display: none">
                             <form> 
                                 <div class="form-group">
@@ -115,10 +118,10 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
                         <div class="box-body" id="envioPlanilha" style="display: none">
                             <form> 
                                 <div class="form-group">
-                                    <label for="foto" class="control-label">Envie uma planilha com postagens</label> <br>
+                                    <label for="foto" class="control-label">Envie uma planilha com postagens em formato CSV</label> <br>
                                     <div class="btn btn-default btn-file">
-                                        <i class="fa fa-paperclip"></i> Escolher arquivo de planilha
-                                        <input type="file" name="attachment">
+                                        <i class="fa fa-paperclip"></i> Escolher arquivo de planilha CSV
+                                        <input type="file" accept=".csv" name="attachment">
                                     </div> <br>
                                 </div>
                             </form>
@@ -181,6 +184,8 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
         document.getElementById('btnSalvar').style.display = 'block';
         document.getElementById('escolhaForma').style.display = 'none';
         document.getElementById('envioPlanilha').style.display = 'none';
+        document.getElementById('btnVoltarExt').style.display = 'none';
+        
     }
     
     function abrirEnvioPlanilha(){
@@ -188,6 +193,7 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
         document.getElementById('btnVoltar').style.display = 'block';
         document.getElementById('btnSalvar').style.display = 'block';
         document.getElementById('escolhaForma').style.display = 'none';
+        document.getElementById('btnVoltarExt').style.display = 'none';
     }
     
     function voltar(){
@@ -196,6 +202,11 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
         document.getElementById('btnVoltar').style.display = 'none';
         document.getElementById('btnSalvar').style.display = 'none';
         document.getElementById('escolhaForma').style.display = 'block';
+        document.getElementById('btnVoltarExt').style.display = 'block';
+    }
+    
+    function voltarExt(){
+        window.location.href = "introEtapa2.php";
     }
     </script>
 

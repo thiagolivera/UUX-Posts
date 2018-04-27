@@ -1,5 +1,9 @@
 <?php
 include '../verificarSessao.class';
+include './processamentoControle.php';
+
+$processamentoControle = new processamentoControle();
+$avaliacaoAtual = $processamentoControle->obterAvaliacao($_SESSION['idAvaliacao']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,7 +98,7 @@ include '../verificarSessao.class';
                         
                         <div class="box-body" id="escolhaForma">
                             <div class="list-group">
-                                <button type="button" onclick="abrirEscolhaProcessamento()" class="list-group-item">Transformar postagens em sentenças (você deve escolher os delimitadores)</button>
+                                <button type="button" class="list-group-item disabled">Transformar postagens em sentenças (evolução futura)</button>
                                 <button type="button" class="list-group-item disabled">Limpeza do texto (evolução futura)</button>
                                 <button type="button" class="list-group-item disabled">Eliminação de Stopwords (evolução futura)</button>
                                 <button type="button" class="list-group-item disabled">Steaming (evolução futura)</button>
@@ -102,24 +106,9 @@ include '../verificarSessao.class';
                                 <button type="button" onclick="pular()" class="list-group-item">Não quero realizar processamento de postagens</button>
                             </div>
                         </div>
-                        
-                        <div class="box-body" id="escolhaSite" style="display: none">
-                            <form> 
-                                <div class="form-group">
-                                  <label>Informe os demilitadores que deseja utilizar</label>
-                                  <div class="col-sm-12">
-                                        <input type="text" placeholder="Ex.: ponto final" data-role="tagsinput" />
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        
                     </div>
-                    <div id="btnVoltar" style="float: left; padding-bottom: 10px; display: none">
+                    <div id="btnVoltar" style="float: left; padding-bottom: 10px;">
                         <button class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
-                    </div>
-                    <div id="btnSalvar" style="float: right; padding-bottom: 10px; display: none">
-                        <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
                     </div>
                 </div>
                 <a style="color: #ecf0f5">'</a>
@@ -161,28 +150,12 @@ include '../verificarSessao.class';
       radioClass   : 'iradio_minimal-blue'
     });
     
-    function proximo(){
-        window.location.href = "../etapa3/introEtapa3.php";
-    }
-    
     function pular(){
         window.location.href = "../etapa3/introEtapa3.php";
     }
     
-    function abrirEscolhaProcessamento(){
-        document.getElementById('escolhaSite').style.display = 'block';
-        document.getElementById('btnVoltar').style.display = 'block';
-        document.getElementById('btnSalvar').style.display = 'block';
-        document.getElementById('escolhaForma').style.display = 'none';
-        document.getElementById('envioPlanilha').style.display = 'none';
-    }
-    
     function voltar(){
-        document.getElementById('escolhaSite').style.display = 'none';
-        document.getElementById('btnVoltar').style.display = 'none';
-        document.getElementById('btnSalvar').style.display = 'none';
-        document.getElementById('escolhaForma').style.display = 'block';
-        document.getElementById('envioPlanilha').style.display = 'block';
+        window.location.href = "formaExtracao.php";
     }
     </script>
 
