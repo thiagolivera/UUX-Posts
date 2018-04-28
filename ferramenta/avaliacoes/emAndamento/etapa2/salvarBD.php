@@ -1,19 +1,19 @@
 <?php
 
-include '../../../../../Banco.php';
+include '../../../Banco.php';
 
 class SalvarNoBD extends Banco{
     public function __construct() {
         
     }
     
-    public function testeSalvar($idAvaliacao){
+    public function salvarPostagens($idAvaliacao, $arquivo){
         $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
         mysqli_autocommit($conexao, FALSE);
         $erro = 0;
         
         require_once './lib/ARQUIVOS/csv.class.php' ; 
-        $csv = new \ARQUIVOS\Csv( 'posts.csv',',','"' );
+        $csv = new \ARQUIVOS\Csv( 'temp/'.$arquivo,',','"' );
         
         foreach( @$csv->ler() as $linha ){
             $sql = "INSERT INTO postagens(idAvaliacao, idPostagem, postagem, data) VALUES (".$idAvaliacao.",DEFAULT,'".mysqli_real_escape_string($conexao, utf8_encode($linha['text']))."','".mysqli_real_escape_string($conexao, utf8_encode($linha['date']))."');";

@@ -75,7 +75,7 @@ unset( $_SESSION['idAvaliacao'] );
                             <td><?php echo $avaliacoesAndamento[$i]["papel"]; ?></td>
                             <td><?php echo $avaliacoesAndamento[$i]["status"]; ?></td>
                             <td>
-                                <a class="btn btn-sm btn-default" title="Continuar avaliacao" href="controleAvaliacoes.php?continuar=1&idAvaliacao=<?php echo $_SESSION['pegue'] = $avaliacoesAndamento[$i]["idAvaliacao"]; ?>&status=<?php echo $avaliacoesAndamento[$i]["status"]; ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a> 
+                                <a class="btn btn-sm btn-default" title="Continuar avaliacao" href="controleAvaliacoes.php?continuar=1&idAvaliacao=<?php echo $avaliacoesAndamento[$i]["idAvaliacao"]; ?>&status=<?php echo $avaliacoesAndamento[$i]["status"]; ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a> 
                             </td>
                         </tr>
                         <?php
