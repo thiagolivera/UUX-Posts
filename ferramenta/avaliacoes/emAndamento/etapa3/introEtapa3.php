@@ -66,7 +66,7 @@ include '../verificarSessao.class';
                     </div>
                 </div>
                 <div class="box-footer" style="padding-top: 10px;">
-                    <h4 style="text-align: center">Nessa etapa as postagens são classificadas e validadas pelos avaliadores, nas categorias de classificação indicadas na Etapa 1 dessa avaliação.</h4>
+                    <h4 style="text-align: center">Nessa etapa as postagens extraídas na <a href="../etapa2/introEtapa2.php">Etapa 2 - Extração das PRUs</a>, são classificadas. A classificação pode ser feita de forma automática ou por avaliadores.</h4>
                 </div>
                   <!-- /.row -->
                 </div>
@@ -91,7 +91,7 @@ include '../verificarSessao.class';
                         <li>
                           <i class="fa fa-cloud-download bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header">ETAPA 2 - Extração das PRUs</h3>
+                              <h3 class="timeline-header"><a href="../etapa2/introEtapa2.php">ETAPA 2 - Extração das PRUs</a></h3>
                           </div>
                         </li>
                         
@@ -123,7 +123,7 @@ include '../verificarSessao.class';
         <div style="padding-bottom: 10px;">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="width: 100%; margin-right: 10px;">Próximo</button>
         </div>
-                <div class="modal fade" id="modal-default">
+        <div class="modal fade" id="modal-default">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
