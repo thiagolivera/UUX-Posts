@@ -96,8 +96,8 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
                         
                         <div class="box-body" id="escolhaForma">
                             <div class="list-group">
-                                <button type="button" onclick="abrirEscolhaSite()" class="list-group-item">Extração automática de um site</button>
-                                <button type="button" onclick="abrirEnvioPlanilha()" class="list-group-item">Envio de uma planilha de postagens</button>
+                                <button type="button" onclick="abrirEscolhaSite()" class="list-group-item disabled">Extração automatizada a partir de um sistema social</button>
+                                <button type="button" onclick="abrirEnvioPlanilha()" class="list-group-item">Envio de um arquivo CSV com postagens já extraídas</button>
                             </div>
                         </div>
                         
@@ -105,34 +105,61 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
                             <button class="btn btn-info" onclick="voltarExt()" style="margin-left: 10px;">Voltar</button>
                         </div>
                         
-                        <div class="box-body" id="escolhaSite" style="display: none">
-                            <form> 
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Informe o site para extração das postagens</label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex.: twitter.com">
-                                  <small id="emailHelp" class="form-text text-muted">Essa funcionalidade pode apresentar problemas ao tentar extrair de outros sites além do Twitter.</small>
-                                </div>
-                            </form>
+                        <div id="escolhaSite" style="display: none">
+                            <div class="box-body">
+                                <form> 
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Informe o sistema social para extração das postagens</label>
+                                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex.: twitter.com">
+                                      <small id="emailHelp" class="form-text text-muted">No momento, apenas é possível extrair postagens do Twitter. Estudos estão sendo realizados para possibilitar a extração a partir de outros sistemas sociais.</small>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div id="extrairAuto" style="float: right; padding-top: 10px; display: none">
+                                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                            </div>
+
+                            <div id="voltarExtrair" style="float: left; padding-top: 10px; display: none">
+                                <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                            </div>
                         </div>
                         
-                        <div class="box-body" id="envioPlanilha" style="display: none">
-                            <form> 
-                                <div class="form-group">
-                                    <label for="foto" class="control-label">Envie uma planilha com postagens em formato CSV</label> <br>
-                                    <div class="btn btn-default btn-file">
-                                        <i class="fa fa-paperclip"></i> Escolher arquivo de planilha CSV
-                                        <input type="file" accept=".csv" name="attachment">
-                                    </div> <br>
-                                </div>
+                        <div id="envioPlanilha" style="display: none">
+                            <div class="box-body">
+                                <form action="extracaoPlanilhaControle.php" method="POST" enctype="multipart/form-data"> 
+                                    <div class="form-group">
+                                        <label for="fileUpload" class="control-label">Envie postagens em formato CSV</label> <br>
+                                        <div class="btn btn-default btn-file">
+                                            <div class="botaoArquivo"> <i class="fa fa-paperclip"></i> Escolher arquivo CSV</div>
+                                            <input id="fileUpload" type="file" accept=".csv" name="fileUpload">
+                                        </div> <br>
+
+                                        <div>
+                                            <br>
+                                            <label class="control-label">Restrições do arquivo CSV</label>
+                                            <ul>
+                                                <li>São aceitos arquivos que tenham as colunas <strong>text</strong> e <strong>date</strong></li>
+                                                <li>A coluna <strong>text</strong> É OBRIGATÓRIA e deve conter o texto da postagem entre aspas</li>
+                                                <li>A coluna <strong>date</strong> deve conter a data da postagem (caso não tenha essa coluna, a data será definida como null)</li>
+                                                <li>As colunas devem estar sepadas por vírgula</li>
+                                                <li><strong>Certifique-se de que cada postagem está em uma linha do arquivo CSV</strong> </li>
+                                                <li>Caso o arquivo enviado não tiver tais restrições, ele será lido incorretamente</li>
+                                                <li><a href="exemplo-csv-uuxposts.csv">Clique aqui e baixe um arquivo CSV de exemplo</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div id="btnSalvar" style="float: right; padding-top: 10px; display: none">
+                                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                            </div>
+
+                            <div id="btnVoltar" style="float: left; padding-top: 10px; display: none">
+                                <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                            </div>
+
                             </form>
                         </div>
-                        
-                    </div>
-                    <div id="btnVoltar" style="float: left; padding-bottom: 10px; display: none">
-                        <button class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
-                    </div>
-                    <div id="btnSalvar" style="float: right; padding-bottom: 10px; display: none">
-                        <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
                     </div>
                 </div>
                 <a style="color: #ecf0f5">'</a>
@@ -156,6 +183,20 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
 </style>
 
 <script>
+    
+    var div = document.getElementsByClassName("botaoArquivo")[0];
+    var input = document.getElementById("fileUpload");
+
+    div.addEventListener("click", function(){
+        input.click();
+    });
+    
+    input.addEventListener("change", function(){
+        var nome = " <i class=\"fa fa-paperclip\"></i> Escolher arquivo CSV";
+        if(input.files.length > 0) nome = input.files[0].name;
+        div.innerHTML = nome;
+    });
+    
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -180,8 +221,8 @@ $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
     
     function abrirEscolhaSite(){
         document.getElementById('escolhaSite').style.display = 'block';
-        document.getElementById('btnVoltar').style.display = 'block';
-        document.getElementById('btnSalvar').style.display = 'block';
+        document.getElementById('voltarExtrair').style.display = 'block';
+        document.getElementById('extrairAuto').style.display = 'block';
         document.getElementById('escolhaForma').style.display = 'none';
         document.getElementById('envioPlanilha').style.display = 'none';
         document.getElementById('btnVoltarExt').style.display = 'none';
