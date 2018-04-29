@@ -1,23 +1,48 @@
 <?php
-include './verificarSessao.class';
-include './novaAvaliacaoControle.php';
+    include './verificarSessao.class';
+    include './novaAvaliacaoControle.php';
 
-if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma"]) && isset($_POST["fonte"]) && isset($_POST["objetivos"])){
+    $controleAvaliacao = new AvaliacaoControle();
     
-    $avaliacao = new Avaliacao();
-    $avaliacao->nome = $_POST["nome"];
-    $avaliacao->sistema = $_POST["sistema"];
-    $avaliacao->plataforma = $_POST["plataforma"];
-    $avaliacao->fonte = $_POST["fonte"];
-    $avaliacao->objetivos = $_POST["objetivos"];
-    
-    if(isset($_POST["funcionalidades"])){
-        $avaliacao->funcionalidades = $_POST["funcionalidades"];
+    if(isset($_POST["idAvaliacao"]) && isset($_POST["nome"]) && isset($_POST["sistema"]) && 
+            isset($_POST["plataforma"]) && isset($_POST["fonte"]) && isset($_POST["objetivos"])){
+        
+        $avaliacao = new Avaliacao();
+        $avaliacao->id = $_POST["idAvaliacao"];
+        $avaliacao->nome = $_POST["nome"];
+        $avaliacao->sistema = $_POST["sistema"];
+        $avaliacao->plataforma = $_POST["plataforma"];
+        $avaliacao->fonte = $_POST["fonte"];
+        $avaliacao->objetivos = $_POST["objetivos"];
+
+        if(isset($_POST["funcionalidades"])){
+            $avaliacao->funcionalidades = $_POST["funcionalidades"];
+        }
+
+        $controleAvaliacao->editarAvaliacao($avaliacao, $_SESSION["login"]);
+    } else if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma"]) && 
+            isset($_POST["fonte"]) && isset($_POST["objetivos"])){
+
+        $avaliacao = new Avaliacao();
+        $avaliacao->nome = $_POST["nome"];
+        $avaliacao->sistema = $_POST["sistema"];
+        $avaliacao->plataforma = $_POST["plataforma"];
+        $avaliacao->fonte = $_POST["fonte"];
+        $avaliacao->objetivos = $_POST["objetivos"];
+
+        if(isset($_POST["funcionalidades"])){
+            $avaliacao->funcionalidades = $_POST["funcionalidades"];
+        }
+
+        $controleAvaliacao->criarAvaliacao($avaliacao, $_SESSION["login"]);
     }
     
-    $controleAvaliacao = new AvaliacaoControle();
-    $controleAvaliacao->criarAvaliacao($avaliacao, $_SESSION["login"]);
-}
+    
+    $avaliacaoInfo = null;
+    if(isset($_GET["id"])){
+        $avaliacaoInfo = $controleAvaliacao->obterInfoAvaliacao($_GET["id"]);
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,30 +117,38 @@ if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma
                         <div class="box-body" style="padding-left: 25px; padding-right: 35px">
                             <form class="form-horizontal" method="POST" action="criarAvaliacao.php">
                                 <div class="form-group">
-                                    <label for="nome" class="col-sm-2 control-label">Nome da avaliação:<a style="color: #ff0000">*</a></label>
+                                    <label for="nome" class="col-sm-2 control-label">Nome da avaliação: <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="120" required="required" name="nome" type="text" class="form-control" id="nome" placeholder="Ex.: Avaliação para artigo do HCI">
+                                        <input maxlength="120" required="required" name="nome" type="text" class="form-control" id="nome" placeholder="Ex.: Avaliação para artigo do HCI" value="<?php echo $avaliacaoInfo[1]; ?>">
                                     </div>
                                 </div>
+                                
+                                <?php 
+                                if(isset($_GET["id"])){
+                                    ?>
+                                    <input type="hidden" name="idAvaliacao" value="<?php echo $_GET["id"]; ?>">
+                                <?php
+                                }
+                                ?>
                                 
                                 <div class="form-group">
                                     <label for="sistema" class="col-sm-2 control-label">Sistema avaliado <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="50" required="required" name="sistema" type="text" class="form-control" id="sistema" placeholder="Ex.: Google Maps">
+                                        <input maxlength="50" required="required" name="sistema" type="text" class="form-control" id="sistema" placeholder="Ex.: Google Maps" value="<?php echo $avaliacaoInfo[2]; ?>">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="plataforma" class="col-sm-2 control-label">Plataforma do sistema <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="45" required="required" name="plataforma" type="text" class="form-control" id="plataforma" placeholder="Ex.: Android">
+                                        <input maxlength="45" required="required" name="plataforma" type="text" class="form-control" id="plataforma" placeholder="Ex.: Android" value="<?php echo $avaliacaoInfo[3]; ?>">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fonte" class="col-sm-2 control-label">Fonte das postagens <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="45" required="required" name="fonte" type="text" class="form-control" id="fonte" placeholder="Ex.: Play Store">
+                                        <input maxlength="45" required="required" name="fonte" type="text" class="form-control" id="fonte" placeholder="Ex.: Play Store" value="<?php echo $avaliacaoInfo[4]; ?>">
                                     </div>
                                 </div>
 
@@ -129,18 +162,34 @@ if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma
                                 <div class="form-group">
                                     <label for="objetivos" class="col-sm-2 control-label">Objetivos de avaliação <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <textarea maxlength="800" required="required" type="text" class="form-control" name="objetivos" id="objetivos" placeholder="Ex.: Identificar problemas na interação e na interface"></textarea>
+                                        <textarea maxlength="800" required="required" type="text" class="form-control" name="objetivos" id="objetivos" placeholder="Ex.: Identificar problemas na interação e na interface"><?php echo $avaliacaoInfo[5]; ?></textarea>
                                     </div>
                                 </div>
-
-                                <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
-                                    <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
+                        </div>
+                        <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px; padding-top: 15px;">
+                            <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
+                        </div>
+                        <?php 
+                        if(isset($_GET["id"])){
+                            ?> 
+                                <div style="float: right; padding-bottom: 10px; padding-top: 15px;">
+                                    <button class="btn btn-info" type="submit">Próximo</button>
                                 </div>
-                                <div style="float: right; padding-bottom: 10px;">
+                            <?php
+                        }
+                        ?>
+                        
+                        <?php 
+                        if(!isset($_GET["id"])){
+                            ?> 
+                                <div style="float: right; padding-bottom: 10px; padding-top: 15px;">
                                     <button class="btn btn-info" type="submit">Criar avaliação</button>
                                 </div>
-                            </form>
-                        </div>
+                            <?php
+                        }
+                        ?>
+                        
+                    </form>
                     </div>
                 </div>
                 <a style="color: #ecf0f5;">'</a>

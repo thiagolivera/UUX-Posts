@@ -58,7 +58,6 @@ class ContextoAvaliacaoControle extends Banco{
             mysqli_close($conexao);
             header("location:../../emAndamento/etapa2/introEtapa2.php");
         } else {
-            echo 'erro';
             mysqli_close($conexao);
             
         }
@@ -75,7 +74,7 @@ class ContextoAvaliacaoControle extends Banco{
     }
     
     public function obterAvaliacao($id){
-        $sql = "SELECT nomeSistema, plataforma FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
+        $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
         $rtn = self::Executar($sql);
         return mysqli_fetch_row($rtn);
     }

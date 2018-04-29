@@ -6,6 +6,29 @@ class AvaliacaoControle extends Banco{
         
     }
     
+    public function editarAvaliacao(Avaliacao $avaliacao){
+        $erro = 0;
+        
+        $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
+        mysqli_autocommit($conexao, FALSE);
+        //1) tenta salvar os dados no banco
+        $sql = "UPDATE avaliacaoInfo SET nomeAvaliacao = '".$avaliacao->nome."', nomeSistema = '".$avaliacao->sistema."', plataforma = '".$avaliacao->plataforma."',"
+                . "fontePostagens = '".$avaliacao->fonte."', objetivos = '".$avaliacao->objetivos."' where idAvaliacao = ".$avaliacao->id.";";
+        if (!mysqli_query($conexao, $sql)){
+            $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
+        
+        //Verifica se houve erro para cancelar a transação
+        if ($erro == 0){
+            mysqli_commit($conexao);
+            mysqli_close($conexao);
+            header("location:../emAndamento/etapa1/contextoAvaliacao.php");
+        } else {
+            mysqli_close($conexao);
+            
+        }
+    }
+    
     public function criarAvaliacao(Avaliacao $avaliacao, $gerente){
         date_default_timezone_set('America/Sao_Paulo');
         $date = date('Y-m-d');
@@ -62,9 +85,16 @@ class AvaliacaoControle extends Banco{
             mysqli_close($conexao);
         }
     }
+    
+    public function obterInfoAvaliacao($idAvaliacao){
+        $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $idAvaliacao . ";";
+        $rtn = self::Executar($sql);
+        return mysqli_fetch_row($rtn);
+    }
 }
 
 class Avaliacao {
+    var $id;
     var $nome;
     var $sistema;
     var $plataforma;

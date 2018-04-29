@@ -332,7 +332,7 @@
         });
 
         function voltar(){
-            history.back();
+            window.location.href = "../../novaAvaliacao/criarAvaliacao.php?id=<?php echo $idAvalicao?>";
         }
     </script>
 

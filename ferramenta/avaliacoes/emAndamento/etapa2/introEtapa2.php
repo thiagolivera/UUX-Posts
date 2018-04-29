@@ -84,7 +84,7 @@ include '../verificarSessao.class';
                         <li>
                           <i class="fa fa-eercast bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header">ETAPA 1 - Definição do contexto de avaliação</h3>
+                              <h3 class="timeline-header"><a href="../../novaAvaliacao/criarAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>">ETAPA 1 - Definição do contexto de avaliação</a></h3>
                           </div>
                         </li>
                         
