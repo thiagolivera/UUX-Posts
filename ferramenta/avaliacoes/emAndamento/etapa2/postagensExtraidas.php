@@ -64,7 +64,25 @@ if(isset($_GET['excluirTudo'])){
     </section>
 
     <section class="content">
-        <?php include_once("../avaliacaoEmAndamento.php");?>
+        <div class="alert alert-success alert-dismissible" id="alertaSucesso" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Postagem excluída</h4>
+            A postagem foi excluída com sucesso!
+        </div>
+        
+        <?php
+        if(isset($_GET['sucesso'])){
+            ?> 
+            <script>
+                document.getElementById('alertaSucesso').style.display = 'block';
+                $("#alertaSucesso").fadeTo(7000, 500).slideUp(500, function(){
+                    $("#alertaSucesso").alert('close');
+                });
+            </script>
+            <?php
+        }
+        
+        include_once("../avaliacaoEmAndamento.php");?>
         
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box box-body">
@@ -78,7 +96,7 @@ if(isset($_GET['excluirTudo'])){
                         <th>ID</th>
                         <th style="width:150px">Data</th>
                         <th>Postagem</th>
-                        <th>Ação</th>
+                        <th style="width:100px">Ação</th>
                       </tr>
                     </thead>
                     
@@ -91,6 +109,7 @@ if(isset($_GET['excluirTudo'])){
                             <td><?php echo $postagensExtraidas[$i]["data"]; ?></td>
                             <td><?php echo $postagensExtraidas[$i]["postagem"]; ?></td>
                             <td>
+                                <a class="btn btn-sm btn-default disabled" title="Quebrar postagem"><i class="fa fa-chain-broken" aria-hidden="true"></i></a> 
                                 <a class="btn btn-sm btn-default" title="Excluir postagem" href="postagensExtraidas.php?idExcluir=<?php echo $postagensExtraidas[$i]["idPostagem"]; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
                             </td>
                         </tr>
