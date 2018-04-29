@@ -40,7 +40,7 @@ class ExtracaoControle extends Banco{
     public function excluirTodasPostagens($idAvaliacao){
         $sql = "DELETE FROM `postagens` WHERE idAvaliacao = " . $idAvaliacao . ";";
         $rtn = parent::Executar($sql);
-        header("location:formaextracao.php");
+        header("location:formaExtracao.php");
     }
     
     public function verificarSeHaPostagens($idAvaliacao){

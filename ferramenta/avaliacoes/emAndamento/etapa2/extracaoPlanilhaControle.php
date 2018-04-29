@@ -17,5 +17,6 @@ if(isset($_FILES['fileUpload'])){
     $salvar = new SalvarNoBD();
     if($salvar->salvarPostagens($idAvalicao, $new_name)){
         unlink("temp/".$new_name);
+        header("location:postagensExtraidas.php");
     }
 }

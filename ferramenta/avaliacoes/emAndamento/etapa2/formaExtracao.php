@@ -140,7 +140,7 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                                         <label for="fileUpload" class="control-label">Envie postagens em formato CSV</label> <br>
                                         <div class="btn btn-default btn-file">
                                             <div class="botaoArquivo"> <i class="fa fa-paperclip"></i> Escolher arquivo CSV</div>
-                                            <input id="fileUpload" type="file" accept=".csv" name="fileUpload">
+                                            <input id="fileUpload" required type="file" accept=".csv" name="fileUpload">
                                         </div> <br>
 
                                         <div>
