@@ -3,7 +3,6 @@ include './verificarSessao.class';
 include './avaliacoesAndamentoControle.php';
 $controleAvaliacaoAndamento = new AvaliacoesAndamentoControle();
 $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SESSION['login']);
-unset( $_SESSION['idAvaliacao'] );
 
 ?>
 <!DOCTYPE html>

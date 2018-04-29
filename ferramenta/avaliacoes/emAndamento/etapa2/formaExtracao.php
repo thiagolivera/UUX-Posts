@@ -5,6 +5,14 @@ include './extracaoControle.php';
 $idAvalicao = $_SESSION['idAvaliacao'];
 $extracaoControle = new ExtracaoControle();
 $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
+
+if(!$extracaoControle->isGerente($idAvalicao, $_SESSION['login'])){
+    header("location:erro.php");
+}
+
+if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
+    header("location:postagensExtraidas.php");
+}
 ?>
 <!DOCTYPE html>
 <html>

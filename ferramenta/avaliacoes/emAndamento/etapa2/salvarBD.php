@@ -19,8 +19,12 @@ class SalvarNoBD extends Banco{
             $sql = "INSERT INTO postagens(idAvaliacao, idPostagem, postagem, data) VALUES (".$idAvaliacao.",DEFAULT,'".mysqli_real_escape_string($conexao, utf8_encode($linha['text']))."','".mysqli_real_escape_string($conexao, utf8_encode($linha['date']))."');";
             if (!mysqli_query($conexao, $sql)){
                 $erro++; //se der erro incrementa no contador para cancelar a transação
-                echo mysqli_error($conexao);
             }
+        }
+        
+        $sql = "UPDATE `avaliacao` SET `status` = 'Definição da classificação' WHERE `idavaliacao` = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
         }
         
         //Verifica se houve erro para cancelar a transação

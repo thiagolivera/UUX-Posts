@@ -9,6 +9,9 @@ if(isset($_GET['continuar'])){
     if(strcmp($_GET['status'], 'Etapa 2 - Extração de PRUS') == 0){
         header("location:emAndamento/etapa2/introEtapa2.php");
     }
+    if(strcmp($_GET['status'], 'Definição da classificação') == 0){
+        header("location:emAndamento/etapa3/introEtapa3.php");
+    }
     
 }
 
