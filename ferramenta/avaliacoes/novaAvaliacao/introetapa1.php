@@ -141,12 +141,4 @@ include './verificarSessao.class';
         window.location.href = "criarAvaliacao.php";
     }
 </script>
-
-<style>
-@media(max-width: 991px){
-    #etapas {
-        display: none;  
-      }
-}    
-</style>
 </html>

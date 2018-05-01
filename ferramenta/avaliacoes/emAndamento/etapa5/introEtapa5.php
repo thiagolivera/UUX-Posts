@@ -142,11 +142,4 @@ include '../verificarSessao.class';
     }
 </script>
 
-<style>
-@media(max-width: 991px){
-    #etapas {
-        display: none;  
-      }
-}    
-</style>
 </html>

@@ -214,7 +214,7 @@
 
 <script type="text/javascript">    
     function voltar(){
-        window.location.href = "introEtapa1.php";
+        history.back();
     }
     
     //Flat red color scheme for iCheck

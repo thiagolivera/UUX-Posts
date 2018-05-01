@@ -58,8 +58,10 @@ $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SES
                 <table id="example1" class="table table-hover no-margin text-center table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th>Título</th>
                         <th>Sistema</th>
-                        <th>Seu papel</th>
+                        <th id="plataforma">Plataforma</th>
+                        <th id="papel">Seu papel</th>
                         <th>Status</th>
                         <th>Ações</th>
                       </tr>
@@ -70,11 +72,14 @@ $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SES
                         for($i = 0; $i < count($avaliacoesAndamento); $i++){
                         ?>
                         <tr>
+                            <td><?php echo $avaliacoesAndamento[$i]["nomeAvaliacao"]; ?></td>
                             <td><?php echo $avaliacoesAndamento[$i]["nomeSistema"]; ?></td>
-                            <td><?php echo $avaliacoesAndamento[$i]["papel"]; ?></td>
+                            <td id="plataforma"><?php echo $avaliacoesAndamento[$i]["plataforma"]; ?></td>
+                            <td id="papel"><?php echo $avaliacoesAndamento[$i]["papel"]; ?></td>
                             <td><?php echo $avaliacoesAndamento[$i]["status"]; ?></td>
                             <td>
-                                <a class="btn btn-sm btn-default" title="Continuar avaliacao" href="controleAvaliacoes.php?continuar=1&idAvaliacao=<?php echo $avaliacoesAndamento[$i]["idAvaliacao"]; ?>&status=<?php echo $avaliacoesAndamento[$i]["status"]; ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a> 
+                                <a class="btn btn-sm btn-default" title="Continuar avaliacao" href="controleAvaliacoes.php?continuar=1&idAvaliacao=<?php echo $avaliacoesAndamento[$i]["idAvaliacao"]; ?>&status=<?php echo $avaliacoesAndamento[$i]["status"]; ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                <a class="btn btn-sm btn-default disabled" title="Excluir avaliacao"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
                             </td>
                         </tr>
                         <?php
@@ -153,5 +158,18 @@ $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SES
     })
   })
 </script>
+
+<style>
+    
+    @media(max-width: 768px){
+        #plataforma {
+            display: none;  
+        }
+
+        #papel {
+            display: none;
+        }
+    }
+    </style>
 
 </html>

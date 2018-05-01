@@ -96,7 +96,7 @@ if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['n
                   <label for="nome" class="col-sm-2 control-label">Nome</label>
 
                   <div class="col-sm-10">
-                      <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?php echo $perfilAtual[1];?>">
+                      <input type="text" class="form-control" required="" name="nome" id="nome" placeholder="Nome" value="<?php echo $perfilAtual[1];?>">
                   </div>
                 </div>
                   
@@ -104,7 +104,7 @@ if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['n
                   <label for="email" class="col-sm-2 control-label">E-mail</label>
 
                   <div class="col-sm-10">
-                      <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $perfilAtual[3];?>">
+                      <input type="email" class="form-control" required="" name="email" id="email" placeholder="Email" value="<?php echo $perfilAtual[3];?>">
                   </div>
                 </div>
                   
@@ -112,7 +112,7 @@ if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['n
                   <label for="profissao" class="col-sm-2 control-label">Profissão</label>
 
                   <div class="col-sm-10">
-                      <input type="text" class="form-control" name="profissao" id="profissao" placeholder="Profissão" value="<?php echo $perfilAtual[2];?>">
+                      <input type="text" required="" class="form-control" name="profissao" id="profissao" placeholder="Profissão" value="<?php echo $perfilAtual[2];?>">
                   </div>
                 </div>
               </div>

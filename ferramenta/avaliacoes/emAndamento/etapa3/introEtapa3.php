@@ -1,5 +1,11 @@
 <?php
 include '../verificarSessao.class';
+
+if(isset($_POST["automatica"])){
+    //redireciona para a página de classificação automática
+} else if(isset($_POST["avaliadores"])){
+    header("location:definirAvaliadores.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -126,23 +132,35 @@ include '../verificarSessao.class';
         <div class="modal fade" id="modal-default">
           <div class="modal-dialog">
             <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Escolha a forma de visualização da classificação <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></h4>
-              </div>
-              <div class="modal-body">
-                  <form action="classificacaoPostagens.php" method="post">
-                          <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
-                              <option>Por postagem</option>
-                              <option>Por categoria</option>
-                          </select>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Continuar</button>
-              </div>
-                </form>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Escolha a forma de classificação</h4>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="introEtapa3.php" method="POST">
+                            <div class="col-md-6" style="display: flex; justify-content: center; padding-top: 15px">
+                                <button type="submit"  class="btn btn-default pull-left disabled" style="width: 350px">
+                                    <input type="hidden" value="automatica" name="automatica">
+                                    <img class="img-responsive center-block" src="../../../images/automatica.png" width="150px">
+                                    <br><strong style="font-size: 16px">Classificação automática</strong>
+                                </button>
+                            </div>
+                        </form>
+
+                        <form action="introEtapa3.php" method="POST">
+                            <div class="col-md-6" style="display: flex; justify-content: center; padding-top: 15px">
+                                <button type="submit" class="btn btn-default pull-left" style="width: 350px">
+                                    <input type="hidden" value="avaliadores" name="avaliadores">
+                                    <img class="img-responsive center-block" src="../../../images/avaliadores.png" width="235px">
+                                    <br><strong style="font-size: 16px">Classificação por avaliadores</strong>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <!-- /.modal-content -->
           </div>
@@ -187,11 +205,4 @@ include '../verificarSessao.class';
         })
     </script>
 
-<style>
-@media(max-width: 991px){
-    #etapas {
-        display: none;  
-      }
-}    
-</style>
 </html>
