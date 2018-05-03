@@ -98,6 +98,23 @@ class AvaliadoresControle extends Banco{
         $sql = "DELETE FROM `avaliacaoPapeis` WHERE `idAvaliacao` = ".$avaliador->idAvaliacao." and `idPessoa` = ".$avaliador->idPessoa." and `papel` = '".$avaliador->papel."';";
         parent::Executar($sql);
     }
+    
+    public function verificarAvaliadoresInformados($idAvaliacao){
+        //verifica quantos validadores foram incluidos
+        $sql = "SELECT COUNT(*) FROM `avaliacaoPapeis` WHERE idAvaliacao = " . $idAvaliacao . " and papel = 'Classificador'";
+        $rtn = parent::Executar($sql);
+        if(intval(mysqli_fetch_row($rtn)[0]) < 2){
+            return FALSE;
+        }
+        //verifica quantos validadores foram incluidos
+        $sql = "SELECT COUNT(*) FROM `avaliacaoPapeis` WHERE idAvaliacao = " . $idAvaliacao . " and papel='Validador'";
+        $rtn = parent::Executar($sql);
+        if(intval(mysqli_fetch_row($rtn)[0]) < 1){
+            return FALSE;
+        }
+        
+        return TRUE;
+    }
 }
 
 class Avaliador{

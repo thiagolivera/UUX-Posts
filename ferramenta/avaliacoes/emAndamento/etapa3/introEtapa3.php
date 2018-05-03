@@ -140,8 +140,8 @@ if(isset($_POST["automatica"])){
                 
                 <div class="modal-body">
                     <div class="row">
-                        <form action="introEtapa3.php" method="POST">
-                            <div class="col-md-6" style="display: flex; justify-content: center; padding-top: 15px">
+                        <form action="" method="POST">
+                            <div class="col-md-6 disabled" style="display: flex; justify-content: center; padding-top: 15px">
                                 <button type="submit"  class="btn btn-default pull-left disabled" style="width: 350px">
                                     <input type="hidden" value="automatica" name="automatica">
                                     <img class="img-responsive center-block" src="../../../images/automatica.png" width="150px">

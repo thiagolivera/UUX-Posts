@@ -9,6 +9,19 @@ if(!isset($_SESSION['idAvaliacao'])){
 $idAvalicao = $_SESSION['idAvaliacao'];
 
 $avaliadoresControle = new AvaliadoresControle();
+
+if(!$avaliadoresControle->isGerente($idAvalicao, $_SESSION['login'])){
+    header("location:erro.php");
+}
+
+if(isset($_POST['salvar'])){
+    if($avaliadoresControle->verificarAvaliadoresInformados($idAvalicao)){
+        echo "TRUE";
+    } else{
+        header("location:definirAvaliadores.php?erroSalvar");
+    }
+}
+
 $avaliacaoAtual = $avaliadoresControle->obterAvaliacao($idAvalicao);
 
 $classificadores = $avaliadoresControle->obterClassificadores($idAvalicao);
@@ -127,6 +140,13 @@ if(isset($_GET["excluir"])){
             Você informou o e-mail de um usuário que não possui cadastro na UUX-Posts.<br>
             Peça-o para se cadastrar e tente novamente.
         </div>
+        
+        <div class="alert alert-error alert-dismissible" id="alertaErroSalvar" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i>Número de avaliadores insuficiente</h4>
+            O número de avaliadores informado não é suficiente para essa avaliação<br>
+            Você deve informar pelo menos dois classificadores e um validador
+        </div>
 
         <div class="alert alert-success alert-dismissible" id="alertaSucesso" style="display: none">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -147,6 +167,17 @@ if(isset($_GET["excluir"])){
                 document.getElementById('alertaErro').style.display = 'block';
                 $("#alertaErro").fadeTo(7000, 500).slideUp(500, function(){
                     $("#alertaErro").alert('close');
+                });
+            </script>
+            <?php
+        }
+        
+        if(isset($_GET['erroSalvar'])){
+            ?> 
+            <script>
+                document.getElementById('alertaErroSalvar').style.display = 'block';
+                $("#alertaErroSalvar").fadeTo(7000, 500).slideUp(500, function(){
+                    $("#alertaErroSalvar").alert('close');
                 });
             </script>
             <?php
@@ -357,7 +388,10 @@ if(isset($_GET["excluir"])){
             <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
         </div>
         <div style="float: right; padding-bottom: 10px;">
-            <button type="submit" class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
+            <form action="definirAvaliadores.php" method="POST">
+                <input type="hidden" name="salvar" value="salvar">
+                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+            </form>
         </div>
         <a style="color: #ecf0f5">'</a>
     </section>
