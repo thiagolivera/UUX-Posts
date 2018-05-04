@@ -12,10 +12,6 @@ if(!$extracaoControle->verificarSeHaPostagens($idAvalicao)){
     $postagensExtraidas = $extracaoControle->obterPostsExtraidas($idAvalicao);
 }
 
-if(isset($_GET['idExcluir'])){
-    $extracaoControle->excluirPostagem($_GET['idExcluir']);
-}
-
 if(isset($_GET['excluirTudo'])){
     $extracaoControle->excluirTodasPostagens($idAvalicao);
 }
@@ -108,10 +104,6 @@ if(isset($_GET['excluirTudo'])){
                             <td><?php echo $postagensExtraidas[$i]["idPostagem"]; ?></td>
                             <td><?php echo $postagensExtraidas[$i]["data"]; ?></td>
                             <td><?php echo $postagensExtraidas[$i]["postagem"]; ?></td>
-                            <td>
-                                <a class="btn btn-sm btn-default disabled" title="Quebrar postagem"><i class="fa fa-chain-broken" aria-hidden="true"></i></a> 
-                                <a class="btn btn-sm btn-default" title="Excluir postagem" href="postagensExtraidas.php?idExcluir=<?php echo $postagensExtraidas[$i]["idPostagem"]; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
-                            </td>
                         </tr>
                         <?php
                         }

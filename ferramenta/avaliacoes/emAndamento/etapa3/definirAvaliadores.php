@@ -16,13 +16,46 @@ if(!$avaliadoresControle->isGerente($idAvalicao, $_SESSION['login'])){
 
 if(isset($_POST['salvar'])){
     if($avaliadoresControle->verificarAvaliadoresInformados($idAvalicao)){
-        echo "TRUE";
+        $avaliadoresControle->alterarStatus($idAvalicao);
+        header("location:dashboardClassificacao.php");
     } else{
         header("location:definirAvaliadores.php?erroSalvar");
     }
 }
 
+if(isset($_GET['excluirCategoria'])){
+    if(strcmp($_GET['excluirCategoria'], "Funcionalidade") == 0){
+        $avaliadoresControle->excluirCategoriaFuncionalidade($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+    if(strcmp($_GET['excluirCategoria'], "Tipo") == 0){
+        $avaliadoresControle->excluirCategoriaTipo($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+    if(strcmp($_GET['excluirCategoria'], "Intencao") == 0){
+        $avaliadoresControle->excluirCategoriaIntencao($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+    if(strcmp($_GET['excluirCategoria'], "AnaliseSentimentos") == 0){
+        $avaliadoresControle->excluirCategoriaAnaliseSentimentos($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+    if(strcmp($_GET['excluirCategoria'], "Usabilidade") == 0){
+        $avaliadoresControle->excluirCategoriaUsabilidade($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+    if(strcmp($_GET['excluirCategoria'], "UX") == 0){
+        $avaliadoresControle->excluirCategoriaUX($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+    if(strcmp($_GET['excluirCategoria'], "Artefato") == 0){
+        $avaliadoresControle->excluirCategoriaArtefato($idAvalicao);
+        header("location:definirAvaliadores.php");
+    }
+}
+
 $avaliacaoAtual = $avaliadoresControle->obterAvaliacao($idAvalicao);
+$categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAvalicao);
 
 $classificadores = $avaliadoresControle->obterClassificadores($idAvalicao);
 $validadores = $avaliadoresControle->obterValidadores($idAvalicao);
@@ -50,6 +83,56 @@ if(isset($_POST["avaliadores"])){
     
     if($avaliadoresControle->inserirValidador($avaliador)){
         header("location:definirAvaliadores.php?sucesso");
+    } else{
+        header("location:definirAvaliadores.php?erro");
+    }
+} else if(isset($_POST["categorias"])){
+    $categorias = new Categorias();
+    
+    if(isset($_POST["funcionalidade"])){
+        $categorias->funcionalidade = true;
+    } else{
+        $categorias->funcionalidade = 0;
+    }
+    
+    if(isset($_POST["tipo"])){
+        $categorias->tipo = true;
+    } else{
+        $categorias->tipo = 0;
+    }
+    
+    if(isset($_POST["intencao"])){
+        $categorias->intencao = true;
+    } else{
+        $categorias->intencao = 0;
+    }
+    
+    if(isset($_POST["analiseSentimentos"])){
+        $categorias->sentimentos = true;
+    } else{
+        $categorias->sentimentos = 0;
+    }
+    
+    if(isset($_POST["usabilidade"])){
+        $categorias->usabilidade = true;
+    } else{
+        $categorias->usabilidade = 0;
+    }
+    
+    if(isset($_POST["ux"])){
+        $categorias->ux = true;
+    } else{
+        $categorias->ux = 0;
+    }
+    
+    if(isset($_POST["artefato"])){
+        $categorias->artefato = true;
+    } else{
+        $categorias->artefato = 0;
+    }
+    
+    if($avaliadoresControle->inserirCategoriasClassificacao($idAvalicao, $categorias)){
+        header("location:definirAvaliadores.php?sucessoCategorias");
     } else{
         header("location:definirAvaliadores.php?erro");
     }
@@ -207,7 +290,76 @@ if(isset($_GET["excluir"])){
         
         include_once("../avaliacaoEmAndamento.php");?>
         
-        <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0; padding-right: 0;">            
+        <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0; padding-right: 0;">
+            <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Categorias de classificação</h3>
+                        <br><i>Adicione as categorias de classificação que os avaliadores irão classificar</i>
+                    </div>
+
+                    <div class="box-body" style="padding-left: 15px; padding-right: 15px">
+                        <table id="example3" class="table table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Categoria de classificação</th>
+                                    <th style="width: 10px">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                for($i = 0; $i < count($categoriasClassificacao); $i++){ ?>
+                                        <?php 
+                                            if(strcmp($categoriasClassificacao[$i]["funcionalidade"], '1') == '0'){
+                                                ?><tr><td>Funcionalidade</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=Funcionalidade"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+
+                                            if(strcmp($categoriasClassificacao[$i]["tipo"], '1') == '0'){
+                                                ?><tr><td>Tipo</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=Tipo"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+
+                                            if(strcmp($categoriasClassificacao[$i]["intencao"], '1') == '0'){
+                                                ?><tr><td>Intenção</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=Intencao"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+
+                                            if(strcmp($categoriasClassificacao[$i]["analiseSentimentos"], '1') == '0'){
+                                                ?><tr><td>Análise de Sentimentos</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=AnaliseSentimentos"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+
+                                            if(strcmp($categoriasClassificacao[$i]["usabilidade"], '1') == '0'){
+                                                ?><tr><td>Critérios de qualidade de uso (Usabilidade)</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=Usabilidade"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+
+                                            if(strcmp($categoriasClassificacao[$i]["ux"], '1') == '0'){
+                                                ?><tr><td>Critérios de qualidade de uso (Experiência do usuário)</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=UX"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+
+                                            if(strcmp($categoriasClassificacao[$i]["artefato"], '1') == '0'){
+                                                ?><tr><td>Artefato</td>
+                                                <td><a class="btn btn-sm btn-default" href="definirAvaliadores.php?excluirCategoria=Artefato"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr><?php
+                                            }
+                                        ?>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <form class="form-horizontal" style="">
+                            <div class="form-group" style="padding-right: 10px; display: flex; justify-content: flex-end;">
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-categorias">Adicionar categoria de classificação</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
             <div class="col-md-6 col-sm-12 col-xs-12" style=" padding-left: 0;">
                 <div class="box box-default">
                     <div class="box-header with-border">
@@ -383,6 +535,72 @@ if(isset($_GET["excluir"])){
                 </div>
                 <!-- /.modal-dialog -->
             </div>
+            
+            <div class="modal fade" id="modal-categorias">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Selecione as categorias de classificação</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="row">
+                                <form class="form-horizontal" action="definirAvaliadores.php" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">
+                                    <input type="hidden" value="categorias" name="categorias">
+                                    <div class="form-group" style="padding-left: 20px">
+                                        <div class="col-sm-10">
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="funcionalidade" class="minimal"> Classificação por funcionalidade
+                                            </label>
+                                            <br>
+
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="tipo" class="minimal"> Classificação por tipo
+                                            </label>
+                                            <br>
+
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="intencao" class="minimal"> Classificação por intenção
+                                            </label>
+                                            <br>
+
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="analiseSentimentos" class="minimal"> Classificação por análise de sentimentos
+                                            </label>
+                                            <br>
+
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="usabilidade" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
+                                            </label>
+                                            <br>
+
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="ux" id="criteriosQualidade" class="minimal"> Classificação por critérios de qualidade de uso (Experiência do Usuário)
+                                            </label>
+                                            <br>
+
+                                            <label style="font-weight: 500;">
+                                                <input type="checkbox" name="artefato" class="minimal"> Classificação por artefato
+                                            </label>
+                                            <br>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                                </form>
+                    </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
         </div>
         <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
             <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
@@ -425,70 +643,101 @@ if(isset($_GET["excluir"])){
 <script src="../../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
-  $(function () {
-    $('#example1').DataTable({
-        "language": {
-            "sEmptyTable": "Nenhum classificador encontrado",
-            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "Exibindo até _MENU_ resultados por página",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum classificador encontrado",
-            "sSearch": "Pesquisar: ",
-            "oPaginate": {
-                "sNext": "Próximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Último"
+    $(function () {
+        $('#example1').DataTable({
+            "language": {
+                "sEmptyTable": "Nenhum classificador encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Exibindo até _MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum classificador encontrado",
+                "sSearch": "Pesquisar: ",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
             },
-            "oAria": {
-                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                "sSortDescending": ": Ordenar colunas de forma descendente"
-            }
-        },
-        'paging'      : false,
-        'lengthChange': false,
-        'searching'   : false,
-        'ordering'    : true,
-        'info'        : false,
-        'autoWidth'   : false
-    }),
-    $('#example2').DataTable({
-        "language": {
-            "sEmptyTable": "Nenhum validador encontrado",
-            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "Exibindo até _MENU_ resultados por página",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum validador encontrado",
-            "sSearch": "Pesquisar: ",
-            "oPaginate": {
-                "sNext": "Próximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Último"
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : false,
+            'autoWidth'   : false
+        }),
+        $('#example2').DataTable({
+            "language": {
+                "sEmptyTable": "Nenhum validador encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Exibindo até _MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum validador encontrado",
+                "sSearch": "Pesquisar: ",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
             },
-            "oAria": {
-                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                "sSortDescending": ": Ordenar colunas de forma descendente"
-            }
-        },
-        'paging'      : false,
-        'lengthChange': false,
-        'searching'   : false,
-        'ordering'    : true,
-        'info'        : false,
-        'autoWidth'   : false
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : false,
+            'autoWidth'   : false
+        }),
+        $('#example3').DataTable({
+            "language": {
+                "sEmptyTable": "Ainda não foi incluída alguma categoria de classificação",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Exibindo até _MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum validador encontrado",
+                "sSearch": "Pesquisar: ",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : false,
+            'info'        : false,
+            'autoWidth'   : false
+        })
     })
-  })
   
     function proximo(){
         window.location.href = "contextoAvaliacao.php";

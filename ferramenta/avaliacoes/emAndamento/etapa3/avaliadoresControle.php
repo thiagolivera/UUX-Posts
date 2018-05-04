@@ -7,6 +7,67 @@ class AvaliadoresControle extends Banco{
         
     }
     
+    public function excluirCategoriaFuncionalidade($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `funcionalidade`='0' WHERE `idavaliacao` = ".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+    
+    public function excluirCategoriaTipo($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `tipo`='0' WHERE `idavaliacao`=".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+    public function excluirCategoriaIntencao($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `intencao`='0' WHERE `idavaliacao`=".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+    public function excluirCategoriaAnaliseSentimentos($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `analiseSentimentos`='0' WHERE `idavaliacao`=".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+    public function excluirCategoriaUsabilidade($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `usabilidade`='0' WHERE `idavaliacao`=".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+    public function excluirCategoriaUX($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `ux`='0' WHERE `idavaliacao`=".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+    public function excluirCategoriaArtefato($idAvaliacao){
+        $sql = "UPDATE `avaliacaoCategorias` SET `artefato`='0' WHERE `idavaliacao`=".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+
+    public function inserirCategoriasClassificacao($idAvaliacao, Categorias $categorias){
+        if(count(self::obterCategoriasAvaliacao($idAvaliacao)) != 0){
+            $sql = "UPDATE `avaliacaoCategorias` SET `funcionalidade`='".$categorias->funcionalidade."',`tipo`='".$categorias->tipo."',`intencao`='".$categorias->intencao."',`analiseSentimentos`='".$categorias->sentimentos."',`usabilidade`='".$categorias->usabilidade."',`ux`='".$categorias->ux."',`artefato`='".$categorias->artefato."' WHERE `idavaliacao`=".$idAvaliacao.";";
+        } else{
+            $sql = "INSERT INTO `avaliacaoCategorias`(`idavaliacao`, `funcionalidade`, `tipo`, `intencao`, `analiseSentimentos`, `usabilidade`, `ux`, `artefato`) VALUES "
+                . "(".$idAvaliacao.",'".$categorias->funcionalidade."','".$categorias->tipo."','".$categorias->intencao."','".$categorias->sentimentos."','".$categorias->usabilidade."','".$categorias->ux."','".$categorias->artefato."');";
+        }
+        
+        parent::Executar($sql);
+        return TRUE;
+    }
+
+    public function obterCategoriasAvaliacao($idAvaliacao){
+        $sql = "SELECT * FROM avaliacaoCategorias WHERE idavaliacao = " . $idAvaliacao . ";";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+
+
+    public function alterarStatus($idAvaliacao){
+        $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 3 - Classificação de PRUS' WHERE `idavaliacao` = ".$idAvaliacao.";";
+        parent::Executar($sql);
+    }
+
+
     public function obterAvaliacao($id){
         $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
         $rtn = self::Executar($sql);
@@ -124,4 +185,18 @@ class Avaliador{
     var $papel;
     var $faixaInicio;
     var $faixaFim;
+}
+
+class Categorias{
+    var $funcionalidade;
+    var $tipo;
+    var $intencao;
+    var $sentimentos;
+    var $usabilidade;
+    var $ux;
+    var $artefato;
+    
+    public function __construct() {
+        
+    }
 }

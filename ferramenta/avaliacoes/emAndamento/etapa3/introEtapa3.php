@@ -6,6 +6,14 @@ if(isset($_POST["automatica"])){
 } else if(isset($_POST["avaliadores"])){
     header("location:definirAvaliadores.php");
 }
+
+if(isset($_SESSION['papel'])){
+    if(strcmp($_SESSION['papel'], "Gerente")){
+        
+    } else{
+        
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,8 +135,17 @@ if(isset($_POST["automatica"])){
         </div>
         
         <div style="padding-bottom: 10px;">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="width: 100%; margin-right: 10px;">Próximo</button>
+            <?php
+            if(isset($_SESSION['papel'])){
+                if(strcmp($_SESSION['papel'], "Gerente") == '0'){
+                    ?><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="width: 100%; margin-right: 10px;">Próximo</button><?php
+                } else{
+                    ?><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-visualizacao" style="width: 100%; margin-right: 10px;">Próximo</button><?php
+                }
+            }
+            ?>
         </div>
+        
         <div class="modal fade" id="modal-default">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -167,6 +184,32 @@ if(isset($_POST["automatica"])){
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+        
+        <div class="modal fade" id="modal-visualizacao">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Escolha a forma de visualização da classificação <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></h4>
+              </div>
+              <div class="modal-body">
+                  <form action="classificacaoPostagens.php" method="post">
+                          <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
+                              <option>Por postagem</option>
+                              <option>Por categoria</option>
+                          </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Continuar</button>
+              </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
         <a style="color: #ecf0f5">'</a>
     </section>
   </div>
@@ -179,16 +222,6 @@ if(isset($_POST["automatica"])){
     $(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){
         $(".alert-dismissible").alert('close');
     });
-    
-    function proximo(){
-        if($('#modoVisualizacao').val() === 'Por postagem'){
-            <?php
-            session_start();
-            
-            ?>
-        }
-        window.location.href = "classificacaoPostagens.php";
-    }
 </script>
 
 <!-- Select 2 -->

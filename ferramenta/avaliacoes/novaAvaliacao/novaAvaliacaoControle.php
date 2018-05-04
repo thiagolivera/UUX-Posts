@@ -44,7 +44,6 @@ class AvaliacaoControle extends Banco{
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
         
-        
         //2) obtem o id da avaliação criada
         $sql = "SELECT idavaliacao FROM avaliacao where idPessoaCriou = ". $gerente ." ORDER BY idavaliacao DESC LIMIT 1;";
         $result = mysqli_query($conexao, $sql);

@@ -7,7 +7,11 @@ class AvaliacoesAndamentoControle extends Banco{
     }
 
     public function obterAvaliacoesUsuario($idPessoa){
-        $sql = "SELECT avaliacaoPapeis.idAvaliacao, avaliacaoInfo.nomeAvaliacao, avaliacaoInfo.plataforma, avaliacaoInfo.nomeSistema, avaliacaoPapeis.papel, avaliacao.status from avaliacaoInfo, avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." and status != 'Concluída';";
+        $sql = "SELECT avaliacaoPapeis.idAvaliacao, avaliacaoInfo.nomeAvaliacao, avaliacaoInfo.plataforma, "
+                . "avaliacaoInfo.nomeSistema, avaliacaoPapeis.papel, avaliacao.status from avaliacaoInfo, "
+                . "avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and "
+                . "avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." "
+                . "and status != 'Concluída';";
         $rtn = parent::Executar($sql);
         
         $array = array();
