@@ -112,14 +112,17 @@ class AvaliadoresControle extends Banco{
         return $array;
     }
     
-    public function verificarSeHaPostagens($idAvaliacao){
-        $sql = "SELECT * FROM `postagens` WHERE `idAvaliacao` = ".$idAvaliacao." limit 1;";
+    public function obterNumeroPostagens($idAvaliacao){
+        $sql = "SELECT count(*) FROM `postagens` WHERE `idAvaliacao` = ".$idAvaliacao.";";
         $rtn = parent::Executar($sql);
-        if($rtn == '0'){
-            return false;
-        } else{
-            return true;
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
         }
+        return $array[0]["count(*)"];
+        
     }
     
     public function isEmailValido($email){        

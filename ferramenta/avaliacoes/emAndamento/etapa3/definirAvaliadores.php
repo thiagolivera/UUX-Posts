@@ -10,10 +10,12 @@ $idAvalicao = $_SESSION['idAvaliacao'];
 
 $avaliadoresControle = new AvaliadoresControle();
 
+//Se não for o gerente de avaliação, não tem acesso a essa página, então.. sai
 if(!$avaliadoresControle->isGerente($idAvalicao, $_SESSION['login'])){
     header("location:erro.php");
 }
 
+//Se concluiu tudo, então verifica se possui o mínimo de avaliadores informados e vai para o próximo passo
 if(isset($_POST['salvar'])){
     if($avaliadoresControle->verificarAvaliadoresInformados($idAvalicao)){
         $avaliadoresControle->alterarStatus($idAvalicao);
@@ -23,6 +25,7 @@ if(isset($_POST['salvar'])){
     }
 }
 
+//Se foi pedido para excluir uma categoria
 if(isset($_GET['excluirCategoria'])){
     if(strcmp($_GET['excluirCategoria'], "Funcionalidade") == 0){
         $avaliadoresControle->excluirCategoriaFuncionalidade($idAvalicao);
@@ -56,35 +59,44 @@ if(isset($_GET['excluirCategoria'])){
 
 $avaliacaoAtual = $avaliadoresControle->obterAvaliacao($idAvalicao);
 $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAvalicao);
-
 $classificadores = $avaliadoresControle->obterClassificadores($idAvalicao);
 $validadores = $avaliadoresControle->obterValidadores($idAvalicao);
+$numTotalPostagens = $avaliadoresControle->obterNumeroPostagens($idAvalicao);
 
 if(isset($_POST["avaliadores"])){
-    $avaliador = new Avaliador();
-    $avaliador->email = $_POST["email"];
-    $avaliador->idAvaliacao = $idAvalicao;
-    $avaliador->papel = "Classificador";
-    $avaliador->faixaInicio = $_POST["postInicial"];
-    $avaliador->faixaFim = $_POST["postFinal"];
     
-    if($avaliadoresControle->inserirAvaliador($avaliador)){
-        header("location:definirAvaliadores.php?sucesso");
+    if(($_POST["postInicial"] > $numTotalPostagens) || ($_POST["postFinal"] > $numTotalPostagens) || ($_POST["postFinal"] < $_POST["postInicial"])){
+        header("location:definirAvaliadores.php?alertaFaixaValores");
     } else{
-        header("location:definirAvaliadores.php?erro");
+        $avaliador = new Avaliador();
+        $avaliador->email = $_POST["email"];
+        $avaliador->idAvaliacao = $idAvalicao;
+        $avaliador->papel = "Classificador";
+        $avaliador->faixaInicio = $_POST["postInicial"];
+        $avaliador->faixaFim = $_POST["postFinal"];
+        
+        if($avaliadoresControle->inserirAvaliador($avaliador)){
+            header("location:definirAvaliadores.php?sucesso");
+        } else{
+            header("location:definirAvaliadores.php?erro");
+        }
     }
 } else if(isset($_POST["validadores"])){
-    $avaliador = new Avaliador();
-    $avaliador->email = $_POST["email"];
-    $avaliador->idAvaliacao = $idAvalicao;
-    $avaliador->papel = "Validador";
-    $avaliador->faixaInicio = $_POST["postInicial"];
-    $avaliador->faixaFim = $_POST["postFinal"];
-    
-    if($avaliadoresControle->inserirValidador($avaliador)){
-        header("location:definirAvaliadores.php?sucesso");
+    if(($_POST["postInicial"] > $numTotalPostagens) || ($_POST["postFinal"] > $numTotalPostagens) || ($_POST["postFinal"] < $_POST["postInicial"])){
+        header("location:definirAvaliadores.php?alertaFaixaValores");
     } else{
-        header("location:definirAvaliadores.php?erro");
+        $avaliador = new Avaliador();
+        $avaliador->email = $_POST["email"];
+        $avaliador->idAvaliacao = $idAvalicao;
+        $avaliador->papel = "Validador";
+        $avaliador->faixaInicio = $_POST["postInicial"];
+        $avaliador->faixaFim = $_POST["postFinal"];
+
+        if($avaliadoresControle->inserirValidador($avaliador)){
+            header("location:definirAvaliadores.php?sucesso");
+        } else{
+            header("location:definirAvaliadores.php?erro");
+        }
     }
 } else if(isset($_POST["categorias"])){
     $categorias = new Categorias();
@@ -230,17 +242,24 @@ if(isset($_GET["excluir"])){
             O número de avaliadores informado não é suficiente para essa avaliação<br>
             Você deve informar pelo menos dois classificadores e um validador
         </div>
+        
+        <div class="alert alert-error alert-dismissible" id="alertaFaixaValores" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i>A faixa de valores é inválida</h4>
+            Você digitou uma faixa de valores inválida<br>
+            Atente-se ao número de postagens extraídas
+        </div>
 
         <div class="alert alert-success alert-dismissible" id="alertaSucesso" style="display: none">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Usuário adicionado</h4>
-            O usuário foi adicionado com sucesso!
+            <h4><i class="icon fa fa-check"></i> Avaliador adicionado</h4>
+            O avaliador foi adicionado com sucesso!
         </div>
         
         <div class="alert alert-success alert-dismissible" id="alertaSucessoExcluir" style="display: none">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Usuário removido</h4>
-            O usuário foi removido com sucesso!
+            <h4><i class="icon fa fa-check"></i> Avaliador removido</h4>
+            O avaliador foi removido com sucesso!
         </div>
         
         <?php
@@ -283,6 +302,17 @@ if(isset($_GET["excluir"])){
                 document.getElementById('alertaSucessoExcluir').style.display = 'block';
                 $("#alertaSucessoExcluir").fadeTo(7000, 500).slideUp(500, function(){
                     $("#alertaSucessoExcluir").alert('close');
+                });
+            </script>
+            <?php
+        }
+        
+        if(isset($_GET['alertaFaixaValores'])){
+            ?> 
+            <script>
+                document.getElementById('alertaFaixaValores').style.display = 'block';
+                $("#alertaFaixaValores").fadeTo(7000, 500).slideUp(500, function(){
+                    $("#alertaFaixaValores").alert('close');
                 });
             </script>
             <?php
@@ -365,6 +395,7 @@ if(isset($_GET["excluir"])){
                     <div class="box-header with-border">
                         <h3 class="box-title">Classificadores de postagens</h3>
                         <br><i>Para cada faixa de postagens, deve ter no mínimo 02 (dois) classificadores</i>
+                        <br><i>Número total de postagens: <?php echo $numTotalPostagens ?></i>
                     </div>
 
                     <div class="box-body" style="padding-left: 15px; padding-right: 15px">
@@ -424,6 +455,7 @@ if(isset($_GET["excluir"])){
                                     
                                     <div class="form-group">
                                         <h4 style="text-align: center">Indique a faixa de postagens para o classificador</h4>
+                                        <h4 style="text-align: center">Número total de postagens: <?php echo $numTotalPostagens ?></h4>
                                         <label for="postInicial" class="col-sm-2 control-label" style="padding-top: 0px;">Postagem inicial</label>
                                         <div class="col-sm-4">
                                             <input type="number" class="form-control" required name="postInicial" id="postInicial" placeholder="Ex.: 2501">
@@ -452,6 +484,7 @@ if(isset($_GET["excluir"])){
                     <div class="box-header with-border">
                         <h3 class="box-title">Validadores de classificação</h3>
                         <br><i>Para cada faixa de postagens, deve ter no mínimo 01 (um) validador</i>
+                        <br><i>Número total de postagens: <?php echo $numTotalPostagens; ?></i>
                     </div>
 
                     <div class="box-body" style="padding-left: 15px; padding-right: 15px">
@@ -513,6 +546,7 @@ if(isset($_GET["excluir"])){
                                     
                                     <div class="form-group">
                                         <h4 style="text-align: center">Indique a faixa de postagens para o validador</h4>
+                                        <h4 style="text-align: center">Número total de postagens: <?php echo $numTotalPostagens ?></h4>
                                         <label for="postInicial" class="col-sm-2 control-label" style="padding-top: 0px;">Postagem inicial</label>
                                         <div class="col-sm-4">
                                             <input type="number" class="form-control" required name="postInicial" id="postInicial" placeholder="Ex.: 2501">
@@ -642,6 +676,7 @@ if(isset($_GET["excluir"])){
 <!-- DataTables -->
 <script src="../../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
 <script>
     $(function () {
         $('#example1').DataTable({
