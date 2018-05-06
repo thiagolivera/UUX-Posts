@@ -24,11 +24,11 @@
                 <div class="col-sm-6">
                     <input type="hidden" name="pru">
                     <label style="font-weight: 500;">
-                        <input type="radio" name="pru" value="1" required class="minimal"> PRU
+                        <input type="radio" name="pru" value="1" onclick="postPRU()" required> PRU
                     </label>
                     <br>
                     <label style="font-weight: 500;">
-                        <input type="radio" name="pru" value="0" class="minimal"> Não-PRU
+                        <input type="radio" name="pru" value="0" onclick="postNaoPRU()"> Não-PRU
                     </label>
                     <br>
                 </div>
@@ -37,7 +37,7 @@
             <?php 
                 if(strcmp($categoriasClassificacao[0]["funcionalidade"], '1') == '0'){
                     ?>
-                    <div class="row">
+                    <div class="row" id="classFuncionalidade">
                         <div class="form-group col-sm-12">
                             <label for="funcionalidades" class="col-sm-2 control-label">Classificação por funcionalidade</label>
                             <div class="col-sm-10">
@@ -48,7 +48,7 @@
                     <?php
                 }
                 
-        ?>  <div class="row"> <?php
+        ?>  <div class="row" id="categoriasClass"> <?php
                 if(strcmp($categoriasClassificacao[0]["tipo"], '1') == '0'){
                     ?>
                     <div class="form-group col-sm-4">
@@ -56,27 +56,27 @@
                         <div class="col-sm-6">
                             <input type="hidden" name="tipo">
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="critica" class="abc" onclick="deRequireCb('abc')" required> Crítica
+                                <input type="checkbox" name="critica" id="critica" class="abc" onclick="deRequireCb('abc')" required> Crítica
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="elogio" class="abc" onclick="deRequireCb('abc')" required> Elogio
+                                <input type="checkbox" name="elogio"id="elogio" class="abc" onclick="deRequireCb('abc')" required> Elogio
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="duvida" class="abc" onclick="deRequireCb('abc')" required> Dúvida
+                                <input type="checkbox" name="duvida" id="duvida" class="abc" onclick="deRequireCb('abc')" required> Dúvida
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="comparacao" class="abc" onclick="deRequireCb('abc')" required> Comparação
+                                <input type="checkbox" name="comparacao" id="comparacao" class="abc" onclick="deRequireCb('abc')" required> Comparação
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="sugestao" class="abc" onclick="deRequireCb('abc')" required> Sugestão
+                                <input type="checkbox" name="sugestao" id="sugestao" class="abc" onclick="deRequireCb('abc')" required> Sugestão
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="ajuda" class="abc" onclick="deRequireCb('abc')" required> Ajuda
+                                <input type="checkbox" name="ajuda" id="ajuda" class="abc" onclick="deRequireCb('abc')" required> Ajuda
                             </label>
                             <br>
                         </div>
@@ -89,15 +89,15 @@
                         <div class="col-sm-6">
                             <input type="hidden" name="intencao">
                             <label style="font-weight: 500;">
-                                <input type="radio" name="intencao" value="Visceral" required class="minimal"> Visceral
+                                <input type="radio" name="intencao" id="visceral" value="Visceral" required> Visceral
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="radio" name="intencao" value="Comportamental" class="minimal"> Comportamental
+                                <input type="radio" name="intencao" value="Comportamental"> Comportamental
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="radio" name="intencao" value="Reflexiva" class="minimal"> Reflexiva
+                                <input type="radio" name="intencao" value="Reflexiva"> Reflexiva
                             </label>
                             <br>
                         </div>
@@ -110,15 +110,15 @@
                         <div class="col-sm-6">
                             <input type="hidden" name="sentimentos">
                             <label style="font-weight: 500;">
-                                <input type="radio" name="sentimentos" value="Positiva" required class="minimal"> Positiva
+                                <input type="radio" name="sentimentos" id="positiva" value="Positiva" required> Positiva
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="radio" name="sentimentos" value="Negativa" class="minimal"> Negativa
+                                <input type="radio" name="sentimentos" value="Negativa"> Negativa
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="radio" name="sentimentos" value="Neutra" class="minimal"> Neutra
+                                <input type="radio" name="sentimentos" value="Neutra"> Neutra
                             </label>
                             <br>
                         </div>
@@ -131,31 +131,31 @@
                         <div class="col-sm-6">
                             <input type="hidden" name="usabilidade">
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="eficacia" class="abcU" onclick="deRequireCb('abcU')" required> Eficácia
+                                <input type="checkbox" name="eficacia" class="abcU" id="eficacia" onclick="deRequireCb('abcU')" required> Eficácia
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="eficiencia" class="abcU" onclick="deRequireCb('abcU')" required> Eficiência
+                                <input type="checkbox" name="eficiencia" class="abcU" id="eficiencia" onclick="deRequireCb('abcU')" required> Eficiência
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="satisfacao" class="abcU" onclick="deRequireCb('abcU')" required> Satisfação
+                                <input type="checkbox" name="satisfacao" class="abcU" id="satisfacao" onclick="deRequireCb('abcU')" required> Satisfação
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="seguranca" class="abcU" onclick="deRequireCb('abcU')" required> Segurança
+                                <input type="checkbox" name="seguranca" class="abcU" id="seguranca" onclick="deRequireCb('abcU')" required> Segurança
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="utilidade" class="abcU" onclick="deRequireCb('abcU')" required> Utilidade
+                                <input type="checkbox" name="utilidade" class="abcU" id="utilidade" onclick="deRequireCb('abcU')" required> Utilidade
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="memorabilidade" class="abcU" onclick="deRequireCb('abcU')" required> Memorabilidade
+                                <input type="checkbox" name="memorabilidade" class="abcU" id="memorabilidade" onclick="deRequireCb('abcU')" required> Memorabilidade
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input type="checkbox" name="aprendizado" class="abcU" onclick="deRequireCb('abcU')" required> Aprendizado
+                                <input type="checkbox" name="aprendizado" class="abcU" id="aprendizado" onclick="deRequireCb('abcU')" required> Aprendizado
                             </label>
                             <br>
                         </div>
@@ -168,27 +168,27 @@
                         <div class="col-sm-6">
                             <input type="hidden" name="ux">
                             <label style="font-weight: 500;">
-                                <input class="abcU" type="checkbox" name="afeto" onclick="deRequireCb('abcU')" required> Afeto
+                                <input class="abcU" type="checkbox" name="afeto" id="afeto" onclick="deRequireCb('abcU')" required> Afeto
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcU" type="checkbox" name="estetica" onclick="deRequireCb('abcU')" required> Estética
+                                <input class="abcU" type="checkbox" name="estetica" id="estetica" onclick="deRequireCb('abcU')" required> Estética
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcU" type="checkbox" name="frustracao" onclick="deRequireCb('abcU')" required> Frustração
+                                <input class="abcU" type="checkbox" name="frustracao" id="frustracao" onclick="deRequireCb('abcU')" required> Frustração
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcU" type="checkbox" name="satisfacao" onclick="deRequireCb('abcU')" required> Satisfação
+                                <input class="abcU" type="checkbox" name="satisfacao" id="satisfacao-ux" onclick="deRequireCb('abcU')" required> Satisfação
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcU" type="checkbox" name="motivacao" onclick="deRequireCb('abcU')" required> Motivação
+                                <input class="abcU" type="checkbox" name="motivacao" id="motivacao" onclick="deRequireCb('abcU')" required> Motivação
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcU" type="checkbox" name="suporte" onclick="deRequireCb('abcU')" required> Suporte
+                                <input class="abcU" type="checkbox" name="suporte" id="suporte" onclick="deRequireCb('abcU')" required> Suporte
                             </label>
                             <br>
                         </div>
@@ -200,7 +200,7 @@
             
             <?php if(strcmp($categoriasClassificacao[0]["artefato"], '1') == '0'){
                 ?>
-                <div class="row">
+                <div class="row" id="classArtefato">
                     <div class="form-group col-sm-12">
                         <label for="artefato" class="col-sm-2 control-label">Classificação por artefato</label>
                         <div class="col-sm-10">
@@ -213,7 +213,7 @@
     </div>
 </div>
 
-
+<div id="espacos" style="display: none"><br><br><br></div>
 <div class="row" style="padding-top: 20px">
     <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
             <button class="btn btn-info" onclick="voltar()" style="margin-right: 10px;">Voltar</button>
@@ -238,24 +238,84 @@
         window.location.href = "introEtapa3.php";
     }
     
-        function deRequireCb(elClass) {
-            el=document.getElementsByClassName(elClass);
+    function deRequireCb(elClass) {
+        el=document.getElementsByClassName(elClass);
 
-            var atLeastOneChecked=false;//at least one cb is checked
-            for (i=0; i<el.length; i++) {
-                if (el[i].checked === true) {
-                    atLeastOneChecked=true;
-                }
-            }
-
-            if (atLeastOneChecked === true) {
-                for (i=0; i<el.length; i++) {
-                    el[i].required = false;
-                }
-            } else {
-                for (i=0; i<el.length; i++) {
-                    el[i].required = true;
-                }
+        var atLeastOneChecked=false;//at least one cb is checked
+        for (i=0; i<el.length; i++) {
+            if (el[i].checked === true) {
+                atLeastOneChecked=true;
             }
         }
+
+        if (atLeastOneChecked === true) {
+            for (i=0; i<el.length; i++) {
+                el[i].required = false;
+            }
+        } else {
+            for (i=0; i<el.length; i++) {
+                el[i].required = true;
+            }
+        }
+    }
+    
+    function postPRU(){
+        document.getElementById('categoriasClass').style.display = 'block';
+        document.getElementById('classFuncionalidade').style.display = 'block';
+        document.getElementById('classArtefato').style.display = 'block';
+        document.getElementById('espacos').style.display = 'none';
+        
+        document.getElementById('critica').required = true;
+        document.getElementById('elogio').required = true;
+        document.getElementById('duvida').required = true;
+        document.getElementById('comparacao').required = true;
+        document.getElementById('sugestao').required = true;
+        document.getElementById('ajuda').required = true;
+        document.getElementById('visceral').required = true;
+        document.getElementById('positiva').required = true;
+        
+        document.getElementById('eficacia').required = true;
+        document.getElementById('eficiencia').required = true;
+        document.getElementById('satisfacao').required = true;
+        document.getElementById('seguranca').required = true;
+        document.getElementById('utilidade').required = true;
+        document.getElementById('memorabilidade').required = true;
+        document.getElementById('aprendizado').required = true;
+        document.getElementById('afeto').required = true;
+        document.getElementById('estetica').required = true;
+        document.getElementById('frustracao').required = true;
+        document.getElementById('satisfacao-ux').required = true;
+        document.getElementById('motivacao').required = true;
+        document.getElementById('suporte').required = true;
+    }
+    function postNaoPRU(){
+        document.getElementById('categoriasClass').style.display = 'none';
+        document.getElementById('classFuncionalidade').style.display = 'none';
+        document.getElementById('classArtefato').style.display = 'none';
+        document.getElementById('espacos').style.display = 'block';
+        
+        document.getElementById('critica').required = false;
+        document.getElementById('elogio').required = false;
+        document.getElementById('duvida').required = false;
+        document.getElementById('comparacao').required = false;
+        document.getElementById('sugestao').required = false;
+        document.getElementById('ajuda').required = false;
+        document.getElementById('visceral').required = false;
+        document.getElementById('positiva').required = false;
+        
+        document.getElementById('eficacia').required = false;
+        document.getElementById('eficiencia').required = false;
+        document.getElementById('satisfacao').required = false;
+        document.getElementById('seguranca').required = false;
+        document.getElementById('utilidade').required = false;
+        document.getElementById('memorabilidade').required = false;
+        document.getElementById('aprendizado').required = false;
+        document.getElementById('afeto').required = false;
+        document.getElementById('estetica').required = false;
+        document.getElementById('frustracao').required = false;
+        document.getElementById('satisfacao-ux').required = false;
+        document.getElementById('motivacao').required = false;
+        document.getElementById('suporte').required = false;
+        
+    }
 </script>
