@@ -1,6 +1,5 @@
 <?php 
     $postagem = $controle->obterUmaPostagemNaoClassificada($idAvalicao);
-    $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
 ?>
 
 <div id="classificacaoPorPostagem">
@@ -19,6 +18,22 @@
         <form class="form-horizontal" method="POST" id="classificacao" action="salvarClassificacaoControle.php">
             <input type="hidden" name="idPostagem" value="<?php echo $postagem[0]["idPostagem"]; ?>">
             <input type="hidden" name="idAvaliacao" value="<?php echo $idAvalicao; ?>">
+            
+            <div class="form-group col-sm-4">
+                <label class="col-sm-6 control-label">Classificação por PRU <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></label>
+                <div class="col-sm-6">
+                    <input type="hidden" name="pru">
+                    <label style="font-weight: 500;">
+                        <input type="radio" name="pru" value="1" required class="minimal"> PRU
+                    </label>
+                    <br>
+                    <label style="font-weight: 500;">
+                        <input type="radio" name="pru" value="0" class="minimal"> Não-PRU
+                    </label>
+                    <br>
+                </div>
+            </div>
+            
             <?php 
                 if(strcmp($categoriasClassificacao[0]["funcionalidade"], '1') == '0'){
                     ?>
@@ -153,27 +168,27 @@
                         <div class="col-sm-6">
                             <input type="hidden" name="ux">
                             <label style="font-weight: 500;">
-                                <input class="abcUX" type="checkbox" name="afeto" onclick="deRequireCb('abcUX')" required> Afeto
+                                <input class="abcU" type="checkbox" name="afeto" onclick="deRequireCb('abcU')" required> Afeto
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcUX" type="checkbox" name="estetica" onclick="deRequireCb('abcUX')" required> Estética
+                                <input class="abcU" type="checkbox" name="estetica" onclick="deRequireCb('abcU')" required> Estética
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcUX" type="checkbox" name="frustracao" onclick="deRequireCb('abcUX')" required> Frustração
+                                <input class="abcU" type="checkbox" name="frustracao" onclick="deRequireCb('abcU')" required> Frustração
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcUX" type="checkbox" name="satisfacao" onclick="deRequireCb('abcUX')" required> Satisfação
+                                <input class="abcU" type="checkbox" name="satisfacao" onclick="deRequireCb('abcU')" required> Satisfação
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcUX" type="checkbox" name="motivacao" onclick="deRequireCb('abcUX')" required> Motivação
+                                <input class="abcU" type="checkbox" name="motivacao" onclick="deRequireCb('abcU')" required> Motivação
                             </label>
                             <br>
                             <label style="font-weight: 500;">
-                                <input class="abcUX" type="checkbox" name="suporte" onclick="deRequireCb('abcUX')" required> Suporte
+                                <input class="abcU" type="checkbox" name="suporte" onclick="deRequireCb('abcU')" required> Suporte
                             </label>
                             <br>
                         </div>

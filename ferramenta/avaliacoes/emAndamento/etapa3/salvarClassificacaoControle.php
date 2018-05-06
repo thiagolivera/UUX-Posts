@@ -89,6 +89,10 @@ if(isset($_POST["artefato"])){
     $classificacao->classArtefato = $_POST["artefato"];
 }
 
+if(isset($_POST["pru"])){
+    $classificacao->classPRU = $_POST["pru"];
+}
+
 session_start();
 $classificacao->idClassificador = $_SESSION["login"];
 $classificacao->idPostagem = $_POST["idPostagem"];

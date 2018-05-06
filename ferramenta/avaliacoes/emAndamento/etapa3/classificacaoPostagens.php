@@ -9,6 +9,7 @@ if(isset($_POST["modoVisualizacao"])){
 
 $controle = new ClassificacaoControle();
 $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
+$categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
 ?>
 <!DOCTYPE html>
 <html>
