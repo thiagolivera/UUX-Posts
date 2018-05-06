@@ -100,7 +100,7 @@ if(isset($_POST["avaliadores"])){
     }
 } else if(isset($_POST["categorias"])){
     $categorias = new Categorias();
-    
+     
     if(isset($_POST["funcionalidade"])){
         $categorias->funcionalidade = true;
     } else{

@@ -1,5 +1,14 @@
 <?php
 include '../verificarSessao.class';
+include './classificacaoControle.php';
+
+$idAvalicao = $_SESSION['idAvaliacao'];
+if(isset($_POST["modoVisualizacao"])){
+    $_SESSION["modoVisualizacao"] = $_POST["modoVisualizacao"];
+}
+
+$controle = new ClassificacaoControle();
+$avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,9 +97,9 @@ include '../verificarSessao.class';
                 </div>
                 <div class="box-body" style="padding-left: 25px; padding-right: 35px">
                     <?php
-                        if(strcmp($_POST['modoVisualizacao'],"Por postagem") == 0){
+                        if(strcmp($_SESSION['modoVisualizacao'],"Por postagem") == 0){
                             include("porPostagem.php");
-                        } else if(strcmp($_POST['modoVisualizacao'],"Por categoria") == 0){
+                        } else if(strcmp($_SESSION['modoVisualizacao'],"Por categoria") == 0){
                             include("porCategoria.php");
                         }
                     ?>
