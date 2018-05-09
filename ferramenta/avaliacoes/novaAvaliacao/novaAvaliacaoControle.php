@@ -22,6 +22,7 @@ class AvaliacaoControle extends Banco{
         if ($erro == 0){
             mysqli_commit($conexao);
             mysqli_close($conexao);
+            $_SESSION['papel'] = "Gerente";
             header("location:../emAndamento/etapa1/contextoAvaliacao.php");
         } else {
             mysqli_close($conexao);
@@ -77,8 +78,9 @@ class AvaliacaoControle extends Banco{
         if ($erro == 0){
             mysqli_commit($conexao);
             $_SESSION['idAvaliacao'] = $idAvaliacao;
-            header("location:../emAndamento/etapa1/contextoAvaliacao.php");
+            $_SESSION['papel'] = "Gerente";
             mysqli_close($conexao);
+            header("location:../emAndamento/etapa1/contextoAvaliacao.php");
         } else {
             mysqli_rollback($conexao);
             mysqli_close($conexao);

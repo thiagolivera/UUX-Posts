@@ -6,14 +6,6 @@ if(isset($_POST["automatica"])){
 } else if(isset($_POST["avaliadores"])){
     header("location:definirAvaliadores.php");
 }
-
-if(isset($_SESSION['papel'])){
-    if(strcmp($_SESSION['papel'], "Gerente")){
-        
-    } else{
-        
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +65,7 @@ if(isset($_SESSION['papel'])){
           <div class="box box-solid">
               <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-black" style="height: 250px;
-                     background: url('../../../images/ClassificacaoPrus.svg') center center; position: relative">
+                     background: url('../../../images/ClassificacaoPRUs.svg') center center; position: relative">
                     <div style="width: 100%; left: 0; top: 0; background-color: #3c8dbc;  position: absolute;">
                         <h3 style="color: white; padding-left: 15px; padding-top: 10px" class="widget-user-username">Etapa 3 - Classificação das PRUs</h3>
                         <h5 style="color: white; padding-left: 15px;" class="widget-user-desc">Metodologia MALTU</h5>  
@@ -197,6 +189,7 @@ if(isset($_SESSION['papel'])){
                   <form action="classificacaoPostagens.php" method="post">
                           <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
                               <option>Por postagem</option>
+                              <option>Por conjunto de postagens</option>
                               <option>Por categoria</option>
                           </select>
               </div>

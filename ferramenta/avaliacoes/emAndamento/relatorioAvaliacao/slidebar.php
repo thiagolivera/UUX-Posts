@@ -6,7 +6,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
             <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/index.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/index.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../../index.php">
@@ -26,7 +26,7 @@
             ?>
             
             <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/editarPerfil.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/editarPerfil.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../../editarPerfil.php">
@@ -48,7 +48,7 @@
         
         <?php 
             if(strcmp($tipoUsuario,"administrador") == 0){
-                if(strcmp($_SERVER['PHP_SELF'], "/avaliacoes/novaAvaliacao/criarAvaliacao.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/novaAvaliacao/criarAvaliacao.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../novaAvaliacao/introetapa1.php">
@@ -70,7 +70,7 @@
         
         
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/avaliacoes/avaliacoesAndamento.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/avaliacoesAndamento.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../avaliacoesAndamento.php">
@@ -90,7 +90,7 @@
             ?>
         
             <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/avaliacoes/avaliacoesConcluidas.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/avaliacoesConcluidas.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../avaliacoesConcluidas.php">
@@ -111,7 +111,7 @@
         
         <li class="header">POSTAGENS</li>
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/avaliacoes/postagensFavoritas.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/postagensFavoritas.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../postagensFavoritas.php">
@@ -131,7 +131,7 @@
             ?>
                     
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/avaliacoes/postagensComDuvida.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/postagensComDuvida.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../postagensComDuvida.php">
@@ -155,7 +155,7 @@
         ?>
         <li class="header">USUÁRIOS</li>
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/administracao/cadastrarUsuario.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/administracao/cadastrarUsuario.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../../administracao/cadastrarUsuario.php">
@@ -175,7 +175,7 @@
             ?>
                     
         <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/administracao/gerenciarUsuarios.php") == 0){
+                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/administracao/gerenciarUsuarios.php") == 0){
                 ?>
                     <li class="active">
                         <a href="../../../administracao/gerenciarUsuarios.php">

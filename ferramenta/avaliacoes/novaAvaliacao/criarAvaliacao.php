@@ -20,6 +20,7 @@
         }
 
         $controleAvaliacao->editarAvaliacao($avaliacao, $_SESSION["login"]);
+        $_SESSION['papel'] = "Gerente";
     } else if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma"]) && 
             isset($_POST["fonte"]) && isset($_POST["objetivos"])){
 
@@ -33,14 +34,21 @@
         if(isset($_POST["funcionalidades"])){
             $avaliacao->funcionalidades = $_POST["funcionalidades"];
         }
-
         $controleAvaliacao->criarAvaliacao($avaliacao, $_SESSION["login"]);
     }
     
     
     $avaliacaoInfo = null;
     if(isset($_GET["id"])){
-        $avaliacaoInfo = $controleAvaliacao->obterInfoAvaliacao($_GET["id"]);
+        if(isset($_SESSION['papel'])){
+            if(strcmp($_SESSION['papel'], "Gerente") == '0'){
+                $avaliacaoInfo = $controleAvaliacao->obterInfoAvaliacao($_GET["id"]);
+            } else{
+                header("Location:acessoNegado.php");
+            }
+        } else{
+            header("Location:acessoNegado.php");
+        }
     }
 
 ?>

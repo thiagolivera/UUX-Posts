@@ -87,10 +87,19 @@ class ClassificacaoControle extends Banco{
         return $array;
     }
     
-    public function obterDezPostagens($idAvaliacao){
+    public function obterPostagensNaoClassificadas($idAvaliacao, $idClassificador){ //where idavaliador = ".$idAvaliador."
+        $sql = "SELECT * FROM `postagens` WHERE postagens.idPostagem NOT IN (SELECT classificacao.idPostagem from classificacao where idClassificador = ".$idClassificador.") and postagens.idAvaliacao = " . $idAvaliacao . "  LIMIT 10;";
+        $rtn = parent::Executar($sql);
         
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
     }
-    
+
+
     public function obterAvaliacao($id){
         $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
         $rtn = self::Executar($sql);
@@ -109,9 +118,3 @@ class ClassificacaoControle extends Banco{
         return $array;
     }
 }
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-

@@ -4,12 +4,17 @@
     
     $idAvalicao = $_SESSION['idAvaliacao'];
     
-    $controleContextoAvaliacao = new ContextoAvaliacaoControle();
-    
-    if(!$controleContextoAvaliacao->isGerente($idAvalicao, $_SESSION['login'])){
-        header("location:erro.php");
+    if(isset($_SESSION['papel'])){
+        if(strcmp($_SESSION['papel'], "Gerente") == '0'){
+            
+        } else{
+            header("Location:acessoNegado.php");
+        }
+    } else{
+        header("Location:acessoNegado.php");
     }
     
+    $controleContextoAvaliacao = new ContextoAvaliacaoControle();
     $avaliacaoAtual = $controleContextoAvaliacao->obterAvaliacao($idAvalicao);
     $contextoAtual = $controleContextoAvaliacao->obterContexto($idAvalicao);
 

@@ -1,20 +1,30 @@
 <?php
-include '../verificarSessao.class';
-include './extracaoControle.php';
+    include '../verificarSessao.class';
+    include './extracaoControle.php';
 
-$idAvalicao = $_SESSION['idAvaliacao'];
-$extracaoControle = new ExtracaoControle();
-$avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
+    $idAvalicao = $_SESSION['idAvaliacao'];
+    $extracaoControle = new ExtracaoControle();
+    $avaliacaoAtual = $extracaoControle->obterAvaliacao($idAvalicao);
 
-if(!$extracaoControle->verificarSeHaPostagens($idAvalicao)){
-    header("location:formaExtracao.php");
-} else{
-    $postagensExtraidas = $extracaoControle->obterPostsExtraidas($idAvalicao);
-}
+    if(isset($_SESSION['papel'])){
+        if(strcmp($_SESSION['papel'], "Gerente") == '0'){
+            
+        } else{
+            header("Location:acessoNegado.php");
+        }
+    } else{
+        header("Location:acessoNegado.php");
+    }
 
-if(isset($_GET['excluirTudo'])){
-    $extracaoControle->excluirTodasPostagens($idAvalicao);
-}
+    if(!$extracaoControle->verificarSeHaPostagens($idAvalicao)){
+        header("location:formaExtracao.php");
+    } else{
+        $postagensExtraidas = $extracaoControle->obterPostsExtraidas($idAvalicao);
+    }
+
+    if(isset($_GET['excluirTudo'])){
+        $extracaoControle->excluirTodasPostagens($idAvalicao);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,7 +102,6 @@ if(isset($_GET['excluirTudo'])){
                         <th>ID</th>
                         <th style="width:150px">Data</th>
                         <th>Postagem</th>
-                        <th style="width:100px">Ação</th>
                       </tr>
                     </thead>
                     

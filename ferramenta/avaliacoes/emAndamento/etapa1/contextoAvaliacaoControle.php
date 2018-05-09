@@ -24,10 +24,16 @@ class ContextoAvaliacaoControle extends Banco{
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
         
-        //1) muda status da avaliação no dados no banco
-        $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 2 - Extração de PRUS' WHERE `idavaliacao` = ".$idAvaliacao.";";
-        if (!mysqli_query($conexao, $sql)){
-            $erro++; //se der erro incrementa no contador para cancelar a transação
+        //2) altera o status se for um sequencial
+        $sql = "SELECT status FROM avaliacao WHERE `idavaliacao` = ".$idAvaliacao." LIMIT 1;";
+        $result = mysqli_query($conexao, $sql);
+        $status = mysqli_fetch_array($result)[0];
+        if(strcmp($status, "Etapa 1 - Contexto de avaliação") == '0'){
+            //2) muda status da avaliação no dados no banco
+            $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 2 - Extração de PRUS' WHERE `idavaliacao` = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
+            }
         }
         
         //Verifica se houve erro para cancelar a transação
@@ -50,6 +56,18 @@ class ContextoAvaliacaoControle extends Banco{
                 . " experienciaTecnologica = '".$contexto->experiencia."' where idAvaliacao = ".$idAvaliacao.";";
         if (!mysqli_query($conexao, $sql)){
             $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
+        
+        //2) altera o status se for um sequencial
+        $sql = "SELECT status FROM avaliacao WHERE `idavaliacao` = ".$idAvaliacao." LIMIT 1;";
+        $result = mysqli_query($conexao, $sql);
+        $status = mysqli_fetch_array($result)[0];
+        if(strcmp($status, "Etapa 1 - Contexto de avaliação") == '0'){
+            //2) muda status da avaliação no dados no banco
+            $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 2 - Extração de PRUS' WHERE `idavaliacao` = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
+            }
         }
         
         //Verifica se houve erro para cancelar a transação

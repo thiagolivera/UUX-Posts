@@ -1,5 +1,15 @@
 <?php
 include '../verificarSessao.class';
+
+    if(isset($_SESSION['papel'])){
+        if(strcmp($_SESSION['papel'], "Gerente") == '0'){
+            
+        } else{
+            header("Location:acessoNegado.php");
+        }
+    } else{
+        header("Location:acessoNegado.php");
+    }
 ?>
 <!DOCTYPE html>
 <html>
