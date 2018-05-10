@@ -100,9 +100,9 @@ class ClassificacaoPRUsControle extends Banco{
             $idClassUX = null;
             
             //Verifica se há classificação por tipo
-            if(isset($classificacoes[$i][2][0])){
+            if(isset($classificacoes[$i]["tipo"][0])){
                 //Prepara a classificação por tipo
-                $classTipo = self::preparaClassTipo($classificacoes[$i][2]);
+                $classTipo = self::preparaClassTipo($classificacoes[$i]["tipo"]);
 
                 //Salvar classificação por tipo
                 $sql = "INSERT INTO `classTipo`(`idClassTipo`, `critica`, `elogio`, `duvida`, `comparacao`, `sugestao`, `ajuda`) VALUES ("
@@ -117,9 +117,9 @@ class ClassificacaoPRUsControle extends Banco{
             }
             
             //Verifica se há classificação usabilidade
-            if(isset($classificacoes[$i][5][0])){
+            if(isset($classificacoes[$i]["usabilidade"][0])){
                 //Prepara a classificação por facetas usabilidade
-                $classUsabilidade = self::preparaClassUsabilidade($classificacoes[$i][5]);
+                $classUsabilidade = self::preparaClassUsabilidade($classificacoes[$i]["usabilidade"]);
                 
                 //grava classificação por usabilidade
                 $sql = "INSERT INTO `classUsabilidade`(`idClassUsabilidade`, `eficacia`, `eficiencia`, `satisfacao`, `seguranca`, `utilidade`, `memorabilidade`, `aprendizado`) VALUES ("
@@ -134,9 +134,9 @@ class ClassificacaoPRUsControle extends Banco{
             }
             
             //Verifica se há classificação UX
-            if(isset($classificacoes[$i][6][0])){
+            if(isset($classificacoes[$i]["ux"][0])){
                 //Prepara a classificação por facetas de UX
-                $classUX = self::preparaClassUX($classificacoes[$i][6]);
+                $classUX = self::preparaClassUX($classificacoes[$i]["ux"]);
                 
                 //gravar classificação por UX
                  $sql = "INSERT INTO `classUX`(`idClassUX`, `afeto`, `estetica`, `frustracao`, `satisfacao`, `motivacao`, `suporte`) VALUES ("
@@ -149,12 +149,62 @@ class ClassificacaoPRUsControle extends Banco{
                 $idClassUX = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
             }
             
-            //Grava classificação
-            $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`, `classFuncionalidade`, `classTipo`, `classIntencao`, `classAnaliseSentimentos`, `classUsabilidade`, `classUX`, `classArtefato`) VALUES ("
-                    . "'".$idClassificador."','".$classificacoes[$i][8]."','".$idAvaliacao."','".$classificacoes[$i][0]."','".$classificacoes[$i][1]."','".$idClassTipo."','".$classificacoes[$i][3]."','".$classificacoes[$i][4]."','".$idClassUsabilidade."','".$idClassUX."','".$classificacoes[$i][7]."');";
+            $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`) VALUES ("
+                    . "'".$idClassificador."','".$classificacoes[$i]["idPostagem"]."','".$idAvaliacao."','".$classificacoes[$i]["PRU"]."');";
             if (!mysqli_query($conexao, $sql)){
                 $erro++; //se der erro incrementa no contador para cancelar a transação
             }
+            
+            if(isset($classificacoes[$i]["funcionalidade"][0])){
+                $sql = "UPDATE classificacao SET classFuncionalidade = '".$classificacoes[$i]["funcionalidade"]."' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            if(isset($classificacoes[$i]["tipo"][0])){
+                $sql = "UPDATE `classificacao` SET `classTipo` = ".$idClassTipo." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            if(isset($classificacoes[$i]["intencao"][0])){
+                $sql = "UPDATE `classificacao` SET `classIntencao` = '".$classificacoes[$i]["intencao"]."' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            if(isset($classificacoes[$i]["sentimento"][0])){
+                $sql = "UPDATE `classificacao` SET `classAnaliseSentimentos` = '".$classificacoes[$i]["sentimento"]."' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            if(isset($classificacoes[$i]["usabilidade"][0])){
+                $sql = "UPDATE `classificacao` SET `classUsabilidade` = ".$idClassUsabilidade." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            if(isset($classificacoes[$i]["ux"][0])){
+                $sql = "UPDATE `classificacao` SET `classUX` = ".$idClassUX." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            if(isset($classificacoes[$i]["artefato"][0])){
+                $sql = "UPDATE `classificacao` SET `classArtefato` = '".$classificacoes[$i]["artefato"]."' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            //Grava classificação
+            echo mysqli_error($conexao);
         }
         
         //Verifica se houve erro para cancelar a transação

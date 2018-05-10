@@ -87,8 +87,36 @@ class ClassificacaoControle extends Banco{
         return $array;
     }
     
-    public function obterPostagensNaoClassificadas($idAvaliacao, $idClassificador){ //where idavaliador = ".$idAvaliador."
-        $sql = "SELECT * FROM `postagens` WHERE postagens.idPostagem NOT IN (SELECT classificacao.idPostagem from classificacao where idClassificador = ".$idClassificador.") and postagens.idAvaliacao = " . $idAvaliacao . "  LIMIT 10;";
+    public function obterFaixaValoresClassificacao($idAvaliacao, $idClassificador){
+        $sql = "SELECT * FROM `avaliacaoPapeis` WHERE idAvaliacao = ".$idAvaliacao." and idPessoa = ".$idClassificador." and papel = 'Classificador' LIMIT 1;";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+    
+    public function obterIdPrimeiraPostagem($idAvaliacao){
+        $sql = "SELECT * FROM `postagens` WHERE idAvaliacao = ".$idAvaliacao." LIMIT 1;";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+
+    public function obterPostagensNaoClassificadas($idAvaliacao, $idClassificador){
+        $idPostagemInicial = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaInicio"] - 1;
+        $idPostagemFinal = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaFim"];
+        
+        $sql = "SELECT * FROM `postagens` WHERE postagens.idPostagem NOT IN (SELECT classificacao.idPostagem from classificacao where idClassificador = ".$idClassificador.") "
+                . "and postagens.idAvaliacao = " . $idAvaliacao . " and idPostagem BETWEEN ".$idPostagemInicial." AND ".$idPostagemFinal." LIMIT 10;";
         $rtn = parent::Executar($sql);
         
         $array = array();
