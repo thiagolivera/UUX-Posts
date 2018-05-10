@@ -1,5 +1,12 @@
 <?php
 $listaPostagens = $controle->obterPostagensNaoClassificadas($idAvalicao, $_SESSION["login"]);
+if(count($listaPostagens) == 0){
+    ?>
+    <script>
+        window.location.href = "../etapa4/introEtapa4.php?fimClassificacao";
+    </script>
+    <?php
+}
 ?>
 
 <div class="table-responsive">
