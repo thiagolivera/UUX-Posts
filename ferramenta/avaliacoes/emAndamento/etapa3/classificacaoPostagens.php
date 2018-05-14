@@ -74,8 +74,6 @@ $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
                             <?php
                                 if(strcmp($_SESSION['modoVisualizacao'],"Por postagem") == 0){
                                     include("./porPostagem.php");
-                                } else if(strcmp($_SESSION['modoVisualizacao'],"Por categoria") == 0){
-                                    include("./porCategoria.php");
                                 } else if(strcmp($_SESSION['modoVisualizacao'],"Por conjunto de postagens") == 0){
                                     include("./porConjunto.php");
                                 }

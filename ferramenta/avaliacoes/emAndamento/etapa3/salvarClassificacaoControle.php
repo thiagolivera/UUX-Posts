@@ -99,4 +99,6 @@ $classificacao->idClassificador = $_SESSION["login"];
 $classificacao->idPostagem = $_POST["idPostagem"];
 $classificacao->idAvaliacao = $_POST["idAvaliacao"];
 
-$controle->salvarClassificacao($classificacao, $classTipo, $classUsabilidade, $classUX);
+if($controle->salvarClassificacao($classificacao, $classTipo, $classUsabilidade, $classUX)){
+    header("location:classificacaoPostagens.php");
+}

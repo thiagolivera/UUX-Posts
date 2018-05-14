@@ -131,6 +131,12 @@ if(isset($_POST["automatica"])){
             if(isset($_SESSION['papel'])){
                 if(strcmp($_SESSION['papel'], "Gerente") == '0'){
                     ?><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="width: 100%; margin-right: 10px;">Próximo</button><?php
+                } else if(strcmp($_SESSION['papel'], "Validador") == '0'){
+                    ?>
+                    <form action="validacao/validacaoPostagens.php" method="POST">
+                        <button type="submit" class="btn btn-info" style="width: 100%; margin-right: 10px;">Próximo</button>
+                    </form>
+                    <?php
                 } else{
                     ?><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-visualizacao" style="width: 100%; margin-right: 10px;">Próximo</button><?php
                 }
@@ -190,7 +196,6 @@ if(isset($_POST["automatica"])){
                           <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
                               <option>Por postagem</option>
                               <option>Por conjunto de postagens</option>
-                              <option>Por categoria</option>
                           </select>
               </div>
               <div class="modal-footer">

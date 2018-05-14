@@ -1,5 +1,12 @@
 <?php 
-    $postagem = $controle->obterUmaPostagemNaoClassificada($idAvalicao);
+    $postagem = $controle->obterUmaPostagemNaoClassificada($idAvalicao, $_SESSION["login"]);
+    if(count($postagem) == 0){
+        ?>
+        <script>
+            window.location.href = "../etapa4/introEtapa4.php?fimClassificacao";
+        </script>
+        <?php
+    }
 ?>
 
 <div id="classificacaoPorPostagem">
@@ -213,22 +220,22 @@
     </div>
 </div>
 
-<div id="espacos" style="display: none"><br><br><br></div>
+<div id="espacos" style="display: none"><br><br><br><br></div>
 <div class="row" style="padding-top: 20px">
-    <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+    <div class="col-sm-6" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
             <button class="btn btn-info" onclick="voltar()" style="margin-right: 10px;">Voltar</button>
     </div>
     
-    <div class="col-sm-3" style="padding-bottom: 10px;">
+    <div class="col-sm-3" style="padding-bottom: 10px; display: none">
         <button class="btn btn-primary center-block disabled"><i class="fa fa-star"></i> Marcar como favorita</button>
     </div>
     
-    <div class="col-sm-3" style="padding-bottom: 10px;">
+    <div class="col-sm-3" style="padding-bottom: 10px; display: none">
         <button class="btn btn-warning center-block disabled"><i class="fa fa-question"></i> Pedir ajuda para classificar</button>
     </div>
 
-    <div class="col-sm-3" style="padding-bottom: 10px; float: right;">
-        <button class="btn btn-info center-block" type="submit">Salvar e próximo</button>
+    <div class="col-sm-6" style="padding-bottom: 10px;">
+        <button class="btn btn-info" type="submit" style="float: right">Salvar e próximo</button>
     </div>
     </form>
 </div>

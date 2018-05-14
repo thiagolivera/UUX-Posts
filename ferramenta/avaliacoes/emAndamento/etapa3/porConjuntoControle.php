@@ -56,4 +56,7 @@ for($i=0; $i < $numPostagens; $i++){ //10 é o número de postagens
 
 include './ClassificacaoPRUsControle.php';
 $salvar = new ClassificacaoPRUsControle();
-$salvar->salvarClassificacaoPRUs($classificacoes, $_POST["idAvaliacao"]);
+
+if($salvar->salvarClassificacaoPRUs($classificacoes, $_POST["idAvaliacao"])){
+    header("location:classificacaoPostagens.php");
+}

@@ -1,6 +1,6 @@
 <?php
 
-include '../../../Banco.php';
+include_once '../../../Banco.php';
 
 class ClassificacaoControle extends Banco{
 
@@ -46,8 +46,8 @@ class ClassificacaoControle extends Banco{
         $idClassUX = mysqli_fetch_array($result)[0];
         
         //4) grava classificação
-        $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`, `classFuncionalidade`, `classTipo`, `classIntencao`, `classAnaliseSentimentos`, `classUsabilidade`, `classUX`, `classArtefato`) VALUES ("
-                . "'".$classificacao->idClassificador."','".$classificacao->idPostagem."','".$classificacao->idAvaliacao."','".$classificacao->classPRU."','".$classificacao->classFuncionalidade."','".$idClassTipo."','".$classificacao->classIntencao."','".$classificacao->classAnaliseSentimentos."','".$idClassUsabilidade."','".$idClassUX."','".$classificacao->classArtefato."');";
+        $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`, `classFuncionalidade`, `classTipo`, `classIntencao`, `classAnaliseSentimentos`, `classUsabilidade`, `classUX`, `classArtefato`, isValidado) VALUES ("
+                . "'".$classificacao->idClassificador."','".$classificacao->idPostagem."','".$classificacao->idAvaliacao."','".$classificacao->classPRU."','".$classificacao->classFuncionalidade."','".$idClassTipo."','".$classificacao->classIntencao."','".$classificacao->classAnaliseSentimentos."','".$idClassUsabilidade."','".$idClassUX."','".$classificacao->classArtefato."', ".$classificacao->isValidado.");";
         if (!mysqli_query($conexao, $sql)){
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
@@ -56,27 +56,19 @@ class ClassificacaoControle extends Banco{
         if ($erro == 0){
             mysqli_commit($conexao);
             mysqli_close($conexao);
-            header("location:classificacaoPostagens.php");
+            return true;
         } else {
             mysqli_close($conexao);
             
         }
     }
-
-    public function obterUmaPostagem($idAvaliacao){
-        $sql = "SELECT * FROM postagens WHERE idavaliacao = " . $idAvaliacao . " LIMIT 1;";
-        $rtn = parent::Executar($sql);
-        
-        $array = array();
-        
-        while($row = @mysqli_fetch_assoc($rtn)){
-            $array[] = $row;
-        }
-        return $array;
-    }
     
-    public function obterUmaPostagemNaoClassificada($idAvaliacao){
-        $sql = "SELECT * FROM `postagens` WHERE postagens.idPostagem NOT IN (SELECT classificacao.idPostagem from classificacao) and postagens.idAvaliacao = " . $idAvaliacao . " LIMIT 1;";
+    public function obterUmaPostagemNaoClassificada($idAvaliacao, $idClassificador){
+        $idPostagemInicial = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaInicio"] - 1;
+        $idPostagemFinal = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaFim"];
+        
+        $sql = "SELECT * FROM `postagens` WHERE postagens.idPostagem NOT IN (SELECT classificacao.idPostagem from classificacao where idClassificador = ".$idClassificador.") "
+                . "and postagens.idAvaliacao = " . $idAvaliacao . " and idPostagem BETWEEN ".$idPostagemInicial." AND ".$idPostagemFinal." LIMIT 1;";
         $rtn = parent::Executar($sql);
         
         $array = array();

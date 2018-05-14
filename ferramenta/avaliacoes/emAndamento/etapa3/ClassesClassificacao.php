@@ -9,6 +9,7 @@ class Classificacao{
     var $classIntencao;
     var $classAnaliseSentimentos;
     var $classArtefato;
+    var $isValidado;
 }
 
 class ClassificaoTipo{
