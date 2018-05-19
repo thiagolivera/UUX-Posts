@@ -110,11 +110,17 @@ class ClassificacaoPRUsControle extends Banco{
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }
-                
-                //obtem o id da classTipo
-                $sql = "SELECT idClassTipo FROM classTipo ORDER BY idClassTipo DESC LIMIT 1;";
-                $idClassTipo = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
+            } else{
+                $sql = "INSERT INTO `classTipo`(`idClassTipo`, `critica`, `elogio`, `duvida`, `comparacao`, `sugestao`, `ajuda`) VALUES ("
+                    . "DEFAULT,0,0,0,0,0,0);";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
             }
+            
+            //obtem o id da classTipo
+            $sql = "SELECT idClassTipo FROM classTipo ORDER BY idClassTipo DESC LIMIT 1;";
+            $idClassTipo = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
             
             //Verifica se há classificação usabilidade
             if(isset($classificacoes[$i]["usabilidade"][0])){
@@ -185,11 +191,10 @@ class ClassificacaoPRUsControle extends Banco{
                 }
             }
             
-            if(isset($classificacoes[$i]["tipo"][0])){
-                $sql = "UPDATE `classificacao` SET `classTipo` = ".$idClassTipo." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
-                if (!mysqli_query($conexao, $sql)){
-                    $erro++; //se der erro incrementa no contador para cancelar a transação
-                }
+            
+            $sql = "UPDATE `classificacao` SET `classTipo` = ".$idClassTipo." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
             }
             
             if(isset($classificacoes[$i]["intencao"][0])){
@@ -197,10 +202,20 @@ class ClassificacaoPRUsControle extends Banco{
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }
+            } else{
+                $sql = "UPDATE `classificacao` SET `classIntencao` = '' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
             }
             
             if(isset($classificacoes[$i]["sentimento"][0])){
                 $sql = "UPDATE `classificacao` SET `classAnaliseSentimentos` = '".$classificacoes[$i]["sentimento"]."' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            } else{
+                $sql = "UPDATE `classificacao` SET `classAnaliseSentimentos` = '' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }
@@ -218,6 +233,11 @@ class ClassificacaoPRUsControle extends Banco{
             
             if(isset($classificacoes[$i]["artefato"][0])){
                 $sql = "UPDATE `classificacao` SET `classArtefato` = '".$classificacoes[$i]["artefato"]."' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            } else{
+                $sql = "UPDATE `classificacao` SET `classArtefato` = '' WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }

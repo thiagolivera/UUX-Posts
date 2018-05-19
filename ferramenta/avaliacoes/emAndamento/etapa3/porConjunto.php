@@ -32,7 +32,7 @@ if(count($listaPostagens) == 0){
                             </td>
 
                             <td style="width: 21.25%">
-                                <select required="" name="classPRU<?php echo $i;?>" class="form-control" style="width: 156px">
+                                <select onchange="naoPRU(<?php echo $i;?>)" name="classPRU<?php echo $i;?>" id="classPRU<?php echo $i;?>" class="form-control" style="width: 156px">
                                     <option selected>PRU</option>
                                     <option>Não-PRU</option>
                                 </select>
@@ -41,14 +41,14 @@ if(count($listaPostagens) == 0){
                             if(strcmp($categoriasClassificacao[0]["funcionalidade"], '1') == '0'){
                                 ?>
                                 <td style="width: 21.25%">
-                                    <input name="classFuncionalidade<?php echo $i;?>" type="text" style="width: 156px" class="form-control" id="funcionalidade" name="funcionalidade" placeholder="Funcionalidade">
+                                    <input name="classFuncionalidade<?php echo $i;?>" type="text" style="width: 156px" class="form-control" id="classFuncionalidade<?php echo $i;?>" placeholder="Funcionalidade">
                                 </td>
                             <?php
                             }
                             if(strcmp($categoriasClassificacao[0]["tipo"], '1') == '0'){
                                 ?>
                                 <td style="width: 21.25%">
-                                    <select required name="classTipo<?php echo $i;?>[]" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Tipo de PRU" style="width: 100%;">
+                                    <select required name="classTipo<?php echo $i;?>[]" id="classTipo<?php echo $i;?>" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Tipo de PRU" style="width: 100%;">
                                         <option>Crítica</option>
                                         <option>Elogio</option>
                                         <option>Dúvida</option>
@@ -61,7 +61,7 @@ if(count($listaPostagens) == 0){
                             } if(strcmp($categoriasClassificacao[0]["intencao"], '1') == '0'){
                                 ?>
                                 <td style="width: 21.25%">
-                                    <select required name="classIntencao<?php echo $i;?>" id="intencao" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Intenção" style="width: 100%;">
+                                    <select required name="classIntencao<?php echo $i;?>" id="classIntencao<?php echo $i;?>" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Intenção" style="width: 100%;">
                                         <option>Visceral</option>
                                         <option>Comportamental</option>
                                         <option>Reflexiva</option>
@@ -76,7 +76,7 @@ if(count($listaPostagens) == 0){
                             if(strcmp($categoriasClassificacao[0]["analiseSentimentos"], '1') == '0'){
                                 ?>
                                 <td>
-                                    <select required name="classSentimento<?php echo $i;?>" id="sentimento" class="form-control select2" multiple="multiple" data-placeholder="Sentimento" style="width: 156px">
+                                    <select required name="classSentimento<?php echo $i;?>" id="classSentimento<?php echo $i;?>" class="form-control select2" multiple="multiple" data-placeholder="Sentimento" style="width: 156px">
                                         <option>Positiva</option>
                                         <option>Negativa</option>
                                         <option>Neutra</option>
@@ -86,7 +86,7 @@ if(count($listaPostagens) == 0){
                             } if(strcmp($categoriasClassificacao[0]["usabilidade"], '1') == '0'){
                                 ?>
                                 <td>
-                                    <select name="classUsabilidade<?php echo $i;?>[]" class="form-control select2" multiple="multiple" data-placeholder="Facetas Usabilidade" style="width: 156px">
+                                    <select name="classUsabilidade<?php echo $i;?>[]" id="classUsabilidade<?php echo $i;?>" class="form-control select2" multiple="multiple" data-placeholder="Facetas Usabilidade" style="width: 156px">
                                         <option>Eficácia</option>
                                         <option>Eficiencia</option>
                                         <option>Satisfação</option>
@@ -100,7 +100,7 @@ if(count($listaPostagens) == 0){
                             } if(strcmp($categoriasClassificacao[0]["ux"], '1') == '0'){
                                 ?>
                                 <td>
-                                    <select name="classUX<?php echo $i;?>[]" class="form-control select2" multiple="multiple" data-placeholder="Facetas UX" style="width: 156px">
+                                    <select name="classUX<?php echo $i;?>[]" id="classUX<?php echo $i;?>" class="form-control select2" multiple="multiple" data-placeholder="Facetas UX" style="width: 156px">
                                         <option>Afeto</option>
                                         <option>Estética</option>
                                         <option>Frustração</option>
@@ -113,7 +113,7 @@ if(count($listaPostagens) == 0){
                             } if(strcmp($categoriasClassificacao[0]["artefato"], '1') == '0'){
                                 ?>
                                 <td>
-                                    <input style="width: 156px" type="text" class="form-control" id="artefato" name="classArtefato<?php echo $i;?>" placeholder="Artefato">
+                                    <input style="width: 156px" type="text" class="form-control" id="classArtefato<?php echo $i;?>" name="classArtefato<?php echo $i;?>" placeholder="Artefato">
                                 </td>
                             <?php
                             }
@@ -139,6 +139,42 @@ if(count($listaPostagens) == 0){
 <script>
     function voltar(){
         window.location.href = "introEtapa3.php";
+    }
+    
+    function naoPRU(num){
+        if(document.getElementById('classPRU'.concat(num)).value === "PRU"){
+            document.getElementById('classFuncionalidade'.concat(num)).required = true;
+            document.getElementById('classTipo'.concat(num)).required = true;
+            document.getElementById('classIntencao'.concat(num)).required = true;
+            document.getElementById('classSentimento'.concat(num)).required = true;
+            document.getElementById('classUsabilidade'.concat(num)).required = true;
+            document.getElementById('classUX'.concat(num)).required = true;
+            document.getElementById('classArtefato'.concat(num)).required = true;
+            
+            document.getElementById('classFuncionalidade'.concat(num)).disabled = false;
+            document.getElementById('classTipo'.concat(num)).disabled = false;
+            document.getElementById('classIntencao'.concat(num)).disabled = false;
+            document.getElementById('classSentimento'.concat(num)).disabled = false;
+            document.getElementById('classUsabilidade'.concat(num)).disabled = false;
+            document.getElementById('classUX'.concat(num)).disabled = false;
+            document.getElementById('classArtefato'.concat(num)).disabled = false;
+        } else{
+            document.getElementById('classFuncionalidade'.concat(num)).required = false;
+            document.getElementById('classTipo'.concat(num)).required = false;
+            document.getElementById('classIntencao'.concat(num)).required = false;
+            document.getElementById('classSentimento'.concat(num)).required = false;
+            document.getElementById('classUsabilidade'.concat(num)).required = false;
+            document.getElementById('classUX'.concat(num)).required = false;
+            document.getElementById('classArtefato'.concat(num)).required = false;
+            
+            document.getElementById('classFuncionalidade'.concat(num)).disabled = true;
+            document.getElementById('classTipo'.concat(num)).disabled = true;
+            document.getElementById('classIntencao'.concat(num)).disabled = true;
+            document.getElementById('classSentimento'.concat(num)).disabled = true;
+            document.getElementById('classUsabilidade'.concat(num)).disabled = true;
+            document.getElementById('classUX'.concat(num)).disabled = true;
+            document.getElementById('classArtefato'.concat(num)).disabled = true;
+        }
     }
 </script>
 
