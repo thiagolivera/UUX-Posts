@@ -28,12 +28,23 @@ class ValidacaoControle extends Banco{
         return $array;
     }
     
-    public function obterPostagensNaoValidadas($idAvaliacao){   
-        $idsPostagens = self::obterIDPostagensNaoValidadas($idAvaliacao);
-        $idsParaValidacao = array();
-        session_start();
+    public function obterPostagem($idPostagem){
+        $sql = "SELECT * FROM postagens where idPostagem = ".$idPostagem.";";
+        $rtn = parent::Executar($sql);
         
-        for($i=0; (count($idsParaValidacao) < 10) && ($i < count($idsPostagens)); $i++){
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+
+    public function obterPostagensNaoValidadas($idAvaliacao){
+        $idsPostagens = self::obterIDPostagensNaoValidadas($idAvaliacao);
+        $postsParaValidacao = array();
+        
+        for($i=0; (count($postsParaValidacao) < 1) && ($i < count($idsPostagens)); $i++){
             $classificacoes = self::obterClassificaoesDeUmaPostagem($idsPostagens[$i]["idPostagem"], $idAvaliacao);
             $diferencas = 0;
             for($j=1; $j < count($classificacoes); $j++){
@@ -41,14 +52,14 @@ class ValidacaoControle extends Banco{
             }
             
             if($diferencas > 0){
-                $idsParaValidacao[] = $idsPostagens[$i]["idPostagem"];
+                $postsParaValidacao[] = $classificacoes;
             } else{
                 self::construirObjetoClassificacao($classificacoes);
             }
         }
         
-        if(count($idsParaValidacao) > 0){
-            return $idsParaValidacao;
+        if(count($postsParaValidacao) > 0){
+            return $postsParaValidacao;
         } else{
             header("location:../../etapa4/introEtapa4.php");
         }

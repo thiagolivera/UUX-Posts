@@ -1,19 +1,26 @@
 <?php
 include '../../../verificarSessao.class';
 include './validacaoControle.php';
+//falta verificar se o usuário logado tem permissões para acessar essa página
 
 $idAvalicao = $_SESSION['idAvaliacao'];
 
 $controle = new ValidacaoControle();
 $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
 $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
+$classificacoes = $controle->obterPostagensNaoValidadas($idAvalicao);
+$postagem = $controle->obterPostagem($classificacoes[0][0]["idPostagem"]);
+
+if(isset($_POST["classPRU"])){
+    
+}
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>UUX-Posts | Classificação de Postagens</title>
+    <title>UUX-Posts | Validação da classificação</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -66,23 +73,296 @@ $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
                 <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                          <h3 class="box-title">Classificação de Postagens</h3>
+                          <h3 class="box-title">Validação da classificação de Postagens</h3>
                         </div>
                         <div class="box-body" style="padding-left: 25px; padding-right: 35px">
-                            <?php
-                                if(strcmp($_SESSION['modoVisualizacao'],"Por postagem") == 0){
-                                    include("./porPostagem.php");
-                                } else if(strcmp($_SESSION['modoVisualizacao'],"Por conjunto de postagens") == 0){
-                                    include("./porConjunto.php");
-                                }
-                            ?>
+                            <div class="box box-body center-block" style="width: 95%; font-size: 16px">
+                                <div style="float: left;">
+                                    <p>Postagem <?php echo $postagem[0]["idPostagem"]; ?></p>
+                                </div>
+                                <br><br>
+                                <p style="text-align: center; font-style: italic">"<?php echo $postagem[0]["postagem"]; ?>"</p>
+                                <div style="float: right;">
+                                    <p><?php echo $postagem[0]["data"]; ?></p>
+                                </div>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <div class="table">
+                                    <table class="table table-hover no-margin">
+                                        <tbody>
+                                                <?php 
+                                                for($i=0; $i < count($classificacoes[0]); $i++){
+                                                    ?>
+                                                    <tr>
+                                                        <td rowspan="2" style="justify-content: center;">
+                                                            Classificação <?php echo $i + 1; ?>
+                                                        </td>
+                                                        <td style="width: 21.25%">
+                                                            <select disabled name="classPRU<?php echo $i;?>" class="form-control" style="width: 156px">
+                                                                <?php if($classificacoes[0][$i]["classPRU"] == 1){
+                                                                    ?><option selected>PRU</option>
+                                                                      <option>Não-PRU</option><?php
+                                                                } else{
+                                                                    ?><option>PRU</option>
+                                                                      <option selected>Não-PRU</option><?php
+                                                                } ?>
+                                                            </select>
+                                                        </td>
+                                                        <?php 
+                                                        if(strcmp($categoriasClassificacao[0]["funcionalidade"], '1') == '0'){
+                                                            ?>
+                                                            <td style="width: 21.25%">
+                                                                <input disabled name="classFuncionalidade<?php echo $i;?>" type="text" style="width: 156px" class="form-control" id="funcionalidade" name="funcionalidade" value="<?php echo $classificacoes[0][$i]["classFuncionalidade"]; ?>">
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        if(strcmp($categoriasClassificacao[0]["tipo"], '1') == '0'){
+                                                            ?>
+                                                            <td style="width: 21.25%">
+                                                                <select disabled name="classTipo<?php echo $i;?>[]" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Tipo de PRU" style="width: 100%;">
+                                                                    <?php if($classificacoes[0][$i]["critica"] == 1){
+                                                                        ?><option selected>Crítica</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["elogio"] == 1){
+                                                                        ?><option selected>Elogio</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["duvida"] == 1){
+                                                                        ?><option selected>Dúvida</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["comparacao"] == 1){
+                                                                        ?><option selected>Comparação</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["sugestao"] == 1){
+                                                                        ?><option selected>Sugestão</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["ajuda"] == 1){
+                                                                        ?><option selected>Ajuda</option><?php
+                                                                    } ?>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["intencao"], '1') == '0'){
+                                                            ?>
+                                                            <td style="width: 21.25%">
+                                                                <select disabled name="classIntencao<?php echo $i;?>" id="intencao" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Intenção" style="width: 100%;">
+                                                                    <?php if(strcmp($classificacoes[0][$i]["classIntencao"], "Visceral") == '0'){
+                                                                        ?><option selected>Visceral</option><?php
+                                                                    }?>
+                                                                    <?php if(strcmp($classificacoes[0][$i]["classIntencao"], "Comportamental") == 0){
+                                                                        ?><option selected>Comportamental</option><?php
+                                                                    }?>
+                                                                    <?php if(strcmp($classificacoes[0][$i]["classIntencao"], "Reflexiva") == 0){
+                                                                        ?><option selected>Reflexiva</option><?php
+                                                                    }?>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                                    <tr>
+                                                        <?php
+                                                        if(strcmp($categoriasClassificacao[0]["analiseSentimentos"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <select disabled name="classSentimento<?php echo $i;?>" id="sentimento" class="form-control select2" multiple="multiple" data-placeholder="Sentimento" style="width: 156px">
+                                                                    <?php if(strcmp($classificacoes[0][$i]["classAnaliseSentimentos"], "Positiva") == '0'){
+                                                                        ?><option selected>Positiva</option><?php
+                                                                    }?>
+                                                                    <?php if(strcmp($classificacoes[0][$i]["classAnaliseSentimentos"], "Negativa") == '0'){
+                                                                        ?><option selected>Negativa</option><?php
+                                                                    }?>
+                                                                    <?php if(strcmp($classificacoes[0][$i]["classAnaliseSentimentos"], "Neutra") == '0'){
+                                                                        ?><option selected>Neutra</option><?php
+                                                                    }?>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["usabilidade"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <select disabled name="classUsabilidade<?php echo $i;?>[]" class="form-control select2" multiple="multiple" style="width: 156px">
+                                                                    <?php if($classificacoes[0][$i]["eficacia"] == 1){
+                                                                        ?><option selected>Eficácia</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["eficiencia"] == 1){
+                                                                        ?><option selected>Eficiencia</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["satisfacaoUs"] == 1){
+                                                                        ?><option selected>Satisfação</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["seguranca"] == 1){
+                                                                        ?><option selected>Segurança</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["utilidade"] == 1){
+                                                                        ?><option selected>Utilidade</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["memorabilidade"] == 1){
+                                                                        ?><option selected>Memorabilidade</option><?php
+                                                                    } ?>
+                                                                    <?php if($classificacoes[0][$i]["aprendizado"] == 1){
+                                                                        ?><option selected>Aprendizado</option><?php
+                                                                    }?>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["ux"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <select disabled name="classUX<?php echo $i;?>[]" class="form-control select2" multiple="multiple" data-placeholder="Facetas UX" style="width: 156px">
+                                                                    <?php if($classificacoes[0][$i]["afeto"] == 1){
+                                                                        ?><option selected>Afeto</option><?php
+                                                                    }?>
+                                                                    <?php if($classificacoes[0][$i]["estetica"] == 1){
+                                                                        ?><option selected>Estética</option><?php
+                                                                    }?>
+                                                                    <?php if($classificacoes[0][$i]["frustracao"] == 1){
+                                                                        ?><option selected>Frustração</option><?php
+                                                                    }?>
+                                                                    <?php if($classificacoes[0][$i]["satisfacao"] == 1){
+                                                                        ?><option selected>Satisfação</option><?php
+                                                                    }?>
+                                                                    <?php if($classificacoes[0][$i]["motivacao"] == 1){
+                                                                        ?><option selected>Motivação</option><?php
+                                                                    }?>
+                                                                    <?php if($classificacoes[0][$i]["suporte"] == 1){
+                                                                        ?><option selected>Suporte</option><?php
+                                                                    }?>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["artefato"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <input disabled style="width: 156px" type="text" class="form-control" id="artefato" name="classArtefato<?php echo $classificacoes[0][$i]["classArtefato"];?>" value="<?php ?>">
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                                    <?php
+                                                } ?>
+                                                
+                                                <form method="POST" action="../porConjuntoControle.php">
+                                                    <?php $i = 0; ?>
+                                                    <input type="hidden" name="idAvaliacao" value="<?php echo $idAvalicao;?>">
+                                                    <input type="hidden" name="idPostagem<?php echo $i;?>" value="<?php echo $postagem[0]["idPostagem"]; ?>">
+                                                    <input type="hidden" name="numPostagens" value="1">
+                                                    <input type="hidden" name="isValidacao<?php echo $i;?>" value="true">
+                                                    <input type="hidden" name="validacao" value="true">
+                                                    
+                                                    <tr>
+                                                        <td rowspan="2" style="justify-content: center;">
+                                                            Classificação Final
+                                                        </td>
+                                                        <td style="width: 21.25%">
+                                                            <select required="" name="classPRU<?php echo $i;?>" class="form-control" style="width: 156px">
+                                                                <option selected>PRU</option>
+                                                                <option>Não-PRU</option>
+                                                            </select>
+                                                        </td>
+                                                        <?php 
+                                                        if(strcmp($categoriasClassificacao[0]["funcionalidade"], '1') == '0'){
+                                                            ?>
+                                                            <td style="width: 21.25%">
+                                                                <input name="classFuncionalidade<?php echo $i;?>" type="text" style="width: 156px" class="form-control" id="funcionalidade" name="funcionalidade" placeholder="Funcionalidade">
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        if(strcmp($categoriasClassificacao[0]["tipo"], '1') == '0'){
+                                                            ?>
+                                                            <td style="width: 21.25%">
+                                                                <select required name="classTipo<?php echo $i;?>[]" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Tipo de PRU" style="width: 100%;">
+                                                                    <option>Crítica</option>
+                                                                    <option>Elogio</option>
+                                                                    <option>Dúvida</option>
+                                                                    <option>Comparação</option>
+                                                                    <option>Sugestão</option>
+                                                                    <option>Ajuda</option>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["intencao"], '1') == '0'){
+                                                            ?>
+                                                            <td style="width: 21.25%">
+                                                                <select required name="classIntencao<?php echo $i;?>" id="intencao" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Intenção" style="width: 100%;">
+                                                                    <option>Visceral</option>
+                                                                    <option>Comportamental</option>
+                                                                    <option>Reflexiva</option>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                                    <tr>
+                                                        <?php
+                                                        if(strcmp($categoriasClassificacao[0]["analiseSentimentos"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <select required name="classSentimento<?php echo $i;?>" id="sentimento" class="form-control select2" multiple="multiple" data-placeholder="Sentimento" style="width: 156px">
+                                                                    <option>Positiva</option>
+                                                                    <option>Negativa</option>
+                                                                    <option>Neutra</option>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["usabilidade"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <select name="classUsabilidade<?php echo $i;?>[]" class="form-control select2" multiple="multiple" data-placeholder="Facetas Usabilidade" style="width: 156px">
+                                                                    <option>Eficácia</option>
+                                                                    <option>Eficiencia</option>
+                                                                    <option>Satisfação</option>
+                                                                    <option>Segurança</option>
+                                                                    <option>Utilidade</option>
+                                                                    <option>Memorabilidade</option>
+                                                                    <option>Aprendizado</option>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["ux"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <select name="classUX<?php echo $i;?>[]" class="form-control select2" multiple="multiple" data-placeholder="Facetas UX" style="width: 156px">
+                                                                    <option>Afeto</option>
+                                                                    <option>Estética</option>
+                                                                    <option>Frustração</option>
+                                                                    <option>Satisfação</option>
+                                                                    <option>Motivação</option>
+                                                                    <option>Suporte</option>
+                                                                </select>
+                                                            </td>
+                                                        <?php
+                                                        } if(strcmp($categoriasClassificacao[0]["artefato"], '1') == '0'){
+                                                            ?>
+                                                            <td>
+                                                                <input style="width: 156px" type="text" class="form-control" id="artefato" name="classArtefato<?php echo $i;?>" placeholder="Artefato">
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-sm-6" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
+                            <button class="btn btn-info" onclick="voltar()" style="margin-right: 10px;">Voltar</button>
+                    </div>
+                    
+                    <div class="col-sm-6" style="padding-bottom: 10px;">
+                        <button class="btn btn-info" type="submit" style="float: right">Salvar e próximo</button>
+                    </div>
+                    </form>
                 </div>
                 <a style="color: #ecf0f5">'</a>
             </section>
         </div>
-        <?php include_once("../../../rodape.php");?>
+        <?php include_once("../../../../rodape.php");?>
     </div>
 
 </body>
@@ -101,35 +381,36 @@ $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
     </style>
 
     <!-- jQuery 3 -->
-    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Select2 -->
-    <script src="../../../bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="../../../../bower_components/select2/dist/js/select2.full.min.js"></script>
     <!-- InputMask -->
-    <script src="../../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="../../../../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- date-range-picker -->
-    <script src="../../../bower_components/moment/min/moment.min.js"></script>
-    <script src="../../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../../../../bower_components/moment/min/moment.min.js"></script>
+    <script src="../../../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap datepicker -->
-    <script src="../../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="../../../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <!-- bootstrap color picker -->
-    <script src="../../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <script src="../../../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <!-- bootstrap time picker -->
-    <script src="../../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="../../../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- SlimScroll -->
-    <script src="../../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- iCheck 1.0.1 -->
-    <script src="../../../plugins/iCheck/icheck.min.js"></script>
+    <script src="../../../../plugins/iCheck/icheck.min.js"></script>
     <!-- FastClick -->
-    <script src="../../../bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="../../../../bower_components/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../../dist/js/adminlte.min.js"></script>
+    <script src="../../../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../../../dist/js/demo.js"></script>
+    <script src="../../../../dist/js/demo.js"></script>
     <!-- Page script -->
+    
     <script>
       $(function () {
         //Initialize Select2 Elements
@@ -199,989 +480,4 @@ $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
         })
       })
     </script>
-
 </html>
-
-
-
-
-<div id="classificacaoPorFuncionalidade">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR FUNCIONALIDADE  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th class="col-sm-4">Postagem</th>
-                    <th class="col-sm-1">Ação</th>
-                    <th class="col-sm-6">Funcionalidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                        que abro e começo a ouvir uma música aparece um aviso de que o app está
-                        apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                        celular sem me irritar."</p></td>
-                    <td>
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><textarea class="form-control" id="funcionalidades" placeholder="Qual/quais funcionalidade(s) do sistema foi/foram citada(s) na postagem?"></textarea></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><textarea class="form-control" id="funcionalidades" placeholder="Qual/quais funcionalidade(s) do sistema foi/foram citada(s) na postagem?"></textarea></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><textarea class="form-control" id="funcionalidades" placeholder="Qual/quais funcionalidade(s) do sistema foi/foram citada(s) na postagem?"></textarea></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><textarea class="form-control" id="funcionalidades" placeholder="Qual/quais funcionalidade(s) do sistema foi/foram citada(s) na postagem?"></textarea></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="col-sm-6" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><textarea class="form-control" id="funcionalidades" placeholder="Qual/quais funcionalidade(s) do sistema foi/foram citada(s) na postagem?"></textarea></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="row" style="padding-top: 20px">
-        <div id="btnVoltar" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
-        </div>
-        <div id="btnSalvar" style="float: right; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassTipo()" style="margin-right: 10px;">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<div id="classificacaoPorTipo" style="display: none">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR TIPO  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Postagem</th>
-                    <th>Ação</th>
-                    <th>Crítica</th>
-                    <th>Elogio</th>
-                    <th>Dúvida</th>
-                    <th>Comparação</th>
-                    <th>Sugestão</th>
-                    <th>Ajuda</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                    que abro e começo a ouvir uma música aparece um aviso de que o app está
-                    apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                    celular sem me irritar."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    
-                    <td id="tipo"><input id="critica1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="elogio1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="duvida1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comparacao1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="sugestao1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="ajuda1" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="critica" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="elogio" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="duvida" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comparacao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="sugestao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="ajuda" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="critica" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="elogio" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="duvida" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comparacao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="sugestao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="ajuda" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="critica" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="elogio" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="duvida" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comparacao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="sugestao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="ajuda" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="critica" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="elogio" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="duvida" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comparacao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="sugestao" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="ajuda" type="checkbox" class="minimal"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="row" style="padding-top: 20px">
-        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassFunc()" style="margin-right: 10px;">Voltar</button>
-        </div>
-        
-        
-        <div class="col-sm-3" style="padding-bottom: 10px; float: right">
-            <button class="btn btn-info center-block" onclick="abrirClassIntencao()">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<div id="classificacaoPorIntencao" style="display: none">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR INTENÇÃO  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Postagem</th>
-                    <th>Ação</th>
-                    <th>Visceral</th>
-                    <th>Comportamental</th>
-                    <th>Reflexiva</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                    que abro e começo a ouvir uma música aparece um aviso de que o app está
-                    apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                    celular sem me irritar."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="visceral1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comportamental1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="reflexiva1" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="visceral2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comportamental2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="reflexiva2" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="visceral3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comportamental3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="reflexiva3" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="visceral4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comportamental4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="reflexiva4" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="visceral5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="comportamental5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="reflexiva5" type="checkbox" class="minimal"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="row" style="padding-top: 20px">
-        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassTipo()" style="margin-right: 10px;">Voltar</button>
-        </div>
-
-        <div class="col-sm-3" style="padding-bottom: 10px; float: right">
-            <button class="btn btn-info center-block" onclick="abrirClassAnaliseSentimentos()">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<div id="classificacaoPorAnaliseSentimentos" style="display: none">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR ANÁLISE DE SENTIMENTOS  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Postagem</th>
-                    <th>Ação</th>
-                    <th>Positiva</th>
-                    <th>Neutra</th>
-                    <th>Negativa</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                    que abro e começo a ouvir uma música aparece um aviso de que o app está
-                    apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                    celular sem me irritar."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="positiva1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="neutra1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="negativa1" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="positiva2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="neutra2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="negativa2" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="positiva3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="neutra3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="negativa3" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="positiva4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="neutra4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="negativa4" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="positiva5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="neutra5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="negativa5" type="checkbox" class="minimal"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row" style="padding-top: 20px">
-        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassIntencao()" style="margin-right: 10px;">Voltar</button>
-        </div>
-
-        <div class="col-sm-3" style="padding-bottom: 10px; float: right">
-            <button class="btn btn-info center-block" onclick="abrirClassUsabilidade()">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<div id="classificacaoPorFacetasUsabilidade" style="display: none">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR CRITÉRIOS DE QUALIDADE DE USO (USABILIDADE)  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Postagem</th>
-                    <th>Ação</th>
-                    <th>Eficácia</th>
-                    <th>Eficiência</th>
-                    <th>Satisfação</th>
-                    <th>Segurança</th>
-                    <th>Utilidade</th>
-                    <th>Memorabilidade</th>
-                    <th>Aprendizado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                    que abro e começo a ouvir uma música aparece um aviso de que o app está
-                    apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                    celular sem me irritar."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="eficacia1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="eficiencia1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="seguranca1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="utilidade1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="memorabilidade1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="aprendizado1" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="eficacia2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="eficiencia2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="seguranca2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="utilidade2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="memorabilidade2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="aprendizado2" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="eficacia3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="eficiencia3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="seguranca3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="utilidade3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="memorabilidade3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="aprendizado3" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="eficacia4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="eficiencia4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="seguranca4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="utilidade4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="memorabilidade4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="aprendizado4" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="eficacia5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="eficiencia5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="seguranca5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="utilidade5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="memorabilidade5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="aprendizado5" type="checkbox" class="minimal"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row" style="padding-top: 20px">
-        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassAnaliseSentimentos()" style="margin-right: 10px;">Voltar</button>
-        </div>
-
-        <div class="col-sm-3" style="padding-bottom: 10px; float: right">
-            <button class="btn btn-info center-block" onclick="abrirClassUX()">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<div id="classificacaoPorFacetasUX" style="display: none">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR CRITÉRIOS DE QUALIDADE DE USO (EXPERIÊNCIA DO USUÁRIO)  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th>Postagem</th>
-                    <th>Ação</th>
-                    <th>Afeto</th>
-                    <th>Estética</th>
-                    <th>Frustração</th>
-                    <th>Satisfação</th>
-                    <th>Motivação</th>
-                    <th>Suporte</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                    que abro e começo a ouvir uma música aparece um aviso de que o app está
-                    apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                    celular sem me irritar."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="afeto1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="estetica1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="frustracao1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="motivacao1" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="suporte1" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="afeto2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="estetica2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="frustracao2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="motivacao2" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="suporte2" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="afeto3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="estetica3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="frustracao3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="motivacao3" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="suporte3" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="afeto4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="estetica4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="frustracao4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="motivacao4" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="suporte4" type="checkbox" class="minimal"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="tipo"><input id="afeto5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="estetica5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="frustracao5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="satisfacao5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="motivacao5" type="checkbox" class="minimal"></td>
-                    <td id="tipo"><input id="suporte5" type="checkbox" class="minimal"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row" style="padding-top: 20px">
-        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassUsabilidade()" style="margin-right: 10px;">Voltar</button>
-        </div>
-
-        <div class="col-sm-3" style="padding-bottom: 10px; float: right">
-            <button class="btn btn-info center-block" onclick="abrirClassArtefato()">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<div id="classificacaoPorArtefato" style="display: none">
-    <div class="table">
-        <table class="table table-hover no-margin text-center">
-            <thead>
-                <tr>
-                    <th colspan="7">CLASSIFICAÇÃO POR ARTEFATO  <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th class="col-sm-4">Postagem</th>
-                    <th class="col-sm-4">Ação</th>
-                    <th class="col-sm-4">Artefato</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="post1">
-                    <td><p style="text-align: center; font-style: italic">"O que está acontecendo com o app? Toda vez
-                        que abro e começo a ouvir uma música aparece um aviso de que o app está
-                        apresentando falhas continuamente. Não consigo utilizar mais pelo 
-                        celular sem me irritar."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="post1-artefato"><input type="text" class="form-control" id="nome" placeholder="Ex.: iPhone X"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Cansado desse aplicativo já... baixo minhas
-                            músicas off line no cartão de memória.. toda vez que o aplicativo e atualizado ele muda pra
-                            memória interna e perco todas as músicas que baixei tento que mudar pro externo e baixar tudo
-                            novamente"</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="post2-artefato"><input type="text" class="form-control" id="nome" placeholder="Ex.: iPhone X"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"O deezer está concorrendo diretamente com vocês,
-                            inclusive sai de graça em alguns planos em certas operadoras. Então embora seja bom, é sempre
-                            interessante ficar atento a concorrência."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="post3-artefato"><input type="text" class="form-control" id="nome" placeholder="Ex.: iPhone X"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Gostei muito! So não entendi até agora q paguei o
-                            boleto ontem pra ser premium e ate agora não teve liberação, continuo em conta simples."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="post4-artefato"><input type="text" class="form-control" id="nome" placeholder="Ex.: iPhone X"></td>
-                </tr>
-                  
-                <tr>
-                    <td><p style="text-align: center; font-style: italic">"Eu assinei o família Premium e ele diz que não
-                            consegue comprovar que a minha própria esposa não mora comigo no mesmo endereço. Ta na hora de
-                            cancelar então né. Não há sequer um fórum de ajuda ao cliente."</p></td>
-                    <td>
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-primary center-block"><i class="fa fa-star"></i></button>
-                        </div>
-
-                        <div class="" style="padding-bottom: 10px;">
-                            <button class="btn btn-warning center-block"><i class="fa fa-question"></i></button>
-                        </div>
-                    </td>
-                    <td id="post5-artefato"><input type="text" class="form-control" id="nome" placeholder="Ex.: iPhone X"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="row" style="padding-top: 20px">
-        <div class="col-sm-3" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="abrirClassUX()" style="margin-right: 10px;">Voltar</button>
-        </div>
-
-        <div class="col-sm-3" style="padding-bottom: 10px; float: right">
-            <button class="btn btn-info center-block" onclick="proximo()">Salvar e próximo</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function abrirClassFunc(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'block';
-        document.getElementById('classificacaoPorTipo').style.display = 'none';
-        document.getElementById('classificacaoPorIntencao').style.display = 'none';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
-        document.getElementById('classificacaoPorArtefato').style.display = 'none';
-    }
-    
-    function abrirClassTipo(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'none';
-        document.getElementById('classificacaoPorTipo').style.display = 'block';
-        document.getElementById('classificacaoPorIntencao').style.display = 'none';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
-        document.getElementById('classificacaoPorArtefato').style.display = 'none';
-    }
-    
-    function abrirClassIntencao(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'none';
-        document.getElementById('classificacaoPorTipo').style.display = 'none';
-        document.getElementById('classificacaoPorIntencao').style.display = 'block';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
-        document.getElementById('classificacaoPorArtefato').style.display = 'none';
-    }
-    
-    function abrirClassAnaliseSentimentos(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'none';
-        document.getElementById('classificacaoPorTipo').style.display = 'none';
-        document.getElementById('classificacaoPorIntencao').style.display = 'none';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'block';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
-        document.getElementById('classificacaoPorArtefato').style.display = 'none';
-    }
-    
-    function abrirClassUsabilidade(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'none';
-        document.getElementById('classificacaoPorTipo').style.display = 'none';
-        document.getElementById('classificacaoPorIntencao').style.display = 'none';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'block';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
-        document.getElementById('classificacaoPorArtefato').style.display = 'none';
-    }
-    
-    function abrirClassUX(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'none';
-        document.getElementById('classificacaoPorTipo').style.display = 'none';
-        document.getElementById('classificacaoPorIntencao').style.display = 'none';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'block';
-        document.getElementById('classificacaoPorArtefato').style.display = 'none';
-    }
-    
-    function abrirClassArtefato(){
-        document.getElementById('classificacaoPorFuncionalidade').style.display = 'none';
-        document.getElementById('classificacaoPorTipo').style.display = 'none';
-        document.getElementById('classificacaoPorIntencao').style.display = 'none';
-        document.getElementById('classificacaoPorAnaliseSentimentos').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUsabilidade').style.display = 'none';
-        document.getElementById('classificacaoPorFacetasUX').style.display = 'none';
-        document.getElementById('classificacaoPorArtefato').style.display = 'block';
-    }
-    
-    function voltar(){
-        window.location.href = "introEtapa3.php";
-    }
-</script>
-
-
-<style>
-    #tipo{
-        vertical-align: middle;
-    }
-</style>

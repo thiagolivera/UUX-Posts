@@ -81,7 +81,7 @@
                 } else{
                     ?>
                     <li>
-                        <a href="../../avaliacoesAndamento.php">
+                        <a href="../../../avaliacoesAndamento.php">
                             <i class="fa fa-spinner"></i> <span>Avaliações em andamento</span>
                         </a>
                     </li>

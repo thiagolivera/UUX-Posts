@@ -149,10 +149,22 @@ class ClassificacaoPRUsControle extends Banco{
                 $idClassUX = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
             }
             
-            $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`) VALUES ("
-                    . "'".$idClassificador."','".$classificacoes[$i]["idPostagem"]."','".$idAvaliacao."','".$classificacoes[$i]["PRU"]."');";
-            if (!mysqli_query($conexao, $sql)){
-                $erro++; //se der erro incrementa no contador para cancelar a transação
+            if(isset($classificacoes[$i]["isValidacao"])){
+                if(strcmp($classificacoes[$i]["isValidacao"], "true") == 0){
+                    $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`, isValidado) VALUES ("
+                            . "'".$idClassificador."','".$classificacoes[$i]["idPostagem"]."','".$idAvaliacao."','".$classificacoes[$i]["PRU"]."', 1);";
+                    if (!mysqli_query($conexao, $sql)){
+                        $erro++; //se der erro incrementa no contador para cancelar a transação
+                        echo mysqli_error($conexao);
+                    }
+                } else{
+                    $sql = "INSERT INTO `classificacao`(`idClassificador`, `idPostagem`, `idAvaliacao`, `classPRU`) VALUES ("
+                            . "'".$idClassificador."','".$classificacoes[$i]["idPostagem"]."','".$idAvaliacao."','".$classificacoes[$i]["PRU"]."');";
+                    if (!mysqli_query($conexao, $sql)){
+                        $erro++; //se der erro incrementa no contador para cancelar a transação
+                        //echo mysqli_error($conexao);
+                    }
+                }
             }
             
             if(isset($classificacoes[$i]["funcionalidade"][0])){
@@ -188,7 +200,7 @@ class ClassificacaoPRUsControle extends Banco{
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }
-            }
+            } 
             
             if(isset($classificacoes[$i]["ux"][0])){
                 $sql = "UPDATE `classificacao` SET `classUX` = ".$idClassUX." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
@@ -211,10 +223,10 @@ class ClassificacaoPRUsControle extends Banco{
         if ($erro == 0){
             mysqli_commit($conexao);
             mysqli_close($conexao);
-            header("location:classificacaoPostagens.php");
+            return true;
         } else {
             mysqli_close($conexao);
-            
+            return false;
         }
     }
 }

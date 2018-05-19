@@ -5,7 +5,7 @@ include './ClassesClassificacao.php';
 $classificacoes = null;
 $numPostagens = $_POST["numPostagens"];
 
-for($i=0; $i < $numPostagens; $i++){ //10 é o número de postagens
+for($i=0; $i < $numPostagens; $i++){
     if(isset($_POST["classPRU".$i])){
         if(strcmp($_POST["classPRU".$i], "PRU") == '0'){
             $classificacoes[$i]["PRU"] = 1;
@@ -48,6 +48,11 @@ for($i=0; $i < $numPostagens; $i++){ //10 é o número de postagens
     } else{
         $classificacoes[$i]["artefato"] = null;
     }
+    if(isset($_POST["isValidacao".$i])){
+        $classificacoes[$i]["isValidacao"] = $_POST["isValidacao".$i];
+    } else{
+        $classificacoes[$i]["isValidacao"] = 0;
+    }
     
     if(isset($_POST["idPostagem".$i])){
         $classificacoes[$i]["idPostagem"] = $_POST["idPostagem".$i];
@@ -58,5 +63,10 @@ include './ClassificacaoPRUsControle.php';
 $salvar = new ClassificacaoPRUsControle();
 
 if($salvar->salvarClassificacaoPRUs($classificacoes, $_POST["idAvaliacao"])){
-    header("location:classificacaoPostagens.php");
+    echo "deu certo";
+    if(isset($_POST["validacao"])){
+        header("location:validacao/validacaoPostagens.php");
+    } else{
+        //header("location:classificacaoPostagens.php");
+    }
 }
