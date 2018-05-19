@@ -127,11 +127,16 @@ class ClassificacaoPRUsControle extends Banco{
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }
-
-                //obtem o id da classUsabilidade
-                $sql = "SELECT idClassUsabilidade FROM classUsabilidade ORDER BY idClassUsabilidade DESC LIMIT 1;";
-                $idClassUsabilidade = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
+            } else{
+                $sql = "INSERT INTO `classUsabilidade`(`idClassUsabilidade`, `eficacia`, `eficiencia`, `satisfacao`, `seguranca`, `utilidade`, `memorabilidade`, `aprendizado`) VALUES (DEFAULT,0,0,0,0,0,0,0);";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
             }
+            
+            //obtem o id da classUsabilidade
+            $sql = "SELECT idClassUsabilidade FROM classUsabilidade ORDER BY idClassUsabilidade DESC LIMIT 1;";
+            $idClassUsabilidade = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
             
             //Verifica se há classificação UX
             if(isset($classificacoes[$i]["ux"][0])){
@@ -144,10 +149,16 @@ class ClassificacaoPRUsControle extends Banco{
                 if (!mysqli_query($conexao, $sql)){
                     $erro++; //se der erro incrementa no contador para cancelar a transação
                 }
-                //obtem o id da classUX
+            } else{
+                $sql = "INSERT INTO `classUX`(`idClassUX`, `afeto`, `estetica`, `frustracao`, `satisfacao`, `motivacao`, `suporte`) VALUES (DEFAULT,0,0,0,0,0,0);";
+                if (!mysqli_query($conexao, $sql)){
+                    $erro++; //se der erro incrementa no contador para cancelar a transação
+                }
+            }
+            
+            //obtem o id da classUX
                 $sql = "SELECT idClassUX FROM classUX ORDER BY idClassUX DESC LIMIT 1;";
                 $idClassUX = mysqli_fetch_array(mysqli_query($conexao, $sql))[0];
-            }
             
             if(isset($classificacoes[$i]["isValidacao"])){
                 if(strcmp($classificacoes[$i]["isValidacao"], "true") == 0){
@@ -195,18 +206,14 @@ class ClassificacaoPRUsControle extends Banco{
                 }
             }
             
-            if(isset($classificacoes[$i]["usabilidade"][0])){
-                $sql = "UPDATE `classificacao` SET `classUsabilidade` = ".$idClassUsabilidade." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
-                if (!mysqli_query($conexao, $sql)){
-                    $erro++; //se der erro incrementa no contador para cancelar a transação
-                }
-            } 
+            $sql = "UPDATE `classificacao` SET `classUsabilidade` = ".$idClassUsabilidade." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
+            }
             
-            if(isset($classificacoes[$i]["ux"][0])){
-                $sql = "UPDATE `classificacao` SET `classUX` = ".$idClassUX." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
-                if (!mysqli_query($conexao, $sql)){
-                    $erro++; //se der erro incrementa no contador para cancelar a transação
-                }
+            $sql = "UPDATE `classificacao` SET `classUX` = ".$idClassUX." WHERE idClassificador = ".$idClassificador." AND idPostagem = ".$classificacoes[$i]["idPostagem"]." AND idAvaliacao = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
             }
             
             if(isset($classificacoes[$i]["artefato"][0])){

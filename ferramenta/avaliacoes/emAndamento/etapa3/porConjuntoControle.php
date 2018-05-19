@@ -63,10 +63,9 @@ include './ClassificacaoPRUsControle.php';
 $salvar = new ClassificacaoPRUsControle();
 
 if($salvar->salvarClassificacaoPRUs($classificacoes, $_POST["idAvaliacao"])){
-    echo "deu certo";
     if(isset($_POST["validacao"])){
         header("location:validacao/validacaoPostagens.php");
     } else{
-        //header("location:classificacaoPostagens.php");
+        header("location:classificacaoPostagens.php");
     }
 }
