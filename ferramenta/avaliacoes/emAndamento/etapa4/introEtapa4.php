@@ -84,21 +84,21 @@ include '../verificarSessao.class';
                         <li>
                           <i class="fa fa-eercast bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header">ETAPA 1 - Definição do contexto de avaliação</h3>
+                              <h3 class="timeline-header"><a href="../../novaAvaliacao/criarAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>">ETAPA 1 - Definição do contexto de avaliação</a></h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-cloud-download bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header">ETAPA 2 - Extração das PRUs</h3>
+                              <h3 class="timeline-header"><a href="../etapa2/introEtapa2.php">ETAPA 2 - Extração das PRUs</a></h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-check-circle-o bg-yellow"></i>
                           <div class="timeline-item">
-                            <h3 class="timeline-header">ETAPA 3 - Classificação das PRUs</h3>
+                              <h3 class="timeline-header"><a href="../etapa3/introEtapa3.php">ETAPA 3 - Classificação das PRUs</a></h3>
                           </div>
                         </li>
                         
@@ -150,13 +150,51 @@ include '../verificarSessao.class';
         <!-- /.modal-dialog -->
       </div>
   </div>
+    
+    <div class="modal fade" id="modal-fim-validacao" data-backdrop="static">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Fim da validação de classificação!</h4>
+              </div>
 
-  <?php include("../../../rodape.php");
+              <div class="modal-body">
+                  <div class="row">
+                      <img class="img-responsive center-block" src="../../../images/validadoresFelizes.svg" width="350px">
+                      <h3 class="text-center">Parabéns! Você já validou todas as classificações de postagens</h3>
+                      <h4 class="text-center" style="padding-right: 20px; padding-left: 20px">Agora você poderá visualizar os resultados (Etapa 4) e fornecer suas percepções de classificação (Etapa 5)</h4>
+                      
+                      <form>
+                          <button type="button" class="btn btn-success center-block" data-dismiss="modal">
+                              Continuar
+                          </button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <?php  include("../../../rodape.php"); ?>
+  </div>
+
+  <?php
     if(isset($_GET["fimClassificacao"])){
         ?>
     <script>
         $(document).ready(function() {
             $('#modal-default').modal('show');
+        })
+    </script>
+    <?php
+    }
+    
+    if(isset($_GET["fimValidacao"])){
+        ?>
+    <script>
+        $(document).ready(function() {
+            $('#modal-fim-validacao').modal('show');
         })
     </script>
     <?php

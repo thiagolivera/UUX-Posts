@@ -1,3 +1,7 @@
+<?php 
+$resultadosUX = $controle->obterResultadosUX($idAvalicao);
+?>
+
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Classificação por Critérios de Qualidade de Uso (Experiência do usuário)</h3>
@@ -11,7 +15,7 @@
                         <thead>
                             <tr>
                               <th>Faceta de UX</th>
-                              <th>Frequência</th>
+                              <th>Quantidade</th>
                               <th>Porcentagem (%)</th>
                             </tr>
                         </thead>
@@ -19,33 +23,33 @@
                         <tbody>
                             <tr>
                               <td>Afeto</td>
-                              <td>0</td>
-                              <td>0%</td>
+                              <td><?php echo $resultadosUX[0];?></td>
+                              <td><?php echo round((100*$resultadosUX[0])/$resultadosUX[6],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Estética</td>
-                              <td>2</td>
-                              <td>1.06%</td>
+                              <td><?php echo $resultadosUX[1];?></td>
+                              <td><?php echo round((100*$resultadosUX[1])/$resultadosUX[6],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Frustração</td>
-                              <td>58</td>
-                              <td>31.01%</td>
+                              <td><?php echo $resultadosUX[2];?></td>
+                              <td><?php echo round((100*$resultadosUX[2])/$resultadosUX[6],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Satisfação</td>
-                              <td>5</td>
-                              <td>2.67%</td>
+                              <td><?php echo $resultadosUX[3];?></td>
+                              <td><?php echo round((100*$resultadosUX[3])/$resultadosUX[6],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Motivação</td>
-                              <td>0</td>
-                              <td>0%</td>
+                              <td><?php echo $resultadosUX[4];?></td>
+                              <td><?php echo round((100*$resultadosUX[4])/$resultadosUX[6],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Suporte</td>
-                              <td>35</td>
-                              <td>18.71%</td>
+                              <td><?php echo $resultadosUX[5];?></td>
+                              <td><?php echo round((100*$resultadosUX[5])/$resultadosUX[6],2) . "%"; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -74,7 +78,12 @@
         ],
         datasets: [
             {
-                data: [50, 50, 50, 50, 50, 50],
+                data: [<?php echo round((100*$resultadosUX[0])/$resultadosUX[6],2);?>,
+                    <?php echo round((100*$resultadosUX[1])/$resultadosUX[6],2);?>,
+                    <?php echo round((100*$resultadosUX[2])/$resultadosUX[6],2);?>,
+                    <?php echo round((100*$resultadosUX[3])/$resultadosUX[6],2);?>,
+                    <?php echo round((100*$resultadosUX[4])/$resultadosUX[6],2);?>,
+                    <?php echo round((100*$resultadosUX[5])/$resultadosUX[6],2);?>],
                 backgroundColor: [
                     "#A3CB38",
                     "#1289A7",

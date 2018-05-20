@@ -1,3 +1,7 @@
+<?php 
+$resultadosUsabilidade = $controle->obterResultadosUsabilidade($idAvalicao);
+?>
+
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Classificação por Critérios de Qualidade de Uso (Usabilidade)</h3>
@@ -11,7 +15,7 @@
                         <thead>
                             <tr>
                               <th>Faceta de Usabilidade</th>
-                              <th>Frequência</th>
+                              <th>Quantidade</th>
                               <th>Porcentagem (%)</th>
                             </tr>
                         </thead>
@@ -19,38 +23,38 @@
                         <tbody>
                             <tr>
                               <td>Eficácia</td>
-                              <td>118</td>
-                              <td>62.76%</td>
+                              <td><?php echo $resultadosUsabilidade[0];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[0])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Eficiência</td>
-                              <td>7</td>
-                              <td>3.72%</td>
+                              <td><?php echo $resultadosUsabilidade[1];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[1])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Satisfação</td>
-                              <td>5</td>
-                              <td>2.65%</td>
+                              <td><?php echo $resultadosUsabilidade[2];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[2])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Segurança</td>
-                              <td>2</td>
-                              <td>1.06%</td>
+                              <td><?php echo $resultadosUsabilidade[3];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[3])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Utilidade</td>
-                              <td>41</td>
-                              <td>21.80%</td>
+                              <td><?php echo $resultadosUsabilidade[4];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[4])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Memorabilidade</td>
-                              <td>1</td>
-                              <td>0.53%</td>
+                              <td><?php echo $resultadosUsabilidade[5];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[5])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Aprendizado</td>
-                              <td>5</td>
-                              <td>2.65%</td>
+                              <td><?php echo $resultadosUsabilidade[6];?></td>
+                              <td><?php echo round((100*$resultadosUsabilidade[6])/$resultadosUsabilidade[7],2) . "%"; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -80,7 +84,13 @@
         ],
         datasets: [
             {
-                data: [100, 50, 50, 50, 50, 50, 50],
+                data: [<?php echo round((100*$resultadosUsabilidade[0])/$resultadosUsabilidade[7],2);?>,
+                    <?php echo round((100*$resultadosUsabilidade[1])/$resultadosUsabilidade[7],2);?>,
+                    <?php echo round((100*$resultadosUsabilidade[2])/$resultadosUsabilidade[7],2);?>,
+                    <?php echo round((100*$resultadosUsabilidade[3])/$resultadosUsabilidade[7],2);?>,
+                    <?php echo round((100*$resultadosUsabilidade[4])/$resultadosUsabilidade[7],2);?>,
+                    <?php echo round((100*$resultadosUsabilidade[5])/$resultadosUsabilidade[7],2);?>,
+                    <?php echo round((100*$resultadosUsabilidade[6])/$resultadosUsabilidade[7],2);?>],
                 backgroundColor: [
                     "#00d2d3",
                     "#54a0ff",

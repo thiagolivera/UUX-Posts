@@ -61,7 +61,8 @@ class ValidacaoControle extends Banco{
         if(count($postsParaValidacao) > 0){
             return $postsParaValidacao;
         } else{
-            header("location:../../etapa4/introEtapa4.php");
+            self::atualizarStatus($idAvaliacao);
+            header("location:../../etapa4/introEtapa4.php?fimValidacao");
         }
     }
     

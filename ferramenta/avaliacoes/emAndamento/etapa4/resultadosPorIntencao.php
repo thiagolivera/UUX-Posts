@@ -1,3 +1,6 @@
+<?php 
+$resultadosIntencao = $controle->obterResultadosIntencao($idAvalicao);
+?>
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Classificação por Intenção</h3>
@@ -11,7 +14,7 @@
                         <thead>
                             <tr>
                               <th>Intenção</th>
-                              <th>Frequência</th>
+                              <th>Quantidade</th>
                               <th>Porcentagem (%)</th>
                             </tr>
                         </thead>
@@ -19,18 +22,18 @@
                         <tbody>
                             <tr>
                               <td>Visceral</td>
-                              <td>86</td>
-                              <td>30%</td>
+                              <td><?php echo $resultadosIntencao[0][0];?></td>
+                              <td><?php echo round((100*$resultadosIntencao[0][0])/$resultadosIntencao[3][0],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Comportamental</td>
-                              <td>6</td>
-                              <td>30%</td>
+                              <td><?php echo $resultadosIntencao[1][0];?></td>
+                              <td><?php echo round((100*$resultadosIntencao[1][0])/$resultadosIntencao[3][0],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Reflexiva</td>
-                              <td>19</td>
-                              <td>40%</td>
+                              <td><?php echo $resultadosIntencao[2][0];?></td>
+                              <td><?php echo round((100*$resultadosIntencao[2][0])/$resultadosIntencao[3][0],2) . "%"; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,7 +58,9 @@
         ],
         datasets: [
             {
-                data: [30, 30, 40],
+                data: [<?php echo round((100*$resultadosIntencao[0][0])/$resultadosIntencao[3][0],2); ?>,
+                    <?php echo round((100*$resultadosIntencao[1][0])/$resultadosIntencao[3][0],2); ?>,
+                    <?php echo round((100*$resultadosIntencao[2][0])/$resultadosIntencao[3][0],2); ?>],
                 backgroundColor: [
                     "#1e90ff",
                     "#ffa502",

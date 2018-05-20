@@ -1,5 +1,14 @@
 <?php
 include '../verificarSessao.class';
+include_once './interpretacaoControle.php';
+
+if(!isset($_SESSION['idAvaliacao'])){
+    header("location:erro.php");
+}
+
+$idAvalicao = $_SESSION['idAvaliacao'];
+$controle = new InterpretacaoControle();
+$avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
 ?>
 <!DOCTYPE html>
 <html>

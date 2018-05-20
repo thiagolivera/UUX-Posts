@@ -1,3 +1,7 @@
+<?php 
+$resultadosSentimentos = $controle->obterResultadosSentimentos($idAvalicao);
+?>
+
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Classificação por Análise de Sentimentos</h3>
@@ -11,7 +15,7 @@
                         <thead>
                             <tr>
                               <th>Polaridade</th>
-                              <th>Frequência</th>
+                              <th>Quantidade</th>
                               <th>Porcentagem (%)</th>
                             </tr>
                         </thead>
@@ -19,18 +23,18 @@
                         <tbody>
                             <tr>
                               <td>Positiva</td>
-                              <td>86</td>
-                              <td>60%</td>
+                              <td><?php echo $resultadosSentimentos[0][0];?></td>
+                              <td><?php echo round((100*$resultadosSentimentos[0][0])/$resultadosSentimentos[3][0],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Neutra</td>
-                              <td>6</td>
-                              <td>10%</td>
+                              <td><?php echo $resultadosSentimentos[1][0];?></td>
+                              <td><?php echo round((100*$resultadosSentimentos[1][0])/$resultadosSentimentos[3][0],2) . "%"; ?></td>
                             </tr>
                             <tr>
                               <td>Negativa</td>
-                              <td>19</td>
-                              <td>30%</td>
+                              <td><?php echo $resultadosSentimentos[2][0];?></td>
+                              <td><?php echo round((100*$resultadosSentimentos[2][0])/$resultadosSentimentos[3][0],2) . "%"; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,7 +59,9 @@
         ],
         datasets: [
             {
-                data: [60, 10, 30],
+                data: [<?php echo round((100*$resultadosSentimentos[0][0])/$resultadosSentimentos[3][0],2); ?>,
+                    <?php echo round((100*$resultadosSentimentos[1][0])/$resultadosSentimentos[3][0],2); ?>,
+                    <?php echo round((100*$resultadosSentimentos[2][0])/$resultadosSentimentos[3][0],2); ?>],
                 backgroundColor: [
                     "#05c46b",
                     "#BEC5CC",
