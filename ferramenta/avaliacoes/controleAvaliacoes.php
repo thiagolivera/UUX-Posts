@@ -19,6 +19,9 @@ if(isset($_GET['continuar'])){
     if(strcmp($_GET['status'], 'Etapa 4 - Interpretação dos resultados') == 0){
         header("location:emAndamento/etapa4/introEtapa4.php");
     }
+    if(strcmp($_GET['status'], 'Etapa 5 - Relato dos resultados') == 0){
+        header("location:emAndamento/etapa5/introEtapa5.php");
+    }
     
 }
 

@@ -78,4 +78,19 @@ class InterpretacaoControle extends Banco{
         $sql = "SELECT SUM(classPRU) FROM `classificacoesPorPostagens` WHERE idAvaliacao = ".$idAvaliacao." and isValidado = 1;";
         return mysqli_fetch_row(self::Executar($sql));
     }
+    
+    public function atualizarStatus($idAvaliacao){
+        $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
+        //2) altera o status se for um sequencial
+        $sql = "SELECT status FROM avaliacao WHERE `idavaliacao` = ".$idAvaliacao." LIMIT 1;";
+        $result = mysqli_query($conexao, $sql);
+        $status = mysqli_fetch_array($result)[0];
+        if(strcmp($status, "Etapa 4 - Interpretação dos resultados") == '0'){
+            //2) muda status da avaliação no dados no banco
+            $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 5 - Relato dos resultados' WHERE `idavaliacao` = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
+            }
+        }
+    }
 }

@@ -9,6 +9,11 @@ if(!isset($_SESSION['idAvaliacao'])){
 $idAvalicao = $_SESSION['idAvaliacao'];
 $controle = new InterpretacaoControle();
 $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
+
+if(isset($_POST["proximo"])){
+    $controle->atualizarStatus($idAvalicao);
+    header("location:../etapa5/introetapa5.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -122,9 +127,13 @@ $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
                         <div class="no-print" style="float: left; padding-bottom: 10px;">
                             <button class="btn btn-info" onclick="voltar()" type="button">Voltar</button>
                         </div>
-                        <div class="no-print" style="float: right; padding-bottom: 10px;">
-                            <button class="btn btn-info" onclick="proximo()" type="button">Próxima etapa</button>
-                        </div>
+                        
+                        <form action="visualizacaoResultados.php" method="POST">
+                            <input type="hidden" value="proximo" name="proximo">
+                            <div class="no-print" style="float: right; padding-bottom: 10px;">
+                                <button class="btn btn-info" type="submit">Próxima etapa</button>
+                            </div>
+                        </form>
                     </div>
                     <a style="color: #ecf0f5">'</a>
                 </section>

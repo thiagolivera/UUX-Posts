@@ -84,28 +84,28 @@ include '../verificarSessao.class';
                         <li>
                           <i class="fa fa-eercast bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header">ETAPA 1 - Definição do contexto de avaliação</h3>
+                              <h3 class="timeline-header"><a href="../../novaAvaliacao/criarAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>">ETAPA 1 - Definição do contexto de avaliação</a></h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-cloud-download bg-yellow"></i>
                           <div class="timeline-item">
-                              <h3 class="timeline-header">ETAPA 2 - Extração das PRUs</h3>
+                              <h3 class="timeline-header"><a href="../etapa2/introEtapa2.php">ETAPA 2 - Extração das PRUs</a></h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-check-circle-o bg-yellow"></i>
                           <div class="timeline-item">
-                            <h3 class="timeline-header">ETAPA 3 - Classificação das PRUs</h3>
+                            <h3 class="timeline-header"><a href="../etapa3/introEtapa3.php">ETAPA 3 - Classificação das PRUs</a></h3>
                           </div>
                         </li>
                         
                         <li>
                           <i class="fa fa-bar-chart bg-yellow"></i>
                           <div class="timeline-item">
-                            <h3 class="timeline-header">ETAPA 4 - Interpretação dos resultados</h3>
+                              <h3 class="timeline-header"><a href="../etapa4/introEtapa4.php">ETAPA 4 - Interpretação dos resultados</a></h3>
                           </div>
                         </li>
                         

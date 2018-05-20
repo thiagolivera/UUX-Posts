@@ -1,5 +1,29 @@
 <?php
 include '../verificarSessao.class';
+
+include_once './relatoControle.php';
+
+if(!isset($_SESSION['idAvaliacao'])){
+    header("location:erro.php");
+}
+
+$idAvalicao = $_SESSION['idAvaliacao'];
+$controle = new RelatoControle();
+$avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
+
+if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_POST["q4"]) && isset($_POST["q5"])
+        && isset($_POST["q6"])){
+    $relato = new Relato();
+    $relato->q1 = $_POST["q1"];
+    $relato->q2 = $_POST["q2"];
+    $relato->q3 = $_POST["q3"];
+    $relato->q4 = $_POST["q4"];
+    $relato->q5 = $_POST["q5"];
+    $relato->q6 = $_POST["q6"];
+    
+    $controle->salvarPercepcoes($_SESSION["login"], $idAvalicao, $relato);
+    header("location:../relatorioAvaliacao/relatorioAvaliacao.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -78,38 +102,38 @@ include '../verificarSessao.class';
                             <h3 class="box-title">Informe suas percepções de avaliação</h3>
                         </div>
                         <div class="box-body pad">
-                            <form>
+                            <form method="post" action="relatoAvaliacao.php">
                                   <div class="form-group">
                                     <label for="comment">1) Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
-                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                    <textarea required class="form-control" rows="3" name="q1" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">2) Teve alguma postagem que lhe chamou atenção? Por quê?</label>
-                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                    <textarea required class="form-control" rows="3" name="q2" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">3) O que você percebeu durante esta análise?</label>
-                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                    <textarea required class="form-control" rows="3" name="q3" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">4) Qual o sentimento você percebeu com maior frequência nas postagens?</label>
-                                    <textarea class="form-control" rows="2" id="comment"></textarea>
+                                    <textarea required class="form-control" rows="2" name="q4" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">5) Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
-                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                    <textarea required class="form-control" rows="3" name="q5" id="comment"></textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">6) Relate quaisquer outras observações percebidas:</label>
-                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                    <textarea class="form-control" rows="3" name="q6" id="comment"></textarea>
                                   </div>
-                            </form>
                         </div>
                     </div>
 
                     <div style="float: right; padding-bottom: 10px;">
-                        <button class="btn btn-info" onclick="proximo()" style="margin-right: 10px;">Salvar e próximo</button>
+                        <button class="btn btn-info" type="submit" style="margin-right: 10px;">Salvar e próximo</button>
                     </div>
+                    </form>
                 </div>
                 <a style="color: #ecf0f5">'</a>
             </section>
@@ -149,10 +173,7 @@ include '../verificarSessao.class';
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass   : 'iradio_minimal-blue'
     });
-    
-    function proximo(){
-        window.location.href = "../relatorioAvaliacao/relatorioAvaliacao.php";
-    }
+   
     </script>
     
     <script>
