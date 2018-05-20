@@ -184,29 +184,39 @@ if(isset($_POST["automatica"])){
         <!-- /.modal -->
         
         <div class="modal fade" id="modal-visualizacao">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Escolha a forma de visualização da classificação <a class="btn btn-sm btn-default"><i class="fa fa-question" aria-hidden="true"></i></a></h4>
-              </div>
-              <div class="modal-body">
-                  <form action="classificacaoPostagens.php" method="post">
-                          <select id="modoVisualizacao" class="js-example-basic-single" name="modoVisualizacao" style="width: 100%">
-                              <option>Por postagem</option>
-                              <option>Por conjunto de postagens</option>
-                          </select>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Continuar</button>
-              </div>
-                </form>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Escolha a forma de visualização da classificação</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <form action="classificacaoPostagens.php" method="POST">
+                                <div class="col-md-6" style="display: flex; justify-content: center; padding-top: 5px">
+                                    <button type="submit"  class="btn btn-default pull-left" style="width: 350px">
+                                        <input type="hidden" value="Por postagem" name="modoVisualizacao">
+                                        <img class="img-responsive center-block" src="../../../images/porPostagem.svg" width="220px">
+                                        <br><strong style="font-size: 16px">Por postagem</strong>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <form action="classificacaoPostagens.php" method="POST">
+                                <div class="col-md-6" style="display: flex; justify-content: center; padding-top: 5px">
+                                    <button type="submit" class="btn btn-default pull-left" style="width: 350px">
+                                        <input type="hidden" value="Por conjunto de postagens" name="modoVisualizacao">
+                                        <img class="img-responsive center-block" src="../../../images/porConjunto.svg" width="200px">
+                                        <br><strong style="font-size: 16px">Por conjunto de postagens</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
         </div>
         <a style="color: #ecf0f5">'</a>
     </section>
