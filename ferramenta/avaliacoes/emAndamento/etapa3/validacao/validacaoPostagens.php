@@ -216,7 +216,7 @@ $postagem = $controle->obterPostagem($classificacoes[0][0]["idPostagem"]);
                                                                     <?php if($classificacoes[0][$i]["frustracao"] == 1){
                                                                         ?><option selected>Frustração</option><?php
                                                                     }?>
-                                                                    <?php if($classificacoes[0][$i]["satisfacao"] == 1){
+                                                                    <?php if($classificacoes[0][$i]["satisfacaoUX"] == 1){
                                                                         ?><option selected>Satisfação</option><?php
                                                                     }?>
                                                                     <?php if($classificacoes[0][$i]["motivacao"] == 1){

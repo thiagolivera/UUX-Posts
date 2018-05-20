@@ -65,6 +65,22 @@ class ValidacaoControle extends Banco{
         }
     }
     
+    public function atualizarStatus($idAvaliacao){
+        $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
+        //2) altera o status se for um sequencial
+        $sql = "SELECT status FROM avaliacao WHERE `idavaliacao` = ".$idAvaliacao." LIMIT 1;";
+        $result = mysqli_query($conexao, $sql);
+        $status = mysqli_fetch_array($result)[0];
+        if(strcmp($status, "Etapa 3 - Classificação de PRUS") == '0'){
+            //2) muda status da avaliação no dados no banco
+            $sql = "UPDATE `avaliacao` SET `status` = 'Etapa 4 - Interpretação dos resultados' WHERE `idavaliacao` = ".$idAvaliacao.";";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
+            }
+        }
+    }
+
+
     public function construirObjetoClassificacao($array){
         $classTipo = new ClassificaoTipo();
         $classTipo->ajuda = $array[0]["ajuda"];
