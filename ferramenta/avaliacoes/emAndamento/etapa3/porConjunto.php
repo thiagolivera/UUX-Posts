@@ -127,9 +127,6 @@ if(count($listaPostagens) == 0){
 </div>
 
 <div class="row" style="padding-top: 20px">
-        <div id="btnVoltar" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
-        </div>
         <div id="btnSalvar" style="float: right; padding-bottom: 10px;">
             <button class="btn btn-info" type="submit" style="margin-right: 10px;">Salvar e próximo</button>
         </div>
@@ -137,10 +134,6 @@ if(count($listaPostagens) == 0){
     </div>
 
 <script>
-    function voltar(){
-        window.location.href = "introEtapa3.php";
-    }
-    
     function naoPRU(num){
         if(document.getElementById('classPRU'.concat(num)).value === "PRU"){
             document.getElementById('classFuncionalidade'.concat(num)).required = true;

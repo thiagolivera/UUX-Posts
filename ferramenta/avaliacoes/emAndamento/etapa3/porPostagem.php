@@ -222,10 +222,6 @@
 
 <div id="espacos" style="display: none"><br><br><br><br></div>
 <div class="row" style="padding-top: 20px">
-    <div class="col-sm-6" id="btnVoltarClassTipo" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="voltar()" style="margin-right: 10px;">Voltar</button>
-    </div>
-    
     <div class="col-sm-3" style="padding-bottom: 10px; display: none">
         <button class="btn btn-primary center-block disabled"><i class="fa fa-star"></i> Marcar como favorita</button>
     </div>
@@ -241,10 +237,6 @@
 </div>
 
 <script>
-    function voltar(){
-        window.location.href = "introEtapa3.php";
-    }
-    
     function deRequireCb(elClass) {
         el=document.getElementsByClassName(elClass);
 
