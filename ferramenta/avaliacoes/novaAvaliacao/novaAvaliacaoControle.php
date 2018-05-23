@@ -18,6 +18,22 @@ class AvaliacaoControle extends Banco{
             $erro++; //se der erro incrementa no contador para cancelar a transação
         }
         
+        //2) exclui as funcionalidades já cadastradas
+        $sql = "DELETE FROM `avaliacaoFuncionalidades` WHERE `idAvaliacao` = " . $avaliacao->id . ";";
+        if (!mysqli_query($conexao, $sql)){
+            $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
+        
+        //3) cadastrar funcionalidades informadas
+        $funcionalidades = preg_split("/[,]+/", $avaliacao->funcionalidades);
+        for($i = 0; $i < count($funcionalidades); $i++){
+            $sql = "INSERT INTO `avaliacaoFuncionalidades`(`idAvaliacao`, `idFuncionalidade`, `funcionalidade`)"
+                    . " VALUES (". $avaliacao->id .",DEFAULT,'". $funcionalidades[$i] ."')";
+            if (!mysqli_query($conexao, $sql)){
+                $erro++;
+            }
+        }
+        
         //Verifica se houve erro para cancelar a transação
         if ($erro == 0){
             mysqli_commit($conexao);

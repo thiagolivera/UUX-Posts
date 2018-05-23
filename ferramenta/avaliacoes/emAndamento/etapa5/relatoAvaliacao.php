@@ -97,10 +97,10 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
                 <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
                     <?php 
                     if(strcmp($_SESSION['papel'], "Gerente") == 0){
-                        $avaliadores = $controle->obterAvaliadores($idAvalicao);
-                        $relatos = $controle->obterPercepcoes($idAvalicao);
+                        $avaliadores = $controle->obterAvaliadoresComPercepcao($idAvalicao);
+                        $relatos = $controle->obterAvaliadoresSemPercepcao($idAvalicao);
                         
-                        if(count($avaliadores) == count($relatos)){
+                        if(count($relatos) == 0){
                             header("location:../relatorioAvaliacao/relatorioAvaliacao.php");
                         }
                                                 
@@ -131,16 +131,18 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
                                                 ?>
                                             <tr>
                                                 <td><?php echo $avaliadores[$i]["nome"] ?></td>
-                                                
-                                                <?php
-                                                for($j=0; $j < count($relatos); $j++){
-                                                    if($avaliadores[$i]["codlogin"] == $relatos[$j]["codlogin"]){
-                                                        ?> <td><span class="label label-success" style="font-size: 12px">Concluído</span></td> <?php
-                                                    } else{
-                                                        ?> <td><span class="label label-warning" style="font-size: 12px">Pendente</span></td> <?php
-                                                    }
-                                                }
+                                                <td> <span class="label label-success" style="font-size: 12px">Concluído</span></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                            
+                                            <?php
+                                                for($i=0; $i < count($relatos); $i++){
                                                 ?>
+                                            <tr>
+                                                <td><?php echo $relatos[$i]["nome"] ?></td>
+                                                <td> <span class="label label-warning" style="font-size: 12px">Pendente</span></td>
                                             </tr>
                                             <?php
                                             }

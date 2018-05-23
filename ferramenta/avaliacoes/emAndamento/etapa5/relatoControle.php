@@ -14,8 +14,8 @@ class RelatoControle extends Banco{
         self::Executar($sql);
     }
     
-    public function obterAvaliadores($idAvaliacao){
-        $sql = "SELECT DISTINCT login.nome, login.codlogin FROM login, avaliacaoPapeis where login.codlogin = avaliacaoPapeis.idPessoa and avaliacaoPapeis.idAvaliacao =".$idAvaliacao.";";
+    public function obterAvaliadoresComPercepcao($idAvaliacao){
+        $sql = "SELECT DISTINCT login.nome, login.codlogin FROM login, avaliacaoPapeis, avaliacaoPercepcoes where login.codlogin = avaliacaoPapeis.idPessoa and avaliacaoPapeis.idAvaliacao =".$idAvaliacao." and avaliacaoPercepcoes.idAvaliador = login.codlogin;";
         $rtn = parent::Executar($sql);
         
         $array = array();
@@ -26,8 +26,8 @@ class RelatoControle extends Banco{
         return $array;
     }
     
-    public function obterPercepcoes($idAvaliacao){
-        $sql = "SELECT login.codlogin, avaliacaoPercepcoes.idPercepcao from login, avaliacaoPercepcoes where login.codlogin = avaliacaoPercepcoes.idAvaliador and avaliacaoPercepcoes.idAvaliacao =".$idAvaliacao.";";
+    public function obterAvaliadoresSemPercepcao($idAvaliacao){
+        $sql = "SELECT DISTINCT login.nome, login.codlogin FROM login, avaliacaoPapeis, avaliacaoPercepcoes where login.codlogin = avaliacaoPapeis.idPessoa and avaliacaoPapeis.idAvaliacao = ".$idAvaliacao." and login.codlogin NOT IN (SELECT idAvaliador from avaliacaoPercepcoes where avaliacaoPercepcoes.idAvaliacao = ".$idAvaliacao.");";
         $rtn = parent::Executar($sql);
         
         $array = array();
