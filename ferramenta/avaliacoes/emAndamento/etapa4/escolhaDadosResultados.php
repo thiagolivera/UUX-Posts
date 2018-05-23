@@ -9,6 +9,7 @@ if(!isset($_SESSION['idAvaliacao'])){
 $idAvalicao = $_SESSION['idAvaliacao'];
 $controle = new InterpretacaoControle();
 $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
+$categoriasAvaliacao = $controle->obterCategoriasAvaliacao($idAvalicao)[0];
 ?>
 <!DOCTYPE html>
 <html>
@@ -102,40 +103,69 @@ $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
                                     <label for="tipoUsuario" class="col-sm-2 control-label">Categorias de classificação<a style="color: #ff0000">*</a></label>
                                     <form action="visualizacaoResultados.php" method="post">
                                         <div class="col-sm-10">
+                                            
+                                            <?php if($categoriasAvaliacao["funcionalidade"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="funcionalidade" class="minimal"> Classificação por funcionalidade
                                             </label>
                                             <br>
-
+                                                <?php
+                                            } ?>
+                                            
+                                            <?php if($categoriasAvaliacao["tipo"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="tipo" class="minimal"> Classificação por tipo
                                             </label>
                                             <br>
-
+                                                <?php
+                                            } ?>
+                                            
+                                            <?php if($categoriasAvaliacao["intencao"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="intencao" class="minimal"> Classificação por intenção
                                             </label>
                                             <br>
-
+                                                <?php
+                                            } ?>
+                                            
+                                            <?php if($categoriasAvaliacao["analiseSentimentos"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="analiseSentimentos" class="minimal"> Classificação por análise de sentimentos
                                             </label>
                                             <br>
-
+                                                <?php
+                                            } ?>
+                                            
+                                            <?php if($categoriasAvaliacao["usabilidade"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="usabilidade" class="minimal"> Classificação por critérios de qualidade de uso (Usabilidade)
                                             </label>
                                             <br>
-
+                                                <?php
+                                            } ?>
+                                            
+                                            <?php if($categoriasAvaliacao["ux"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="ux" class="minimal"> Classificação por critérios de qualidade de uso (Experiência do Usuário)
                                             </label>
                                             <br>
-
+                                                <?php
+                                            } ?>
+                                            
+                                            <?php if($categoriasAvaliacao["artefato"]){
+                                                ?>
                                             <label style="font-weight: 500;">
                                                 <input type="checkbox" name="artefato" class="minimal"> Classificação por artefato
                                             </label>
                                             <br>
+                                                <?php
+                                            } ?>
                                         </div>
                                         <div style="float: right; padding-bottom: 10px;">
                                             <button class="btn btn-info" type="submit">Visualizar resultados</button>

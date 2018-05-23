@@ -8,6 +8,18 @@ class InterpretacaoControle extends Banco{
         return mysqli_fetch_row($rtn);
     }
     
+    public function obterCategoriasAvaliacao($idAvaliacao){
+        $sql = "SELECT * FROM avaliacaoCategorias WHERE idavaliacao = " . $idAvaliacao . ";";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+    
     public function obterResultadosTipo($idAvaliacao){
         $sql = "SELECT SUM(critica), SUM(elogio), SUM(duvida), SUM(comparacao), SUM(sugestao), SUM(ajuda), SUM(classPRU) FROM `classificacoesPorPostagens` WHERE `idAvaliacao` = ".$idAvaliacao." and `isValidado` = 1;";
         $rtn = self::Executar($sql);

@@ -1,3 +1,7 @@
+<?php 
+$percepcoes = $relatorioControle->obterPercepcoes($idAvalicao);
+?>
+
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Percepções de avaliação</h3>
@@ -5,32 +9,60 @@
 
     <div class="box-body">
         <div class="row" style="padding-left: 20px; padding-right: 20px; text-align: justify">
-            <p>
-                Neste tópico, faz-se um relacionamento com as outras
-                avaliações textuais de UUX, realizadas pelos autores deste
-                artigo. A classificação por tipo pode representar
-                características do sistema avaliado. Nas avaliações
-                apresentadas neste artigo (Sistemas = Google Maps e Waze,
-                base de dados = App Stores), os tipos predominantes foram
-                (em ordem decrescente): (Elogio, Crítica) ou (Crítica,
-                Elogio), Sugestão, Comparação, Dúvida e Ajuda, as duas
-                últimas com quase 0% de postagens. Em outra avaliação,
-                também de um aplicativo mobile (Sistema = Spotify, base de
-                dados = Reclame Aqui) [5], as PRUs predominantes foram
-                do tipo: Crítica, Dúvida, Elogio e Sugestão, em ordem
-                decrescente. Por se tratar de um site de reclamações e
-                suporte, explicam-se os tipos “Crítica” e “Dúvida” como
-                predominantes. Esse tipo de avaliação tem apresentado
-                resultados satisfatórios, sobretudo por ser capaz de
-                identificar problemas, como de “Suporte” [5], que em outros
-                tipos de avaliação, seriam dificilmente encontrados.
-                Em avaliações de PRUs em Sistemas Sociais, como o Twitter
-                [17], Facebook [20] e um Sistema Social Acadêmico de uma
-                universidade (postagens extraídas de um fórum), as
-                postagens do tipo “Dúvida” e “Ajuda” eram as mais
-                frequentes, o que reforça o caráter colaborativo deste tipo de
-                sistema. 
-            </p>
+            <label for="comment">1) Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
+            <ul>
+                <?php
+                for($i=0; $i < count($percepcoes); $i++){
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q1"];?> </li> <?php
+                }
+                
+                ?>
+            </ul>
+            <label for="comment">2) Teve alguma postagem que lhe chamou atenção? Por quê?</label>
+            <ul>
+                <?php
+                for($i=0; $i < count($percepcoes); $i++){
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q2"];?> </li> <?php
+                }
+                
+                ?>
+            </ul>
+            <label for="comment">3) O que você percebeu durante esta análise?</label>
+            <ul>
+                <?php
+                for($i=0; $i < count($percepcoes); $i++){
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q3"];?> </li> <?php
+                }
+                
+                ?>
+            </ul>
+            <label for="comment">4) Qual o sentimento você percebeu com maior frequência nas postagens?</label>
+            <ul>
+                <?php
+                for($i=0; $i < count($percepcoes); $i++){
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q4"];?> </li> <?php
+                }
+                
+                ?>
+            </ul>
+            <label for="comment">5) Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
+            <ul>
+                <?php
+                for($i=0; $i < count($percepcoes); $i++){
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q5"];?> </li> <?php
+                }
+                
+                ?>
+            </ul>
+            <label for="comment">6) Relate quaisquer outras observações percebidas:</label>
+            <ul>
+                <?php
+                for($i=0; $i < count($percepcoes); $i++){
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q6"];?> </li> <?php
+                }
+                
+                ?>
+            </ul>
         </div>
     </div>
 </div>

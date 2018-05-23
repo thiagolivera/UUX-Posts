@@ -1,5 +1,14 @@
 <?php
 include '../verificarSessao.class';
+include_once '../etapa4/interpretacaoControle.php';
+include_once './relatorioControle.php';
+
+$idAvalicao = $_SESSION['idAvaliacao'];
+$controle = new InterpretacaoControle();
+$avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
+$categoriasAvaliacao = $controle->obterCategoriasAvaliacao($idAvalicao)[0];
+
+$relatorioControle = new RelatorioControle();
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,23 +73,42 @@ include '../verificarSessao.class';
                 </section>
 
                 <section class="content">
-                    <h2 style="text-align: center">Relatório de Avaliação</h2>
+                    <h2 style="text-align: center">Relatório de Avaliação 
+                        <?php 
+                        if(isset($_POST["preliminar"])){
+                            echo "Preliminar";
+                        } ?>
+                    </h2>
                     <?php include_once("./infoAvaliacao.php");
-                          include_once("./avaliadores.php");
-                          include_once("./contextoAvaliacao.php");?>
+                          include_once("./contextoAvaliacao.php");
+                          include_once("./avaliadores.php");?>
                     <div class="box box-default">
                         <div class="box-header with-border">
                             <h3 class="box-title">Resultados de Classificação</h3>
                         </div>
                     </div>
-                    <?php 
-                    include("../etapa4/resultadosPorFuncionalidade.php");
-                    include("../etapa4/resultadosPorTipo.php");
-                    include("../etapa4/resultadosPorIntencao.php");
-                    include("../etapa4/resultadosAnaliseSentimentos.php");
-                    include("../etapa4/resultadosUsabilidade.php");
-                    include("../etapa4/resultadosUX.php");
-                    include("../etapa4/resultadosArtefato.php");
+                    <?php
+                    if($categoriasAvaliacao["funcionalidade"]){
+                        include("../etapa4/resultadosPorFuncionalidade.php");
+                    }
+                    if($categoriasAvaliacao["tipo"]){
+                        include("../etapa4/resultadosPorTipo.php");
+                    }
+                    if($categoriasAvaliacao["intencao"]){
+                        include("../etapa4/resultadosPorIntencao.php");
+                    }
+                    if($categoriasAvaliacao["analiseSentimentos"]){
+                        include("../etapa4/resultadosAnaliseSentimentos.php");
+                    }
+                    if($categoriasAvaliacao["usabilidade"]){
+                        include("../etapa4/resultadosUsabilidade.php");
+                    }
+                    if($categoriasAvaliacao["ux"]){
+                        include("../etapa4/resultadosUX.php");
+                    }
+                    if($categoriasAvaliacao["artefato"]){
+                        include("../etapa4/resultadosArtefato.php");
+                    }
                     include("./percepcoesAvaliacao.php");
                     ?>
                     <a target="_blank" onclick="window.print();" class="btn btn-primary no-print"><i class="fa fa-print"></i> Imprimir</a>

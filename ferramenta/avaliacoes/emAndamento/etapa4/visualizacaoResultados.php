@@ -101,26 +101,42 @@ if(isset($_POST["proximo"])){
                     <?php include_once("../avaliacaoEmAndamento.php");?>
                     <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
                         <?php
+                        $cont=0;
                             if(isset($_POST['funcionalidade']) && strcmp($_POST['funcionalidade'],"on") == 0){
                                 include("./resultadosPorFuncionalidade.php");
+                                $cont++;
                             }
                             if(isset($_POST['tipo']) && strcmp($_POST['tipo'],"on") == 0){
                                 include("./resultadosPorTipo.php");
+                                $cont++;
                             }
                             if(isset($_POST['intencao']) && strcmp($_POST['intencao'],"on") == 0){
                                 include("./resultadosPorIntencao.php");
+                                $cont++;
                             }
                             if(isset($_POST['analiseSentimentos']) && strcmp($_POST['analiseSentimentos'],"on") == 0){
                                 include("./resultadosAnaliseSentimentos.php");
+                                $cont++;
                             }
                             if(isset($_POST['usabilidade']) && strcmp($_POST['usabilidade'],"on") == 0){
                                 include("./resultadosUsabilidade.php");
+                                $cont++;
                             }
                             if(isset($_POST['ux']) && strcmp($_POST['ux'],"on") == 0){
                                 include("./resultadosUX.php");
+                                $cont++;
                             }
                             if(isset($_POST['artefato']) && strcmp($_POST['artefato'],"on") == 0){
                                 include("./resultadosArtefato.php");
+                                $cont++;
+                            }
+                            
+                            if($cont == 0){
+                                ?>
+                                <script>
+                                    window.location.href = "escolhaDadosResultados.php";
+                                </script>
+                                <?php
                             }
                         ?>
 
