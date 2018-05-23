@@ -1,5 +1,17 @@
 <?php
 include '../verificarSessao.class';
+include_once './relatoControle.php';
+
+
+$idAvalicao = $_SESSION['idAvaliacao'];
+$controle = new RelatoControle();
+
+        $relatos = $controle->obterAvaliadoresSemPercepcao($idAvalicao);
+                        
+        if(count($relatos) == 0){
+            $controle->atualizarStatus($idAvalicao);
+            header("location:../relatorioAvaliacao/relatorioAvaliacao.php");
+        }
 ?>
 <!DOCTYPE html>
 <html>

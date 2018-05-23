@@ -1,6 +1,5 @@
 <?php
 include '../verificarSessao.class';
-
 include_once './relatoControle.php';
 
 if(!isset($_SESSION['idAvaliacao'])){
@@ -101,6 +100,7 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
                         $relatos = $controle->obterAvaliadoresSemPercepcao($idAvalicao);
                         
                         if(count($relatos) == 0){
+                            $controle->atualizarStatus($idAvalicao);
                             header("location:../relatorioAvaliacao/relatorioAvaliacao.php");
                         }
                                                 
@@ -161,7 +161,7 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
                         </div>
                     <?php
                     } else{
-                        $relatos = $controle->obterPercepcoes($idAvalicao);
+                        $relatos = $controle->obterAvaliadoresComPercepcao($idAvalicao);
                         for($i=0; $i < count($relatos); $i++){
                             if($relatos[$i]["codlogin"] == $idAvaliador){
                                 ?>

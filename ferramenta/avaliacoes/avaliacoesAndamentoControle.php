@@ -11,7 +11,7 @@ class AvaliacoesAndamentoControle extends Banco{
                 . "avaliacaoInfo.nomeSistema, avaliacaoPapeis.papel, avaliacao.status from avaliacaoInfo, "
                 . "avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and "
                 . "avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." "
-                . "and status != 'Concluída';";
+                . "and status != 'Avaliação Concluída';";
         $rtn = parent::Executar($sql);
         
         $array = array();
