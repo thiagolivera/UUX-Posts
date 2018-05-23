@@ -7,6 +7,7 @@ if(!isset($_SESSION['idAvaliacao'])){
     header("location:erro.php");
 }
 
+$idAvaliador = $_SESSION["login"];
 $idAvalicao = $_SESSION['idAvaliacao'];
 $controle = new RelatoControle();
 $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
@@ -59,22 +60,19 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
-    
-        <!-- CK Editor -->
-        <script src="../../../bower_components/ckeditor/ckeditor.js"></script>
   
-	<!-- jQuery 3 -->
-	<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap 3.3.7 -->
-	<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- iCheck 1.0.1 -->
-        <script src="../../../plugins/iCheck/icheck.min.js"></script>
-	<!-- FastClick -->
-	<script src="../../../bower_components/fastclick/lib/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../../../dist/js/adminlte.min.js"></script>
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- jQuery 3 -->
+    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="../../../plugins/iCheck/icheck.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../../dist/js/adminlte.min.js"></script>
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -97,43 +95,120 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
             <section class="content">
                 <?php include_once("../avaliacaoEmAndamento.php");?>
                 <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Informe suas percepções de avaliação</h3>
-                        </div>
-                        <div class="box-body pad">
-                            <form method="post" action="relatoAvaliacao.php">
-                                  <div class="form-group">
-                                    <label for="comment">1) Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
-                                    <textarea required class="form-control" rows="3" name="q1" id="comment"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="comment">2) Teve alguma postagem que lhe chamou atenção? Por quê?</label>
-                                    <textarea required class="form-control" rows="3" name="q2" id="comment"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="comment">3) O que você percebeu durante esta análise?</label>
-                                    <textarea required class="form-control" rows="3" name="q3" id="comment"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="comment">4) Qual o sentimento você percebeu com maior frequência nas postagens?</label>
-                                    <textarea required class="form-control" rows="2" name="q4" id="comment"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="comment">5) Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
-                                    <textarea required class="form-control" rows="3" name="q5" id="comment"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="comment">6) Relate quaisquer outras observações percebidas:</label>
-                                    <textarea class="form-control" rows="3" name="q6" id="comment"></textarea>
-                                  </div>
-                        </div>
-                    </div>
+                    <?php 
+                    if(strcmp($_SESSION['papel'], "Gerente") == 0){
+                        $avaliadores = $controle->obterAvaliadores($idAvalicao);
+                        $relatos = $controle->obterPercepcoes($idAvalicao);
+                        
+                        if(count($avaliadores) == count($relatos)){
+                            header("location:../relatorioAvaliacao/relatorioAvaliacao.php");
+                        }
+                                                
+                        ?>
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Etapa 5 - Relato dos resultados</h3>
+                            </div>
+                            <div class="box-body" style="text-align: center">
+                                <div>
+                                    <h4>Nessa etapa, todos os avaliadores irão fornecer suas percepções de avaliação</h4>
+                                    <h4>Quando todos concluírem, você poderá gerar um relatório desta avaliação</h4>
+                                </div>
 
-                    <div style="float: right; padding-bottom: 10px;">
-                        <button class="btn btn-info" type="submit" style="margin-right: 10px;">Salvar e próximo</button>
-                    </div>
-                    </form>
+                                <div style="padding-top: 10px; text-align: center">
+                                    <h4>Veja abaixo o status de cada avaliador quanto ao relato dos resultados</h4>
+                                    <table class="table table-responsive table-hover no-margin text-center table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center">Nome</th>
+                                                <th style="text-align: center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            <?php
+                                                for($i=0; $i < count($avaliadores); $i++){
+                                                ?>
+                                            <tr>
+                                                <td><?php echo $avaliadores[$i]["nome"] ?></td>
+                                                
+                                                <?php
+                                                for($j=0; $j < count($relatos); $j++){
+                                                    if($avaliadores[$i]["codlogin"] == $relatos[$j]["codlogin"]){
+                                                        ?> <td><span class="label label-success" style="font-size: 12px">Concluído</span></td> <?php
+                                                    } else{
+                                                        ?> <td><span class="label label-warning" style="font-size: 12px">Pendente</span></td> <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div style="padding-top: 20px">
+                                    <form action="../relatorioAvaliacao/relatorioAvaliacao.php">
+                                        <input type="hidden" name="preliminar">
+                                        <button class="btn btn-success" type="submit">Gerar relatório preliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    } else{
+                        $relatos = $controle->obterPercepcoes($idAvalicao);
+                        for($i=0; $i < count($relatos); $i++){
+                            if($relatos[$i]["codlogin"] == $idAvaliador){
+                                ?>
+                                <script>
+                                    window.location.href = "fimAvaliacao.php";
+                                </script>
+                                <?php
+                            }
+                        }
+                        ?>
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Informe suas percepções de avaliação</h3>
+                            </div>
+                            <div class="box-body pad">
+                                <form method="post" action="relatoAvaliacao.php">
+                                      <div class="form-group">
+                                        <label for="comment">1) Você teve dificuldade em classificar as postagens? Se sim, qual sua principal dificuldade?</label>
+                                        <textarea required class="form-control" rows="3" name="q1" id="comment"></textarea>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="comment">2) Teve alguma postagem que lhe chamou atenção? Por quê?</label>
+                                        <textarea required class="form-control" rows="3" name="q2" id="comment"></textarea>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="comment">3) O que você percebeu durante esta análise?</label>
+                                        <textarea required class="form-control" rows="3" name="q3" id="comment"></textarea>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="comment">4) Qual o sentimento você percebeu com maior frequência nas postagens?</label>
+                                        <textarea required class="form-control" rows="2" name="q4" id="comment"></textarea>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="comment">5) Quais as principais reclamações (problemas encontrados no sistema) e os principais elogios (benefícios do sistema) percebido nas postagens?</label>
+                                        <textarea required class="form-control" rows="3" name="q5" id="comment"></textarea>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="comment">6) Relate quaisquer outras observações percebidas:</label>
+                                        <textarea class="form-control" rows="3" name="q6" id="comment"></textarea>
+                                      </div>
+                                <div style="float: right; padding-bottom: 10px;">
+                                    <button class="btn btn-info" type="submit" style="margin-right: 10px;">Salvar e próximo</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <a style="color: #ecf0f5">'</a>
             </section>
