@@ -1,5 +1,5 @@
 <?php
-include '../../../Banco.php';
+include_once '../../../Banco.php';
 
 class AvaliadoresControle extends Banco{
     
@@ -123,6 +123,54 @@ class AvaliadoresControle extends Banco{
         }
         return $array[0]["count(*)"];
         
+    }
+    
+    public function obterNumeroPostagensClassificadas($idAvaliacao){
+        $sql = "SELECT login.nome, COUNT(classificacao.idClassificador) as numPosts FROM classificacao, login WHERE classificacao.idAvaliacao = ".$idAvaliacao." and login.codlogin = classificacao.idClassificador and classificacao.isValidado=0 GROUP by login.nome;";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+    
+    public function obterNumeroPostagensValidadas($idAvaliacao){
+        $sql = "SELECT login.nome, COUNT(classificacao.idClassificador) as numPosts FROM classificacao, login WHERE classificacao.idAvaliacao = ".$idAvaliacao." and login.codlogin = classificacao.idClassificador and classificacao.isValidado=1 GROUP by login.nome;";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+    
+    public function obterClassificadoresSemClassificacao($idAvaliacao){
+        $sql = "SELECT login.nome FROM classificacao, avaliacaoPapeis, login WHERE login.codlogin not in (SELECT classificacao.idClassificador from classificacao where classificacao.idAvaliacao = ".$idAvaliacao.") AND avaliacaoPapeis.idPessoa = login.codlogin AND avaliacaoPapeis.idAvaliacao = ".$idAvaliacao." AND avaliacaoPapeis.papel = 'Classificador' AND classificacao.idAvaliacao = ".$idAvaliacao." AND classificacao.isValidado = 0 GROUP by login.nome;";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+    
+    public function obterValidadoresSemClassificacao($idAvaliacao){
+        $sql = "SELECT login.nome FROM classificacao, avaliacaoPapeis, login WHERE login.codlogin not in (SELECT classificacao.idClassificador from classificacao where classificacao.idAvaliacao = ".$idAvaliacao.") AND avaliacaoPapeis.idPessoa = login.codlogin AND avaliacaoPapeis.idAvaliacao = ".$idAvaliacao." AND avaliacaoPapeis.papel = 'Validador' AND classificacao.idAvaliacao = ".$idAvaliacao." AND classificacao.isValidado = 0 GROUP by login.nome;";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array;
     }
     
     public function isEmailValido($email){        
