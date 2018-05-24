@@ -59,8 +59,8 @@ $avaliacoesConcluidas = $controleAvaliacaoConcluidas->obterAvaliacoesUsuario($_S
                     <thead>
                       <tr>
                         <th>Data de conclusão</th>
+                        <th>Título</th>
                         <th>Sistema</th>
-                        <th>Seu papel</th>
                         <th>Ações</th>
                       </tr>
                     </thead>
@@ -71,10 +71,9 @@ $avaliacoesConcluidas = $controleAvaliacaoConcluidas->obterAvaliacoesUsuario($_S
                         ?>
                         <tr>
                             <td><?php echo $avaliacoesConcluidas[$i]["dataTermino"]; ?></td>
+                            <td><?php echo $avaliacoesConcluidas[$i]["nomeAvaliacao"]; ?></td>
                             <td><?php echo $avaliacoesConcluidas[$i]["nomeSistema"]; ?></td>
-                            <td><?php echo $avaliacoesConcluidas[$i]["papel"]; ?></td>
-                            <td><a class="btn btn-sm btn-default" title="Resetar senha" href="gerenciarUsuarios.php?rst=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-undo" aria-hidden="true"></i></a>
-                                <a class="btn btn-sm btn-default" title="Bloquear usuário" href="gerenciarUsuarios.php?dstv=<?php echo $usuarios[$i]["codlogin"];?>"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                            <td><a class="btn btn-sm btn-default" title="Abrir relatório" href="emAndamento/relatorioAvaliacao/relatorioAvaliacao.php<?php $_SESSION['idAvaliacao'] = $avaliacoesConcluidas[$i]["idAvaliacao"];?>"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         <?php

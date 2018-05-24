@@ -7,7 +7,7 @@ class AvaliacoesConcluidasControle extends Banco{
     }
 
     public function obterAvaliacoesUsuario($idPessoa){
-        $sql = "SELECT avaliacaoPapeis.idAvaliacao, avaliacaoInfo.nomeSistema, avaliacaoPapeis.papel, avaliacao.dataTermino from avaliacaoInfo, avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." and status = 'Avaliação Concluída';";
+        $sql = "SELECT DISTINCT avaliacaoInfo.idAvaliacao, avaliacaoInfo.nomeAvaliacao, avaliacaoInfo.nomeSistema, avaliacao.dataTermino from avaliacaoInfo, avaliacao, avaliacaoPapeis where avaliacao.idavaliacao = avaliacaoPapeis.idAvaliacao and avaliacaoInfo.idAvaliacao = avaliacao.idavaliacao and avaliacaoPapeis.idPessoa = ".$idPessoa." and status = 'Avaliação Concluída';";
         $rtn = parent::Executar($sql);
         
         $array = array();
