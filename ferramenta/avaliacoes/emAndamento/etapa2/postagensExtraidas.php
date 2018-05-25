@@ -179,6 +179,7 @@
     
     function proximo(){
         window.location.href = "../etapa3/introEtapa3.php";
+        <?php $_SESSION['status'] = 'Etapa 3 - Classificação de PRUS'; ?>
     }
     
     function voltar(){

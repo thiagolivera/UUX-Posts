@@ -4,6 +4,17 @@ include_once '../ClassesClassificacao.php';
 
 class ValidacaoControle extends Banco{
     
+    public function isClassificacaoFinalizada($idAvaliacao){
+        $sql = "SELECT count(*) as num FROM `avaliacaoPapeis` WHERE `idAvaliacao` = ".$idAvaliacao." and `isConcluido` = 0 and `papel` != 'Validador' and `papel` != 'Gerente'";
+        $rtn = self::Executar($sql);
+        
+        if (mysqli_fetch_row($rtn)[0] == 0){
+            return true;
+        }
+        return false;
+    }
+
+
     public function obterIDPostagensNaoValidadas($idAvaliacao){
         $sql = "SELECT DISTINCT idPostagem FROM `classificacoesPorPostagens` where idPostagem not in (SELECT idPostagem from classificacoesPorPostagens WHERE isValidado = 1 and idAvaliacao = ".$idAvaliacao.") and idAvaliacao = ".$idAvaliacao.";";
         $rtn = parent::Executar($sql);   

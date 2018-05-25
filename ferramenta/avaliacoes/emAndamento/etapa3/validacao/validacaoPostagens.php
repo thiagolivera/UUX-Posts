@@ -6,10 +6,13 @@ include './validacaoControle.php';
 $idAvalicao = $_SESSION['idAvaliacao'];
 
 $controle = new ValidacaoControle();
-$avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
-$categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
-$classificacoes = $controle->obterPostagensNaoValidadas($idAvalicao);
-$postagem = $controle->obterPostagem($classificacoes[0][0]["idPostagem"]);
+if(!$controle->isClassificacaoFinalizada($idAvalicao)){
+    header("location:erroValidacao.php");
+} else{
+    $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
+    $categoriasClassificacao = $controle->obterCategoriasAvaliacao($idAvalicao);
+    $classificacoes = $controle->obterPostagensNaoValidadas($idAvalicao);
+    $postagem = $controle->obterPostagem($classificacoes[0][0]["idPostagem"]);
 
 ?>
 <!DOCTYPE html>
@@ -513,3 +516,9 @@ $postagem = $controle->obterPostagem($classificacoes[0][0]["idPostagem"]);
     }
     </script>
 </html>
+
+<?php 
+
+}
+
+?>

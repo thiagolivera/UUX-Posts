@@ -118,6 +118,11 @@ class ClassificacaoControle extends Banco{
         }
         return $array;
     }
+    
+    public function ataulizarStatusAvaliador($idAvaliacao, $idClassificador){
+        $sql = "UPDATE `avaliacaoPapeis` SET `isConcluido`= 1 WHERE `idAvaliacao` = ".$idAvaliacao." and `idPessoa` = ".$idClassificador.";";
+        parent::Executar($sql);
+    }
 
 
     public function obterAvaliacao($id){

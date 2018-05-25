@@ -1,6 +1,7 @@
 <?php
 $listaPostagens = $controle->obterPostagensNaoClassificadas($idAvalicao, $_SESSION["login"]);
 if(count($listaPostagens) == 0){
+    $controle->ataulizarStatusAvaliador($idAvalicao, $_SESSION["login"]);
     ?>
     <script>
         window.location.href = "fimClassificacao.php";
