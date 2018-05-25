@@ -125,30 +125,6 @@ include '../verificarSessao.class';
         </div>
         <a style="color: #ecf0f5">'</a>
     </section>
-      
-    <div class="modal fade" id="modal-default" data-backdrop="static">
-        <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Fim da classificação de postagens!</h4>
-              </div>
-
-              <div class="modal-body">
-                  <div class="row">
-                      <img class="img-responsive center-block" src="../../../images/classificadoresFelizes.svg" width="350px">
-                      <h3 class="text-center">Parabéns! Você já classificou todas as suas postagens</h3>
-                      <h4 class="text-center" style="padding-right: 20px; padding-left: 20px">Antes de continuar, você deverá aguardar a validação de classificação para visualizar os resultados (Etapa 4) e fornecer suas percepções de classificação (Etapa 5)</h4>
-                      
-                      <form action="../../../index.php">
-                          <button type="submit" class="btn btn-success center-block">Voltar para o início</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
   </div>
     
     <div class="modal fade" id="modal-fim-validacao" data-backdrop="static">
@@ -180,16 +156,6 @@ include '../verificarSessao.class';
   </div>
 
   <?php
-    if(isset($_GET["fimClassificacao"])){
-        ?>
-    <script>
-        $(document).ready(function() {
-            $('#modal-default').modal('show');
-        })
-    </script>
-    <?php
-    }
-    
     if(isset($_GET["fimValidacao"])){
         ?>
     <script>

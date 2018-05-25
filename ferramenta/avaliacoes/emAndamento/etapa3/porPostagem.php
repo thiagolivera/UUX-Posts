@@ -3,7 +3,7 @@
     if(count($postagem) == 0){
         ?>
         <script>
-            window.location.href = "../etapa4/introEtapa4.php?fimClassificacao";
+            window.location.href = "fimClassificacao.php";
         </script>
         <?php
     }

@@ -3,7 +3,7 @@ $listaPostagens = $controle->obterPostagensNaoClassificadas($idAvalicao, $_SESSI
 if(count($listaPostagens) == 0){
     ?>
     <script>
-        window.location.href = "../etapa4/introEtapa4.php?fimClassificacao";
+        window.location.href = "fimClassificacao.php";
     </script>
     <?php
 }
