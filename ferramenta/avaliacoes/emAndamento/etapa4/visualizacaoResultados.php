@@ -101,6 +101,7 @@ if(isset($_POST["proximo"])){
                     <?php include_once("../avaliacaoEmAndamento.php");?>
                     <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
                         <?php
+                        include("./resultadosClassPRU.php");
                         $cont=0;
                             if(isset($_POST['funcionalidade']) && strcmp($_POST['funcionalidade'],"on") == 0){
                                 include("./resultadosPorFuncionalidade.php");

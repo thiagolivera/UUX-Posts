@@ -20,6 +20,18 @@ class InterpretacaoControle extends Banco{
         return $array;
     }
     
+    public function obterResultadosClassPRUs($idAvaliacao){
+        $array = array();
+        
+        $sql = "SELECT count(`classPRU`) FROM `classificacoesPorPostagens` WHERE idAvaliacao = ".$idAvaliacao." and isValidado = 1 and classPRU = 1";
+        $array[] = mysqli_fetch_row(self::Executar($sql));
+        
+        $sql = "SELECT count(`classPRU`) FROM `classificacoesPorPostagens` WHERE idAvaliacao = ".$idAvaliacao." and isValidado = 1 and classPRU = 0";
+        $array[] = mysqli_fetch_row(self::Executar($sql));
+        
+        return $array;
+    }
+    
     public function obterResultadosTipo($idAvaliacao){
         $sql = "SELECT SUM(critica), SUM(elogio), SUM(duvida), SUM(comparacao), SUM(sugestao), SUM(ajuda), SUM(classPRU) FROM `classificacoesPorPostagens` WHERE `idAvaliacao` = ".$idAvaliacao." and `isValidado` = 1;";
         $rtn = self::Executar($sql);
