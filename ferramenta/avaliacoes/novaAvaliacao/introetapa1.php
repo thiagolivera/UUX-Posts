@@ -66,7 +66,7 @@ include './verificarSessao.class';
                     </div>
                 </div>
                 <div class="box-footer" style="padding-top: 10px;">
-                    <h4 style="text-align: center">Nessa primeira etapa de avaliação, você deve identificar o sistema avaliado, informar os avaliadores e o contexto de uso do sistema.</h4>
+                    <h4 style="text-align: center">Nessa primeira etapa de avaliação, você deve identificar o sistema avaliado, o contexto de uso do sistema e quem são seus usuários.</h4>
                 </div>
                   <!-- /.row -->
                 </div>

@@ -105,7 +105,7 @@ class ClassificacaoControle extends Banco{
 
     public function obterPostagensNaoClassificadas($idAvaliacao, $idClassificador){
         $idPostagemInicial = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaInicio"] - 1;
-        $idPostagemFinal = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaFim"];
+        $idPostagemFinal = self::obterIdPrimeiraPostagem($idAvaliacao)[0]["idPostagem"] + self::obterFaixaValoresClassificacao($idAvaliacao, $idClassificador)[0]["faixaFim"] - 1;
         
         $sql = "SELECT * FROM `postagens` WHERE postagens.idPostagem NOT IN (SELECT classificacao.idPostagem from classificacao where idClassificador = ".$idClassificador.") "
                 . "and postagens.idAvaliacao = " . $idAvaliacao . " and idPostagem BETWEEN ".$idPostagemInicial." AND ".$idPostagemFinal." LIMIT 10;";
@@ -131,7 +131,13 @@ class ClassificacaoControle extends Banco{
         return mysqli_fetch_row($rtn);
     }
     
-    public function obterCategoriasAvaliacao($idAvaliacao){
+    public function obterStatus($id){
+        $sql = "SELECT status FROM avaliacao WHERE idAvaliacao = " . $id . ";";
+        $rtn = self::Executar($sql);
+        return mysqli_fetch_row($rtn);
+    }
+
+        public function obterCategoriasAvaliacao($idAvaliacao){
         $sql = "SELECT * FROM avaliacaoCategorias WHERE idavaliacao = " . $idAvaliacao . ";";
         $rtn = parent::Executar($sql);
         

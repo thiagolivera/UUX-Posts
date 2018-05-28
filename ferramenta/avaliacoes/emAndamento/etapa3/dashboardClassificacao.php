@@ -174,7 +174,13 @@ $numTotalPostagens = $avaliadoresControle->obterNumeroPostagens($idAvalicao);
                                     </div>
                                 </div>
                             </div>
-                            <form action="../../../index.php">
+                            
+                            <form action="definirAvaliadores.php" method="POST">
+                              <button type="submit" class="btn btn-dropbox center-block">Editar detalhes da classificação</button>
+                              <br>
+                            </form>
+                            
+                            <form action="../../../index.php" method="POST">
                               <button type="submit" class="btn btn-success center-block">Voltar para o início</button>
                               <br>
                             </form>

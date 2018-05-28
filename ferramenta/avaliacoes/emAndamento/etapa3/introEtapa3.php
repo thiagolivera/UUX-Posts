@@ -1,8 +1,9 @@
 <?php
 include '../verificarSessao.class';
+include './classificacaoControle.php';
 
-$status = $_SESSION['status'];
-unset($_SESSION['status']);
+$controle = new ClassificacaoControle();
+$status = $controle->obterStatus($_SESSION["idAvaliacao"])[0];;
 
 if(isset($_POST["automatica"])){
     //redireciona para a página de classificação automática

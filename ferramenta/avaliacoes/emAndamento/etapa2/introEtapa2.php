@@ -76,7 +76,7 @@ include '../verificarSessao.class';
                     </div>
                 </div>
                 <div class="box-footer" style="padding-top: 10px;">
-                    <h4 style="text-align: center">Nessa etapa é realizada a extração das postagens a partir do sistema informado, de uma planilha enviada ou do cadastro de postagens.</h4>
+                    <h4 style="text-align: center">Nessa etapa é realizada a extração das postagens a partir do sistema informado ou de uma planilha enviada.</h4>
                 </div>
                   <!-- /.row -->
                 </div>

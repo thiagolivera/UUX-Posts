@@ -207,8 +207,29 @@ class AvaliadoresControle extends Banco{
     }
     
     public function excluirAvaliador(Avaliador $avaliador){
+        $erro = 0;
+        
+        $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
+        mysqli_autocommit($conexao, FALSE);
+        
+        $sql = "DELETE FROM `classificacao` WHERE `idClassificador` = ".$avaliador->idPessoa." and `idAvaliacao` = ".$avaliador->idAvaliacao.";";
+        if (!mysqli_query($conexao, $sql)){
+            $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
+        
         $sql = "DELETE FROM `avaliacaoPapeis` WHERE `idAvaliacao` = ".$avaliador->idAvaliacao." and `idPessoa` = ".$avaliador->idPessoa." and `papel` = '".$avaliador->papel."';";
-        parent::Executar($sql);
+        if (!mysqli_query($conexao, $sql)){
+            $erro++; //se der erro incrementa no contador para cancelar a transação
+        }
+        
+        //Verifica se houve erro para cancelar a transação
+        if ($erro == 0){
+            mysqli_commit($conexao);
+            mysqli_close($conexao);
+            return true;
+        } else {
+            mysqli_close($conexao);
+        }
     }
     
     public function verificarAvaliadoresInformados($idAvaliacao){

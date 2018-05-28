@@ -14,7 +14,6 @@ if(isset($_GET['continuar'])){
         header("location:emAndamento/etapa3/introEtapa3.php");
     }
     if(strcmp($_GET['status'], 'Etapa 3 - Classificação de PRUS') == 0){
-        $_SESSION['status'] = 'Etapa 3 - Classificação de PRUS';
         header("location:emAndamento/etapa3/introEtapa3.php");
     }
     if(strcmp($_GET['status'], 'Etapa 4 - Interpretação dos resultados') == 0){

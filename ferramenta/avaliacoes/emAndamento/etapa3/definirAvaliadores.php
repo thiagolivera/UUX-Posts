@@ -19,7 +19,7 @@ if(!$avaliadoresControle->isGerente($idAvalicao, $_SESSION['login'])){
 if(isset($_POST['salvar'])){
     if($avaliadoresControle->verificarAvaliadoresInformados($idAvalicao)){
         $avaliadoresControle->alterarStatus($idAvalicao);
-        header("location:../../../index.php");
+        header("location:dashboardClassificacao.php");
     } else{
         header("location:definirAvaliadores.php?erroSalvar");
     }
