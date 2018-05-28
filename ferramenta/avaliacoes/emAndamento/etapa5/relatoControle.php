@@ -32,7 +32,7 @@ class RelatoControle extends Banco{
     }
     
     public function obterAvaliadoresComPercepcao($idAvaliacao){
-        $sql = "SELECT DISTINCT login.nome, login.codlogin FROM login, avaliacaoPapeis, avaliacaoPercepcoes where login.codlogin = avaliacaoPapeis.idPessoa and avaliacaoPapeis.idAvaliacao =".$idAvaliacao." and avaliacaoPercepcoes.idAvaliador = login.codlogin;";
+        $sql = "SELECT DISTINCT login.nome, login.codlogin FROM login, avaliacaoPapeis, avaliacaoPercepcoes where login.codlogin = avaliacaoPapeis.idPessoa and avaliacaoPapeis.idAvaliacao=".$idAvaliacao." and avaliacaoPapeis.idAvaliacao = avaliacaoPercepcoes.idAvaliacao and avaliacaoPercepcoes.idAvaliador = login.codlogin;";
         $rtn = parent::Executar($sql);
         
         $array = array();

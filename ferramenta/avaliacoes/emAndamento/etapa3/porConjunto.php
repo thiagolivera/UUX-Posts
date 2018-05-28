@@ -49,7 +49,7 @@ if(count($listaPostagens) == 0){
                             if(strcmp($categoriasClassificacao[0]["tipo"], '1') == '0'){
                                 ?>
                                 <td style="width: 21.25%">
-                                    <select required name="classTipo<?php echo $i;?>[]" id="classTipo<?php echo $i;?>" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Tipo de PRU" style="width: 100%;">
+                                    <select required="required" name="classTipo<?php echo $i;?>[]" id="classTipo<?php echo $i;?>" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Tipo de PRU" style="width: 100%;">
                                         <option>Crítica</option>
                                         <option>Elogio</option>
                                         <option>Dúvida</option>
@@ -62,7 +62,7 @@ if(count($listaPostagens) == 0){
                             } if(strcmp($categoriasClassificacao[0]["intencao"], '1') == '0'){
                                 ?>
                                 <td style="width: 21.25%">
-                                    <select required name="classIntencao<?php echo $i;?>" id="classIntencao<?php echo $i;?>" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Intenção" style="width: 100%;">
+                                    <select required="required" name="classIntencao<?php echo $i;?>" id="classIntencao<?php echo $i;?>" style="width: 156px" class="form-control select2" multiple="multiple" data-placeholder="Intenção" style="width: 100%;">
                                         <option>Visceral</option>
                                         <option>Comportamental</option>
                                         <option>Reflexiva</option>
@@ -77,7 +77,7 @@ if(count($listaPostagens) == 0){
                             if(strcmp($categoriasClassificacao[0]["analiseSentimentos"], '1') == '0'){
                                 ?>
                                 <td>
-                                    <select required name="classSentimento<?php echo $i;?>" id="classSentimento<?php echo $i;?>" class="form-control select2" multiple="multiple" data-placeholder="Sentimento" style="width: 156px">
+                                    <select required="required" name="classSentimento<?php echo $i;?>" id="classSentimento<?php echo $i;?>" class="form-control select2" multiple="multiple" data-placeholder="Sentimento" style="width: 156px">
                                         <option>Positiva</option>
                                         <option>Negativa</option>
                                         <option>Neutra</option>

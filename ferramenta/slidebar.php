@@ -107,47 +107,6 @@
                 }
             ?>
         
-        <li class="header">POSTAGENS</li>
-        <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/postagensFavoritas.php") == 0){
-                ?>
-                    <li class="active">
-                        <a href="avaliacoes/postagensFavoritas.php">
-                            <i class="fa fa-star"></i> <span>Postagens favoritas</span>
-                        </a>
-                    </li>
-            <?php
-                } else{
-                    ?>
-                    <li>
-                        <a href="avaliacoes/postagensFavoritas.php">
-                            <i class="fa fa-star"></i> <span>Postagens favoritas</span>
-                        </a>
-                    </li>
-            <?php
-                }
-            ?>
-                    
-        <?php 
-                if(strcmp($_SERVER['PHP_SELF'], "/ferramenta/avaliacoes/postagensComDuvida.php") == 0){
-                ?>
-                    <li class="active">
-                        <a href="avaliacoes/postagensComDuvida.php">
-                            <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
-                        </a>
-                    </li>
-            <?php
-                } else{
-                    ?>
-                    <li>
-                        <a href="avaliacoes/postagensComDuvida.php">
-                            <i class="fa fa-question"></i> <span>Postagens com dúvidas</span>
-                        </a>
-                    </li>
-            <?php
-                }
-            ?>
-        
         <?php
         if($_SESSION['isAdmin'] == 1){
         ?>

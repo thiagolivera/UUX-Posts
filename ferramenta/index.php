@@ -121,39 +121,6 @@ include './verificarSessao.php';
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-xs-6" id="btn-favoritas">
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3 style="font-size: 30px">Postagens</h3>
-                            <p>Postagens favoritas</p>
-                         </div>
-
-                        <div class="icon">
-                            <i class="fa fa-star" style="padding-top: 15px"></i>
-                        </div>
-
-                        <a href="avaliacoes/postagensFavoritas.php" class="small-box-footer">
-                            Abrir <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-xs-6" id="btn-duvidas">
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3 style="font-size: 30px">Postagens</h3>
-                            <p>Postagens com dúvidas</p>
-                         </div>
-
-                        <div class="icon">
-                            <i class="fa fa-question" style="padding-top: 15px"></i>
-                        </div>
-
-                        <a href="avaliacoes/postagensComDuvida.php" class="small-box-footer">
-                            Abrir <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
                 <?php
                 if($_SESSION['isAdmin'] == 1){
                     ?>

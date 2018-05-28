@@ -88,6 +88,7 @@ $relatorioControle = new RelatorioControle();
                         </div>
                     </div>
                     <?php
+                        include '../etapa4/resultadosClassPRU.php';
                     if($categoriasAvaliacao["funcionalidade"]){
                         include("../etapa4/resultadosPorFuncionalidade.php");
                     }
