@@ -89,7 +89,7 @@ if(count($listaPostagens) == 0){
                                 <td>
                                     <select name="classUsabilidade<?php echo $i;?>[]" id="classUsabilidade<?php echo $i;?>" class="form-control select2" multiple="multiple" data-placeholder="Facetas Usabilidade" style="width: 156px">
                                         <option>Eficácia</option>
-                                        <option>Eficiencia</option>
+                                        <option>Eficiência</option>
                                         <option>Satisfação</option>
                                         <option>Segurança</option>
                                         <option>Utilidade</option>

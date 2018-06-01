@@ -143,7 +143,7 @@ if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['n
                   <label for="novaSenha" class="col-sm-2 control-label">Nova senha</label>
 
                   <div class="col-sm-10">
-                      <input type="password" class="form-control" name="novaSenha" id="novaSenha" placeholder="Nova senha">
+                      <input type="password" class="form-control" name="novaSenha" id="novaSenha" placeholder="Mínimo de 8 caracteres">
                   </div>
                 </div>
                   
@@ -151,7 +151,7 @@ if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['n
                   <label for="confirmaSenha" class="col-sm-2 control-label">Confirme a nova senha</label>
 
                   <div class="col-sm-10">
-                      <input type="password" class="form-control" name="novaSenha2" id="confirmaSenha" placeholder="Confirme a nova senha">
+                      <input type="password" class="form-control" name="novaSenha2" id="confirmaSenha" placeholder="Mínimo de 8 caracteres">
                   </div>
                 </div>
               </div>

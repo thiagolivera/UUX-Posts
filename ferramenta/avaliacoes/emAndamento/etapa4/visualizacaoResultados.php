@@ -12,7 +12,7 @@ $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
 
 if(isset($_POST["proximo"])){
     $controle->atualizarStatus($idAvalicao);
-    header("location:../etapa5/introetapa5.php");
+    header("location:../etapa5/introEtapa5.php");
 }
 ?>
 <!DOCTYPE html>
@@ -193,10 +193,6 @@ if(isset($_POST["proximo"])){
         
         function voltar(){
             window.location.href = "escolhaDadosResultados.php";
-        }
-
-        function proximo(){
-            window.location.href = "../etapa5/introEtapa5.php";
         }
     </script>
 </html>
