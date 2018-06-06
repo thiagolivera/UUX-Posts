@@ -92,6 +92,9 @@ $relatorioControle = new RelatorioControle();
                     if($categoriasAvaliacao["funcionalidade"]){
                         include("../etapa4/resultadosPorFuncionalidade.php");
                     }
+                    if($categoriasAvaliacao["funcionalidade"] && $categoriasAvaliacao["tipo"]){
+                        include './funcTipo.php';
+                    }
                     if($categoriasAvaliacao["tipo"]){
                         include("../etapa4/resultadosPorTipo.php");
                     }
