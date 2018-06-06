@@ -32,7 +32,7 @@ $numPRUS = $controle->obterNumeroPRUs($idAvalicao)[0];
                           }
                            ?></td>
                           <td><?php echo $resultadosFuncionalidade[$i]["quantidade"]; ?></td>
-                          <td><?php echo round((100*$resultadosFuncionalidade[$i]["quantidade"])/$numPRUS,2) . "%"; ?></td>
+                          <td><?php echo round((100*$resultadosFuncionalidade[$i]["quantidade"])/count($resultadosFuncionalidade),2) . "%"; ?></td>
                         </tr>
                     <?php
                     }
@@ -76,7 +76,7 @@ $resultadosFuncionalidadeElogio = $relatorioControle->obterFuncElogio($idAvalica
                           }
                            ?></td>
                           <td><?php echo $resultadosFuncionalidadeElogio[$i]["quantidade"]; ?></td>
-                          <td><?php echo round((100*$resultadosFuncionalidadeElogio[$i]["quantidade"])/$numPRUS,2) . "%"; ?></td>
+                          <td><?php echo round((100*$resultadosFuncionalidadeElogio[$i]["quantidade"])/count($resultadosFuncionalidadeElogio),2) . "%"; ?></td>
                         </tr>
                     <?php
                     }
@@ -120,7 +120,7 @@ $resultadosFuncionalidadeDuvida = $relatorioControle->obterFuncDuvida($idAvalica
                           }
                            ?></td>
                           <td><?php echo $resultadosFuncionalidadeDuvida[$i]["quantidade"]; ?></td>
-                          <td><?php echo round((100*$resultadosFuncionalidadeDuvida[$i]["quantidade"])/$numPRUS,2) . "%"; ?></td>
+                          <td><?php echo round((100*$resultadosFuncionalidadeDuvida[$i]["quantidade"])/count($resultadosFuncionalidadeDuvida),2) . "%"; ?></td>
                         </tr>
                     <?php
                     }
@@ -164,7 +164,7 @@ $resultadosFuncionalidadeComparacao = $relatorioControle->obterFuncComparacao($i
                           }
                            ?></td>
                           <td><?php echo $resultadosFuncionalidadeComparacao[$i]["quantidade"]; ?></td>
-                          <td><?php echo round((100*$resultadosFuncionalidadeComparacao[$i]["quantidade"])/$numPRUS,2) . "%"; ?></td>
+                          <td><?php echo round((100*$resultadosFuncionalidadeComparacao[$i]["quantidade"])/count($resultadosFuncionalidadeComparacao),2) . "%"; ?></td>
                         </tr>
                     <?php
                     }
@@ -208,7 +208,7 @@ $resultadosFuncionalidadeSugestao = $relatorioControle->obterFuncSugestao($idAva
                           }
                            ?></td>
                           <td><?php echo $resultadosFuncionalidadeSugestao[$i]["quantidade"]; ?></td>
-                          <td><?php echo round((100*$resultadosFuncionalidadeSugestao[$i]["quantidade"])/$numPRUS,2) . "%"; ?></td>
+                          <td><?php echo round((100*$resultadosFuncionalidadeSugestao[$i]["quantidade"])/count($resultadosFuncionalidadeSugestao),2) . "%"; ?></td>
                         </tr>
                     <?php
                     }
@@ -233,7 +233,7 @@ $resultadosFuncionalidadeAjuda = $relatorioControle->obterFuncAjuda($idAvalicao)
 
 <div class="box box-default">
     <div class="box-header with-border">
-        <h3 class="box-title">Funcionalidades que os usuários pediram ajuda</h3>
+        <h3 class="box-title">Funcionalidades que os usuários forneceram ajuda</h3>
     </div>
 
     <div class="box-body">
@@ -260,7 +260,7 @@ $resultadosFuncionalidadeAjuda = $relatorioControle->obterFuncAjuda($idAvalicao)
                           }
                            ?></td>
                           <td><?php echo $resultadosFuncionalidadeAjuda[$i]["quantidade"]; ?></td>
-                          <td><?php echo round((100*$resultadosFuncionalidadeAjuda[$i]["quantidade"])/$numPRUS,2) . "%"; ?></td>
+                          <td><?php echo round((100*$resultadosFuncionalidadeAjuda[$i]["quantidade"])/count($resultadosFuncionalidadeAjuda),2) . "%"; ?></td>
                         </tr>
                     <?php
                     }

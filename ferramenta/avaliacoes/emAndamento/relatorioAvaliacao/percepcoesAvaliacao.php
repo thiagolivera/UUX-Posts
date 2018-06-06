@@ -13,25 +13,42 @@ $percepcoes = $relatorioControle->obterPercepcoes($idAvalicao);
             <ul>
                 <?php
                 for($i=0; $i < count($percepcoes); $i++){
-                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q1"];?> </li> <?php
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php
+                    if (strcmp($percepcoes[$i]["q1"],"") == 0){
+                        echo "(não informado)";
+                    } else{
+                        echo $percepcoes[$i]["q1"];
+                    }
+                    ?> </li>
+                <?php
                 }
-                
                 ?>
             </ul>
             <label for="comment">2) Teve alguma postagem que lhe chamou atenção? Por quê?</label>
             <ul>
                 <?php
                 for($i=0; $i < count($percepcoes); $i++){
-                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q2"];?> </li> <?php
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php
+                    if (strcmp($percepcoes[$i]["q2"],"") == 0){
+                        echo "(não informado)";
+                    } else{
+                        echo $percepcoes[$i]["q2"];
+                    }
+                    ?> </li> <?php
                 }
-                
                 ?>
             </ul>
             <label for="comment">3) O que você percebeu durante esta análise?</label>
             <ul>
                 <?php
                 for($i=0; $i < count($percepcoes); $i++){
-                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q3"];?> </li> <?php
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php
+                    if (strcmp($percepcoes[$i]["q3"],"") == 0){
+                        echo "(não informado)";
+                    } else{
+                        echo $percepcoes[$i]["q3"];
+                    }
+                    ?> </li> <?php
                 }
                 
                 ?>
@@ -40,7 +57,13 @@ $percepcoes = $relatorioControle->obterPercepcoes($idAvalicao);
             <ul>
                 <?php
                 for($i=0; $i < count($percepcoes); $i++){
-                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q4"];?> </li> <?php
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php
+                    if (strcmp($percepcoes[$i]["q4"],"") == 0){
+                        echo "(não informado)";
+                    } else{
+                        echo $percepcoes[$i]["q4"];
+                    }
+                    ?> </li> <?php
                 }
                 
                 ?>
@@ -49,7 +72,13 @@ $percepcoes = $relatorioControle->obterPercepcoes($idAvalicao);
             <ul>
                 <?php
                 for($i=0; $i < count($percepcoes); $i++){
-                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q5"];?> </li> <?php
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php
+                    if (strcmp($percepcoes[$i]["q5"],"") == 0){
+                        echo "(não informado)";
+                    } else{
+                        echo $percepcoes[$i]["q5"];
+                    }
+                    ?> </li> <?php
                 }
                 
                 ?>
@@ -58,9 +87,14 @@ $percepcoes = $relatorioControle->obterPercepcoes($idAvalicao);
             <ul>
                 <?php
                 for($i=0; $i < count($percepcoes); $i++){
-                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php echo $percepcoes[$i]["q6"];?> </li> <?php
+                    ?> <li>Avaliador <?php echo $i + 1; ?>: <?php
+                    if (strcmp($percepcoes[$i]["q6"],"") == 0){
+                        echo "(não informado)";
+                    } else{
+                        echo $percepcoes[$i]["q6"];
+                    }
+                    ?> </li> <?php
                 }
-                
                 ?>
             </ul>
         </div>
