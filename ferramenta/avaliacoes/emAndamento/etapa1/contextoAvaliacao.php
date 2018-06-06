@@ -141,21 +141,21 @@
                         <div class="form-group">
                             <label for="fisico" class="col-sm-2 control-label">Ambiente físico</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="ambFisico" id="fisico" placeholder="Ex.: Os usuários usam o aplicativo em casa"><?php echo $contextoAtual[1]; ?></textarea>
+                                <textarea class="form-control" name="ambFisico" id="fisico" placeholder="Ex.: os usuários usam o aplicativo em casa"><?php echo $contextoAtual[1]; ?></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="social" class="col-sm-2 control-label">Ambiente social</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="ambSocial" id="social" placeholder="Ex.: Os usuários usam o aplicativo em casa"><?php echo $contextoAtual[2]; ?></textarea>
+                                <textarea class="form-control" name="ambSocial" id="social" placeholder="Ex.: em família, no trabalho"><?php echo $contextoAtual[2]; ?></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                           <label for="cultural" class="col-sm-2 control-label">Ambiente cultural</label>
                           <div class="col-sm-10">
-                              <textarea class="form-control" name="ambCultural" id="cultural" placeholder="Ex.: Os usuários usam o aplicativo em casa"><?php echo $contextoAtual[3]; ?></textarea>
+                              <textarea class="form-control" name="ambCultural" id="cultural" placeholder="Ex.: universitários, crianças, motoristas"><?php echo $contextoAtual[3]; ?></textarea>
                           </div>
                         </div>
                         

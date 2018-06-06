@@ -75,5 +75,18 @@ class RelatorioControle extends Banco{
         return $array;
     }
     
+    public function obterNumeroPostagens($idAvaliacao){
+        $sql = "SELECT count(*) FROM `postagens` WHERE `idAvaliacao` = ".$idAvaliacao.";";
+        $rtn = parent::Executar($sql);
+        
+        $array = array();
+        
+        while($row = @mysqli_fetch_assoc($rtn)){
+            $array[] = $row;
+        }
+        return $array[0]["count(*)"];
+        
+    }
+    
     
 }

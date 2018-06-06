@@ -2,6 +2,7 @@
 
 $avaliacaoInfo = $relatorioControle->obterInfoAvaliacao($idAvalicao);
 $funcionalidades = $relatorioControle->obterFuncionalidades($idAvalicao);
+$numPostagens = $relatorioControle->obterNumeroPostagens($idAvalicao);
         
 ?>
 
@@ -15,6 +16,7 @@ $funcionalidades = $relatorioControle->obterFuncionalidades($idAvalicao);
             <b>Sistema avaliado:</b> <?php echo $avaliacaoInfo["nomeSistema"]; ?> <br>
             <b>Plataforma do sistema:</b> <?php echo $avaliacaoInfo["plataforma"]; ?> <br>
             <b>Fonte das postagens:</b> <?php echo $avaliacaoInfo["fontePostagens"]; ?> <br>
+            <b>Número de postagens extraídas:</b> <?php echo $numPostagens; ?> <br>
             <b>Funcionalidades:</b> <?php
             for($i=0; $i < count($funcionalidades); $i++){
                 if(strcmp($funcionalidades[$i]["funcionalidade"], "") == 0){
