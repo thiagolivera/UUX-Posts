@@ -137,25 +137,39 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                             <div class="box-body">
                                 <form action="extracaoPlanilhaControle.php" method="POST" enctype="multipart/form-data"> 
                                     <div class="form-group">
-                                        <label for="fileUpload" class="control-label">Envie postagens em formato CSV</label> <br>
+                                        <label for="formaExtracao" class="control-label">Forma de extração</label> <br>
+                                        <div>
+                                            <input required="required" type="text" class="form-control" name="formaExtracao" id="formaExtracao" placeholder="Ex.: Automática utilizando o crawler Apify" maxlength="100">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="periodoExtracao" class="control-label">Período de extração</label> <br>
+                                        <div>
+                                            <input required="required" type="text" class="form-control" name="periodoExtracao" id="periodoExtracao" placeholder="Ex.: 01 a 05 de maio de 2018" maxlength="100">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="fileUpload" class="control-label">Envie um arquivo com postagens em formato CSV</label> <br>
                                         <div class="btn btn-default btn-file">
                                             <div class="botaoArquivo"> <i class="fa fa-paperclip"></i> Escolher arquivo CSV</div>
-                                            <input id="fileUpload" required type="file" accept=".csv" name="fileUpload">
+                                            <input id="fileUpload" required="required" type="file" accept=".csv" name="fileUpload">
                                         </div> <br>
+                                    </div>
 
-                                        <div>
-                                            <br>
-                                            <label class="control-label">Restrições do arquivo CSV</label>
-                                            <ul>
-                                                <li>São aceitos arquivos que tenham as colunas <strong>text</strong> e <strong>date</strong></li>
-                                                <li>A coluna <strong>text</strong> É OBRIGATÓRIA e deve conter o texto da postagem entre aspas</li>
-                                                <li>A coluna <strong>date</strong> deve conter a data da postagem (caso não tenha essa coluna, a data será definida como null)</li>
-                                                <li>As colunas devem estar separadas por vírgula</li>
-                                                <li><strong>Certifique-se de que cada postagem está em uma linha do arquivo CSV</strong> </li>
-                                                <li>Caso o arquivo enviado não obedecer a tais restrições, ele será lido incorretamente</li>
-                                                <li><a href="exemplo-csv-uuxposts.csv">Clique aqui e baixe um arquivo CSV de exemplo</a></li>
-                                            </ul>
-                                        </div>
+                                    <div class="form-group">
+                                        <br>
+                                        <label class="control-label">Restrições do arquivo CSV</label>
+                                        <ul>
+                                            <li>São aceitos arquivos que tenham as colunas <strong>text</strong> e <strong>date</strong></li>
+                                            <li>A coluna <strong>text</strong> É OBRIGATÓRIA e deve conter o texto da postagem entre aspas</li>
+                                            <li>A coluna <strong>date</strong> deve conter a data da postagem (caso não tenha essa coluna, a data será definida como null)</li>
+                                            <li>As colunas devem estar separadas por vírgula</li>
+                                            <li><strong>Certifique-se de que cada postagem está em uma linha do arquivo CSV</strong> </li>
+                                            <li>Caso o arquivo enviado não obedecer a tais restrições, ele será lido incorretamente</li>
+                                            <li><a href="exemplo-csv-uuxposts.csv">Clique aqui e baixe um arquivo CSV de exemplo</a></li>
+                                        </ul>
                                     </div>
                             </div>
                             <div id="btnSalvar" style="float: right; padding-top: 10px; display: none">
@@ -191,7 +205,6 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
 </style>
 
 <script>
-    
     var div = document.getElementsByClassName("botaoArquivo")[0];
     var input = document.getElementById("fileUpload");
 

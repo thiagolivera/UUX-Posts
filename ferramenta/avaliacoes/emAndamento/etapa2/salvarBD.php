@@ -6,8 +6,9 @@ class SalvarNoBD extends Banco{
     public function __construct() {
         
     }
-    
-    public function salvarPostagens($idAvaliacao, $arquivo){
+
+
+    public function salvarPostagens($idAvaliacao, $arquivo, $formaExtracao, $periodoExtracao){
         $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
         mysqli_autocommit($conexao, FALSE);
         $erro = 0;
@@ -32,6 +33,12 @@ class SalvarNoBD extends Banco{
             if (!mysqli_query($conexao, $sql)){
                 $erro++; //se der erro incrementa no contador para cancelar a transação
             }
+        }
+        
+        //3) atualiza info de extracao
+        $sql = "UPDATE `avaliacaoInfo` SET `formaExtracao`= '".$formaExtracao."',`periodoExtracao`= '".$periodoExtracao."' WHERE `idAvaliacao` = '".$idAvaliacao."';";
+        if (!mysqli_query($conexao, $sql)){
+                $erro++; //se der erro incrementa no contador para cancelar a transação
         }
         
         //Verifica se houve erro para cancelar a transação

@@ -16,6 +16,8 @@ $numPostagens = $relatorioControle->obterNumeroPostagens($idAvalicao);
             <b>Sistema avaliado:</b> <?php echo $avaliacaoInfo["nomeSistema"]; ?> <br>
             <b>Plataforma do sistema:</b> <?php echo $avaliacaoInfo["plataforma"]; ?> <br>
             <b>Fonte das postagens:</b> <?php echo $avaliacaoInfo["fontePostagens"]; ?> <br>
+            <b>Forma de extração:</b> <?php echo $avaliacaoInfo["formaExtracao"]; ?> <br>
+            <b>Período de Extração:</b> <?php echo $avaliacaoInfo["periodoExtracao"]; ?> <br>
             <b>Número de postagens extraídas:</b> <?php echo $numPostagens; ?> <br>
             <b>Funcionalidades:</b> <?php
             for($i=0; $i < count($funcionalidades); $i++){

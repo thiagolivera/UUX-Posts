@@ -2,7 +2,7 @@
 
 include './salvarBD.php';
 
-if(isset($_FILES['fileUpload'])){
+if(isset($_POST["formaExtracao"]) && isset($_POST["periodoExtracao"]) && isset($_FILES['fileUpload'])){
     date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
 
     $ext = strtolower(substr($_FILES['fileUpload']['name'],-4)); //Pegando extensão do arquivo
@@ -15,7 +15,7 @@ if(isset($_FILES['fileUpload'])){
     $idAvalicao = $_SESSION['idAvaliacao'];
     
     $salvar = new SalvarNoBD();
-    if($salvar->salvarPostagens($idAvalicao, $new_name)){
+    if($salvar->salvarPostagens($idAvalicao, $new_name, $_POST["formaExtracao"], $_POST["periodoExtracao"])){
         unlink("temp/".$new_name);
         header("location:postagensExtraidas.php");
     }
