@@ -5,6 +5,12 @@ class AvaliacoesAndamentoControle extends Banco{
     public function __construct() {
 
     }
+    
+    public function excluirAvaliacao($idAvaliacao){
+        $sql = "DELETE FROM `avaliacaoInfo` WHERE `avaliacaoInfo`.`idAvaliacao` = ".$idAvaliacao.";";
+        $rtn = parent::Executar($sql);
+        header("location:avaliacoesAndamento.php?sucessoExcluir");
+    }
 
     public function obterAvaliacoesUsuario($idPessoa){
         $sql = "SELECT avaliacaoPapeis.idAvaliacao, avaliacaoInfo.nomeAvaliacao, avaliacaoInfo.plataforma, "

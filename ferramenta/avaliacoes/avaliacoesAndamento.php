@@ -4,6 +4,10 @@ include './avaliacoesAndamentoControle.php';
 $controleAvaliacaoAndamento = new AvaliacoesAndamentoControle();
 $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SESSION['login']);
 
+if(isset($_GET["excluir"])){
+    $controleAvaliacaoAndamento->excluirAvaliacao($_GET["idAvaliacao"]);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,7 +83,11 @@ $avaliacoesAndamento = $controleAvaliacaoAndamento->obterAvaliacoesUsuario($_SES
                             <td><?php echo $avaliacoesAndamento[$i]["status"]; ?></td>
                             <td>
                                 <a class="btn btn-sm btn-default" title="Continuar avaliacao" href="controleAvaliacoes.php?continuar=1&idAvaliacao=<?php echo $avaliacoesAndamento[$i]["idAvaliacao"]; ?>&status=<?php echo $avaliacoesAndamento[$i]["status"]; ?>&papel=<?php echo $avaliacoesAndamento[$i]["papel"]; ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                                <a class="btn btn-sm btn-default disabled" title="Excluir avaliacao"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
+                                <?php if(strcmp($avaliacoesAndamento[$i]["papel"], "Gerente") == 0){
+                                    ?> <a class="btn btn-sm btn-default" title="Excluir avaliacao" href="avaliacoesAndamento.php?excluir=1&idAvaliacao=<?php echo $avaliacoesAndamento[$i]["idAvaliacao"];?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a> <?php
+                                } else{
+                                    ?> <a class="btn btn-sm btn-default disabled" title="Excluir avaliacao"><i class="fa fa-trash-o" aria-hidden="true"></i></a>  <?php
+                                } ?>
                             </td>
                         </tr>
                         <?php

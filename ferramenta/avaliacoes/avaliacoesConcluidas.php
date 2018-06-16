@@ -73,8 +73,11 @@ $avaliacoesConcluidas = $controleAvaliacaoConcluidas->obterAvaliacoesUsuario($_S
                             <td><?php echo $avaliacoesConcluidas[$i]["dataTermino"]; ?></td>
                             <td><?php echo $avaliacoesConcluidas[$i]["nomeAvaliacao"]; ?></td>
                             <td><?php echo $avaliacoesConcluidas[$i]["nomeSistema"]; ?></td>
-                            <td><a class="btn btn-sm btn-default" title="Abrir relatório" href="emAndamento/relatorioAvaliacao/relatorioAvaliacao.php<?php $_SESSION['idAvaliacao'] = $avaliacoesConcluidas[$i]["idAvaliacao"];?>"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
-                            </td>
+                            <td><a class="btn btn-sm btn-default" title="Abrir relatório" href="abrirRelatorioControle.php?id=<?php echo $avaliacoesConcluidas[$i]["idAvaliacao"]; ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></td>
+                            
+                    <form id="myForm" method="POST" action="emAndamento/relatorioAvaliacao/relatorioAvaliacao.php">
+                                <input type="hidden" value="<?php echo $avaliacoesConcluidas[$i]["idAvaliacao"];?>">
+                            </form>
                         </tr>
                         <?php
                         }
