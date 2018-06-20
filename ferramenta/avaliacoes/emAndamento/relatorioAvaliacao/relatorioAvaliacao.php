@@ -3,7 +3,7 @@ include '../verificarSessao.class';
 include_once '../etapa4/interpretacaoControle.php';
 include_once './relatorioControle.php';
 
-$idAvalicao = $_SESSION['idAvaliacao'];
+$idAvalicao = $_GET["id"];
 $controle = new InterpretacaoControle();
 $avaliacaoAtual = $controle->obterAvaliacao($idAvalicao);
 $categoriasAvaliacao = $controle->obterCategoriasAvaliacao($idAvalicao)[0];
