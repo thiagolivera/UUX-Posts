@@ -33,7 +33,7 @@ class Banco{
         
         if(mysqli_affected_rows($this->con) > 0){
             return $this->qry;
-        } else{
+        } else {
             return 0;
         }
         

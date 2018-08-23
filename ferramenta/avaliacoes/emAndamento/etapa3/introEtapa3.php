@@ -7,6 +7,8 @@ $status = $controle->obterStatus($_SESSION["idAvaliacao"])[0];;
 
 if(isset($_POST["automatica"])){
     //redireciona para a página de classificação automática
+    header("location:classificacaoAutomatica.php");
+    //$controle->classificacaoAutomatica($_SESSION["idAvaliacao"],"Critica");
 } else if(isset($_POST["avaliadores"])){
     header("location:definirAvaliadores.php");
 }
@@ -168,8 +170,8 @@ if(isset($_POST["automatica"])){
                 <div class="modal-body">
                     <div class="row">
                         <form action="" method="POST">
-                            <div class="col-md-6 disabled" style="display: flex; justify-content: center; padding-top: 15px">
-                                <button type="submit"  class="btn btn-default pull-left disabled" style="width: 350px">
+                            <div class="col-md-6" style="display: flex; justify-content: center; padding-top: 15px">
+                                <button type="submit"  class="btn btn-default pull-left" style="width: 350px">
                                     <input type="hidden" value="automatica" name="automatica">
                                     <img class="img-responsive center-block" src="../../../images/automatica.png" width="150px">
                                     <br><strong style="font-size: 16px">Classificação automática</strong>
