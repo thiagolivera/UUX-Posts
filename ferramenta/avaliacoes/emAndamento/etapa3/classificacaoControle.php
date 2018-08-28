@@ -156,9 +156,7 @@ class ClassificacaoControle extends Banco{
             $sql = $sql."'%".$value."%'"." OR postagem LIKE ";
         }
         $sql = substr($sql, 0,strlen($sql)-18);
-        //print($sql);
         $valores = parent::Executar($sql);
-        //print($valores);
         while($row = @mysqli_fetch_assoc($valores)){
             $array[] = $row;
         }

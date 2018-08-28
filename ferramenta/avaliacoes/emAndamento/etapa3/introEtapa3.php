@@ -8,6 +8,7 @@ $status = $controle->obterStatus($_SESSION["idAvaliacao"])[0];;
 if(isset($_POST["automatica"])){
     //redireciona para a página de classificação automática
     header("location:classificacaoAutomatica.php");
+    
     //$controle->classificacaoAutomatica($_SESSION["idAvaliacao"],$_POST);
 } else if(isset($_POST["avaliadores"])){
     header("location:definirAvaliadores.php");
