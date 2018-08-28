@@ -5,12 +5,7 @@ include './classificacaoControle.php';
 $controle = new ClassificacaoControle();
 $status = $controle->obterStatus($_SESSION["idAvaliacao"])[0];;
 
-if(isset($_POST["automatica"])){
-    //redireciona para a página de classificação automática
-    header("location:classificacaoAutomatica.php");
-    
-    //$controle->classificacaoAutomatica($_SESSION["idAvaliacao"],$_POST);
-} else if(isset($_POST["avaliadores"])){
+if(isset($_POST["avaliadores"])){
     header("location:definirAvaliadores.php");
 }
 ?>
@@ -298,8 +293,7 @@ if(isset($_POST["automatica"])){
 
                             <div class="modal-body">
                                 <div class="row">
-                                    <form class="form-horizontal" action="" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">
-                                        <input type="hidden" value="automatica" name="automatica">
+                                    <form class="form-horizontal" action="classificacaoAutomatica.php" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">
                                         <div class="form-group" style="padding-left: 20px">
                                             <div class="col-sm-12">
                                                 <div class="col-sm-6">

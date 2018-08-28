@@ -1,22 +1,22 @@
 <?php
 include '../verificarSessao.class';
 include './avaliadoresControle.php';
+include './classificacaoControle.php';
 
 if(!isset($_SESSION['idAvaliacao'])){
     header("location:erro.php");
 }
 
 $idAvalicao = $_SESSION['idAvaliacao'];
-
 $avaliadoresControle = new AvaliadoresControle();
 
 //Se não for o gerente de avaliação, não tem acesso a essa página, então.. sai
 if(!$avaliadoresControle->isGerente($idAvalicao, $_SESSION['login'])){
     header("location:erro.php");
 }
-
+$controle = new ClassificacaoControle();
+$postagens = $controle->classificacaoAutomatica($_SESSION["idAvaliacao"],$_POST);
 $avaliacaoAtual = $avaliadoresControle->obterAvaliacao($idAvalicao);
-$categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAvalicao);
 ?>
 <!DOCTYPE html>
 <html>
@@ -87,16 +87,25 @@ $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAva
       </ol>
     </section>
 
+    <?php include_once("../avaliacaoEmAndamento.php");?>
+
     <section class="content">
         <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0; padding-right: 0;">
             <div class="col-md-12 col-sm-12 col-xs-12" style=" padding-left: 0;">
-                <div class="box box-default">
+                <div class="box box-body">
                     <div class="box-header with-border">
                         <h3 class="box-title">Postagens classificadas</h3>
-                        <br><i>nenhuma postagem encontrada com esses filtros</i>
+                        <br><i>Postagens classificadas por:
+                            <?php
+                                while ($fruit_name = current($_POST)){
+                                    if (key($_POST) != "filtros") echo key($_POST);
+                                    if(next($_POST) && key($_POST) != "filtros") echo ", ";
+                                }
+                            ?>
+                        </i>
                     </div>
-                    <div class="box-body" style="padding-left: 15px; padding-right: 15px">
-                        <table id="example" class="table table-bordered table-hover text-center">
+                    <div class="table" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                        <table id="example" class="table table-hover no-margin text-center table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th style="width:75px">ID</th>
@@ -105,24 +114,38 @@ $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAva
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($postagens as $postagen){
+                                ?>
+                                <tr>
+                                    <td><?php echo $postagen["idPostagem"]; ?></td>
+                                    <td><?php echo $postagen["data"]; ?></td>
+                                    <td><?php echo $postagen["postagem"]; ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <div class="row" style="display: block; padding-left: 15px; padding-right: 15px">
+                    <div class="col-md-4 col-xs-4" id="voltar" style="padding-top: 10px;">
+                        <button type="button" class="btn btn-info" onclick="voltar();" style="margin-left: 10px;">Voltar</button>
+                    </div>
+
+                    <div class="col-md-4 col-xs-4" id="excluirPostagens" style="padding-top: 10px; display: flex; justify-content: center;">
+                        <button type="button" class="btn btn-info" onclick="excluirTudo();" style="margin-right: 10px;">Excluir todas as postagens</button>
+                    </div>
+
+                    <div class="col-md-4 col-xs-4" id="proximo" style="padding-top: 10px;">
+                        <button type="button" class="btn btn-info" onclick="proximo();" style="margin-right: 10px; float: right">Salvar e próximo</button>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-3" id="btnVoltar" style="float: left; padding-bottom: 10px;">
-            <button class="btn btn-info" onclick="voltar()" type="button" style="margin-right: 10px;">Voltar</button>
-        </div>
-        <div style="float: right; padding-bottom: 10px;">
-            <form action="definirAvaliadores.php" method="POST">
-                <input type="hidden" name="salvar" value="salvar">
-                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
-            </form>
         </div>
         <a style="color: #ecf0f5">'</a>
     </section>
-      <br>
   </div>
     <?php include_once("../../../rodape.php");?>
 </div>
@@ -132,11 +155,20 @@ $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAva
 <script src="../../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<style>
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+        border-top: 1px solid #ddd;
+    }
+</style>
+
 <script>
     $(function () {
         $('#example').DataTable({
             "language": {
-                "sEmptyTable": "nenhuma postagem foi encontrada com esses filtros",
+                "sEmptyTable": "Nenhum registro encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
                 "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
                 "sInfoFiltered": "(Filtrados de _MAX_ registros)",
@@ -145,7 +177,7 @@ $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAva
                 "sLengthMenu": "Exibindo até _MENU_ resultados por página",
                 "sLoadingRecords": "Carregando...",
                 "sProcessing": "Processando...",
-                "sZeroRecords": "Nenhum validador encontrado",
+                "sZeroRecords": "Nenhum registro encontrado",
                 "sSearch": "Pesquisar: ",
                 "oPaginate": {
                     "sNext": "Próximo",
@@ -157,13 +189,7 @@ $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAva
                     "sSortAscending": ": Ordenar colunas de forma ascendente",
                     "sSortDescending": ": Ordenar colunas de forma descendente"
                 }
-            },
-            'paging'      : false,
-            'lengthChange': false,
-            'searching'   : false,
-            'ordering'    : false,
-            'info'        : false,
-            'autoWidth'   : false
+            }
         })
     });
   
@@ -172,6 +198,9 @@ $categoriasClassificacao = $avaliadoresControle->obterCategoriasAvaliacao($idAva
     }
     function voltar(){
         window.location.href = "./introEtapa3.php";
+    }
+    function excluirTudo(){
+        window.location.href = "postagensExtraidas.php?excluirTudo";
     }
 </script>
 </html>

@@ -160,19 +160,11 @@ class ClassificacaoControle extends Banco{
         while($row = @mysqli_fetch_assoc($valores)){
             $array[] = $row;
         }
-        ?>
-        <pre>
-            <?php
-            print_r($sql);
-            print_r($filtro);
-            print_r($array);
-            ?>
-        </pre>
-        <?php
+        return $array;
     }
 
     private function buscarFiltro($filtro){
-        $termos = array();;
+        $termos = array();
         if (isset($filtro['Verbos'])) $termos = array_merge($termos, array("twitter" , "ter" , "dar" , "ficar" , "poder" , "fazer" , "dever" , "seguir" , "usar" , "querer" , "achar" , "saber" , "ver" , "entrar" , "existir" , "mudar" , "editar" , "deixar" , "falar" , "apagar" , "amar" , "olhar" , "gostar" , "dizer" , "vir" , "passar" , "começar" , "parecer" , "perder" , "indicar" , "responder" , "curtir" , "carregar"));
         if (isset($filtro['Substantivos'])) $termos = array_merge($termos, array("twitter" , "facebook" , "tweet" , "face" , "orkut" , "erro" , "problema" , "sugestão" , "pessoa" , "botão" , "celular" , "app" , "gente" , "pagina" , "comentário" , "opção" , "caractere" , "conta" , "rede" , "aplicativo" , "following" , "follower" , "obrigado" , "tempo" , "vida" , "galera" , "seguidor"));
         if (isset($filtro['Adjetivos'])) $termos = array_merge($termos, array("twitter" , "bom" , "ruim" , "fácil" , "novo" , "direto" , "difícil" , "rápido" , "louco" , "maldito" , "triste" , "lento" , "confuso" , "perdido" , "lindo" , "legal" , "chato" , "feliz" , "querido"));
