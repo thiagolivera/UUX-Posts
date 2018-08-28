@@ -264,7 +264,7 @@ if(isset($_POST["automatica"])){
                                     <div class="form-group" style="padding-left: 20px">
                                         <div class="col-sm-12">
                                             <div class="custom-radio">
-                                                <input type="radio" class="form-check-input" id="booleana" name="formaAvaliacao" onclick="habilita()">
+                                                <input type="radio" class="form-check-input" id="booleana" name="formaAvaliacao" onclick="habilita(this.id, 'proximo')">
                                                 <label class="custom-control-label" for="booleana">Booleana</label>
                                             </div>
                                         </div>
@@ -351,13 +351,13 @@ if(isset($_POST["automatica"])){
                                                         <input type="checkbox" name="Afeto" class="minimal"> Classificação por afeto
                                                     </label>
                                                     <br>
-                                                </div>
-                                                <div class="col-sm-6">
+
                                                     <label style="font-weight: 500;">
                                                         <input type="checkbox" name="Confianca" class="minimal"> Classificação por confiança
                                                     </label>
                                                     <br>
-
+                                                </div>
+                                                <div class="col-sm-6">
                                                     <label style="font-weight: 500;">
                                                         <input type="checkbox" name="Eficacia" class="minimal"> Classificação por eficácia
                                                     </label>
@@ -402,6 +402,16 @@ if(isset($_POST["automatica"])){
                                                         <input type="checkbox" name="Utilidade" class="minimal"> Classificação por utilidades
                                                     </label>
                                                     <br>
+
+                                                    <label style="font-weight: 500;">
+                                                        <input type="checkbox" id="outros" name="Outros" onclick="habilita(this.id, 'outro')" class="minimal"> Outro:
+                                                    </label>
+                                                    <br>
+
+                                                    <label style="font-weight: 500;">
+                                                        <input type="text" id="outro" name="filtros" class="minimal" disabled>
+                                                    </label>
+                                                    <br>
                                                 </div>
                                                 <br>
                                             </div>
@@ -443,9 +453,9 @@ if(isset($_POST["automatica"])){
                 placeholder: 'Selecione',
                 minimumResultsForSearch: Infinity
             });
-        })
-        function habilita() {
-            document.getElementById('proximo').disabled = document.getElementById('booleana').checked !== true;
+        });
+        function habilita(e, desativa) {
+            document.getElementById(desativa).disabled = document.getElementById(e).checked !== true;
         }
         function deshabilita() {
             document.getElementById('proximo').disabled = true;

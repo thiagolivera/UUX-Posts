@@ -165,6 +165,8 @@ class ClassificacaoControle extends Banco{
         ?>
         <pre>
             <?php
+            print_r($sql);
+            print_r($filtro);
             print_r($array);
             ?>
         </pre>
@@ -194,6 +196,10 @@ class ClassificacaoControle extends Banco{
         if (isset($filtro['Seguranca'])) $termos = array_merge($termos, array("twitter" , "saber" , "sistema" , "começar" , "mau" , "fazer" , "dar" , "aparecer" , "errar" , "apertar" , "poder" , "ruim" , "erro" , "digitar" , "constar" , "faltar" , "lista" , "odiar" , "ver" , "ficar" , "querer" , "mexer" , "perceber" , "problema" , "clicar" , "medo" , "enter" , "raiva" , "teclar" , "espaço" , "criar" , "remover" , "complicar"));
         if (isset($filtro['Suporte'])) $termos = array_merge($termos, array("twitter" , "fazer" , "sistema" , "saber" , "preencher" , "ver" , "esperar" , "problema" , "solicitar" , "clicar" , "clique" , "consultar" , "providenciar" , "pedir" , "aparecer" , "dar" , "errar" , "poder" , "erro" , "pergunta" , "vir" , "acreditar" , "continuar" , "dever" , "resolver" , "funcionar" , "tentar" , "conseguir" , "cadastrar" , "complexo" , "procurar" , "selecionar"));
         if (isset($filtro['Utilidade'])) $termos = array_merge($termos, array("twitter" , "poder" , "saber" , "usar" , "ver" , "excluir" , "dar" , "ficar" , "ruim" , "problema" , "dever" , "mozilla" , "querer" , "caractere" , "demorar" , "sistema" , "tirar" , "objetivo" , "limite" , "escrever" , "entrar" , "precisar" , "abrir" , "linha" , "face" , "deixar" , "utilizar" , "editar" , "palavra" , "gostar" , "achar" , "novo" , "fazer" , "ótimo" , "ter" , "parecer" , "próximo"));
+        if (isset($filtro['Outros'])){
+            $palavras = explode(",",$filtro['filtros']);
+            $termos = array_merge($termos, $palavras);
+        }
         return $termos;
     }
 }
