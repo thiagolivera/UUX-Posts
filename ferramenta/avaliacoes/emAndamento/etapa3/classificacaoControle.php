@@ -124,7 +124,6 @@ class ClassificacaoControle extends Banco{
         parent::Executar($sql);
     }
 
-
     public function obterAvaliacao($id){
         $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
         $rtn = self::Executar($sql);
@@ -137,7 +136,7 @@ class ClassificacaoControle extends Banco{
         return mysqli_fetch_row($rtn);
     }
 
-        public function obterCategoriasAvaliacao($idAvaliacao){
+    public function obterCategoriasAvaliacao($idAvaliacao){
         $sql = "SELECT * FROM avaliacaoCategorias WHERE idavaliacao = " . $idAvaliacao . ";";
         $rtn = parent::Executar($sql);
         
@@ -151,7 +150,8 @@ class ClassificacaoControle extends Banco{
 
     public function classificacaoAutomatica($avaliacao, $filtro){
         $palavras = $this->buscarFiltro($filtro);
-        $sql = "select * from postagens where idAvaliacao = ".$avaliacao." and postagem LIKE ";
+        $array = null;
+        $sql = "select * from postagens where BINARY idAvaliacao = ".$avaliacao." and postagem LIKE ";
         foreach ($palavras as $value){
             $sql = $sql."'%".$value."%'"." OR postagem LIKE ";
         }
@@ -193,4 +193,3 @@ class ClassificacaoControle extends Banco{
         return $termos;
     }
 }
-?>
