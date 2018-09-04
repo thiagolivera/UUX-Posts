@@ -3,6 +3,7 @@
 include_once '../../../Banco.php';
 
 class ClassificacaoControle extends Banco{
+    private $postagensClassificadas;
 
     public function salvarClassificacao(Classificacao $classificacao, ClassificaoTipo $classTipo, ClassificaoUsabilidade $classUsabilidade, ClassificacaoUX $classUX){
         $erro = 0;
@@ -153,13 +154,14 @@ class ClassificacaoControle extends Banco{
         $array = null;
         $sql = "select * from postagens where BINARY idAvaliacao = ".$avaliacao." and postagem LIKE ";
         foreach ($palavras as $value){
-            $sql = $sql."'%".$value."%'"." OR postagem LIKE ";
+            $sql = $sql."'%".trim($value)."%'"." OR postagem LIKE ";
         }
         $sql = substr($sql, 0,strlen($sql)-18);
         $valores = parent::Executar($sql);
         while($row = @mysqli_fetch_assoc($valores)){
             $array[] = $row;
         }
+        $this->postagensClassificadas = $array;
         return $array;
     }
 
@@ -192,4 +194,8 @@ class ClassificacaoControle extends Banco{
         }
         return $termos;
     }
+
+    public function getPostagensClassificadas(){
+        return $this->postagensClassificadas;
+}
 }

@@ -207,7 +207,7 @@ $avaliacaoAtual = $avaliadoresControle->obterAvaliacao($idAvalicao);
         });
 
         function proximo() {
-            window.location.href = "contextoAvaliacao.php";
+            window.location.href = "LimparPostagens.php";
         }
 
         function voltar() {
