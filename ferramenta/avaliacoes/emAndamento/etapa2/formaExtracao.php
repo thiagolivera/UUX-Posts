@@ -104,7 +104,7 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                         
                         <div class="box-body" id="escolhaForma">
                             <div class="list-group">
-                                <button type="button" onclick="abrirEscolhaSite()" class="list-group-item disabled">Extração automatizada a partir de um sistema social</button>
+                                <button type="button" onclick="abrirEscolhaSite()" class="list-group-item">Extrair postagens do Twitter</button>
                                 <button type="button" onclick="abrirEnvioPlanilha()" class="list-group-item">Envio de um arquivo CSV com postagens já extraídas</button>
                             </div>
                         </div>
@@ -115,21 +115,184 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                         
                         <div id="escolhaSite" style="display: none">
                             <div class="box-body">
-                                <form> 
                                     <div class="form-group">
-                                      <label for="exampleInputEmail1">Informe o sistema social para extração das postagens</label>
-                                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex.: twitter.com">
-                                      <small id="emailHelp" class="form-text text-muted">No momento, apenas é possível extrair postagens do Twitter. Estudos estão sendo realizados para possibilitar a extração a partir de outros sistemas sociais.</small>
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <div id="extrairAuto" style="float: right; padding-top: 10px; display: none">
-                                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
-                            </div>
+                                        <label>Escolha os padrões de extração</label>
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-pills">
+                                                <li class="active"><a href="#tab_1" data-toggle="tab">Padrões gramaticais</a></li>
+                                                <li><a href="#tab_2" data-toggle="tab">Tipos de PRU</a></li>
+                                                <li><a href="#tab_3" data-toggle="tab">Facetas de UUX</a></li>
+                                                <li><a href="#tab_4" data-toggle="tab">Padrões personalizados</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_1">
+                                                    <form action="extracaoTwitter.php" method="post">
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item" id="verbos" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="verbos" style="display: none;"/>		
+                                                                  Verbos
+                                                            </li>
 
-                            <div id="voltarExtrair" style="float: left; padding-top: 10px; display: none">
-                                <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                                                            <li class="list-group-item" id="substantivos" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="substantivos" style="display: none;"/>		
+                                                                  Substantivos
+                                                            </li>
+
+                                                            <li class="list-group-item" id="adjetivos" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="adjetivos" style="display: none;"/>		
+                                                                  Adjetivos
+                                                            </li>
+
+                                                            <li class="list-group-item" id="adverbios" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="adverbios" style="display: none;"/>			
+                                                                  Advérbios
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                        <div id="extrairAuto" style="float: right; padding-top: 20px; display: none">
+                                                            <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                                                        </div>
+
+                                                        <div id="voltarExtrair" style="float: left; padding-top: 20px; display: none">
+                                                            <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                              <!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_2">
+                                                    <form action="extracaoTwitter.php" method="post">
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item" id="elogio" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="elogio" style="display: none;"/>		
+                                                                  Elogio
+                                                            </li>
+
+                                                            <li class="list-group-item" id="critica" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="critica" style="display: none;"/>		
+                                                                  Crítica
+                                                            </li>
+
+                                                            <li class="list-group-item" id="duvida" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="duvida" style="display: none;"/>		
+                                                                  Dúvida
+                                                            </li>
+
+                                                            <li class="list-group-item" id="comparacao" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="comparacao" style="display: none;"/>			
+                                                                  Comparação
+                                                            </li>
+
+                                                            <li class="list-group-item" id="sugestao" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="sugestao" style="display: none;"/>		
+                                                                  Sugestão
+                                                            </li>
+
+                                                            <li class="list-group-item disabled" id="ajuda">
+                                                                <input disabled="true" type="checkbox" name="ajuda" style="display: none;"/>		
+                                                                  Ajuda
+                                                            </li>
+                                                        </ul>
+                                                        <div id="extrairAuto" style="float: right; padding-top: 20px; display: block">
+                                                            <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                                                        </div>
+
+                                                        <div id="voltarExtrair" style="float: left; padding-top: 20px; display: block">
+                                                            <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                              <!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_3">
+                                                    <form action="extracaoTwitter.php" method="post">
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item" id="eficacia" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="eficacia" style="display: none;"/>		
+                                                                  Eficácia
+                                                            </li>
+
+                                                            <li class="list-group-item" id="eficiencia" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="eficiencia" style="display: none;"/>		
+                                                                  Eficiência
+                                                            </li>
+
+                                                            <li class="list-group-item" id="seguranca" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="seguranca" style="display: none;"/>		
+                                                                  Segurança
+                                                            </li>
+
+                                                            <li class="list-group-item" id="utilidade" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="utilidade" style="display: none;"/>			
+                                                                  Utilidade
+                                                            </li>
+
+                                                            <li class="list-group-item disabled" id="memorabilidade">
+                                                                <input disabled="true" type="checkbox" name="memorabilidade" style="display: none;"/>		
+                                                                  Memorabilidade
+                                                            </li>
+
+                                                            <li class="list-group-item" id="aprendizado" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="aprendizado" style="display: none;"/>		
+                                                                  Aprendizado
+                                                            </li>
+
+                                                            <li class="list-group-item" id="afeto" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="afeto" style="display: none;"/>		
+                                                                  Afeto
+                                                            </li>
+
+                                                            <li class="list-group-item" id="confianca" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="confianca" style="display: none;"/>		
+                                                                  Confiança
+                                                            </li>
+
+                                                            <li class="list-group-item" id="estetica" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="estetica" style="display: none;"/>		
+                                                                  Estética
+                                                            </li>
+
+                                                            <li class="list-group-item" id="frustracao" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="frustracao" style="display: none;"/>		
+                                                                  Frustração
+                                                            </li>
+
+                                                            <li class="list-group-item" id="motivacao" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="motivacao" style="display: none;"/>		
+                                                                  Motivação
+                                                            </li>
+
+                                                            <li class="list-group-item" id="suporte" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="suporte" style="display: none;"/>		
+                                                                  Suporte
+                                                            </li>
+
+                                                            <li class="list-group-item" id="satisfacao" onclick="selecionaItem(this)">
+                                                                  <input type="checkbox" name="satisfacao" style="display: none;"/>		
+                                                                  Satisfação
+                                                            </li>
+                                                        </ul>
+                                                        <div id="extrairAuto" style="float: right; padding-top: 20px; display: block">
+                                                            <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                                                        </div>
+
+                                                        <div id="voltarExtrair" style="float: left; padding-top: 20px; display: block">
+                                                            <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                              <!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_4">
+                                                        <div class="form-group">
+                                                            <div>
+                                                                <input type="text" name="padroesPersonalizados" placeholder="Separe-os por vírgula" data-role="tagsinput" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            
+                                          <!-- /.tab-content -->
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         
@@ -269,6 +432,19 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
     
     function voltarExt(){
         window.location.href = "introEtapa2.php";
+    }
+    
+    function selecionaItem(item){
+        var id_item = item.id;
+        checkbox = item.getElementsByTagName("input")[0];
+        item = document.getElementById(id_item);
+        if(checkbox.checked){
+                checkbox.checked = false;
+                item.classList.remove("active");
+        } else {
+                checkbox.checked = true;
+                item.classList.add("active");
+        }
     }
     </script>
 
