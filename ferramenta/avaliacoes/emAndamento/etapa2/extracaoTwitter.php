@@ -187,11 +187,11 @@ $_SESSION['postagens'] = $r;
         
             <form action="extracaoTwitterControle.php" method="post">
                 <div class="row" style="display: block; padding-left: 15px; padding-right: 15px">
-                    <div class="col-md-4 col-xs-4" id="voltar" style="padding-top: 10px;">
+                    <div class="col-md-6 col-xs-6" id="voltar" style="padding-top: 10px;">
                         <button type="button" class="btn btn-info" onclick="voltar();" style="margin-left: 10px;">Voltar</button>
                     </div>
 
-                    <div class="col-md-4 col-xs-4" id="proximo" style="padding-top: 10px;">
+                    <div class="col-md-6 col-xs-6" id="proximo" style="padding-top: 10px;">
                         <button type="submit" class="btn btn-info" style="margin-right: 10px; float: right">Salvar postagens extraídas</button>
                     </div>
                 </div>

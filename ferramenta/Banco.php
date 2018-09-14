@@ -3,9 +3,13 @@
 class Banco{
     private $con, $qry, $sql, $db;
     private $host = 'sql138.main-hosting.eu';
-    private $user = 'u884100256_uuxpo';
-    private $password = 'QOyPVo5YCWrE';
-    private $database = 'u884100256_uux';
+    //private $user = 'u884100256_uuxpo';
+    //private $password = 'QOyPVo5YCWrE';
+    
+    //private $host = 'localhost';
+    private $user = 'u884100256_estag';
+    private $password = 'u43gmssl';
+    private $database = 'u884100256_estag';
     
     public function getHost(){
         return $this->host;

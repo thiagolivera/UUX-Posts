@@ -10,10 +10,10 @@ class SalvaTwitter extends Banco{
                 . "VALUES (".$idAvaliacao.","
                 . "DEFAULT,'".$r->text."',"
                 . "'".$r->created_at."');";
-            if (!mysqli_query($conexao, $sql)){
-                echo mysqli_error($conexao);
-            }
+            mysqli_query($conexao, $sql);
         }
         mysqli_close($conexao);
+        
+        header("location:../etapa3/introEtapa3.php");
     }
 }
