@@ -343,8 +343,8 @@ if (isset($_POST["avaliadores"])) {
                             <h4 class="modal-title">Selecione as categorias de classificação</h4>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" action="classificacaoAutomatica.php" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">
-                                <div class="form-group" style="padding-left: 20px">
+                            <form class="form-horizontal" action="Classificacao.php?c=FachadaClassificacao&m=classificacaoBooleana" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">
+                                    <div class="form-group" style="padding-left: 20px">
                                     <div class="col-sm-6">
                                         <label style="font-weight: 500;">
                                             <input type="checkbox" name="Verbos" class="minimal"> Classificação
