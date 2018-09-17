@@ -25,12 +25,12 @@ if(isset($_POST["adverbios"]) && strcmp($_POST["adverbios"], "on") == 0){
 
 
 //Tipos de PRU
-if(isset($_POST["critica"]) && strcmp($_POST["critica"], "on") == 0){
-    $stringBusca .= '"twitter mais" OR "twitter tweet" OR "twitter ficar" OR "twitter entrar" OR "twitter aqui" OR "twitter querer" OR "twitter porque" OR "twitter ir gostar" OR "twitter tão" OR "twitter mal" OR "twitter chato"';
-}
-
 if(isset($_POST["elogio"]) && strcmp($_POST["elogio"], "on") == 0){
     $stringBusca .= '"twitter facebook" OR "twitter bem" OR "twitter bom" OR "twitter mais" OR "twitter ter" OR "twitter face" OR "twitter ficar" OR "twitter dar" OR "twitter celular" OR "twitter legal" OR "twitter adorar" OR "twitter gente"';
+}
+
+if(isset($_POST["critica"]) && strcmp($_POST["critica"], "on") == 0){
+    $stringBusca .= '"twitter mais" OR "twitter tweet" OR "twitter ficar" OR "twitter entrar" OR "twitter aqui" OR "twitter querer" OR "twitter porque" OR "twitter ir gostar" OR "twitter tão" OR "twitter mal" OR "twitter chato"';
 }
 
 if(isset($_POST["duvida"]) && strcmp($_POST["duvida"], "on") == 0){
@@ -41,7 +41,7 @@ if(isset($_POST["comparacao"]) && strcmp($_POST["comparacao"], "on") == 0){
     $stringBusca .= '"twitter facebook" OR "twitter mais" OR "twitter face" OR "twitter orkut" OR "twitter bem" OR "twitter ir" OR "twitter bom" OR "twitter ter" OR "twitter usar" OR "twitter achar" OR "twitter ver" OR "twitter dia" OR "twitter ruim"';
 }
 
-if(isset($_POST["sugestao"]) && strcmp($_POST["adverbios"], "on") == 0){
+if(isset($_POST["sugestao"]) && strcmp($_POST["sugestao"], "on") == 0){
     $stringBusca .= '"twitter ter" OR "twitter dever" OR "twitter tweet" OR "twitter sugestão" OR "twitter poder" OR "twitter mais" OR "twitter botão" OR "twitter seguir" OR "twitter dar" OR "twitter editar" OR "twitter ficar" OR "twitter querer" OR "twitter porque"';
 }
 
@@ -97,7 +97,7 @@ if(isset($_POST["utilidade"]) && strcmp($_POST["utilidade"], "on") == 0){
     $stringBusca .= '"twitter poder" OR "twitter saber" OR "twitter usar" OR "twitter ver" OR "twitter excluir" OR "twitter dar" OR "twitter ficar" OR "twitter ruim" OR "twitter problema" OR "twitter dever" OR "twitter mozilla" OR "twitter querer" OR "twitter caractere" OR "twitter demorar" OR "twitter sistema" OR "twitter tirar" OR "twitter objetivo" OR "twitter limite" OR "twitter escrever" OR "twitter entrar"';
 }
 
-$stringBusca .= '-"filter:retweets"';
+$stringBusca .= ' -"filter:retweets"';
 
 session_start();
 $idAvaliacao = $_SESSION['idAvaliacao'];

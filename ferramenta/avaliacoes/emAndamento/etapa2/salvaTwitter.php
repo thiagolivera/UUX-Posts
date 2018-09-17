@@ -4,6 +4,11 @@ include '../../../Banco.php';
 
 class SalvaTwitter extends Banco{
     public function __construct($r, $idAvaliacao) {
+        
+        //Como atualmente não há um pré-processamento da postagens antes de salvá-la no banco,
+        // algumas postagens podem ficar sem os dados salvos no banco, pois há caracteres como 
+        // a aspas simples (') que podem atrapalhar na string SQL do salvamento.
+        
         $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
         foreach ($r as $r){
             $sql = "INSERT INTO postagens(idAvaliacao, idPostagem, postagem, data) "
