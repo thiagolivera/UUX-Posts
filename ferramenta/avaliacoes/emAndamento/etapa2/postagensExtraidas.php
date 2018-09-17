@@ -213,7 +213,7 @@
             "oAria": {
                 "sSortAscending": ": Ordenar colunas de forma ascendente",
                 "sSortDescending": ": Ordenar colunas de forma descendente"
-            },
+            }
         }
     })
   })

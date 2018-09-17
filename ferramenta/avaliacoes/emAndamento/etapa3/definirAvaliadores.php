@@ -579,7 +579,6 @@ if(isset($_GET["excluir"])){
                             </button>
                             <h4 class="modal-title">Selecione as categorias de classificação</h4>
                         </div>
-                        
                         <div class="modal-body">
                             <div class="row">
                                 <form class="form-horizontal" action="definirAvaliadores.php" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">

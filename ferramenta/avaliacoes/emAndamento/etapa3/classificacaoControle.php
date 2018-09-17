@@ -3,7 +3,6 @@
 include_once '../../../Banco.php';
 
 class ClassificacaoControle extends Banco{
-
     public function salvarClassificacao(Classificacao $classificacao, ClassificaoTipo $classTipo, ClassificaoUsabilidade $classUsabilidade, ClassificacaoUX $classUX){
         $erro = 0;
         
@@ -124,7 +123,6 @@ class ClassificacaoControle extends Banco{
         parent::Executar($sql);
     }
 
-
     public function obterAvaliacao($id){
         $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
         $rtn = self::Executar($sql);
@@ -137,7 +135,7 @@ class ClassificacaoControle extends Banco{
         return mysqli_fetch_row($rtn);
     }
 
-        public function obterCategoriasAvaliacao($idAvaliacao){
+    public function obterCategoriasAvaliacao($idAvaliacao){
         $sql = "SELECT * FROM avaliacaoCategorias WHERE idavaliacao = " . $idAvaliacao . ";";
         $rtn = parent::Executar($sql);
         
