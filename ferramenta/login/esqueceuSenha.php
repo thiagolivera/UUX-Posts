@@ -1,12 +1,21 @@
 <?php
 session_start();
+include_once './esqueceuSenhaControle.php';
+
 if(isset($_SESSION["login"])){
     header("location:index.php");
 }
 
-include './autenticacao.php';
-if (isset($_POST['email']) && isset($_POST['password'])) {
-   $pessoa = new Autenticacao($_POST['email'],$_POST['password']);
+if(isset($_POST["email"])){
+    $esqueceuSenha = new RecuperarSenha();
+    
+    $esqueceuSenha->recuperarSenha($_POST["email"]);
+}
+
+if(isset($_GET["token"])){
+    $esqueceuSenha = new RecuperarSenha();
+    
+    echo $esqueceuSenha->verificarValidadeToken($_GET["token"]);
 }
 ?>
 <!DOCTYPE html>
@@ -14,34 +23,34 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>UUX-Posts | Registro</title>
+  <title>UUX-Posts | Recuperar senha</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="../bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
   
   <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="../plugins/iCheck/icheck.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,13 +64,31 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 </head>
     <body class="hold-transition login">
         <div class="login">
+            <div class="alert alert-success alert-dismissible" id="emailEnviado" style="display: none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>E-mail enviado!</h4>
+                Acabamos de enviar um e-mail para o endereço informado. Verifique sua caixa de entrada ou spam.
+            </div>
+            
+            <div class="alert alert-error alert-dismissible" id="erroEmail" style="display: none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>Oops... E-mail inválido!</h4>
+                Vish... O e-mail informado não foi encontrado em nossa base de dados. Tente novamente.
+            </div>
+            
+            <div class="alert alert-error alert-dismissible" id="tokenExpirado" style="display: none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>Token expirado</h4>
+                Verificamos que o token de recuperação de senha que você está tentando utilizar, já expirou. Tente novamente.
+            </div>
+            
            <div class="container">
                <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
                         <form role="form" action="esqueceuSenha.php" method="post">
                             <div class="row">
                                 <div class="icon text-center col-md-12" style="padding-bottom: 20px">
-                                    <a href="../index.html"><img id="logo" src="images/uux-posts.svg" style="width: 100%;"></a>
+                                    <a href="../../index.htm"><img id="logo" src="../images/uux-posts.svg" style="width: 100%;"></a>
                                 </div>
                                 <h3 class="text-center">Recupere sua senha</h3>
                                 
@@ -98,7 +125,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
     .login{
        font-family: 'Josefin Sans', sans-serif;
-       background: url("images/arts-build-close-up-273230.jpg");
+       background: url("../images/arts-build-close-up-273230.jpg");
        background-size: cover;
        background-repeat: no-repeat;
     }
@@ -187,23 +214,34 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 </style>
 
 <?php
-if(isset($_GET['erroLogin'])){
+if(isset($_GET['emailEnviado'])){
     ?> 
     <script>
-        document.getElementById('alertaLogin').style.display = 'block';
-        $("#alertaLogin").fadeTo(7000, 500).slideUp(500, function(){
-            $("#alertaLogin").alert('close');
+        document.getElementById('emailEnviado').style.display = 'block';
+        $("#emailEnviado").fadeTo(7000, 500).slideUp(500, function(){
+            $("#emailEnviado").alert('close');
         });
     </script>
     <?php
 }
 
-if(isset($_GET['bloqueado'])){
+if(isset($_GET['erroEmail'])){
     ?> 
     <script>
-        document.getElementById('bloqueado').style.display = 'block';
-        $("#bloqueado").fadeTo(7000, 500).slideUp(500, function(){
-            $("#bloqueado").alert('close');
+        document.getElementById('erroEmail').style.display = 'block';
+        $("#erroEmail").fadeTo(7000, 500).slideUp(500, function(){
+            $("#erroEmail").alert('close');
+        });
+    </script>
+    <?php
+}
+    
+if(isset($_GET['tokenExpirado'])){
+    ?> 
+    <script>
+        document.getElementById('tokenExpirado').style.display = 'block';
+        $("#tokenExpirado").fadeTo(7000, 500).slideUp(500, function(){
+            $("#tokenExpirado").alert('close');
         });
     </script>
     <?php

@@ -1,6 +1,6 @@
 <?php
 
-include 'Banco.php';
+include '../Banco.php';
 
 class Usuarios extends Banco{
     

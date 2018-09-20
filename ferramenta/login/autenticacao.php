@@ -1,6 +1,6 @@
 <?php
 
-include './Banco.php';
+include '../Banco.php';
 
 class Autenticacao extends Banco{
     protected $_login, $_senha;
@@ -17,7 +17,7 @@ class Autenticacao extends Banco{
         if($rtn == '0'){
             ?> 
             <script>
-                window.location.href = "login.php?erroLogin";
+                window.location.href = "?erroLogin";
             </script>
                 <?php
         } else{
@@ -30,7 +30,7 @@ class Autenticacao extends Banco{
             }else{
                 ?> 
                     <script>
-                        window.location.href = "login.php?bloqueado";
+                        window.location.href = "?bloqueado";
                     </script>
                 <?php
             }

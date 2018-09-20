@@ -3,21 +3,22 @@ session_start();
 if(isset($_SESSION["login"])){
     header("location:index.php");
 }
-include './loginControle.php';
-$controle = new Usuarios();
 
-$nome = '';
-$profissao = '';
-$email = '';
+if(!isset($_SESSION["idUsuario"])){
+    header("location:index.php");
+}
+include_once './esqueceuSenhaControle.php';
+$esqueceuSenha = new RecuperarSenha();
 
-if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']) && isset($_POST['senha']) && isset($_POST['password'])){
+
+if (isset($_POST['senha']) && isset($_POST['password'])){
     if((strlen($_POST['senha']) >= 8) && (strlen($_POST['password']) >= 8)){
         if(strcmp($_POST['senha'], $_POST['password']) == 0){
-            $controle->registrarUsuario($_POST['nome'], $_POST['email'], $_POST['profissao'], $_POST['senha']);
+            if($esqueceuSenha->alterarSenha($_SESSION["idUsuario"], $_POST['senha'])){
+                unset($_SESSION["idUsuario"]);
+                header("location:index.php?senhaAlterada");
+            }
         } else{
-            $nome = $_POST['nome'];
-            $profissao = $_POST['profissao'];
-            $email = $_POST['email'];
             ?>
             <script type='text/javascript'>
                 alert('Ops, as senhas não conferem. Verifique e tente novamente');
@@ -33,39 +34,40 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>UUX-Posts | Registro</title>
+  <title>UUX-Posts | Recuperar senha</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="../bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
   
   <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="../plugins/iCheck/icheck.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -82,35 +84,13 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
            <div class="container">
                <div class="col-md-6 col-md-offset-3">
                     <div class="inner-form">
-                        <form role="form" action="registro.php" method="post">
+                        <form role="form" action="recuperarSenha.php" method="post">
                             <div class="row">
                                 <div class="icon text-center col-md-12" style="padding-bottom: 20px">
-                                    <a href="../index.html"><img id="logo" src="images/uux-posts.svg" style="width: 100%;"></a>
+                                    <a href="../../index.htm"><img id="logo" src="../images/uux-posts.svg" style="width: 100%;"></a>
                                 </div>
-                                <h3 class="text-center">Faça seu cadastro</h3>
+                                <h3 class="text-center">Defina sua nova senha</h3>
                                 
-                                <div class="col-md-12">
-                                    <br>
-                                    <label>Nome</label>
-                                    <div class="form-group">
-                                        <input type="text" maxlength="120" required="required" value="<?php echo $nome; ?>" name="nome" id="nome" class="form-control" placeholder="Ex.: Fulano da Silva">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-12">
-                                    <label>Profissão</label>
-                                    <div class="form-group">
-                                        <input type="text" maxlength="120" required="required" value="<?php echo $profissao; ?>" name="profissao" id="profissao" class="form-control" placeholder="Ex.: Estudante">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-12">
-                                    <label>E-mail</label>
-                                    <div class="form-group">
-                                        <input type="email" maxlength="120" required="required" value="<?php echo $email; ?>" name="email" id="email" class="form-control" placeholder="Ex.: seuemail@uxabilidade.com">
-                                    </div>
-                                </div>
-
                                 <div class="col-md-12">
                                     <label>Senha</label>
                                     <div class="form-group">
@@ -127,18 +107,8 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
 
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-default" onclick="return validarSenha()">
-                                        <span>CADASTRAR</span>
+                                        <span>ALTERAR SENHA</span>
                                     </button>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="forgot">
-                                        <a href="login.php"><p>Já possui cadastro? Entre</p></a>
-                                    </div>
-                                    
-                                    <div class="forgot">
-                                        <a href="esqueceuSenha.php"><p>Esqueceu sua senha?</p></a>
-                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -150,7 +120,7 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
     @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
     .login{
        font-family: 'Josefin Sans', sans-serif;
-       background: url("images/arts-build-close-up-273230.jpg");
+       background: url("../images/arts-build-close-up-273230.jpg");
        background-size: cover;
        background-repeat: no-repeat;
     }
@@ -238,17 +208,5 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']
     }
 </style>
 
-<script>
-    function validarSenha(){
-        senha = document.getElementsByName('senha').value;
-        senha2 = document.getElementsByName('password').value;
-
-        if(senha!== senha2) {
-             senha2.setCustomValidity("Senhas diferentes!");
-            return false; 
-        }
-        return true;
-    }
-</script>
 </body>
 </html>

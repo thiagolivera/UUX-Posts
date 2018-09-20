@@ -2,7 +2,7 @@
 
 class Banco{
     private $con, $qry, $sql, $db;
-    private $host = 'localhost';
+    private $host = '200.129.62.41';
     //private $user = 'u884100256_uuxpo';
     //private $password = 'QOyPVo5YCWrE';
     
