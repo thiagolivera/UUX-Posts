@@ -13,7 +13,7 @@ $email = '';
 if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['profissao']) && isset($_POST['senha']) && isset($_POST['password'])){
     if((strlen($_POST['senha']) >= 8) && (strlen($_POST['password']) >= 8)){
         if(strcmp($_POST['senha'], $_POST['password']) == 0){
-            $controle->registrarUsuario($_POST['nome'], $_POST['email'], $_POST['profissao'], $_POST['senha']);
+            $controle->registrarUsuario($_POST['nome'], strtolower($_POST['email']), $_POST['profissao'], $_POST['senha']);
         } else{
             $nome = $_POST['nome'];
             $profissao = $_POST['profissao'];

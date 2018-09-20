@@ -6,7 +6,7 @@ if(isset($_SESSION["login"])){
 
 include './autenticacao.php';
 if (isset($_POST['email']) && isset($_POST['password'])) {
-   $pessoa = new Autenticacao($_POST['email'],$_POST['password']);
+   $pessoa = new Autenticacao(strtolower($_POST['email']),$_POST['password']);
 }
 ?>
 <!DOCTYPE html>

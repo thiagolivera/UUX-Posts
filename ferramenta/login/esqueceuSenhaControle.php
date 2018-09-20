@@ -18,6 +18,7 @@ class RecuperarSenha extends Banco{
             parent::Executar($sql);
 
             $link = "uuxposts.russas.ufc.br/v3/ferramenta/login/esqueceuSenha.php?token=".$token;
+            //$link = "https://www.uxabilidade.com/uuxposts/ferramenta/login/esqueceuSenha.php?token=".$token;
 
             $retorno = array($link, $isEmailCadastrado);
             self::enviarEmail($email,$retorno);
@@ -44,6 +45,7 @@ class RecuperarSenha extends Banco{
 
         // Set From: header
         $from =  "UUX-Posts <noreply@russas.ufc.br>";
+        //$from =  "UUX-Posts <uuxposts@uxabilidade.com>";
 
         // Email Headers
         $headers = "From: " . $from . "\r\n";
