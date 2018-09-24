@@ -32,6 +32,7 @@ class FachadaClassificacao extends Banco
             $array[] = $row;
         }
         $this->postagens=$array;
+        self::salvar($array);
         return $array;
     }
 
@@ -63,6 +64,20 @@ class FachadaClassificacao extends Banco
             $termos = array_merge($termos, $palavras);
         }
         return $termos;
+    }
+
+    private function salvar($array){
+        $sql = "select idPostagensClassificadas from postagensClassificadas LIMIT 1 ";
+        $resultado = parent::Executar($sql);
+        if(isset($resultado)){
+            parent::Executar("delete from postagensClassificadas where idPostagensClassificadas>0");
+        }
+        $sql = "insert into postagensClassificadas (idPostagensClassificadas) values ";
+        foreach ($array as $posta){
+            $sql .= " (".$posta["idPostagem"]."),";
+        }
+        $sql = substr($sql, 0,strlen($sql)-1);
+        parent::Executar($sql);
     }
 
     /**

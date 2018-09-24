@@ -2,10 +2,10 @@
 
 class Banco{
     private $con, $qry, $sql, $db;
-    private $host = 'sql138.main-hosting.eu';
-    private $user = 'u884100256_uuxpo';
-    private $password = 'QOyPVo5YCWrE';
-    private $database = 'u884100256_uux';
+    private $host = '200.129.62.41';
+    private $user = 'uuxposts';
+    private $password = '8961n38hn';
+    private $database = 'u884100256_estag';
     
     public function getHost(){
         return $this->host;
