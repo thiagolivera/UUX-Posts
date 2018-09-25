@@ -97,14 +97,25 @@ if(isset($_POST["utilidade"]) && strcmp($_POST["utilidade"], "on") == 0){
     $stringBusca .= '"twitter poder" OR "twitter saber" OR "twitter usar" OR "twitter ver" OR "twitter excluir" OR "twitter dar" OR "twitter ficar" OR "twitter ruim" OR "twitter problema" OR "twitter dever" OR "twitter mozilla" OR "twitter querer" OR "twitter caractere" OR "twitter demorar" OR "twitter sistema" OR "twitter tirar" OR "twitter objetivo" OR "twitter limite" OR "twitter escrever" OR "twitter entrar"';
 }
 
+if(isset($_POST["padroesPersonalizados"])){
+    $padroes = $_POST["padroesPersonalizados"];
+    $padroes = str_replace(',', '" OR "', $padroes);
+    
+    $stringBusca .= '"' . $padroes . '"';
+}
+
 $stringBusca .= ' -"filter:retweets"';
 
-session_start();
-$idAvaliacao = $_SESSION['idAvaliacao'];
-$busca = new BuscaTwitter(100);
-$r = $busca->busca_pagina($stringBusca, 15, $idAvaliacao);
+if(strcmp($stringBusca, ' -"filter:retweets"') == 0){
+    header("location:introEtapa2.php");
+} else{
+    session_start();
+    $idAvaliacao = $_SESSION['idAvaliacao'];
+    $busca = new BuscaTwitter(100);
+    $r = $busca->busca_pagina($stringBusca, 15, $idAvaliacao);
 
-$_SESSION['postagens'] = $r;
+    $_SESSION['postagens'] = $r;
+}
 ?>
 
 <!DOCTYPE html>

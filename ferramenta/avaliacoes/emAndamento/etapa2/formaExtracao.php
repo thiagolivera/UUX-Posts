@@ -281,10 +281,19 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                                                 </div>
                                               <!-- /.tab-pane -->
                                                 <div class="tab-pane" id="tab_4">
+                                                    <form action="extracaoTwitter.php" method="post">
                                                         <div class="form-group">
                                                             <div>
-                                                                <input type="text" name="padroesPersonalizados" placeholder="Separe-os por vírgula" data-role="tagsinput" />
+                                                                <input type="text" required="required" name="padroesPersonalizados" placeholder="Separe-os por vírgula" data-role="tagsinput" />
                                                             </div>
+                                                        </div>
+
+                                                        <div id="extrairAuto" style="float: right; padding-top: 20px; display: block">
+                                                            <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                                                        </div>
+
+                                                        <div id="voltarExtrair" style="float: left; padding-top: 20px; display: block">
+                                                            <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
                                                         </div>
                                                     </form>
                                                 </div>
