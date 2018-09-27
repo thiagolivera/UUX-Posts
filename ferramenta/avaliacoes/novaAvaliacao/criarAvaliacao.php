@@ -4,12 +4,12 @@
 
     $controleAvaliacao = new AvaliacaoControle();
     
-    if(isset($_POST["idAvaliacao"]) && isset($_POST["nome"]) && isset($_POST["sistema"]) && 
+    if(isset($_POST["idAvaliacao"]) && isset($_POST["nomeAvaliacao"]) && isset($_POST["sistema"]) && 
             isset($_POST["plataforma"]) && isset($_POST["fonte"]) && isset($_POST["objetivos"])){
         
         $avaliacao = new Avaliacao();
         $avaliacao->id = $_POST["idAvaliacao"];
-        $avaliacao->nome = $_POST["nome"];
+        $avaliacao->nome = $_POST["nomeAvaliacao"];
         $avaliacao->sistema = $_POST["sistema"];
         $avaliacao->plataforma = $_POST["plataforma"];
         $avaliacao->fonte = $_POST["fonte"];
@@ -21,11 +21,11 @@
 
         $controleAvaliacao->editarAvaliacao($avaliacao, $_SESSION["login"]);
         $_SESSION['papel'] = "Gerente";
-    } else if(isset($_POST["nome"]) && isset($_POST["sistema"]) && isset($_POST["plataforma"]) && 
+    } else if(isset($_POST["nomeAvaliacao"]) && isset($_POST["sistema"]) && isset($_POST["plataforma"]) && 
             isset($_POST["fonte"]) && isset($_POST["objetivos"])){
 
         $avaliacao = new Avaliacao();
-        $avaliacao->nome = $_POST["nome"];
+        $avaliacao->nome = $_POST["nomeAvaliacao"];
         $avaliacao->sistema = $_POST["sistema"];
         $avaliacao->plataforma = $_POST["plataforma"];
         $avaliacao->fonte = $_POST["fonte"];
@@ -99,6 +99,9 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    
+    <link rel="shortcut icon" href="../../images/uux-icon.ico" type="image/x-icon">
+    <link rel="icon" href="../../images/uux-icon.ico" type="image/x-icon">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -125,9 +128,9 @@
                         <div class="box-body" style="padding-left: 25px; padding-right: 35px">
                             <form class="form-horizontal" method="POST" action="criarAvaliacao.php">
                                 <div class="form-group">
-                                    <label for="nome" class="col-sm-2 control-label">Nome da avaliação: <a style="color: #ff0000">*</a></label>
+                                    <label for="nomeAvaliacao" class="col-sm-2 control-label">Nome da avaliação: <a style="color: #ff0000">*</a></label>
                                     <div class="col-sm-10">
-                                        <input maxlength="120" required="required" name="nome" type="text" class="form-control" id="nome" placeholder="Ex.: Avaliação para artigo do HCI" value="<?php echo $avaliacaoInfo[1]; ?>">
+                                        <input maxlength="120" required="required" name="nomeAvaliacao" type="text" class="form-control" id="nome" placeholder="Ex.: Avaliação para artigo do HCI" value="<?php echo $avaliacaoInfo[1]; ?>">
                                     </div>
                                 </div>
                                 

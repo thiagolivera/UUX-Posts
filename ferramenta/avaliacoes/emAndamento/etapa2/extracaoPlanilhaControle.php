@@ -1,6 +1,6 @@
 <?php
 
-include './salvarBD.php';
+include './salvarCSVControle.php';
 
 if(isset($_POST["formaExtracao"]) && isset($_POST["periodoExtracao"]) && isset($_FILES['fileUpload'])){
     date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
@@ -14,7 +14,7 @@ if(isset($_POST["formaExtracao"]) && isset($_POST["periodoExtracao"]) && isset($
     session_start();
     $idAvalicao = $_SESSION['idAvaliacao'];
     
-    $salvar = new SalvarNoBD();
+    $salvar = new SalvarCSVControle();
     if($salvar->salvarPostagens($idAvalicao, $new_name, $_POST["formaExtracao"], $_POST["periodoExtracao"])){
         unlink("temp/".$new_name);
         header("location:postagensExtraidas.php");

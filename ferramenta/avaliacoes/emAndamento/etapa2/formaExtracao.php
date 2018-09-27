@@ -75,6 +75,9 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
             })
         })
     </script>
+    
+    <link rel="shortcut icon" href="../../../images/uux-icon.ico" type="image/x-icon">
+  <link rel="icon" href="../../../images/uux-icon.ico" type="image/x-icon">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

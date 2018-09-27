@@ -2,27 +2,9 @@
 
 include '../../../Banco.php';
 
-class SalvarNoBD extends Banco{
+class SalvarCSVControle extends Banco{
     public function __construct() {
         
-    }
-    
-    public function salvarTweetes($r, $idAvaliacao) {
-        $conexao = mysqli_connect($this->getHost(), $this->getUser(), $this->getPass(), $this->getBanco());
-        echo 'aqui';
-        foreach ($r as $r){
-            echo 'oi';
-            $sql = "INSERT INTO postagens(idAvaliacao, idPostagem, postagem, data) "
-                . "VALUES (".$idAvaliacao.","
-                . "DEFAULT,'".$r->text."',"
-                . "'".$r->created_at."');";
-//            if (!mysqli_query($conexao, $sql)){
-//                $erro++; //se der erro incrementa no contador para cancelar a transação
-//                echo mysqli_error($conexao);
-//            }
-            echo $sql;
-        }
-        mysqli_close($conexao);
     }
 
     public function salvarPostagens($idAvaliacao, $arquivo, $formaExtracao, $periodoExtracao){

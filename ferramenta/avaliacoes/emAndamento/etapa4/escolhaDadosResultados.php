@@ -72,6 +72,9 @@ $categoriasAvaliacao = $controle->obterCategoriasAvaliacao($idAvalicao)[0];
                 })
             })
         </script>
+        
+        <link rel="shortcut icon" href="../../../images/uux-icon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../images/uux-icon.ico" type="image/x-icon">
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini">
