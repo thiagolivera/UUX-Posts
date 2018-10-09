@@ -284,10 +284,11 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                                                 </div>
                                               <!-- /.tab-pane -->
                                                 <div class="tab-pane" id="tab_4">
-                                                    <form action="extracaoTwitter.php" method="post">
+                                                    <form action="extracaoTwitter.php" method="post">   
                                                         <div class="form-group">
                                                             <div>
                                                                 <input type="text" required="required" name="padroesPersonalizados" placeholder="Separe-os por vírgula" data-role="tagsinput" />
+                                                                <label class="control-label">Exemplo de padrões personalizados: </label> twitter ficar, twitter entrar, twitter aqui, twitter querer, twitter porque, twitter tão, twitter mal, twitter chato
                                                             </div>
                                                         </div>
 

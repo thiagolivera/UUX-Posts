@@ -1,14 +1,13 @@
 	<?php 
 require_once __DIR__ . '/TwitterOAuth/TwitterOAuth.php';
 require_once __DIR__ . '/TwitterOAuth/Exception/TwitterException.php';
-include_once '../../../Banco.php';
 
 
 use TwitterOAuth\TwitterOAuth;
 
 date_default_timezone_set('UTC');
 
-class BuscaTwitter extends Banco{
+class BuscaTwitter{
     private $tw; //API
     private $toa;
     private $tweets; //lista de tweets

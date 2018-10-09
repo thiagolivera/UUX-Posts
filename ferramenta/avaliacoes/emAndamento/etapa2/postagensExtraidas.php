@@ -1,6 +1,6 @@
 <?php
-    include '../verificarSessao.class';
-    include './extracaoControle.php';
+    include_once '../verificarSessao.class';
+    include_once './extracaoControle.php';
 
     $idAvalicao = $_SESSION['idAvaliacao'];
     $extracaoControle = new ExtracaoControle();
@@ -126,15 +126,23 @@
           </div>
             
             <div class="row" style="display: block; padding-left: 15px; padding-right: 15px">
-                <div class="col-md-4 col-xs-4" id="voltar" style="padding-top: 10px;">
+                <div class="col-md-3" id="voltar" style="padding-top: 10px;">
                     <button type="button" class="btn btn-info" onclick="voltar();" style="margin-left: 10px;">Voltar</button>
                 </div>
                 
-                <div class="col-md-4 col-xs-4" id="excluirPostagens" style="padding-top: 10px; display: flex; justify-content: center;">
-                    <button type="button" class="btn btn-info" onclick="excluirTudo();" style="margin-right: 10px;">Excluir todas as postagens</button>
+                <div class="col-md-3" id="exportarPostagens" style="padding-top: 10px; display: flex; justify-content: center;">
+                    <form action="exportarCSV.php" method="POST">
+                        <?php $_SESSION["postagensExtraidas"] = $postagensExtraidas;?>
+                        <input type="hidden" name="postagensBD">
+                        <button type="submit" class="btn btn-info" style="margin-right: 10px;">Exportar para CSV</button>
+                    </form>
                 </div>
                 
-                <div class="col-md-4 col-xs-4" id="proximo" style="padding-top: 10px;">
+                <div class="col-md-3" id="excluirPostagens" style="padding-top: 10px; display: flex; justify-content: center;">
+                    <button type="button" class="btn btn-info" onclick="excluirTudo();" style="margin-right: 10px;">Excluir postagens</button>
+                </div>
+                
+                <div class="col-md-3" id="proximo" style="padding-top: 10px;">
                     <button type="button" class="btn btn-info" onclick="proximo();" style="margin-right: 10px; float: right">Salvar e próximo</button>
                 </div>
             </div>
@@ -187,6 +195,10 @@
     
     function voltar(){
         window.location.href = "introEtapa2.php";
+    }
+    
+    function exportarPostagens(){
+        window.location.href = "exportarCSV.php";
     }
     
     function excluirTudo(){
