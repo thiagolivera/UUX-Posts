@@ -124,6 +124,8 @@ if(isset($_POST["padroesPersonalizados"])){
     $padroes = str_replace(',', '" OR "', $padroes);
     
     $stringBusca .= '"' . $padroes . '"';
+    
+    $padroes = ['padrões personalizados'];
 }
 
 $stringBusca .= ' -"filter:retweets"';

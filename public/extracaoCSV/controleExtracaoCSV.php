@@ -1,8 +1,8 @@
 <?php
 
-include './salvarCSVControle.php';
+include_once './salvarCSV-BD.php';
 
-if(isset($_POST["formaExtracao"]) && isset($_POST["periodoExtracao"]) && isset($_FILES['fileUpload'])){
+if(isset($_FILES['fileUpload'])){
     date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
 
     $ext = strtolower(substr($_FILES['fileUpload']['name'],-4)); //Pegando extensão do arquivo
@@ -12,11 +12,12 @@ if(isset($_POST["formaExtracao"]) && isset($_POST["periodoExtracao"]) && isset($
     move_uploaded_file($_FILES['fileUpload']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
     
     session_start();
-    $idAvalicao = $_SESSION['idAvaliacao'];
+    $_SESSION['idAvaliacao'] = date("YmdHis"); //cria um id unico de avaliação e salva na seção para baixar as postagens posteriormente
+    $idAvaliacao = $_SESSION['idAvaliacao'];
     
     $salvar = new SalvarCSVControle();
-    if($salvar->salvarPostagens($idAvalicao, $new_name, $_POST["formaExtracao"], $_POST["periodoExtracao"])){
-        unlink("temp/".$new_name);
-        header("location:postagensExtraidas.php");
+    if($salvar->salvarPostagens($idAvaliacao, $new_name)){
+        unlink("./temp/".$new_name);
+        header("location:../classificacaoPosts.php");
     }
 }

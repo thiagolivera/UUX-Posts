@@ -23,7 +23,9 @@
     }
 
     if(isset($_GET['excluirTudo'])){
-        $extracaoControle->excluirTodasPostagens($idAvalicao);
+        if($extracaoControle->excluirTodasPostagens($idAvalicao)){
+            header("location:formaExtracao.php");
+        }
     }
 ?>
 <!DOCTYPE html>

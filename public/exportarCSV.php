@@ -7,6 +7,11 @@ if(isset($_GET["exportarSessao"])){
     $exportar->postsSessao($r);
 }
 
+if(isset($_GET["exportarCSVBD"])){
+    $r = $_SESSION['postagens'];
+    $exportar->postsBD($r);
+}
+
 if(isset($_POST["postagensBD"])){
     $posts = $_SESSION["postagensExtraidas"];
     $exportar->postsBD($posts);

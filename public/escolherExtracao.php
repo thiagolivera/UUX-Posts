@@ -1,10 +1,8 @@
 
 <div class="box box-solid">
-        <div class="box-header with-border">
-            <h4 class="box-title" style="    padding-bottom: 10px;">Escolha a forma de extração das postagens</h4>
-        </div>
-        
         <div class="box-body" id="escolhaForma">
+            <h4 class="box-title" style="    padding-bottom: 10px;">Escolha a forma de extração das postagens</h4>
+            
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action" onclick="abrirEscolhaSite()">Extrair postagens do Twitter</a>
                 <a href="#" class="list-group-item list-group-item-action" onclick="abrirEnvioPlanilha()">Enviar um arquivo CSV com postagens</a>
@@ -14,7 +12,7 @@
         <div id="escolhaSite" style="display: none">
             <div class="box-body">
                     <div class="form-group">
-                        <label>Escolha os padrões de extração</label>
+                        <h4 class="box-title" style="    padding-bottom: 10px;">Escolha os padrões de extração</h4>
                         
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
@@ -195,8 +193,6 @@
                                     </form>
                                 </div>
                             </div>
-
-                          <!-- /.tab-content -->
                         </div>
                     </div>
             </div>
@@ -204,37 +200,36 @@
 
         <div id="envioPlanilha" style="display: none">
             <div class="box-body">
-                <form action="extracaoPlanilhaControle.php" method="POST" enctype="multipart/form-data"> 
+                <form action="public/extracaoCSV/controleExtracaoCSV.php" method="POST" enctype="multipart/form-data"> 
                     <div class="form-group">
-                        <label for="fileUpload" class="control-label">Envie um arquivo com postagens em formato CSV</label> <br>
+                        <h4 class="box-title" style="    padding-bottom: 10px;">Envie um arquivo com postagens em formato CSV</h4>
                         <div class="btn btn-default btn-file">
                             <input id="fileUpload" required="required" type="file" accept=".csv" name="fileUpload">
                         </div> <br>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="padding-left: 20px">
                         <br>
                         <strong class="row">Restrições do arquivo CSV</strong>
                         <ul style="text-align: left">
-                            <li>São aceitos arquivos que tenham as colunas <strong>text</strong> e <strong>date</strong></li>
+                            <li>São aceitos arquivos que tenham as colunas <strong>text</strong></li>
                             <li>A coluna <strong>text</strong> É OBRIGATÓRIA e deve conter o texto da postagem entre aspas</li>
-                            <li>A coluna <strong>date</strong> deve conter a data da postagem (caso não tenha essa coluna, a data será definida como null)</li>
-                            <li>As colunas devem estar separadas por vírgula</li>
+                            <li>Caso tenha colunas no arquivo, elas devem estar separadas por vírgula</li>
                             <li><strong>Certifique-se de que cada postagem está em uma linha do arquivo CSV</strong> </li>
                             <li>Caso o arquivo enviado não obedecer a tais restrições, ele será lido incorretamente</li>
-                            <li><a href="exemplo-csv-uuxposts.csv">Clique aqui e baixe um arquivo CSV de exemplo</a></li>
+                            <li><a href="./public/exemplo-csv-uuxposts.csv">Clique aqui e baixe um arquivo CSV de exemplo</a></li>
                         </ul>
                     </div>
             </div>
-            <div id="btnSalvar" style="float: right; padding-top: 10px; display: none">
-                <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
-            </div>
+                <div id="btnSalvar" style="float: right; padding-top: 10px; display: none">
+                    <button type="submit" class="btn btn-info" style="margin-right: 10px;">Enviar arquivo</button>
+                </div>
 
-            <div id="btnVoltar" style="float: left; padding-top: 10px; display: none">
-                <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
-            </div>
+                <div id="btnVoltar" style="float: left; padding-top: 10px; display: none">
+                    <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
+                </div>
 
-            </form>
+                </form>
         </div>
     </div>
 
@@ -252,10 +247,6 @@
         if(input.files.length > 0) nome = input.files[0].name;
         div.innerHTML = nome;
     });
-    
-    function proximo(){
-        window.location.href = "../etapa2/processamentoPostagens.php";
-    }
     
     function abrirEscolhaSite(){
         document.getElementById('escolhaSite').style.display = 'block';
