@@ -168,7 +168,7 @@
                             </div>
                           <!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_4">
-                                <form action="./classificacaoPosts.php?resultado" method="post">   
+                                <form action="./classificacaoPosts.php?resultado" method="post">
                                     <div class="form-group row">
                                         <input type="text" class="form-control" id="exampleInputEmail1" required="required" name="padroesPersonalizados" aria-describedby="emailHelp" placeholder="Separe-os por vírgula">
                                         <small id="emailHelp" class="form-text text-muted"><label class="control-label">Exemplo de padrões personalizados: </label> twitter ficar, twitter entrar, twitter aqui, twitter querer, twitter porque, twitter tão, twitter mal, twitter chato</small>

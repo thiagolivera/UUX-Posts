@@ -94,6 +94,10 @@
         array_push($padroes, "Utilidade");
     }
     
+    if(isset($_POST["padroesPersonalizados"])){
+        array_push($padroes, $_POST["padroesPersonalizados"]);
+    }
+    
     $classificador = new ClassificacaoBD();
     session_start();
     $post = $classificador->classificacaoBooleana($_SESSION['idAvaliacao'], $padroes);
