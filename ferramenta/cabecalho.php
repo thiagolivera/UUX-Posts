@@ -1,7 +1,4 @@
 <header class="main-header">
-    <link rel="icon" type="imagem/png" href="/images/uux-icon.ico" />
-    <link rel = "shortcut icon" type = "imagem/x-icon" href = "/images/uux-icon.ico"/>
-
     <!-- Logo -->
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->

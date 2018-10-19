@@ -1,8 +1,7 @@
 <?php
-include '../../../Banco.php';
+include_once '../../../Banco.php';
 
 class ExtracaoControle extends Banco{
-    
     public function obterAvaliacao($id){
         $sql = "SELECT * FROM avaliacaoInfo WHERE idAvaliacao = " . $id . ";";
         $rtn = self::Executar($sql);
@@ -33,8 +32,9 @@ class ExtracaoControle extends Banco{
     
     public function excluirTodasPostagens($idAvaliacao){
         $sql = "DELETE FROM `postagens` WHERE idAvaliacao = " . $idAvaliacao . ";";
-        $rtn = parent::Executar($sql);
-        header("location:formaExtracao.php");
+        if(parent::Executar($sql)){
+            return true;
+        }
     }
     
     public function verificarSeHaPostagens($idAvaliacao){

@@ -75,6 +75,9 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
             })
         })
     </script>
+    
+    <link rel="shortcut icon" href="../../../images/uux-icon.ico" type="image/x-icon">
+  <link rel="icon" href="../../../images/uux-icon.ico" type="image/x-icon">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -281,10 +284,20 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                                                 </div>
                                               <!-- /.tab-pane -->
                                                 <div class="tab-pane" id="tab_4">
+                                                    <form action="extracaoTwitter.php" method="post">   
                                                         <div class="form-group">
                                                             <div>
-                                                                <input type="text" name="padroesPersonalizados" placeholder="Separe-os por vírgula" data-role="tagsinput" />
+                                                                <input type="text" required="required" name="padroesPersonalizados" placeholder="Separe-os por vírgula" data-role="tagsinput" />
+                                                                <label class="control-label">Exemplo de padrões personalizados: </label> twitter ficar, twitter entrar, twitter aqui, twitter querer, twitter porque, twitter tão, twitter mal, twitter chato
                                                             </div>
+                                                        </div>
+
+                                                        <div id="extrairAuto" style="float: right; padding-top: 20px; display: block">
+                                                            <button type="submit" class="btn btn-info" style="margin-right: 10px;">Salvar e próximo</button>
+                                                        </div>
+
+                                                        <div id="voltarExtrair" style="float: left; padding-top: 20px; display: block">
+                                                            <button type="button" class="btn btn-info" onclick="voltar()" style="margin-left: 10px;">Voltar</button>
                                                         </div>
                                                     </form>
                                                 </div>
