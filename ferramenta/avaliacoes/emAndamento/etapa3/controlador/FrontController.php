@@ -55,16 +55,9 @@ class FrontController{
         }
     }
 
-    private function getMetodoLimpar($controlador){
+    private function getMetodoLimpar(){
         if(isset($_GET['m'])){
             switch ($_GET['m']){
-                case 'limparPostagensTela':
-                    require_once(__DIR__.'/../LimparPostagens.php');
-                    break;
-                case 'limparPostagens':
-                    $this->postagens = $controlador->limparPostagens($_POST, $this->postagens);
-                    require_once(__DIR__.'/../PostagensLimpas.php');
-                    break;
                 default:
                     header('Location: ./introEtapa3.php');
                     break;
