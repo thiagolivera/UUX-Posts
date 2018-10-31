@@ -14,9 +14,14 @@ for($i=0; $i < $numPostagens; $i++){
         }
     }
     if(isset($_POST["classFuncionalidade".$i])){
-        $classificacoes[$i]["funcionalidade"] = $_POST["classFuncionalidade".$i];
+        if($_POST["classFuncionalidade".$i] == null){
+            $classificacoes[$i]["funcionalidade"] = "";
+        } else{
+            $classificacoes[$i]["funcionalidade"] = $_POST["classFuncionalidade".$i];
+        }
+        
     } else{
-        $classificacoes[$i]["funcionalidade"] = null;
+        $classificacoes[$i]["funcionalidade"] = "";
     }
     if(isset($_POST["classTipo".$i])){
         $classificacoes[$i]["tipo"] = $_POST["classTipo".$i];

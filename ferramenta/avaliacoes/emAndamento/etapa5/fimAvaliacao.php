@@ -59,7 +59,7 @@ $controle = new RelatoControle();
 
             <div class="content-wrapper">
               <section class="content text-center">
-                  <form action="../relatorioAvaliacao/relatorioAvaliacao.php" method="POST">
+                  <form action="../relatorioAvaliacao/relatorioAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>" method="POST">
                       <input type="hidden" name="preliminar">
                       <img class="img-responsive center-block" src="../../../images/fimAvaliacao.svg" style="width: 450px">
                       <h3>Parabéns! Você já concluiu a avaliação.</h3>

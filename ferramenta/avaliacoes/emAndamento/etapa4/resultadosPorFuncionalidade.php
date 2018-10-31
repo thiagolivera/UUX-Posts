@@ -25,7 +25,7 @@ $numPRUS = $controle->obterNumeroPRUs($idAvalicao)[0];
                     ?>
                         <tr>
                           <td><?php
-                          if(strcmp($resultadosFuncionalidade[$i][0], "") == 0){
+                          if(strcmp($resultadosFuncionalidade[$i][0], "") == 0 || $resultadosFuncionalidade[$i][0] == NULL){
                               echo "Não informado";
                           } else{
                               echo $resultadosFuncionalidade[$i][0];
