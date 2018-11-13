@@ -32,11 +32,11 @@
                 <div class="col-sm-6">
                     <input type="hidden" name="pru">
                     <label style="font-weight: 500;">
-                        <input type="radio" name="pru" value="1" onclick="postPRU()" required> PRU
+                        <input type="radio" name="pru" value="1" onclick="postPRU();" required> PRU
                     </label>
                     <br>
                     <label style="font-weight: 500;">
-                        <input type="radio" name="pru" value="0" onclick="postNaoPRU()"> Não-PRU
+                        <input type="radio" name="pru" value="0" onclick="postNaoPRU();"> Não-PRU
                     </label>
                     <br>
                 </div>
@@ -287,7 +287,8 @@
         document.getElementById('satisfacao-ux').required = true;
         document.getElementById('motivacao').required = true;
         document.getElementById('suporte').required = true;
-    }
+    };
+    
     function postNaoPRU(){
         document.getElementById('categoriasClass').style.display = 'none';
         document.getElementById('classFuncionalidade').style.display = 'none';
@@ -316,6 +317,5 @@
         document.getElementById('satisfacao-ux').required = false;
         document.getElementById('motivacao').required = false;
         document.getElementById('suporte').required = false;
-        
-    }
+    };
 </script>

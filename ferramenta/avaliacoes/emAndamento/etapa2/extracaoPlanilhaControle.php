@@ -18,5 +18,7 @@ if(isset($_POST["formaExtracao"]) && isset($_POST["periodoExtracao"]) && isset($
     if($salvar->salvarPostagens($idAvalicao, $new_name, $_POST["formaExtracao"], $_POST["periodoExtracao"])){
         unlink("temp/".$new_name);
         header("location:postagensExtraidas.php");
+    } else{
+        echo 'erro';
     }
 }

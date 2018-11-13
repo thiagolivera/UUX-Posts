@@ -12,12 +12,22 @@ class SalvarCSVControle extends Banco{
         mysqli_autocommit($conexao, FALSE);
         $erro = 0;
         
-        require_once './lib/ARQUIVOS/csv.class.php' ; 
-        $csv = new \ARQUIVOS\Csv( './temp/'.$arquivo,',','"' );
+        $meuArray = Array();
+        $file = fopen('./temp/'.$arquivo, 'r');
+        while (($line = fgetcsv($file)) !== false)
+        {
+          $meuArray[] = $line;
+        }
+        fclose($file);
         
-        foreach( @$csv->ler() as $linha ){
-            $sql = "INSERT INTO postagens_public(idAvaliacao, idPostagem, postagem) VALUES "
-                    . "(".$idAvaliacao.",DEFAULT,'".mysqli_real_escape_string($conexao, utf8_encode($linha['text']))."');";
+        foreach($meuArray as $linha ){
+            if(array_key_exists(1, $meuArray[0])){
+                $sql = "INSERT INTO postagens_public(idAvaliacao, idPostagem, postagem, data) VALUES "
+                    . "(".$idAvaliacao.",DEFAULT,'".$linha[0]."','".$linha[1]."');";
+            } else{
+                $sql = "INSERT INTO postagens_public(idAvaliacao, idPostagem, postagem) VALUES "
+                    . "(".$idAvaliacao.",DEFAULT,'".$linha[0]."');";
+            }
             if (!mysqli_query($conexao, $sql)){
                 $erro++; //se der erro incrementa no contador para cancelar a transação
             }
