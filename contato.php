@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        .col-form-label{
+            text-align: -webkit-right;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,8 +43,103 @@
                 </div>
             </nav>
         </div>
-    </div>
+        
+        <div class="row" style="margin-right: 0">
+            <div class="card-header col-md-12" style="padding-top: 25px; padding-bottom: 20px;">
+                <h4 style="text-align: center">Entre em contato conosco</h4>
+            </div>
+            
+            <?php if(isset($_GET["sucesso"])){
+                ?>
+                <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert" style="text-align: center">
+                    <strong>E-mail enviado com sucesso!</strong> Em breve, retornaremos seu contato.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            } ?>
+            
+            <?php if(isset($_GET["erro"])){
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert" style="text-align: center">
+                    <strong>Desculpe-nos.</strong> Algo de errado aconteceu, tente novamente mais tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            } ?>
+            
+            <div class="col-md-8" id="formularioContato">
+                <form method="POST" action="sendEmail.php">
+                    <div class="form-group row">
+                        <label for="seuNome" class="col-sm-2 col-form-label">Seu nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" autofocus name="nome" id="seuNome" required="required" placeholder="Fulano de Tal">
+                        </div>
+                    </div>
 
+                    <div class="form-group row">
+                        <label for="seuEmail" class="col-sm-2 col-form-label">Seu e-mail</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="email" id="seuEmail" required="required" placeholder="uuxposts@russas.ufc.br">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="assunto" class="col-sm-2 col-form-label">Assunto</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="assunto" id="assunto" placeholder="Quero colaborar no projeto">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="mensagem" class="col-sm-2 col-form-label">Mensagem</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="mensagem" id="mensagem" required="required" placeholder="Sua mensagem..." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="mensagem" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary col-md-2">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-md-4" id="informacoesAlternativas">
+                <h3 class="h6 hide-on-fullwidth">Informações de contato</h3>
+
+                <div class="cinfo">
+                    <h5>Onde você pode nos encontrar</h5>
+                    <p>
+                        Universidade Federal do Ceará - Campus Russas <br>
+                        Rua Felipe Santiago, N° 411 <br>
+                        Cidade Universitária, Russas - CE <br>
+                        Brasil
+                    </p>
+                </div>
+
+                <div class="cinfo">
+                    <h5>Você pode nos enviar e-mail</h5>
+                    <p>
+                        marilia.mendes@ufc.br<br>
+                    </p>
+                </div>
+
+                <div class="cinfo">
+                    <h5>Você também pode nos ligar</h5>
+                    <p>
+                        Telefone: +55 88 3411 9209<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
