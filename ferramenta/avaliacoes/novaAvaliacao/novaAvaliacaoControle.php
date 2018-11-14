@@ -109,17 +109,3 @@ class AvaliacaoControle extends Banco{
         return mysqli_fetch_row($rtn);
     }
 }
-
-class Avaliacao {
-    var $id;
-    var $nome;
-    var $sistema;
-    var $plataforma;
-    var $fonte;
-    var $funcionalidades;
-    var $objetivos;
-    
-    public function __construct() {
-        
-    }
-}

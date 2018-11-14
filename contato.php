@@ -36,7 +36,7 @@
                             <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Página inicial</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="extrairPosts.php">Extrair posts</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="funcionalidades.html">Funcionalidades</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="sobre.html">Sobre o projeto</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="sobre.php">Sobre o projeto</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link active" href="contato.php">Contato</a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self"></form><span class="navbar-text"> <a href="login.php" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="ferramenta/login/registro.php">Cadastre-se</a></div>

@@ -1,3 +1,17 @@
+<?php
+    include_once './public/extracaoCSV/Banco.php';
+    $banco = new Banco();
+
+    $sql = "SELECT * FROM `publicacoes` ORDER BY `anoPublicacao` DESC, `titulo`ASC;";
+    $rtn = $banco->Executar($sql);
+
+    $publicacoes = array();
+
+    while($row = mysqli_fetch_assoc($rtn)){
+        $publicacoes[] = $row;
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -30,7 +44,7 @@
                             <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Página inicial</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="extrairPosts.php">Extrair posts</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="funcionalidades.html">Funcionalidades</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link active" href="sobre.html">Sobre o projeto</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="sobre.php">Sobre o projeto</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="contato.php">Contato</a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self"></form><span class="navbar-text"> <a href="login.php" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="ferramenta/login/registro.php">Cadastre-se</a></div>
@@ -47,36 +61,32 @@
                 <h4 style="text-align: center">Publicações</h4>
             </div>
             <div class="container">
-                <br>
-                <div class="card col-md-12">
-                    <div class="card-body">
-                      <h5 class="card-title">(2018) An experience of textual evaluation using the MALTU methodology</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Marília Mendes, Elizabeth Furtado</h6>
-                      <p class="card-text">20th International Conference on Human-Computer Interaction (HCII 2018)</p>
-                      <a href="https://doi.org/10.1007/978-3-319-91485-5_18" target="_blank" class="card-link">Acessar publicação</a>
-                      <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-319-91485-5_18?format=bibtex&flavour=citation" class="card-link">Baixar bibtex</a>
+                <?php
+                foreach ($publicacoes as $publicacoes){
+                ?>
+                    <br>
+                    <div class="card col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title">(<?php echo $publicacoes["anoPublicacao"]; ?> - <i><?php echo $publicacoes["tipo"]; ?></i>) <?php echo $publicacoes["titulo"]; ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $publicacoes["autores"]; ?></h6>
+                            <p class="card-text"><?php echo $publicacoes["conferencia"]; ?></p>
+                            <a href="<?php echo $publicacoes["linkPublicacao"]; ?>" target="_blank" class="card-link">Acessar publicação</a>
+                            <?php 
+                                if($publicacoes["linkBibtex"] == ""){
+                                ?>
+                                    <a class="card-link disabled">Bibtex indisponível</a>
+                                <?php
+                                } else{
+                                ?>
+                                    <a href="<?php echo $publicacoes["linkBibtex"]; ?>" class="card-link">Baixar bibtex</a>
+                                <?php
+                                }
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="card col-md-12">
-                    <div class="card-body">
-                      <h5 class="card-title">(2017) UUX-Posts: a tool for extracting and classifying postings related to the use of a system</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Marília Mendes, Elizabeth Furtado</h6>
-                      <p class="card-text">8th Latin American Conference on Human-Computer Interaction (CLIHC '17)</p>
-                      <a href="https://doi.org/10.1145/3160504.3160548" target="_blank" class="card-link">Acessar publicação</a>
-                      <a href="https://dl.acm.org/downformats.cfm?id=3160548&parent_id=3160504&expformat=bibtex" class="card-link">Baixar bibtex</a>
-                    </div>
-                </div>
-                <br>
-                <div class="card col-md-12">
-                    <div class="card-body">
-                      <h5 class="card-title">(2017) UUX-Posts – Uma ferramenta de apoio à avaliação textual da usabilidade e experiência de uso em sistemas</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Thiago Silva, Marília Mendes, Elizabeth Furtado</h6>
-                      <p class="card-text">16th Brazilian Symposium on Human Factors in Computer Systems (IHC'17)</p>
-                      <a href="arquivos/pdf/2017_UUX-Posts_poster.pdf" target="_blank" class="card-link">Acessar publicação</a>
-                      <a class="card-link disabled">Bibtex indisponível</a>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
