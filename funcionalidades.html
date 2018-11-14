@@ -13,6 +13,29 @@
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        .container {
+            padding-right: 10px;
+            padding-left: 25px;
+        }
+        
+        .carousel-indicators li {
+            display: inline-block;
+            width: 48px;
+            text-indent: 0;
+            cursor: pointer;
+            border: none;
+            background-color: buttonshadow;
+        }
+        .carousel-indicators .active {
+            width: 48px;
+            background-color: blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,6 +56,42 @@
                         <form class="form-inline mr-auto" target="_self"></form><span class="navbar-text"> <a href="login.php" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="ferramenta/login/registro.php">Cadastre-se</a></div>
                 </div>
             </nav>
+        </div>
+        
+        <div class="row" style="margin-right: 0">
+            <div class="card-header col-md-12" style="padding-top: 25px; padding-bottom: 20px;">
+                <h4 style="text-align: center">Conheça nossas funcionalidades</h4>
+            </div>
+            
+            <div class="container">
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Extração de postagens do Twitter ou de um arquivo CSV</h5>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">Você pode escolher ou definir padrões para a extração</h5>
+                      <p class="card-text">Atualmente a ferramenta é capaz de extrair postagens do Twitter ou de um arquivo CSV utilizando um dos 21 padrões 
+                          predefinidos pela ferramenta, divididos entre as categorias de: padrões gramaticais, tipos de PRU e facetas de UUX.
+                          Você também pode inserir seus padrões para extrair postagens.</p>
+                      <a href="extrairPosts.php" class="btn btn-primary">Teste aqui</a>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Classificação de postagens por avaliadores</h5>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">Você pode montar uma equipe para classificar postagens em uma avaliação</h5>
+                      <p class="card-text">A UUX-Posts agora permite que você e sua equipe classifiquem postagens
+                      para avaliar um sistema, fornecendo apoio na classificação e interpretação dos resultados.
+                      Ao final da classificação, a ferramenta gera um relatório de avaliação com gráficos dos resultados.</p>
+                      <a href="login.php" class="btn btn-primary">Acesse aqui</a>
+                    </div>
+                </div>
+                <br>
+            </div>
         </div>
     </div>
 
