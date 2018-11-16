@@ -129,13 +129,6 @@
                         marilia.mendes@ufc.br<br>
                     </p>
                 </div>
-
-                <div class="cinfo">
-                    <h5>Você também pode nos ligar</h5>
-                    <p>
-                        Telefone: +55 88 3411 9209<br>
-                    </p>
-                </div>
             </div>
         </div>
     </div>

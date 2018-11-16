@@ -2,7 +2,8 @@
 
 // Replace this with your own email address
 $siteOwnersEmail = 'thiago.engsoftware@gmail.com';
-$orientadoraEmail = 'thiagoo360@gmail.com';
+$isaiasEmail = 'isaiasfs1997@hotmail.com';
+$orientadoraEmail = 'marilia.mendes@ufc.br';
 
 
 if($_POST) {
@@ -33,6 +34,9 @@ if($_POST) {
     //envia email para desenvolvedor para a marilia
     ini_set("sendmail_from", $siteOwnersEmail); // for windows server
     $mail = mail($siteOwnersEmail, $subject, $message, $headers);
+    
+    ini_set("sendmail_from", $isaiasEmail); // for windows server
+    $mail = mail($isaiasEmail, $subject, $message, $headers);
     
     ini_set("sendmail_from", $orientadoraEmail); // for windows server
     $mail = mail($orientadoraEmail, $subject, $message, $headers);
