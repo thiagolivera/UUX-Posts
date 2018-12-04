@@ -8,6 +8,7 @@
 
 include_once 'FachadaLimparPostagens.php';
 include_once 'FachadaClassificacao.php';
+include_once (__DIR__.'/../FiltrosREST.php');
 
 if (!isset($_SESSION['idAvaliacao'])) {
     header("location:erro.php");
@@ -45,8 +46,12 @@ class FrontController{
         if(isset($_GET['m'])){
             switch ($_GET['m']){
                 case 'classificacaoBooleana':
-                    $this->postagens = $controlador->classificacaoBooleana($idAvaliacao);
+                    $this->postagens = $controlador->classificacaoBooleana($idAvaliacao, json_encode($_POST));
                     require_once(__DIR__.'/../PostagensClassificacadas.php');
+                    break;
+                case 'classificacaoBooleanaRest':
+                    $rest = new FiltrosREST();
+                    $rest->GET();
                     break;
                 default:
                     header('Location: ./introEtapa3.php');

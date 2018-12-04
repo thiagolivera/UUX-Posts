@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                 <?php
-                foreach ($this->getPostagens() as $postagen) {
+                foreach (json_decode($this->getPostagens(),true) as $postagen) {
                     echo '<tr>';
                     echo "<td>" . $postagen["idPostagem"] . "</td>";
                     echo "<td>" . $postagen["data"] . "</td>";

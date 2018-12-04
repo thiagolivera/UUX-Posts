@@ -19,8 +19,8 @@ class FachadaClassificacao extends Banco
     {
     }
 
-    public function classificacaoBooleana($avaliacao){
-        $palavras = $this->buscarFiltro($_POST);
+    public function classificacaoBooleana($avaliacao, $dados){
+        $palavras = $this->buscarFiltro(json_decode($dados,true));
         $array = null;
         $sql = "select * from postagens where BINARY idAvaliacao = ".$avaliacao." and ( postagem LIKE ";
         foreach ($palavras as $value){
@@ -33,7 +33,7 @@ class FachadaClassificacao extends Banco
         }
         $this->postagens=$array;
         self::salvar($array);
-        return $array;
+        return json_encode($array,true);
     }
 
     private function buscarFiltro($filtro){
