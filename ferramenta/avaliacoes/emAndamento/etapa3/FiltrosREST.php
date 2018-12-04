@@ -22,9 +22,20 @@ class FiltrosREST
     {
     }
 
-    public function GET(){
+    public function GET($url){
         $client  =  new  Client ();
-        $res = $client->get('http://httpbin.org/get');
+        $res = $client->get($url);
+        if($body = $res->getBody()) {
+            $size = $body->getSize();
+            echo '<pre>';
+            print_r($body->read($size));
+            echo '</pre>';
+        }
+    }
+
+    public function POST($url, $dados){
+        $client = new Client([ 'headers' => [ 'Content-Type' => 'application/json' ] ]);
+        $res = $client->post($url, ['body' => $dados]);
         if($body = $res->getBody()) {
             $size = $body->getSize();
             echo '<pre>';

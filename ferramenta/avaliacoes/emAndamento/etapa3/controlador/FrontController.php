@@ -47,11 +47,17 @@ class FrontController{
             switch ($_GET['m']){
                 case 'classificacaoBooleana':
                     $this->postagens = $controlador->classificacaoBooleana($idAvaliacao, json_encode($_POST));
-                    require_once(__DIR__.'/../PostagensClassificacadas.php');
-                    break;
-                case 'classificacaoBooleanaRest':
+                    //require_once(__DIR__.'/../PostagensClassificacadas.php');
                     $rest = new FiltrosREST();
-                    $rest->GET();
+                    $rest->POST('http://httpbin.org/post', $this->postagens);
+                    break;
+                case 'classificacaoBooleanaRestGet':
+                    $rest = new FiltrosREST();
+                    $rest->GET('http://httpbin.org/post');
+                    break;
+                case 'classificacaoBooleanaRestPost':
+                    $rest = new FiltrosREST();
+                    $rest->POST('http://httpbin.org/post', json_encode( $_POST ));
                     break;
                 default:
                     header('Location: ./introEtapa3.php');
