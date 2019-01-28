@@ -23,11 +23,11 @@ class BuscaTwitter{
     private $busca; //string de busca
 
     private $config = array(
-        'consumer_key' => 'kY192LqXOe1D0svJudN7JYe5x',
-        'consumer_secret' => 'sh88SfLzBCO0m2bPQMHQe87lJwPkydHVKqKS0Wq41ybeL5976B',
+        'consumer_key' => 'cTR4bQ2EgwO0e3P6hADNJoi74',
+        'consumer_secret' => 'jQQaC8RRBNGjeDx5q7TbAXypYPkhgBQZhfkprsfG1lTbr8K6Pt',
 
-        'oauth_token' => '443062012-cQxBLG219LCew1rDQC74EqwIEtLCBYyWJ1nBDm07',
-        'oauth_token_secret' => 'Oqc026KaR4O0kRMymELWoajC1Pccr0joX2QR1ySNIcY4q',
+        'oauth_token' => '823670584940888064-5Y7Ue3YSj0otWnI69HstiZZnTBBZOn2',
+        'oauth_token_secret' => 'S0IjuZmijasoUjK4TkHB5RQxTXpHPXwZlOsogfk8xNUpV',
 
         'output_format' => 'object'
     );

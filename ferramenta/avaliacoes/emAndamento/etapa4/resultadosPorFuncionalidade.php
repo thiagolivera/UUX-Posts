@@ -1,6 +1,8 @@
 <?php 
 $resultadosFuncionalidade = $controle->obterResultadosFuncionalidade($idAvalicao);
 $numPRUS = $controle->obterNumeroPRUs($idAvalicao)[0];
+
+var_dump($resultadosFuncionalidade);
 ?>
 
 <div class="box box-default">
@@ -25,7 +27,7 @@ $numPRUS = $controle->obterNumeroPRUs($idAvalicao)[0];
                     ?>
                         <tr>
                           <td><?php
-                          if(strcmp($resultadosFuncionalidade[$i][0], "") == 0 || $resultadosFuncionalidade[$i][0] == NULL){
+                          if(strcmp($resultadosFuncionalidade[$i][0], "") == 0){
                               echo "Não informado";
                           } else{
                               echo $resultadosFuncionalidade[$i][0];

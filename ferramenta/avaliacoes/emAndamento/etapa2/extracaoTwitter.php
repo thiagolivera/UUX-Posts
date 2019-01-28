@@ -225,7 +225,7 @@ if(strcmp($stringBusca, ' -"filter:retweets"') == 0){
                         <tr>
                             <td><?php echo $i + 1; ?></td>
                             <td><?php echo $post["created_at"]; ?></td>
-                            <td><?php echo $post["text"]; ?></td>
+                            <td style="text-align: left"><?php echo $post["text"]; ?></td>
                         </tr>
                         <?php
                         }
