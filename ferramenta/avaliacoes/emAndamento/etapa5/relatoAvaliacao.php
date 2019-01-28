@@ -155,7 +155,7 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
                                 </div>
                                 
                                 <div style="padding-top: 20px">
-                                    <form action="../relatorioAvaliacao/relatorioAvaliacao.php" method="POST">
+                                    <form action="../relatorioAvaliacao/relatorioAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>" method="POST">
                                         <input type="hidden" name="preliminar">
                                         <button class="btn btn-success" type="submit">Gerar relatório preliminar</button>
                                     </form>

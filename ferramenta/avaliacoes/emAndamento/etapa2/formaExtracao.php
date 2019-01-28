@@ -338,9 +338,8 @@ if($extracaoControle->verificarSeHaPostagens($idAvalicao)){
                                         <br>
                                         <label class="control-label">Restrições do arquivo CSV</label>
                                         <ul>
-                                            <li>São aceitos arquivos que tenham as colunas <strong>text</strong> e <strong>date</strong></li>
-                                            <li>A coluna <strong>text</strong> É OBRIGATÓRIA e deve conter o texto da postagem entre aspas</li>
-                                            <li>A coluna <strong>date</strong> deve conter a data da postagem (caso não tenha essa coluna, a data será definida como null)</li>
+                                            <li>Obrigatoriamente as linhas da primeira coluna devem conter o texto de cada postagem.</li>
+                                            <li>A segunda coluna é opcional e deve conter a data da postagem (caso não tenha essa coluna, a data será definida como null)</li>
                                             <li>As colunas devem estar separadas por vírgula</li>
                                             <li><strong>Certifique-se de que cada postagem está em uma linha do arquivo CSV</strong> </li>
                                             <li>Caso o arquivo enviado não obedecer a tais restrições, ele será lido incorretamente</li>

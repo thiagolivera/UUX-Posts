@@ -47,8 +47,17 @@ include '../verificarSessao.class';
                   <form action="../../../index.php" method="POST">
                       <img class="img-responsive center-block" src="../../../images/classificadoresFelizes.png" style="width: 450px">
                       <h3>Parabéns! Você já classificou todas as suas postagens</h3>
-                      <h4>Antes de continuar, você deverá aguardar a validação de classificação para visualizar os resultados (Etapa 4) e fornecer suas percepções de classificação (Etapa 5)</h4>
-                      <button type="submit" class="btn btn-success center-block">Voltar para o início</button>
+                      <h4>Antes de continuar, você deverá aguardar a validação de classificação para visualizar os resultados (Etapa 4) e fornecer suas percepções de classificação (Etapa 5). Enquanto isso, você pode responder a um questionário sobre a sua experiência de uso.</h4> <br>
+                      
+                      <div class="row">
+                          <div class="col-md-6">
+                              <button type="submit" class="btn btn-success center-block col-md-12">Voltar para o início</button>
+                          </div>
+                          
+                          <div class="col-md-6">
+                              <button onclick="window.location.href = 'https://goo.gl/forms/mGl69cGNtTfYDmbz2'" type="button" class="btn btn-primary center-block col-md-12"> Responder questionário sobre o uso</button>
+                          </div>
+                      </div>
                   </form>
               </section>
             </div>

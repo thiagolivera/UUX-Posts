@@ -117,7 +117,7 @@
                         <tr>
                             <td><?php echo $postagensExtraidas[$i]["idPostagem"]; ?></td>
                             <td><?php echo $postagensExtraidas[$i]["data"]; ?></td>
-                            <td><?php echo $postagensExtraidas[$i]["postagem"]; ?></td>
+                            <td style="text-align: left"><?php echo $postagensExtraidas[$i]["postagem"]; ?></td>
                         </tr>
                         <?php
                         }
