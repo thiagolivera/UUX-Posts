@@ -1,6 +1,8 @@
 <?php 
 $resultadosFuncionalidade = $controle->obterResultadosFuncionalidade($idAvalicao);
 $numPRUS = $controle->obterNumeroPRUs($idAvalicao)[0];
+
+var_dump($resultadosFuncionalidade);
 ?>
 
 <div class="box box-default">

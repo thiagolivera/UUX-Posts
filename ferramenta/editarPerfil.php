@@ -53,6 +53,9 @@ if (isset($_POST['senhaAtual']) && isset($_POST['novaSenha']) && isset($_POST['n
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  
+  <link rel="shortcut icon" href="images/uux-icon.ico" type="image/x-icon">
+  <link rel="icon" href="images/uux-icon.ico" type="image/x-icon">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

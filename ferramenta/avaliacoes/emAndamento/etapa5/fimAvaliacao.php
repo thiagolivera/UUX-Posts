@@ -47,6 +47,9 @@ $controle = new RelatoControle();
         <!-- Google Font -->
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        
+        <link rel="shortcut icon" href="../../../images/uux-icon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../images/uux-icon.ico" type="image/x-icon">
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini">
@@ -56,7 +59,7 @@ $controle = new RelatoControle();
 
             <div class="content-wrapper">
               <section class="content text-center">
-                  <form action="../relatorioAvaliacao/relatorioAvaliacao.php" method="POST">
+                  <form action="../relatorioAvaliacao/relatorioAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>" method="POST">
                       <input type="hidden" name="preliminar">
                       <img class="img-responsive center-block" src="../../../images/fimAvaliacao.svg" style="width: 450px">
                       <h3>Parabéns! Você já concluiu a avaliação.</h3>

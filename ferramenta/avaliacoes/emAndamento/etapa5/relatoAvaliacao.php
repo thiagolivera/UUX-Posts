@@ -72,6 +72,9 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
     <script src="../../../dist/js/adminlte.min.js"></script>
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    
+            <link rel="shortcut icon" href="../../../images/uux-icon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../images/uux-icon.ico" type="image/x-icon">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -152,7 +155,7 @@ if(isset($_POST["q1"]) && isset($_POST["q2"]) && isset($_POST["q3"]) && isset($_
                                 </div>
                                 
                                 <div style="padding-top: 20px">
-                                    <form action="../relatorioAvaliacao/relatorioAvaliacao.php" method="POST">
+                                    <form action="../relatorioAvaliacao/relatorioAvaliacao.php?id=<?php echo $_SESSION["idAvaliacao"]; ?>" method="POST">
                                         <input type="hidden" name="preliminar">
                                         <button class="btn btn-success" type="submit">Gerar relatório preliminar</button>
                                     </form>

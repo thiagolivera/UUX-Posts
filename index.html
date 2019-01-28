@@ -1,531 +1,78 @@
 <!DOCTYPE html>
-<!--[if lt IE 9 ]><html class="no-js oldie" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class="no-js" lang="pt-br">
-<!--<![endif]-->
-
-<head>
-
-    <!--- basic page needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>UUX-Posts</title>
-    <meta name="description" content="Uma ferramenta de avaliação de sistemas por meio de textos dos usuários">
-
-    <!-- mobile specific metas
-    ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/vendor.css">
-    <link rel="stylesheet" href="css/main.css">
-
-    <!-- script
-    ================================================== -->
-    <script src="js/modernizr.js"></script>
-    <script src="js/pace.min.js"></script>
-
-    <!-- favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-</head>
-
-<body id="top">
-
-    <!-- header
-    ================================================== -->
-    <header class="s-header">
-
-        <div class="header-logo">
-            <a class="site-logo" href="index.html">
-                <img src="images/logo.png" alt="Homepage">
-            </a>
-        </div>
-
-        <nav class="header-nav">
-
-            <a href="#0" class="header-nav__close" title="close"><span>Fechar</span></a>
-
-            <div class="header-nav__content">
-                <h3>Navegação</h3>
-                
-                <ul class="header-nav__list">
-                    <li class="current"><a class="smoothscroll"  href="#home" title="home">Home</a></li>
-                    <li><a class="smoothscroll"  href="#about" title="about">Sobre</a></li>
-                    <li><a class="smoothscroll"  href="#services" title="services">Detalhes</a></li>
-                    <li><a class="smoothscroll"  href="#works" title="works">Publicações</a></li>
-                    <li><a class="smoothscroll"  href="#clients" title="clients">Sistemas avaliados</a></li>
-                    <li><a class="smoothscroll"  href="#contact" title="clients">Contato</a></li>
-                </ul>
-    
-                <p>Em caso de dúvidas ou qualquer informação adicional sobre o projeto e seu desenvolvimento, entre em contato conosco.</p>
-
-            </div> <!-- end header-nav__content -->
-
-        </nav>  <!-- end header-nav -->
-        
-        <a class="header-menu-toggle" href="#0">
-            <span class="header-menu-text">Menu</span>
-            <span class="header-menu-icon"></span>
-        </a>
-
-    </header> <!-- end s-header -->
-
-
-    <!-- home
-    ================================================== -->
-    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
-
-        <div class="overlay"></div>
-        <div class="shadow-overlay"></div>
-
-        <div class="home-content">
-
-            <div class="row home-content__main">
-
-                <h3>Bem-vindo a UUX-Posts</h3>
-
-                <h1>
-                    Uma ferramenta de apoio <br>
-                    à avaliação textual da <br>
-                    usabilidade e experiência <br>
-                    de uso em sistemas <br>
-                </h1>
-
-                <div class="home-content__buttons">
-                    <a href="ferramenta/index.php" class="btn btn--stroke">
-                        Acesse a ferramenta
-                    </a>
-                    <a href="#about" class="smoothscroll btn btn--stroke">
-                        Conheça mais
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="home-content__scroll">
-                <a href="#about" class="scroll-link smoothscroll">
-                    <span>Role para baixo</span>
-                </a>
-            </div>
-
-            <div class="home-content__line"></div>
-
-        </div> <!-- end home-content -->
-
-    </section> <!-- end s-home -->
-
-
-    <!-- about
-    ================================================== -->
-    <section id='about' class="s-about">
-
-        <div class="row section-header has-bottom-sep" data-aos="fade-up">
-            <div class="col-full">
-                <h3 class="subhead subhead--dark">Sobre a ferramenta</h3>
-                <h1 class="display-1 display-1--light">Conheça a UUX-Posts</h1>
-            </div>
-        </div> <!-- end section-header -->
-
-        <div class="row about-desc" data-aos="fade-up">
-            <div class="col-full">
-                <p>
-                A UUX-Posts é uma ferramenta de extração e classificação de postagens para avaliar a Usabilidade e Experiência do Usuário (UX) de sistemas. As postagens são coletadas de perfis públicos de Sistemas Sociais, como o Twitter ou Lojas de aplicativos. A ferramenta ainda permite o envio de um banco de postagens em formato CSV. A busca padrão é realizada utilizando um conjunto de padrões relacionados a Usabilidade e UX, no entanto, a ferramenta também possibilita uma busca avançada na qual o próprio usuário poderá alterar e definir seus padrões de busca.
-                </p>
-            </div>
-        </div> <!-- end about-desc -->
-
-        <div class="row about-stats stats block-1-3 block-m-1-2 block-mob-full" data-aos="fade-up">
-                
-            <div class="col-block stats__col ">
-                <div class="stats__count">127</div>
-                <h5>Avaliações realizadas</h5>
-            </div>
-            <div class="col-block stats__col">
-                <div class="stats__count">1505</div>
-                <h5>Avaliações em andamento</h5>
-            </div>
-            <div class="col-block stats__col">
-                <div class="stats__count">15783</div>
-                <h5>Postagens classificadas</h5>
-            </div>
-
-        </div> <!-- end about-stats -->
-
-        <div class="about__line"></div>
-
-    </section> <!-- end s-about -->
-
-
-    <!-- services
-    ================================================== -->
-    <section id='services' class="s-services">
-
-        <div class="row section-header has-bottom-sep" data-aos="fade-up">
-            <div class="col-full">
-                <h3 class="subhead">UUX-Posts</h3>
-                <h1 class="display-2">Mais detalhes sobre a ferramenta</h1>
-            </div>
-        </div> <!-- end section-header -->
-
-        <div class="row services-list block-1-2 block-tab-full">
-
-            <div class="col-block service-item" data-aos="fade-up">
-                <div class="service-icon">
-                    <i class="icon-paint-brush"></i>
-                </div>
-                <div class="service-text">
-                    <h3 class="h2">Para quem serve? Qual o objetivo?</h3>
-                    <p>A UUX-Posts é destinada a estudantes e profissionais da área de IHC. Tem como objetivo apoiar a avaliação de sistemas fornecendo percepções do usuário a respeito do seu uso.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-block service-item" data-aos="fade-up">
-                <div class="service-icon">
-                    <i class="icon-group"></i>
-                </div>
-                <div class="service-text">
-                    <h3 class="h2">Como a UUX-Posts funciona?</h3>
-                    <p>O usuário informa o site que deseja coletar os textos ou faz o upload de um banco de postagens. Se o usuário preferir, ele poderá realizar sua própria busca nas postagens e analisar os resultados.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-block service-item" data-aos="fade-up">
-                <div class="service-icon">
-                    <i class="icon-megaphone"></i>
-                </div>  
-                <div class="service-text">
-                    <h3 class="h2">Por quê analisar postagens de UUX?</h3>
-                    <p>Os usuários publicam relatos sobre o uso do sistema, seja reclamando, elogiando ou relatando erros ou dúvidas. Tais postagens são úteis para entender a percepção do usuário, se ele está satisfeito ou não, bem como, suas principais dúvidas e erros no sistema. A vantagem desta técnica é que em sistemas sociais, o usuário é espontâneo e muitas vezes publica seu relato no momento em que ele está utilizando o sistema.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-block service-item" data-aos="fade-up">
-                <div class="service-icon">
-                    <i class="icon-earth"></i>
-                </div>
-                <div class="service-text">
-                    <h3 class="h2">Iniciativa</h3>
-                    <p>A ferramenta UUX-Posts fez parte de um projeto oriundo do Laboratório de estudos do Usuário e da Qualidade de Uso dos Sistemas (LUQS), localizado na Universidade de Fortaleza (Unifor), sob a coordenação da professora Elizabeth Furtado, com incentivos à pesquisa oriundos do CNPQ. O projeto foi resultado da pesquisa de doutorado de Marília Soares Mendes, discente do Programa de Pós-graduação (mestrado acadêmico e doutorado) em Ciência da Computação (MDCC) na Universidade Federal do Ceará (UFC), sob a orientação do Prof. Dr. Miguel Franklin de Castro (UFC) e co-orientação da Profa. Dra. Elizabeth Furtado (UNIFOR). O time também contou com o bolsista Fábio Theophilo (estudante da graduação – UNIFOR).
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-block service-item" data-aos="fade-up">
-                <div class="service-icon">
-                    <i class="icon-cube"></i>
-                </div>
-                <div class="service-text">
-                    <h3 class="h2">Projeto em desenvolvimento</h3>
-                    <p>Atualmente, o projeto continua em desenvolvimento, coordenado pela profa. Marília Mendes na Universidade Federal do Ceará em Russas. O projeto é financiado pela FUNCAP – Fundação cearense de apoio ao desenvolvimento científico e tecnológico, tem apoio do Laboratório Interdisciplinar de Ciência da Computação e Engenharia de Software (LINCE). Conta com sete alunos, sendo cinco bolsistas da Funcap.
-                    </p>
-                </div>
-            </div>
-    
-            <div class="col-block service-item" data-aos="fade-up">
-                <div class="service-icon"><i class="icon-lego-block"></i></div>
-                <div class="service-text">
-                    <h3 class="h2">Política de privacidade</h3>
-                    <p>A UUX-Posts coleta apenas postagens de usuários com perfis públicos; os dados coletados dos usuários são referentes a informação disponibilizada por ele no sistema social, podendo conter sua idade, sexo e localização; a ferramenta não coleta imagens; em postagens que contém nomes de usuários, estes são omitidos.
-                    </p>
-                </div>
-            </div>
-
-        </div> <!-- end services-list -->
-
-    </section> <!-- end s-services -->
-
-
-    <!-- works
-    ================================================== -->
-    <section id='works' class="s-works">
-
-        <div class="intro-wrap">
-                
-            <div class="row section-header has-bottom-sep light-sep" data-aos="fade-up">
-                <div class="col-full">
-                    <h3 class="subhead">Publicações recentes</h3>
-                    <h1 class="display-2 display-2--light">Nosso projeto é fruto de grandes pesquisas</h1>
-                </div>
-            </div> <!-- end section-header -->
-            
-            <div class="row about-stats stats block-1-2 block-m-1-2 block-mob-full" data-aos="fade-up">
-                
-                <div class="col-block stats__col ">
-                    <div class="stats__count">17</div>
-                    <h5 style="color: white">Trabalhos publicados</h5>
-                </div>
-                <div class="col-block stats__col">
-                    <div class="stats__count">10</div>
-                    <h5 style="color: white">Conferências</h5>
-                </div>
-
-            </div> <!-- end about-stats -->
-
-        </div> <!-- end intro-wrap -->
-
-        <div class="row works-content">
-            <div class="col-full masonry-wrap">
-                <ol>
-                    <br><li><a href="">MENDES, Marília S.; FURTADO, Elizabeth S..An experience of textual evaluation using the MALTU methodology. In 20th International Conference on Human-Computer Interaction (HCII 2018).</a></li>
-                    <br><li><a href="https://doi.org/10.1145/3151470.3151471">Mendes, M.; Furtado, M. 2017. UUX-Posts: a tool for extracting and classifying postings related to the use of a system. In CLIHC 2017.</a></li>
-                    <br><li><a href="arquivos/pdf/2017_UUX-Posts_poster.pdf">Silva, T., Mendes, M., Furtado, E.. (2017). UUX-Posts – Uma ferramenta de apoio à avaliação textual da usabilidade e experiência de uso em sistemas. In Extends Proceedings of the 16th Brazilian Symposium on Human Factors in Computer Systems. Joinville, Brasil.</a></li>
-                    <br><li><a href="http://csbc2017.mackenzie.br/public/files/14-sbsc/completos/17.pdf">Oliveira, D.; Furtado, E.; Mendes, M.. MASSVA: Modelo de Avaliação de Sistemas Sociais sob a ótica dos Valores humanos nas postagens dos usuários. SBSC 2017</a></li>
-                    <br><li><a href="http://ceur-ws.org/Vol-2039/paper06.pdf">Oliveira, D., Mendes, M., Furtado, E.. Uma Investigação da Avaliação Emocional por Intenção e por Valores Humanos Expressos em Postagens de Usuários no Twitter (An Investigation of Emotional Evaluation of User Posts on Twitter Based on Intention and Expressed Human Values)58-69</a></li>
-                    <br><li><a href="https://doi.org/10.1145/3160504.3160548">Silva, T.; Freitas, L.; Mendes, M. Beyond traditional evaluations – user’s view in app stores. In: Proceedings of the 16th Brazilian Symposium on Human Factors in Computer Systems. Joinville, Brasil. p. 139 – 148, 2017.</a></li>
-                    <br><li><a href="https://doi.org/10.1007/978-3-319-58562-8_20">Lima A.M.S., Silva P.B.S., Cruz L.A., Mendes M.S. (2017) Investigating the Polarity of User Postings in a Social System. In: Meiselwitz G. (eds) Social Computing and Social Media. Applications and Analytics. SCSM 2017. Lecture Notes in Computer Science, vol 10283. Springer, Cham</a></li>
-                    <br><li><a href="https://doi.org/10.1007/978-3-319-39910-2_13">Oliveira D.C., Furtado E., Mendes M.S. (2016) Do Users Express Values During Use of Social Systems? A Classification of Their Postings in Personal, Social and Technical Values. In: Meiselwitz G. (eds) Social Computing and Social Media. SCSM 2016. Lecture Notes in Computer Science, vol 9742. Springer, Cham</a></li>
-                    <br><li><a href="https://doi.org/10.1145/3033701.3033752">Freitas, L.; Silva, T.; Mendes, M. Avaliação do Spotify – uma experiência de avaliação textual utilizando a metodologia MALTU. In: Proceedings of the 15th Brazilian Symposium on Human Factors in Computer Systems. São Paulo, Brasil. 2016. N° 50.</a></li>
-                    <br><li><a href="https://doi.org/10.1007/978-3-319-20367-6_22">Mendes, M., Furtado, E., Furtado, V., Castro, M. F.. (2015). Investigating Usability and User Experience from the user postings in Social Systems. In Proceedings Third International Conference, HAS 2015, Held as Part of HCI International 2015, Los Angeles, CA, USA, August 2-7, 2015, (HCI International 2015), pp 216-228.</a></li>
-                    <br><li><a href="https://doi.org/10.1007/978-3-319-20376-8_35">Mendes, M., Furtado, E., Militao, G., Castro, M. F.. (2015). Hey, I have a problem in the system. Who can help me? An investigation of Facebook users interaction when facing privacy problem. In Proceedings of Third International Conference, HAS 2015, Held as Part of HCI International 2015, Los Angeles, CA, USA, August 2-7, 2015, (HCI International 2015), pp 391-403.</a></li>
-                    <br><li><a href="http://www.mdcc.ufc.br/teses/doc_download/275-">Mendes, M.. MALTU – Um modelo para avaliação da interação em sistemas sociais a partir da linguagem textual do usuário. Tese (doutorado). Universidade Federal do Ceará, Centro de Ciências, Departamento de Computação, Programa de Pós-Graduação em Ciência da Computação, Fortaleza, 2015.</a></li>
-                    <br><li><a href="https://doi.org/10.1007/978-3-319-07632-4_22">Mendes, M., Furtado, E., Furtado, V., Castro, M. F.. (2014). How do users express their emotions regarding the social system in use? A classification of their postings by using the emotional analysis of Norman. In Proceedings of HCI International 2014, pp 229-241.</a></li>
-                    <br><li><a href="https://doi.org/10.1145/2590651.2590654">Mendes, M., Furtado, E., Castro, M. F.. (2014). Do users write about the system in use? An investigation from messages in Natural Language on Twitter. In Proceedings of the 7th Euro American Conference on Telematics and Information Systems (EATIS 2014)</a></li>
-                    <br><li><a href="">Mendes, M., Furtado, E., Castro, M. F.. (2013). Framework de apoio na avaliação da usabilidade de softwares sociais a partir da Linguagem Natural. In Workshop de Teses e Dissertações – Simpósio Brasileiro de Sistemas Colaborativos (WTD – SBSC 2013).</a></li>
-                    <br><li><a href="https://doi.org/10.1007/978-3-319-03068-5_12">Mendes, M., Furtado, E., Theophilo, F., Castro, M. F.. (2013). A Study about the usability evaluation of Social Systems from messages in Natural Language. In Proceedings of 6th Latin American Conference (CLIHC 2013), pp 59-62.</a></li>
-                    <br><li><a href="http://www.aclweb.org/anthology/W13-4830">Mendes, M., Furtado, E., Castro, M. F.. (2013). Uma investigação no apoio da avaliação da usabilidade em Sistemas Sociais usando Processamento da Linguagem Natural. In Proceedings of IX Brazilian Symposium in Information and Human Language Technology (STIL 2013), pp 220-224.</a></li>
-                </ol>
-            </div> <!-- end col-full -->
-        </div> <!-- end works-content -->
-
-    </section> <!-- end s-works -->
-
-
-    <!-- clients
-    ================================================== -->
-    <section id="clients" class="s-clients">
-
-        <div class="row section-header" data-aos="fade-up">
-            <div class="col-full">
-                <h3 class="subhead">Sistemas</h3>
-                <h1 class="display-2">Alguns dos sistemas já avaliados</h1>
-            </div>
-        </div> <!-- end section-header -->
-
-        <div class="row clients-outer" data-aos="fade-up">
-            <div class="col-full">
-                <div class="clients">
-                    
-                    <a href="#0" title="Twitter" class="clients__slide"><img src="images/clients/twitter.png" /></a>
-                    <a href="#0" title="Facebook" class="clients__slide"><img src="images/clients/facebook.png" /></a>
-                    <a href="#0" title="GPS Brasil" class="clients__slide"><img src="images/clients/gpsBrasil.png" /></a>
-                    <a href="#0" title="Google Maps" class="clients__slide"><img src="images/clients/googlemaps.png" /></a>
-                    <a href="#0" title="Waze" class="clients__slide"><img src="images/clients/waze.png" /></a>
-                    <a href="#0" title="Spotify" class="clients__slide"><img src="images/clients/spotify.png" /></a>
-                    <a href="#0" title="My Fitness Pal" class="clients__slide"><img src="images/clients/myfitnessapp.png" /></a>
-                    <a href="#0" title="SIGAA - UFC" class="clients__slide"><img src="images/clients/sigaa.png" /></a>
-                     
-                </div> <!-- end clients -->
-            </div> <!-- end col-full -->
-        </div> <!-- end clients-outer -->
-
-    </section> <!-- end s-clients -->
-
-
-    <!-- contact
-    ================================================== -->
-    <section id="contact" class="s-contact">
-
-        <div class="overlay"></div>
-        <div class="contact__line"></div>
-
-        <div class="row section-header" data-aos="fade-up">
-            <div class="col-full">
-                <h3 class="subhead">Estamos ansiosos pela sua mensagem</h3>
-                <h1 class="display-2 display-2--light">Entre em contato conosco! :)</h1>
-            </div>
-        </div>
-
-        <div class="row contact-content" data-aos="fade-up">
-            
-            <div class="contact-primary">
-
-                <h3 class="h6">Envie-nos uma mensagem</h3>
-
-                <form name="contactForm" id="contactForm" method="post" action="" novalidate="novalidate">
-                    <fieldset>
-    
-                    <div class="form-field">
-                        <input name="contactName" type="text" id="contactName" placeholder="Seu nome" value="" minlength="2" required="" aria-required="true" class="full-width">
+<html>
+
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129169516-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-129169516-1');
+        </script>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UUX-Posts</title>
+        <meta name="description" content="Uma ferramenta de avaliação de sistemas por meio de textos dos usuários">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+        <link rel="stylesheet" href="assets/css/Footer-Dark.css">
+        <link rel="stylesheet" href="assets/css/Header-Blue.css">
+        <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+    </head>
+
+    <body>
+        <div></div>
+        <div>
+            <div class="header-blue">
+                <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+                    <div class="container"><a class="navbar-brand" href="index.html">UUX-Posts</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse"
+                             id="navcol-1">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html">Página inicial</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" href="extrairPosts.php">Extrair posts</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" href="funcionalidades.html">Funcionalidades</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" href="sobre.php">Sobre o projeto</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" href="contato.php">Contato</a></li>
+                            </ul>
+                            <form class="form-inline mr-auto" target="_self"></form><span class="navbar-text"> <a href="login.php" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="ferramenta/login/registro.php">Cadastre-se</a></div>
                     </div>
-                    <div class="form-field">
-                        <input name="contactEmail" type="email" id="contactEmail" placeholder="Seu e-mail" value="" required="" aria-required="true" class="full-width">
-                    </div>
-                    <div class="form-field">
-                        <input name="contactSubject" type="text" id="contactSubject" placeholder="Assunto" value="" class="full-width">
-                    </div>
-                    <div class="form-field">
-                        <textarea name="contactMessage" id="contactMessage" placeholder="Sua mensagem" rows="10" cols="50" required="" aria-required="true" class="full-width"></textarea>
-                    </div>
-                    <div class="form-field">
-                        <button class="full-width btn--primary">Enviar</button>
-                        <div class="submit-loader">
-                            <div class="text-loader">Enviando...</div>
-                            <div class="s-loader">
-                                <div class="bounce1"></div>
-                                <div class="bounce2"></div>
-                                <div class="bounce3"></div>
-                            </div>
+                </nav>
+                <div class="container hero">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+                            <h1><strong>UUX-Posts</strong><br>Analisador de postagens de sistemas sociais</h1>
+                            <p>Uma ferramenta de apoio à avaliação textual da usabilidade e experiência de uso em sistemas </p>
+                            <a href="login.php">
+                                <button class="btn btn-light btn-lg action-button" type="button">Acessar a ferramenta</button>
+                            </a>
+                            <a href="extrairPosts.php">
+                                <button class="btn btn-light btn-lg action-button" type="button">Extrair postagens</button>
+                            </a>
                         </div>
-                    </div>
-    
-                    </fieldset>
-                </form>
-
-                <!-- contact-warning -->
-                <div class="message-warning">
-                    Ops, aconteceu algo de errado. Tente novamente.
-                </div> 
-            
-                <!-- contact-success -->
-                <div class="message-success">
-                    Sua mensagem foi enviada com sucesso. Em breve te retornaremos.<br>
-                </div>
-
-            </div> <!-- end contact-primary -->
-
-            <div class="contact-secondary">
-                <div class="contact-info">
-
-                    <h3 class="h6 hide-on-fullwidth">Informações de contato</h3>
-
-                    <div class="cinfo">
-                        <h5>Onde você pode nos encontrar</h5>
-                        <p>
-                            Universidade Federal do Ceará - Campus Russas <br>
-                            Rua Felipe Santiago, N° 411 <br>
-                            Cidade Universitária, Russas - CE <br>
-                            Brasil
-                        </p>
-                    </div>
-
-                    <div class="cinfo">
-                        <h5>Você pode nos enviar e-mail</h5>
-                        <p>
-                            marilia.mendes@ufc.br<br>
-                        </p>
-                    </div>
-
-                    <div class="cinfo">
-                        <h5>Você também pode nos ligar</h5>
-                        <p>
-                            Telefone: +55 88 3411 9209<br>
-                        </p>
-                    </div>
-                </div> <!-- end contact-info -->
-            </div> <!-- end contact-secondary -->
-
-        </div> <!-- end contact-content -->
-
-    </section> <!-- end s-contact -->
-
-
-    <!-- footer
-    ================================================== -->
-    <footer>
-
-        <div class="row footer-main">
-
-            <div class="col-six tab-full left footer-desc">
-
-                <div class="footer-logo"></div>
-                
-
-            </div>
-
-            <div class="col-six tab-full right footer-subscribe">
-                <p>Uma ferramenta de apoio a avaliação de sistemas por meio de textos dos usuários se referindo ao uso do sistema.</p>
-            </div>
-
-        </div> <!-- end footer-main -->
-
-        <div class="row footer-bottom">
-
-            <div class="col-twelve">
-                <div class="copyright">
-                    <span>© Copyright LIHC 2018</span> 
-                    <span>Site Template by <a href="https://www.colorlib.com/">Colorlib</a></span>	
-                </div>
-
-                <div class="go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up" aria-hidden="true"></i></a>
-                </div>
-            </div>
-
-        </div> <!-- end footer-bottom -->
-
-    </footer> <!-- end footer -->
-
-
-    <!-- photoswipe background
-    ================================================== -->
-    <div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
-
-        <div class="pswp__bg"></div>
-        <div class="pswp__scroll-wrap">
-
-            <div class="pswp__container">
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-            </div>
-
-            <div class="pswp__ui pswp__ui--hidden">
-                <div class="pswp__top-bar">
-                    <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Fechar (Esc)"></button> <button class="pswp__button pswp__button--share" title=
-                    "Share"></button> <button class="pswp__button pswp__button--fs" title="Tela cheia"></button> <button class="pswp__button pswp__button--zoom" title=
-                    "Zoom in/out"></button>
-                    <div class="pswp__preloader">
-                        <div class="pswp__preloader__icn">
-                            <div class="pswp__preloader__cut">
-                                <div class="pswp__preloader__donut"></div>
+                        <div
+                            class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
+                            <div class="iphone-mockup"><img src="assets/img/iphone.svg" class="device">
+                                <div class="screen"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                    <div class="pswp__share-tooltip"></div>
-                </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
-                "Next (arrow right)"></button>
-                <div class="pswp__caption">
-                    <div class="pswp__caption__center"></div>
-                </div>
-            </div>
-
-        </div>
-
-    </div> <!-- end photoSwipe background -->
-
-
-    <!-- preloader
-    ================================================== -->
-    <div id="preloader">
-        <div id="loader">
-            <div class="line-scale-pulse-out">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
             </div>
         </div>
-    </div>
 
-
-    <!-- Java Script
-    ================================================== -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/uuxposts.js"></script>
-
-</body>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    </body>
 
 </html>
