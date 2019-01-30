@@ -1,0 +1,12 @@
+html, body {height:100%;}
+
+.geral {
+    min-height:100%;
+    position:relative;
+}
+
+#formularioContato, #informacoesAlternativas{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+}
