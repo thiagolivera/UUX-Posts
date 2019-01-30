@@ -342,142 +342,38 @@ if (isset($_POST["avaliadores"])) {
                             </button>
                             <h4 class="modal-title">Selecione as categorias de classificação</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="height: 400px; overflow-y:auto;">
                             <form class="form-horizontal" action="Classificacao.php?c=FachadaClassificacao&m=classificacaoBooleana" method="POST" id="formCategorias" style="padding-right: 20px; padding-left: 10px">
-                                    <div class="form-group" style="padding-left: 20px">
-                                    <div class="col-sm-6">
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Verbos" class="minimal"> Classificação
-                                            por verbos
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Substantivos" class="minimal">
-                                            Classificação por substantivos
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Adjetivos" class="minimal">
-                                            Classificação por adjetivos
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Adverbios" class="minimal">
-                                            Classificação por adverbios
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Comparacao" class="minimal">
-                                            Classificação por comparações
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Elogio" class="minimal"> Classificação
-                                            por elogios
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Duvida" class="minimal"> Classificação
-                                            por dúvidas
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Critica" class="minimal"> Classificação
-                                            por críticas
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Sugestao" class="minimal">
-                                            Classificação por sugestões
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Afeto" class="minimal"> Classificação
-                                            por afeto
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Confianca" class="minimal">
-                                            Classificação por confiança
-                                        </label>
-                                        <br>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Eficacia" class="minimal">
-                                            Classificação por eficácia
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Eficiencia" class="minimal">
-                                            Classificação por eficiência
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Estetica" class="minimal">
-                                            Classificação por estética
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Frustracao" class="minimal">
-                                            Classificação por frustrações
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Motivacao" class="minimal">
-                                            Classificação por motivações
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Satisfacao" class="minimal">
-                                            Classificação por satisfações
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Seguranca" class="minimal">
-                                            Classificação por segurança
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Suporte" class="minimal"> Classificação
-                                            por suporte
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" name="Utilidade" class="minimal">
-                                            Classificação por utilidades
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;">
-                                            <input type="checkbox" id="outros" name="Outros"
-                                                   onclick="habilita(this.id, 'outro')" class="minimal"> Outro:
-                                        </label>
-                                        <br>
-
-                                        <label style="font-weight: 500;width:100%;">
-                                            <input type="text" id="outro" name="filtros" class="minimal" placeholder="Separe-as por vírgula" data-role="tagsinput" disabled>
-                                        </label>
-                                        <br>
-                                    </div>
+                                <div class="form-group" style="padding-left: 20px">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" onclick="toggle('.sub1')">grupo 1</li>
+                                            <li class="list-group-item sub1" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Verbos" class="minimal"> Classificação por verbos </label></li>
+                                            <li class="list-group-item sub1" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Substantivos" class="minimal"> Classificação por substantivos </label></li>
+                                            <li class="list-group-item sub1" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Adjetivos" class="minimal">Classificação por adjetivos</label></li>
+                                            <li class="list-group-item sub1" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Adverbios" class="minimal">Classificação por adverbios</label></li>
+                                            <li class="list-group-item sub1" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Comparacao" class="minimal">Classificação por comparações</label></li>
+                                            <li class="list-group-item sub1" style="display: none;"><label style="font-weight: 500;"><label style="font-weight: 500;"><input type="checkbox" name="Elogio" class="minimal"> Classificação por elogios</label></li>
+                                        <li class="list-group-item" onclick="toggle('.sub2')">grupo 2</li>
+                                            <li class="list-group-item sub2" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Duvida" class="minimal"> Classificação por dúvidas </label></li>
+                                            <li class="list-group-item sub2" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Critica" class="minimal"> Classificação por críticas </label></li>
+                                            <li class="list-group-item sub2" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Sugestao" class="minimal"> Classificação por sugestões </label></li>
+                                            <li class="list-group-item sub2" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Afeto" class="minimal"> Classificação por afeto </label></li>
+                                            <li class="list-group-item sub2" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Confianca" class="minimal">Classificação por confiança </label></li>
+                                            <li class="list-group-item sub2" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Confianca" class="minimal">Classificação por confiança </label></li>
+                                        <li class="list-group-item" onclick="toggle('.sub3')">grupo 3</li>
+                                            <li class="list-group-item sub3" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Eficacia" class="minimal">Classificação por eficácia</label></li>
+                                            <li class="list-group-item sub3" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Eficiencia" class="minimal">Classificação por eficiência</label></li>
+                                            <li class="list-group-item sub3" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Estetica" class="minimal">Classificação por estética</label></li>
+                                            <li class="list-group-item sub3" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Frustracao" class="minimal">Classificação por frustrações</label></li>
+                                            <li class="list-group-item sub3" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Motivacao" class="minimal">Classificação por motivações</label></li>
+                                        <li class="list-group-item" onclick="toggle('.sub4')">grupo 4</li>
+                                            <li class="list-group-item sub4" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Satisfacao" class="minimal">Classificação por satisfações</label></li>
+                                            <li class="list-group-item sub4" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Seguranca" class="minimal">Classificação por segurança</label></li>
+                                            <li class="list-group-item sub4" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Suporte" class="minimal"> Classificação por suporte</label></li>
+                                            <li class="list-group-item sub4" style="display: none;"><label style="font-weight: 500;"><input type="checkbox" name="Utilidade" class="minimal">Classificação por utilidades</label></li>
+                                        <li class="list-group-item" onclick="toggle('.sub5')">Customizado</li>
+                                            <li class="list-group-item sub5" style="display: none;"><label style="font-weight: 500;width:100%;"><input type="text" id="outro" name="filtros" class="minimal" placeholder="Separe-as por vírgula" data-role="tagsinput"></label></li>
+                                    </ul>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
@@ -526,6 +422,10 @@ if (isset($_POST["avaliadores"])) {
     function deshabilita() {
         document.getElementById('proximo').disabled = true;
         document.getElementById('booleana').checked = false;
+    }
+
+    function toggle(e){
+        $(e).toggle(500,"swing");
     }
 </script>
 </html>
