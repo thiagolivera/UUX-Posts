@@ -6,7 +6,9 @@
  * Time: 14:18
  */
 
-class FachadaLimparPostagens
+//include_once (__DIR__."../../../../Banco.php");
+
+class FachadaLimparPostagens extends Banco
 {
 
     private $postagem = array();
@@ -22,13 +24,20 @@ class FachadaLimparPostagens
 
     }
 
-    function limparPostagens($filtro, $postagens){
+    function limparPostagens($filtro){
         echo '<pre>';
+                $sql = "SELECT * FROM postagensClassificadas as posta join postagens on idPostagensClassificadas = idPostagem";
+                $valores = parent::Executar($sql);
+                $array = array();
+                while($row = @mysqli_fetch_assoc($valores)){
+                    $array[] = $row;
+                }
                 echo 'filtros';
                 print_r($filtro);
                 echo 'postagens';
-                var_dump($postagens);
+                print_r($array);
         echo '</pre>';
+        return $array;
     }
 
     public function getMetodos($postagens)

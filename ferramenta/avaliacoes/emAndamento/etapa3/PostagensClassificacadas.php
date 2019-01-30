@@ -13,6 +13,7 @@
                     <?php
                     while ($name = current($_POST)) {
                         if (key($_POST) != "filtros") echo key($_POST);
+                        if (key($_POST) == "filtros") echo ", Customizado";
                         if (next($_POST) && key($_POST) != "filtros") echo ", ";
                     }
                     ?>
@@ -32,7 +33,7 @@
                 </thead>
                 <tbody>
                 <?php
-                foreach ($this->getPostagens() as $postagen) {
+                foreach (json_decode($this->getPostagens(),true) as $postagen) {
                     echo '<tr>';
                     echo "<td>" . $postagen["idPostagem"] . "</td>";
                     echo "<td>" . $postagen["data"] . "</td>";
@@ -63,7 +64,7 @@
 
         <div class="col-md-4 col-xs-4" id="proximo" style="padding-top: 10px;">
             <button type="button" class="btn btn-info" onclick="proximo();"
-                    style="margin-right: 10px; float: right">Salvar e próximo
+                    style="margin-right: 10px; float: right">Finalizar
             </button>
         </div>
     </div>
@@ -110,7 +111,7 @@
     });
 
     function proximo() {
-        window.location.href = "./Classificacao.php?c=FachadaLimparPostagens&m=limparPostagensTela";
+        window.location.href = "./introEtapa3.php";
     }
 
     function voltar() {

@@ -19,20 +19,21 @@ class FachadaClassificacao extends Banco
     {
     }
 
-    public function classificacaoBooleana($avaliacao){
-        $palavras = $this->buscarFiltro($_POST);
+    public function classificacaoBooleana($avaliacao, $dados){
+        $palavras = $this->buscarFiltro(json_decode($dados,true));
         $array = null;
-        $sql = "select * from postagens where BINARY idAvaliacao = ".$avaliacao." and postagem LIKE ";
+        $sql = "select * from postagens where BINARY idAvaliacao = ".$avaliacao." and ( postagem LIKE ";
         foreach ($palavras as $value){
             $sql = $sql."'%".trim($value)."%'"." OR postagem LIKE ";
         }
-        $sql = substr($sql, 0,strlen($sql)-18);
+        $sql = substr($sql, 0,strlen($sql)-18).")";
         $valores = parent::Executar($sql);
         while($row = @mysqli_fetch_assoc($valores)){
             $array[] = $row;
         }
         $this->postagens=$array;
-        return $array;
+        self::salvar($array);
+        return json_encode($array,true);
     }
 
     private function buscarFiltro($filtro){
@@ -58,11 +59,25 @@ class FachadaClassificacao extends Banco
         if (isset($filtro['Seguranca'])) $termos = array_merge($termos, array("twitter" , "saber" , "sistema" , "começar" , "mau" , "fazer" , "dar" , "aparecer" , "errar" , "apertar" , "poder" , "ruim" , "erro" , "digitar" , "constar" , "faltar" , "lista" , "odiar" , "ver" , "ficar" , "querer" , "mexer" , "perceber" , "problema" , "clicar" , "medo" , "enter" , "raiva" , "teclar" , "espaço" , "criar" , "remover" , "complicar"));
         if (isset($filtro['Suporte'])) $termos = array_merge($termos, array("twitter" , "fazer" , "sistema" , "saber" , "preencher" , "ver" , "esperar" , "problema" , "solicitar" , "clicar" , "clique" , "consultar" , "providenciar" , "pedir" , "aparecer" , "dar" , "errar" , "poder" , "erro" , "pergunta" , "vir" , "acreditar" , "continuar" , "dever" , "resolver" , "funcionar" , "tentar" , "conseguir" , "cadastrar" , "complexo" , "procurar" , "selecionar"));
         if (isset($filtro['Utilidade'])) $termos = array_merge($termos, array("twitter" , "poder" , "saber" , "usar" , "ver" , "excluir" , "dar" , "ficar" , "ruim" , "problema" , "dever" , "mozilla" , "querer" , "caractere" , "demorar" , "sistema" , "tirar" , "objetivo" , "limite" , "escrever" , "entrar" , "precisar" , "abrir" , "linha" , "face" , "deixar" , "utilizar" , "editar" , "palavra" , "gostar" , "achar" , "novo" , "fazer" , "ótimo" , "ter" , "parecer" , "próximo"));
-        if (isset($filtro['Outros'])){
+        if (!empty($filtro['filtros'])){
             $palavras = explode(",",$filtro['filtros']);
             $termos = array_merge($termos, $palavras);
         }
         return $termos;
+    }
+
+    private function salvar($array){
+        $sql = "select idPostagensClassificadas from postagensClassificadas LIMIT 1 ";
+        $resultado = parent::Executar($sql);
+        if(isset($resultado)){
+            parent::Executar("delete from postagensClassificadas where idPostagensClassificadas>0");
+        }
+        $sql = "insert into postagensClassificadas (idPostagensClassificadas) values ";
+        foreach ($array as $posta){
+            $sql .= " (".$posta["idPostagem"]."),";
+        }
+        $sql = substr($sql, 0,strlen($sql)-1);
+        parent::Executar($sql);
     }
 
     /**
