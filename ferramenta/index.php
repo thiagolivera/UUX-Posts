@@ -7,7 +7,6 @@ if ('serviceWorker' in navigator) {
 
 <?php
 include './verificarSessao.php';
-require_once 'vendor/autoload.php';
 ?>
 <!DOCTYPE html>
 <html>
