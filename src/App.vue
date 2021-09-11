@@ -9,8 +9,8 @@
     name: 'App',
     metaInfo: {
       title: 'App',
-      titleTemplate: '%s | Zero Free',
-      htmlAttrs: { lang: 'en' },
+      titleTemplate: 'UUX-Posts',
+      htmlAttrs: { lang: 'pt' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

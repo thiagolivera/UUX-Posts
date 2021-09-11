@@ -22,14 +22,13 @@
         width="100%"
       />
 
-      <v-spacer />
-
       <div>
         <v-tabs
           class="hidden-sm-and-down"
           optional
           background-color="transparent"
         >
+
           <v-tab
             to="/extrair-posts"
             class="font-weight-bold"
